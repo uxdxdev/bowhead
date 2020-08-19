@@ -21,7 +21,7 @@
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
     "release": "yarn build:cra-template-bowhead && yarn commit && node scripts/release.js",
-    "commit": "git commit -am 'chore(cra-template-bowhead): updated template' && git push",
+    "commit": "git commit -am 'chore(cra-template-bowhead): updated template' && git push >/dev/null",
     "view:coverage": "lerna run view:coverage --stream"
   },
   "devDependencies": {
