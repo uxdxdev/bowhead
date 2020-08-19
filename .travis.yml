@@ -4,12 +4,15 @@ node_js:
   - '12'
 
 script:
-  - echo 'test'
+  - yarn build:cra-template-bowhead
 
 after_success:
-  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-  - git remote add -f publish https://${GITHUB_TOKEN}@github.com:daithimorton/bowhead.git
-  - git checkout master
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
+  - git config user.email "davidmortonmail@gmail.com"
+  - git config user.name "TravisCI"
+  - git add .
+  - git commit -m "chore(*) TravisCI update [skip ci]"
+  - git push origin HEAD:master  
 
 deploy:
   - provider: script
