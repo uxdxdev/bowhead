@@ -21,7 +21,7 @@ export const userSignOut = () => {
 export const authenticateEmail = ({ email, ref, data }) => {
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
-        : `https://mystifying-meninsky-44479e.netlify.app/verify`;
+        : `${process.env.NETLIFY_APP_URL}/verify`;
 
     const url = new URL(urlStr);
 

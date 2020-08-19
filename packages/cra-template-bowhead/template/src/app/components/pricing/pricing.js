@@ -93,12 +93,12 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
     const successUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `https://mystifying-meninsky-44479e.netlify.app/dashboard`;
+            : `${process.env.NETLIFY_APP_URL}/dashboard`;
 
     const cancelUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `https://mystifying-meninsky-44479e.netlify.app/dashboard`;
+            : `${process.env.NETLIFY_APP_URL}/dashboard`;
 
 
     const handleRedirectToStripe = async (priceId) => {
