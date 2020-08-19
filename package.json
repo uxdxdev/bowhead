@@ -17,13 +17,12 @@
     "start:app": "cd packages/bowhead && yarn start",
     "test": "lerna run test --stream",
     "test:watch": "lerna run test --stream -- --watch",
-    "build": "lerna run build --stream",
+    "build": "lerna run build --stream && node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
     "ci:release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "dev:release": "lerna publish --conventional-commits --yes --no-git-tag-version --no-push",
-    "view:coverage": "lerna run view:coverage --stream",
-    "prepublishOnly": "node scripts/prepublish.js"
+    "view:coverage": "lerna run view:coverage --stream"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",

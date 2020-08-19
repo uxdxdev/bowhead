@@ -1,2 +1,5 @@
 /node_modules
 *.log
+
+# ignore generated template files
+packages/cra-template-bowhead/template
