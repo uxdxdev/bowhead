@@ -30,7 +30,8 @@
     "cross-env": "^7.0.2",
     "husky": "^4.2.5",
     "lerna": "^3.22.1",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "shelljs": "^0.8.4"
   },
   "husky": {
     "hooks": {
