@@ -51,7 +51,7 @@ const SidebarMenuItem = (props) => {
       onClick={handleClick}
     >
       <ListItemIcon className={classes.listItemIcon}>
-        {!!Icon ? <Icon /> : <></>}
+        {Icon ? <Icon /> : <></>}
       </ListItemIcon>
       <ListItemText className={classes.listItemText}>{text}</ListItemText>
       {/* Display the expand menu if the item has children */}

@@ -127,7 +127,7 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
             })
         })
             .then(result => result.json())
-            .catch(error => {
+            .catch(() => {
                 setIsRedirecting(false)
             })
 
