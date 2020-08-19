@@ -1,11 +1,14 @@
 language: node_js
 
 node_js:
-  - '10'
+  - '12'
+
+script:
+  - echo 'test'
 
 after_success:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-  - git remote add pub https://${GITHUB_TOKEN}@github.com:daithimorton/bowhead.git
+  - git remote add -f publish https://${GITHUB_TOKEN}@github.com:daithimorton/bowhead.git
   - git checkout master
 
 deploy:
