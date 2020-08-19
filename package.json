@@ -20,7 +20,7 @@
     "build": "lerna run build --stream && node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "ci:release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
+    "ci:release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes -- --access public",
     "dev:release": "lerna publish --conventional-commits --yes --no-git-tag-version --no-push",
     "view:coverage": "lerna run view:coverage --stream"
   },
