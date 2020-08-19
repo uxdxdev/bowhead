@@ -1,0 +1,13 @@
+{
+    "name": "@mortond/cra-template-bowhead",
+    "version": "0.2.5",
+    "license": "MIT",
+    "main": "template.json",
+    "files": [
+        "template",
+        "template.json"
+    ],
+    "publishConfig": {
+        "access": "public"
+    }
+}
