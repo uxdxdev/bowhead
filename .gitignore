@@ -1,5 +1,6 @@
 /node_modules
 *.log
+.DS_Store
 
 # ignore generated template files
 packages/cra-template-bowhead/template
