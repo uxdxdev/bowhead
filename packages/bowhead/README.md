@@ -21,6 +21,8 @@ Boilerplate for React app + Netlify + Firebase + Stripe
 - Go to https://console.firebase.google.com/ and create a new project
 - Register app in Firebase
 - Create a new `Firestore` database, start in production mode
+- Set Authentication sign-in method to `email/password` and enable `Email link`
+- Add the projects `*.netlify.app` URL to `Authorized domains`
 
 ### Frontend
 
@@ -29,7 +31,10 @@ Boilerplate for React app + Netlify + Firebase + Stripe
 ### Backend
 
 - Generate a new Firebase service account private key for this project
-- Copy contents of the service account `.json` file and set it as the value of `FIREBASE_SERVICE_ACCOUNT` in the `.env` file.
+- Open the service account `.json` file and copy the values for environment these variables to `.env`:
+  - FIREBASE_PROJECT_ID
+  - FIREBASE_PRIVATE_KEY
+  - FIREBASE_CLIENT_EMAIL
 
 ### CLI
 

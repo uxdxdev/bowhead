@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDlNQ-HLz8IkogAxkwUXhBPhwtXd-V7Xqs",
-    authDomain: "marioplan-5009f.firebaseapp.com",
-    databaseURL: "https://marioplan-5009f.firebaseio.com",
-    projectId: "marioplan-5009f",
-    storageBucket: "marioplan-5009f.appspot.com",
-    messagingSenderId: "154886169358",
-    appId: "1:154886169358:web:299e2026c186023708ed5f"
+    apiKey: "AIzaSyAW3V551b53_Q4MIuWbhv_2c8dX4xnjraY",
+    authDomain: "bowhead-d9522.firebaseapp.com",
+    databaseURL: "https://bowhead-d9522.firebaseio.com",
+    projectId: "bowhead-d9522",
+    storageBucket: "bowhead-d9522.appspot.com",
+    messagingSenderId: "839446933691",
+    appId: "1:839446933691:web:6a1f97543a66c0dee8f99e"
 };
 
 export { firebaseConfig }
