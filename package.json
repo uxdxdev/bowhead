@@ -13,16 +13,14 @@
     ]
   },
   "scripts": {
-    "start": "lerna run start --stream --ignore @mortond/bowhead & yarn start:app",
-    "start:app": "cd packages/bowhead && yarn start",
+    "start": "lerna run start --stream --ignore @mortond/bowhead & yarn start:bowhead",
+    "start:bowhead": "cd packages/bowhead && yarn start",
     "test": "lerna run test --stream",
-    "test:watch": "lerna run test --stream -- --watch",
-    "build": "lerna run build --stream && git remote -v && git branch -a && yarn ci:release",
+    "build": "lerna run build --stream",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "ci:release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
-    "dev:release": "lerna publish --conventional-commits --yes --no-git-tag-version",
+    "release": "node scripts/release.js",
     "view:coverage": "lerna run view:coverage --stream"
   },
   "devDependencies": {
@@ -36,7 +34,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn build:cra-template-bowhead",
+      "pre-commit": "yarn lint",
       "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
     }
   },
