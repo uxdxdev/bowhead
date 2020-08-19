@@ -23,7 +23,7 @@ directories.forEach(directory => {
 })
 
 // copy files from bowhead to cra-template-bowhead/template
-const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock']
+const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore']
 files.forEach(file => {
     if (sh.cp('-f', `./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
@@ -57,7 +57,7 @@ const templateJson = {
         browserslist: bowheadPackageJson.browserslist
     }
 }
-const templateJsonStr = JSON.stringify(templateJson);
+const templateJsonStr = JSON.stringify(templateJson, null, 2);
 
 fs.writeFile('./packages/cra-template-bowhead/template.json', templateJsonStr, 'utf8', (err) => {
     if (err) throw err;
