@@ -20,7 +20,8 @@
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "release": "yarn build:cra-template-bowhead && node scripts/release.js",
+    "release": "yarn build:cra-template-bowhead && yarn commit && node scripts/release.js",
+    "commit": "git commit -am 'chore(cra-template-bowhead): updated template' && git push",
     "view:coverage": "lerna run view:coverage --stream"
   },
   "devDependencies": {
