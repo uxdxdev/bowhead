@@ -1,0 +1,10 @@
+{
+    "name": "@mortond/cra-template-bowhead",
+    "version": "0.0.1",
+    "private": true,
+    "main": "template.json",
+    "files": [
+        "template",
+        "template.json"
+    ]
+}

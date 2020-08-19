@@ -1,0 +1,47 @@
+{
+  "name": "workspace",
+  "private": true,
+  "description": "Monorepo for @mortond projects",
+  "version": "1.0.0",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/firebase-admin",
+      "**/firebase-admin/**"
+    ]
+  },
+  "scripts": {
+    "start": "lerna run start --stream --ignore @mortond/bowhead & yarn start:app",
+    "start:app": "cd packages/bowhead && yarn start",
+    "test": "lerna run test --stream",
+    "test:watch": "lerna run test --stream -- --watch",
+    "build": "lerna run build --stream",
+    "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
+    "lint": "lerna run lint --stream",
+    "ci:release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
+    "dev:release": "lerna publish --conventional-commits --yes --no-git-tag-version --no-push",
+    "view:coverage": "lerna run view:coverage --stream",
+    "prepublishOnly": "node scripts/prepublish.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "cross-env": "^7.0.2",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "serve": "^11.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
