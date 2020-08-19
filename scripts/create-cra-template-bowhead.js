@@ -69,3 +69,9 @@ if (sh.rm('-rf', './packages/cra-template-bowhead/.git').code !== 0) {
     sh.echo('Error: Removing .git directory');
     sh.exit(1);
 }
+
+// commit changes
+if (sh.exec('git commit -am "chore(cra-template-bowhead): updated template"').code !== 0) {
+    sh.echo('Error: Removing .git directory');
+    sh.exit(1);
+}
