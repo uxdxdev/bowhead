@@ -32,13 +32,10 @@ jobs:
         - git add .
         - git commit -m "chore(*) TravisCI update [skip ci]"
         - git push origin HEAD:master
-    - stage: test
-      node_js: 10
-      script: echo 'test'
-    - stage: test
-      node_js: 12
-      script: echo 'test'
+    - stage: test      
+      script: skip
     - stage: publish
+      script: skip
       deploy:
         - provider: script
           script: yarn release
