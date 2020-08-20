@@ -1,8 +1,5 @@
 language: node_js
 
-node_js:
-  - '12'
-
 cache:
   yarn: true
   directories:
@@ -15,24 +12,34 @@ install:
   - git config user.name "daithimorton"
   - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
 
-# build
-script:
-  - yarn build:cra-template-bowhead
+stages:
+  - build
+  - test
+  - publish
 
-# build succeeded
-after_success:
-  # commit any changes made to the template directory
-  - git stash
-  - git checkout master
-  - git stash pop
-  - git add .
-  - git commit -m "chore(*) TravisCI update [skip ci]"
-  - git push origin HEAD:master 
-
-# publish to NPM
-deploy:
-  - provider: script
-    script: yarn release
-    skip_cleanup: true
-    on:
-      branch: master
+jobs:  
+  include:
+    - stage: build
+      script:
+        - yarn build:cra-template-bowhead
+      after_success:
+        - git status
+        - git stash
+        - git checkout master
+        - git stash pop
+        - git add .
+        - git commit -m "chore(*) TravisCI update [skip ci]"
+        - git push origin HEAD:master
+    - stage: test
+      node_js: 10
+      script: echo 'test'
+    - stage: test
+      node_js: 12
+      script: echo 'test'
+    - stage: publish
+      deploy:
+        - provider: script
+          script: yarn release
+          cleanup: false
+          on:
+            branch: master
