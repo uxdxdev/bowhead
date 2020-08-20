@@ -1,6 +1,7 @@
 language: node_js
 
 node_js:
+  - '10'
   - '12'
 
 cache:
@@ -8,14 +9,20 @@ cache:
   directories:
     - "node_modules"
 
-script:
-  - yarn build:cra-template-bowhead
-
-after_success:
+# configuration
+install: 
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
   - git config user.email "davidmortonmail@gmail.com"
   - git config user.name "daithimorton"
   - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
+
+# build
+script:
+  - yarn build:cra-template-bowhead
+
+# build succeeded
+after_success:
+  # commit any changes made to the template directory
   - git stash
   - git checkout master
   - git stash pop
@@ -23,6 +30,7 @@ after_success:
   - git commit -m "chore(*) TravisCI update [skip ci]"
   - git push origin HEAD:master 
 
+# publish to NPM
 deploy:
   - provider: script
     script: yarn release
