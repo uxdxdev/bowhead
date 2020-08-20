@@ -14,10 +14,14 @@ script:
 after_success:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
   - git config user.email "davidmortonmail@gmail.com"
-  - git config user.name "TravisCI"
+  - git config user.name "daithimorton"
+  - git remote add -f publish https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
+  - git stash
+  - git checkout master
+  - git stash pop
   - git add .
   - git commit -m "chore(*) TravisCI update [skip ci]"
-  - git push origin HEAD:master https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
+  - git push origin HEAD:master 
 
 deploy:
   - provider: script
