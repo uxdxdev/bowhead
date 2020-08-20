@@ -21,7 +21,7 @@ export const userSignOut = () => {
 export const authenticateEmail = ({ email, ref, data }) => {
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
-        : `${process.env.NETLIFY_APP_URL}/verify`;
+        : `${process.env.REACT_APP_NETLIFY_URL}/verify`;
 
     const url = new URL(urlStr);
 
