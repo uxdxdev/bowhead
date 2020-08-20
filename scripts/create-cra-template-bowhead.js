@@ -78,4 +78,19 @@ if (sh.rm('-rf', './packages/cra-template-bowhead/.git').code !== 0) {
     sh.exit(1);
 }
 
+if (sh.cd('packages/cra-template-bowhead/').code !== 0) {
+    sh.echo('Error: cd to template directory');
+    sh.exit(1);
+}
+
+if (sh.exec("git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')").code !== 0) {
+    sh.echo('Error: git update');
+    sh.exit(1);
+}
+
+if (sh.cd('../../').code !== 0) {
+    sh.echo('Error: cd to ../../');
+    sh.exit(1);
+}
+
 console.log('Building cra-template-bowhead done.')

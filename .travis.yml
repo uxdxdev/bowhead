@@ -31,9 +31,7 @@ jobs:
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
         - git checkout master
       script: 
-        - yarn build:cra-template-bowhead
-        - cd packages/cra-template-bowhead/
-        - git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
+        - yarn build:cra-template-bowhead        
       deploy:
         - provider: script
           script: yarn release          
