@@ -38,7 +38,7 @@ jobs:
       script: skip
       deploy:
         - provider: script
-          script: yarn release
-          cleanup: false
+          script: yarn release          
+          skip_cleanup: true
           on:
             branch: master
