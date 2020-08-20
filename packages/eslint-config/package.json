@@ -1,6 +1,6 @@
 {
   "name": "@mortond/eslint-config",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "ESLint config",
   "main": "index.js",
   "scripts": {
