@@ -1,6 +1,6 @@
 {
     "name": "@mortond/cra-template-bowhead",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "license": "MIT",
     "main": "template.json",
     "files": [
