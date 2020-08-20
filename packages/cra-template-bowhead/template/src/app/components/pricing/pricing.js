@@ -93,12 +93,12 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
     const successUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `${process.env.NETLIFY_APP_URL}/dashboard`;
+            : `${process.env.REACT_APP_NETLIFY_URL}/dashboard`;
 
     const cancelUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `${process.env.NETLIFY_APP_URL}/dashboard`;
+            : `${process.env.REACT_APP_NETLIFY_URL}/dashboard`;
 
 
     const handleRedirectToStripe = async (priceId) => {
