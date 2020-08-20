@@ -100,3 +100,7 @@ Import Firebase emulator data
 ```javascript
 firebase emulators:start --import=./data --only firestore
 ```
+
+# TODO
+
+- Document project setup
