@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.12](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.11...@mortond/bowhead@0.2.12) (2020-08-20)
+
+
+### Bug Fixes
+
+* set eslint to same as react-scripts ([fe46889](https://github.com/daithimorton/bowhead/commit/fe46889500a8640dd1760460c1e8a0a0d31868b9))
+
+
+
+
+
 ## [0.2.11](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.10...@mortond/bowhead@0.2.11) (2020-08-20)
 
 **Note:** Version bump only for package @mortond/bowhead
