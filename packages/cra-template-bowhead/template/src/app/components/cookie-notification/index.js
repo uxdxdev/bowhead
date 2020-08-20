@@ -1,1 +1,0 @@
-export { default as CookieNotification } from './cookie-notification'

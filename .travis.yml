@@ -16,24 +16,24 @@ install:
   - git checkout master
 
 stages:
-  - build
+  # - build
   - test
   - publish
 
 jobs:  
   include:
-    - stage: build
-      script:
-        - yarn build:cra-template-bowhead
-      after_success:
-        - git status        
-        - git add .
-        - git commit -m "chore(*) TravisCI update [skip ci]"
-        - git push origin HEAD:master
+    # - stage: build
+    #   script:
+    #     - yarn build:cra-template-bowhead
+    #   after_success:
+    #     - git status        
+    #     - git add .
+    #     - git commit -m "chore(*) TravisCI update [skip ci]"
+    #     - git push origin HEAD:master
     - stage: test      
       script: skip
     - stage: publish
-      script: skip
+      script: yarn build:cra-template-bowhead
       deploy:
         - provider: script
           script: yarn release          
