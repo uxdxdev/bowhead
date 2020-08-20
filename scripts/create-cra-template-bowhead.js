@@ -15,10 +15,16 @@ if (sh.rm('-f', './packages/cra-template-bowhead/template.json').code !== 0) {
     sh.exit(1);
 }
 
+// make template directory
+if (sh.mkdir('-p', './packages/cra-template-bowhead/template').code !== 0) {
+    sh.echo('Error: Creating template directory');
+    sh.exit(1);
+}
+
 // copy directories from bowhead to cra-template-bowhead/template
 const directories = ['config', 'public', 'scripts', 'src']
 directories.forEach(directory => {
-    if (sh.cp('-rf', `./packages/bowhead/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
+    if (sh.cp('-r', `./packages/bowhead/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
         sh.echo('Error: Copying bowhead directories to template directory');
         sh.exit(1);
     }
@@ -27,7 +33,7 @@ directories.forEach(directory => {
 // copy files from bowhead to cra-template-bowhead/template
 const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore']
 files.forEach(file => {
-    if (sh.cp('-f', `./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
+    if (sh.cp(`./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
         sh.exit(1);
     }

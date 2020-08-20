@@ -1,19 +1,10 @@
 language: node_js
-
 node_js: 10
 
 cache:
   yarn: true
   directories:
     - "node_modules"
-
-# configuration
-install: 
-  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
-  - git config user.email "davidmortonmail@gmail.com"
-  - git config user.name "daithimorton"
-  - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
-  - git checkout master
 
 stages:
   # - build
@@ -33,6 +24,12 @@ jobs:
     - stage: test      
       script: skip
     - stage: publish
+      install:
+        - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
+        - git config user.email "davidmortonmail@gmail.com"
+        - git config user.name "daithimorton"
+        - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
+        - git checkout master
       script: yarn build:cra-template-bowhead
       deploy:
         - provider: script
