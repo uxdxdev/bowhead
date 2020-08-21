@@ -6,25 +6,28 @@ cache:
   directories:
     - "node_modules"
 
-stages:
+stages:  
   - test
   - name: publish
     if: branch = master
 
-jobs:  
-  include:    
-    - stage: test      
+jobs:
+  include: 
+    - stage: test
       script:
+        - yarn lint
         - yarn build
+        - yarn build:cra-template-bowhead
+        - yarn test:user
     - stage: publish
-      install:
+      before_script:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
         - git config user.email "davidmortonmail@gmail.com"
         - git config user.name "daithimorton"
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
         - git fetch origin master
         - git checkout master
-      script: 
+      script:
         - yarn build:cra-template-bowhead
       after_success:
         - git pull
