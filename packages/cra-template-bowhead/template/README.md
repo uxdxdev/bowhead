@@ -1,13 +1,30 @@
 # Bowhead
 
-Boilerplate for React app + Netlify + Firebase + Stripe
+> The bowhead whale is a species of baleen whale belonging to the family Balaenidae and the only living representative of the genus Balaena. It is the only baleen whale endemic to the Arctic and subarctic waters.
+
+Bowhead is a Create-React-App template for fast MicroSaas prototyping.
+
+## Includes
+
+- ReactJS
+- MaterialUI
+- Stripe subscription management
+- Firebase authentication
+- Firestore database
+- Netlify hosting and functions
+
+## How to use
+
+```bash
+npx create-react-app my-app --template @mortond/cra-template-bowhead
+```
 
 # Setup 
 
 - Install Firebase CLI https://firebase.google.com/docs/cli
 - Install Netlify CLI https://docs.netlify.com/cli/get-started/
 - Install Stripe CLI https://stripe.com/docs/stripe-cli
-- Rename `env.sample` to `.env`
+- Rename `.env.sample` to `.env`
 
 ## Stripe
 
@@ -26,15 +43,12 @@ Boilerplate for React app + Netlify + Firebase + Stripe
 
 ### Frontend
 
-- Copy Firebase config to `src/config/frontend/firebaseConfig.js`
+- Copy Firebase project config details to `src/config/frontend/firebaseConfig.js`
 
 ### Backend
 
 - Generate a new Firebase service account private key for this project
-- Open the service account `.json` file and copy the values for environment these variables to `.env`:
-  - FIREBASE_PROJECT_ID
-  - FIREBASE_PRIVATE_KEY
-  - FIREBASE_CLIENT_EMAIL
+- Open the service account `.json` file and copy the environment variable values to `.env`:
 
 ### CLI
 
@@ -43,64 +57,10 @@ Boilerplate for React app + Netlify + Firebase + Stripe
   - Emulators
 
 - Choose `Use an existing project` and select the project you just created
-- Do not overwrite `firestore.rules`, and continue with the rest of the setup as normal
+- **DO NOT** overwrite `firestore.rules`
 - Run `firebase login:ci`, login with your browser, and copy the `token` to the `.env` file.
 
 ## Netlify
 
 - Go to https://app.netlify.com/ and connect this projects `GIT` repo as part of the setup
 - Use `yarn build` for build command, and `build/` for publish directory
-
-# Notes
-
-Start a local Stripe webhook event listener
-
-`stripe listen --forward-to localhost:8888/.netlify/functions/stripe` 
-
-Trigger a Stripe event
-
-`stripe trigger customer.subscription.created`
-
-List of Stripe events
-
-https://stripe.com/docs/api/events/types
-
-Netlify 404 page solution, add `_redirects` to `public` directory
-
-```bash
-/*    /index.html   200
-```
-
-To use firebase SDK in functions
-
-```javascript
-//./config/webpack.functions.js
-const nodeExternals = require('webpack-node-externals');
-
-module.exports = {
-  externals: [nodeExternals()],
-};
-```
-update `package.json`
-
-```javascript
-"scripts": {
-    "build:lambda": "netlify-lambda build --config ./config/webpack.functions.js src/lambda",
-    "start:lambda": "netlify-lambda serve --config ./config/webpack.functions.js src/lambda"
-  },
-```
-Frontend `NODE_ENV` set to `development` in CRA, but Netlify Dev sets it to `production`. So we need to use a custom env variable for the backend functions
-
-```javascript
-FIREBASE_ENV_FLAG=development
-```
-
-Import Firebase emulator data
-
-```javascript
-firebase emulators:start --import=./data --only firestore
-```
-
-# TODO
-
-- Document project setup
