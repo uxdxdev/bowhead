@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.18](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.17...@mortond/bowhead@0.2.18) (2020-08-21)
+
+
+### Bug Fixes
+
+* fix for build scripts...again ([69cfc1c](https://github.com/daithimorton/bowhead/commit/69cfc1c3d16a66d83415d7eaf7efce4a70ad581e))
+
+
+
+
+
 ## [0.2.17](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.16...@mortond/bowhead@0.2.17) (2020-08-21)
 
 
