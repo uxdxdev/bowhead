@@ -18,6 +18,7 @@
     "start:bowhead": "cd packages/bowhead && yarn start",
     "test": "lerna run test --stream",
     "build": "lerna run build --stream",
+    "build:netlify": "lerna exec --stream --scope @mortond/bowhead -- yarn build:netlify",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
