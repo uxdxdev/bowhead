@@ -1,6 +1,7 @@
 {
-  "name": "workspace",
+  "name": "bowhead",
   "private": true,
+  "license": "MIT",
   "description": "Monorepo for bowhead project",
   "version": "1.0.0",
   "workspaces": {
