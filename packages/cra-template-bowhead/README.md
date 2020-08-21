@@ -1,4 +1,3 @@
 # @mortond/cra-template-bowhead
 
-Boilerplate for React app + Netlify + Firebase + Stripe
-
+Create-React-App template for fast MicroSaas prototyping.
