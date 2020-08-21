@@ -14,7 +14,8 @@ stages:
 jobs:  
   include:    
     - stage: test      
-      script: skip
+      script:
+        - yarn build
     - stage: publish
       install:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
