@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.13](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.12...@mortond/bowhead@0.2.13) (2020-08-21)
+
+
+### Bug Fixes
+
+* **cra-template-bowhead:** updated name to Bowhead ([2197899](https://github.com/daithimorton/bowhead/commit/2197899cb22ad9637ca3ebbeac14ead2cb5dd332))
+
+
+
+
+
 ## [0.2.12](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.11...@mortond/bowhead@0.2.12) (2020-08-20)
 
 
