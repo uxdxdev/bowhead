@@ -2,8 +2,6 @@ const sh = require('shelljs')
 const fs = require('fs');
 const bowheadPackageJson = require('../packages/bowhead/package.json')
 
-require('dotenv').config()
-
 // prepare bowhead template directory
 if (sh.rm('-rf', './packages/cra-template-bowhead/template/*').code !== 0) {
     sh.echo('Error: Removing files from template directory');
@@ -31,7 +29,7 @@ directories.forEach(directory => {
 })
 
 // copy files from bowhead to cra-template-bowhead/template
-const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore']
+const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore', 'env.sample']
 files.forEach(file => {
     if (sh.cp(`./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
@@ -42,17 +40,6 @@ files.forEach(file => {
 // rename files from bowhead to cra-template-bowhead/template
 if (sh.cp(`./packages/bowhead/.gitignore`, `./packages/cra-template-bowhead/template/gitignore`).code !== 0) {
     sh.echo('Error: Copying .gitignore');
-    sh.exit(1);
-}
-
-if (sh.cp(`./packages/bowhead/env.sample`, `./packages/cra-template-bowhead/template/env.sample`).code !== 0) {
-    sh.echo('Error: Copying .env.sample');
-    sh.exit(1);
-}
-
-// replace all env variable values
-if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/env.sample').code !== 0) {
-    sh.echo('Error: Replacing values in .env.sample');
     sh.exit(1);
 }
 
