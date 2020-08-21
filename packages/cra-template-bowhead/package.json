@@ -1,7 +1,7 @@
 {
     "name": "@mortond/cra-template-bowhead",
     "description": "Create-React-App template for fast MicroSaas prototyping.",
-    "version": "0.2.15",
+    "version": "0.2.16",
     "license": "MIT",
     "main": "template.json",
     "files": [
