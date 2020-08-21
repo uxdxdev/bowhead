@@ -29,7 +29,7 @@ directories.forEach(directory => {
 })
 
 // copy files from bowhead to cra-template-bowhead/template
-const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore', 'env.sample']
+const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore', '.env.sample']
 files.forEach(file => {
     if (sh.cp(`./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
