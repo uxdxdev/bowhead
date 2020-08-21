@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.16](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.15...@mortond/bowhead@0.2.16) (2020-08-21)
+
+
+### Bug Fixes
+
+* fixed script to copy .env.sample ([81e06f0](https://github.com/daithimorton/bowhead/commit/81e06f01cd4caadc80c2a18c0b0f338ed37a1dd1))
+
+
+
+
+
 ## [0.2.15](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.2.14...@mortond/bowhead@0.2.15) (2020-08-21)
 
 **Note:** Version bump only for package @mortond/bowhead
