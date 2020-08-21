@@ -41,7 +41,7 @@
     "firebase:emulator": "firebase emulators:start",
     "client:start": "react-scripts start",
     "build": "react-scripts build && yarn build:functions",
-    "build:netlify": "yarn build && yarn deploy:firebase:rules",
+    "netlify": "yarn build && yarn deploy:firebase:rules",
     "build:functions": "netlify-lambda build src/functions --config ./config/webpack.functions.js",
     "deploy:firebase:rules": "node scripts/deploy-firebase-rules.js",
     "test": "react-scripts test",
