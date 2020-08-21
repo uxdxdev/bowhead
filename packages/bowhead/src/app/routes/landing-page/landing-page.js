@@ -144,7 +144,7 @@ const LandingPage = () => {
         {/* credibility */}
         <Grid component="section" className={classes.section}>
           <Typography component="h2" variant="h2" align="center" gutterBottom>
-            Many of the worlds leading companies trust Marioplan
+            Many of the worlds leading companies trust Bowhead
           </Typography>
         </Grid>
         <Grid

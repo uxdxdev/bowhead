@@ -96,7 +96,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
               className={classes.listItem}
               underline="none"
             >
-              <TimelineIcon className={classes.icon} /> MarioPlan
+              <TimelineIcon className={classes.icon} /> Bowhead
             </Link>
           </Typography>
 

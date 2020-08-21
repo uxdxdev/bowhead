@@ -131,7 +131,7 @@ const NavBar = ({ auth: { uid }, signOut }) => {
               className={classes.link}
               underline="none"
             >
-              <TimelineIcon className={classes.icon} /> MarioPlan
+              <TimelineIcon className={classes.icon} /> Bowhead
             </Link>
           </Typography>
 
