@@ -27,6 +27,7 @@ jobs:
       script: 
         - yarn build:cra-template-bowhead
       after_success:
+        - git pull
         - git status
         - git add .
         - git commit -m "chore(*) TravisCI update [skip ci]"
