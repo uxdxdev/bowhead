@@ -1,6 +1,6 @@
 # Bowhead monorepo
 
-> > The bowhead whale is a species of baleen whale belonging to the family Balaenidae and the only living representative of the genus Balaena. It is the only baleen whale endemic to the Arctic and subarctic waters.
+> The bowhead whale is a species of baleen whale belonging to the family Balaenidae and the only living representative of the genus Balaena. It is the only baleen whale endemic to the Arctic and subarctic waters.
 
 Bowhead is a Create-React-App template for fast MicroSaas prototyping.
 
