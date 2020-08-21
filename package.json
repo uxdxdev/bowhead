@@ -17,13 +17,13 @@
     "start": "lerna run start --stream --ignore @mortond/bowhead & yarn start:bowhead",
     "start:bowhead": "cd packages/bowhead && yarn start",
     "test": "lerna run test --stream",
+    "test:user": "node scripts/user-test.js",
     "build": "lerna run build --stream",
     "build:netlify": "lerna exec --stream --scope @mortond/bowhead -- yarn build:netlify",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
-    "view:coverage": "lerna run view:coverage --stream"
+    "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
