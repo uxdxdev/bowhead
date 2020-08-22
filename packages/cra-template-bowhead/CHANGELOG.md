@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.21](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.2.20...@mortond/cra-template-bowhead@0.2.21) (2020-08-22)
+
+
+### Bug Fixes
+
+* copy readme to template root dir ([d53ff3e](https://github.com/daithimorton/bowhead/commit/d53ff3e62c0d566a3cc01d8350a443db5e4db5b8))
+
+
+
+
+
 ## [0.2.20](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.2.19...@mortond/cra-template-bowhead@0.2.20) (2020-08-21)
 
 **Note:** Version bump only for package @mortond/cra-template-bowhead
