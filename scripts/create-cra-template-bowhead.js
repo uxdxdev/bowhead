@@ -59,6 +59,12 @@ fs.writeFileSync('./packages/cra-template-bowhead/template.json', templateJsonSt
     console.log('Creating template.json done');
 });
 
+// copy readme file
+if (sh.cp(`./packages/bowhead/README.md`, `./packages/cra-template-bowhead/README.md`).code !== 0) {
+    sh.echo('Error: Copying README.md failed');
+    sh.exit(1);
+}
+
 // remove .git repo files
 if (sh.rm('-rf', './packages/cra-template-bowhead/.git').code !== 0) {
     sh.echo('Error: Removing .git directory');
