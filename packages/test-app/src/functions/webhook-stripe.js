@@ -9,7 +9,7 @@ const isValidStatus = (status) => {
 }
 
 const dbUpdateSubscriptionByCustomerId = async (data) => {
-  const stripeCustomerId = data.stripeCustomerId || null;
+  const stripeCustomerId = data.customer || null;
   const status = data.status || null;
   const planId = data.plan.id || null;
   const interval = data.plan.interval || null;
@@ -26,7 +26,7 @@ const dbUpdateSubscriptionByCustomerId = async (data) => {
 
 const dbUpdateCustomerData = (data) => {
 
-  const stripeCustomerId = data.stripeCustomerId || null;
+  const stripeCustomerId = data.customer || null;
   const uid = data.client_reference_id || null;
 
   if (stripeCustomerId && uid) {

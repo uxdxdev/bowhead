@@ -32,7 +32,7 @@ import {
   Container,
 } from "@material-ui/core";
 import { Assessment } from "@material-ui/icons";
-import { Footer, Pricing, NavBar } from "../../components";
+import { Footer, Pricing, NavBar } from "../../app/components";
 
 const useStyles = makeStyles((theme) => ({
   section: {
