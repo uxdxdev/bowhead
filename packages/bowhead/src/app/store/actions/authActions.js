@@ -1,7 +1,7 @@
 import { AUTH_TYPE } from "../../../utils/constants";
 import {
   userSignOut,
-  authenticateEmail,
+  sendSignInEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
   deleteLoggedInFirebaseUser
@@ -39,7 +39,7 @@ export const authenticateWithEmailLink = ({ email, ref, data }) => {
   return async (dispatch) => {
     dispatch({ type: "SEND_EMAIL_LINK" });
 
-    await authenticateEmail({ email, ref, data })
+    await sendSignInEmail({ email, ref, data })
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
 

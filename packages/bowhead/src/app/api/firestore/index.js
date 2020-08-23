@@ -7,7 +7,7 @@ export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
 
     const batch = firestore.batch();
     // delete projects
-    const projectsRef = await firestore.collection("workspaces").doc(workspaceId).collection("projects").get();
+    const projectsRef = await firestore.collection(FIRESTORE_COLLECTIONS.WORKSPACES).doc(workspaceId).collection(FIRESTORE_COLLECTIONS.PROJECTS).get();
     projectsRef.docs.forEach((project) => {
         batch.delete(project.ref)
     });
@@ -173,7 +173,7 @@ export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email 
 
 export const deleteUserAccountAndData = async uid => {
 
-    const userDataRef = firestore.collection("users").doc(uid);
+    const userDataRef = firestore.collection(FIRESTORE_COLLECTIONS.USERS).doc(uid);
     const userDataDoc = await userDataRef.get();
     const userData = userDataDoc.data();
     const batch = firestore.batch();
@@ -185,7 +185,7 @@ export const deleteUserAccountAndData = async uid => {
 
         if (customer) {
             // delete stripe customer data
-            const stripeCustomerDataRef = firestore.collection("stripe").doc(customer);
+            const stripeCustomerDataRef = firestore.collection(FIRESTORE_COLLECTIONS.STRIPE).doc(customer);
             batch.delete(stripeCustomerDataRef)
         }
 
@@ -194,7 +194,7 @@ export const deleteUserAccountAndData = async uid => {
             for (let key in workspaces) {
                 const workspaceData = workspaces[key];
                 const workspaceRole = workspaceData.role;
-                const workspaceRef = firestore.collection("workspaces").doc(key);
+                const workspaceRef = firestore.collection(FIRESTORE_COLLECTIONS.WORKSPACES).doc(key);
 
                 // remove user from workspaces
                 if (workspaceRole === USER_ROLES.MEMBER) {
@@ -210,7 +210,7 @@ export const deleteUserAccountAndData = async uid => {
 
                 if (workspaceRole === USER_ROLES.OWNER) {
                     // delete projects
-                    const projectsRef = await firestore.collection("workspaces").doc(key).collection("projects").get();
+                    const projectsRef = await firestore.collection(FIRESTORE_COLLECTIONS.WORKSPACES).doc(key).collection(FIRESTORE_COLLECTIONS.PROJECTS).get();
                     projectsRef.docs.forEach((project) => {
                         batch.delete(project.ref)
                     });
