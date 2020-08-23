@@ -177,21 +177,22 @@ const UserManagement = ({
 const mapStateToProps = (state) => {
   const {
     auth: {
-      uid,
       sendEmailAuthError,
       isSendingEmailLink,
       isEmailLinkSent,
       activeWorkspaceId,
     },
-    firebase: { profile },
+    firebase: {
+      auth: {
+        uid,
+        email
+      }
+    },
     firestore: {
       data: { workspaces: firestoreWorkspaces },
     },
   } = state;
 
-  const { email, workspaces: profileWorkspaces } = profile;
-  const profileWorkspace =
-    profileWorkspaces && profileWorkspaces[activeWorkspaceId];
   const firestoreWorkspace =
     firestoreWorkspaces && firestoreWorkspaces[activeWorkspaceId];
 
@@ -203,7 +204,7 @@ const mapStateToProps = (state) => {
     email,
     activeWorkspaceId,
     members: firestoreWorkspace?.members,
-    workspaceName: profileWorkspace?.name,
+    workspaceName: firestoreWorkspace?.name,
   };
 };
 

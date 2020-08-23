@@ -5,7 +5,7 @@ const useAccount = () => {
   const state = useSelector((state) => state);
   const {
     firebase: {
-      profile: { workspaces, customer },
+      profile: { workspaces, stripeCustomerId },
     },
     auth: { activeWorkspaceId },
     firestore: {
@@ -15,10 +15,10 @@ const useAccount = () => {
   } = state;
 
   const isOwner = workspaces && workspaces[activeWorkspaceId]?.role === USER_ROLES.OWNER;
-  const stripeData = stripe && stripe[customer]
+  const stripeData = stripe && stripe[stripeCustomerId]
   const isSubscribed = stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
     stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
-  const isRequestedStripeCustomer = requested[`${FIRESTORE_COLLECTIONS.STRIPE}/${customer}`];
+  const isRequestedStripeCustomer = requested[`${FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
   const isRequestedActiveWorkspace = requested[`${FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
   const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
   const isLoading = isRequestedStripeCustomer &&

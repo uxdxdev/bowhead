@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom'
 import { getToken } from '../../../../../utils/frontend/firebaseFrontend'
 import { STRIPE_SUBSCRIPTION_STATUS } from "../../../../../utils/constants";
 
-const Billing = ({ customer, plan, status, isSubscribed }) => {
+const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();
   const history = useHistory();
 
@@ -20,7 +20,7 @@ const Billing = ({ customer, plan, status, isSubscribed }) => {
     const token = await getToken();
     const data = await fetch(`/.netlify/functions/create-stripe-customer-portal-session?token=${token}`, {
       method: 'POST',
-      body: JSON.stringify({ customer })
+      body: JSON.stringify({ customer: stripeCustomerId })
     }).then(result => result.json()).catch(() => {
       setIsRedirectingToStripeCustomerPortal(false)
     })
@@ -79,7 +79,7 @@ const Billing = ({ customer, plan, status, isSubscribed }) => {
 const mapStateToProps = (state) => {
   const {
     firebase: {
-      profile: { customer },
+      profile: { stripeCustomerId },
     },
     firestore: {
       data: {
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
     }
   } = state;
 
-  const stripeData = stripe && stripe[customer];
+  const stripeData = stripe && stripe[stripeCustomerId];
   const planId = stripeData?.planId
   const status = stripeData?.status
   const isSubscribed = stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
@@ -113,7 +113,7 @@ const mapStateToProps = (state) => {
   }
 
   return {
-    customer,
+    stripeCustomerId,
     plan,
     status,
     isSubscribed

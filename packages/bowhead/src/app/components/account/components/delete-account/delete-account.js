@@ -21,7 +21,7 @@ const DeleteAccount = ({
   deleteCurrentUserAccount,
   deletingUserDataError,
   isDeletingUserData,
-  customer
+  stripeCustomerId
 }) => {
 
   // delete account dialog
@@ -110,7 +110,7 @@ const DeleteAccount = ({
           </Button>
           <Button
             onClick={() => {
-              deleteCurrentUserAccount({ uid, customer });
+              deleteCurrentUserAccount({ uid, stripeCustomerId });
               handleClose();
             }}
             disabled={emailCheckInput !== email}
@@ -130,12 +130,12 @@ const DeleteAccount = ({
 
 const mapStateToProps = (state) => {
   const {
-    firebase: { auth: { email, uid }, profile: { customer } },
+    firebase: { auth: { email, uid }, profile: { stripeCustomerId } },
     auth: { deletingUserDataError, isDeletingUserData },
   } = state;
 
   return {
-    customer,
+    stripeCustomerId,
     email,
     uid,
     isDeletingUserData,
@@ -145,7 +145,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteCurrentUserAccount: ({ uid, customer }) => dispatch(deleteCurrentUserAccount({ uid, customer })),
+    deleteCurrentUserAccount: ({ uid, stripeCustomerId }) => dispatch(deleteCurrentUserAccount({ uid, stripeCustomerId })),
   };
 };
 

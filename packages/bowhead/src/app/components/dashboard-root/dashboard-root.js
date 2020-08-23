@@ -19,7 +19,7 @@ const DashboardRoot = (props) => {
 const mapStateToProps = (state) => {
     const {
         firebase: {
-            profile: { workspaces, customer },
+            profile: { workspaces, stripeCustomerId },
         },
         firestore: {
             data
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
 
     const role = workspaces && workspaces[activeWorkspaceId]?.role
     const isMember = role && role === USER_ROLES.MEMBER;
-    const subscriptionStatus = data && data.stripe && data.stripe[customer]?.status
+    const subscriptionStatus = data && data.stripe && data.stripe[stripeCustomerId]?.status
     const isSubscribed = (subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
         subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.ACTIVE)
     const hasAccessToWorkspace = isSubscribed || isMember

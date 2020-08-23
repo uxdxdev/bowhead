@@ -10,7 +10,7 @@ const useDashboard = () => {
 
   const {
     firebase: {
-      profile: { workspaces, customer },
+      profile: { workspaces, stripeCustomerId },
     },
     firestore: {
       status: { requesting },
@@ -21,7 +21,7 @@ const useDashboard = () => {
   } = state;
 
   const role = workspaces && workspaces[activeWorkspaceId]?.role
-  const subscriptionStatus = data && data.stripe && data.stripe[customer]?.status
+  const subscriptionStatus = data && data.stripe && data.stripe[stripeCustomerId]?.status
   const isSubscribed = (subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
     subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.ACTIVE) ||
     role === USER_ROLES.MEMBER
@@ -45,7 +45,7 @@ const useDashboard = () => {
 
     collections.push({
       collection: FIRESTORE_COLLECTIONS.STRIPE,
-      doc: customer,
+      doc: stripeCustomerId,
     });
 
     workspaces &&
@@ -66,7 +66,7 @@ const useDashboard = () => {
       });
 
     return collections;
-  }, [customer, workspaces, isCreatingWorkspace]);
+  }, [stripeCustomerId, workspaces, isCreatingWorkspace]);
 
   useFirestoreConnect(firestoreConnectConfigCallback);
 
