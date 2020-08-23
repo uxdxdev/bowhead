@@ -14,12 +14,12 @@
     ]
   },
   "scripts": {
-    "start": "lerna run start --stream --ignore @mortond/bowhead & yarn start:bowhead",
-    "start:bowhead": "cd packages/bowhead && yarn start",
+    "start": "lerna run start --stream --ignore test-app & yarn start:test-app",
+    "start:test-app": "cd packages/test-app && yarn start",
     "test": "lerna run test --stream",
     "test:user": "node scripts/user-test.js",
     "build": "lerna run build --stream",
-    "build:netlify": "lerna exec --stream --scope @mortond/bowhead -- yarn build:netlify",
+    "build:netlify": "lerna exec --stream --scope test-app -- yarn build:netlify",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
     "lint": "lerna run lint --stream",
@@ -32,7 +32,6 @@
     "dotenv": "^8.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.22.1",
-    "serve": "^11.3.2",
     "shelljs": "^0.8.4"
   },
   "husky": {
