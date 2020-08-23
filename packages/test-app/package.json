@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
     "@mortond/eslint-config": "^0.2.12",
+    "@mortond/bowhead": "^0.0.1",
     "@stripe/stripe-js": "^1.8.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.7.0",
