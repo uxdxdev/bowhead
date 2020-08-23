@@ -108,12 +108,12 @@ export const verifySignUp = () => {
   };
 };
 
-export const deleteCurrentUserAccount = ({ uid, customer }) => {
+export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
   return async (dispatch) => {
     dispatch({ type: "DELETING_USER_DATA" });
 
     // stripe
-    customer && await deleteStripeCustomerAndSubscription(customer)
+    stripeCustomerId && await deleteStripeCustomerAndSubscription(stripeCustomerId)
       .then((response) => {
         if (!response.ok) {
           dispatch({ type: "DELETING_USER_DATA_ERROR", error: 'failed to delete stripe customer data' });

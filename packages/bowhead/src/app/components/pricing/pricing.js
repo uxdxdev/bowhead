@@ -17,14 +17,12 @@ import { connect } from "react-redux";
 const tiers = [
     {
         title: "Basic",
-        price: "10",
+        price: "249",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_BASIC,
         description: [
-            "1 Project",
-            "Unlimited Workspaces",
+            "10 Projects",
             "Unlimited Users",
-            "Slack Community Access",
-            "24/7 Support",
+            "Live Support",
             "14 Day Free Trial",
         ],
         buttonText: "Get started",
@@ -33,14 +31,12 @@ const tiers = [
     {
         title: "Pro",
         subheader: "Most popular",
-        price: "50",
+        price: "599",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_PRO,
         description: [
-            "5 Projects",
-            "Unlimited Workspaces",
+            "25 Projects",
             "Unlimited Users",
-            "Slack Community Access",
-            "24/7 Support",
+            "Live Support",
             "14 Day Free Trial",
         ],
         buttonText: "Get started",
@@ -48,14 +44,12 @@ const tiers = [
     },
     {
         title: "Enterprise",
-        price: "250",
+        price: "1399",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_ENTERPRISE,
         description: [
-            "Unlimited Projects",
-            "Unlimited Workspaces",
+            "125 Projects",
             "Unlimited Users",
-            "Slack Community Access",
-            "24/7 Support",
+            "Live Support",
             "14 Day Free Trial",
         ],
         buttonText: "Get started",
@@ -85,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
+const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
     const classes = useStyles();
 
     const [isRedirecting, setIsRedirecting] = useState(false)
@@ -108,7 +102,7 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
         const data = await fetch(`/.netlify/functions/create-stripe-checkout-session?token=${token}`, {
             method: 'POST',
             body: JSON.stringify({
-                ...(customer && { customer }),
+                ...(stripeCustomerId && { customer: stripeCustomerId }),
                 payment_method_types: ['card'],
                 line_items: [
                     { price: priceId, quantity: 1 }
@@ -119,7 +113,7 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
                 customer_email: email,
                 client_reference_id: uid,
                 // do not provide a free trial if they were previously a customer
-                ...(!customer && {
+                ...(!stripeCustomerId && {
                     subscription_data: {
                         trial_period_days: '14'
                     }
@@ -214,13 +208,13 @@ const Pricing = ({ auth: { uid }, isSubscribed, customer, email }) => {
 
 const mapStateToProps = (state) => {
     const {
-        firebase: { profile: { email, customer }, auth },
+        firebase: { auth: { uid, email }, profile: { stripeCustomerId } },
     } = state;
 
     return {
-        auth,
-        customer,
-        email
+        uid,
+        email,
+        stripeCustomerId,
     };
 };
 

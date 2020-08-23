@@ -181,11 +181,11 @@ export const deleteUserAccountAndData = async uid => {
     if (userData) {
         const email = userData.email || null;
         const workspaces = userData.workspaces || null;
-        const customer = userData.customer || null;
+        const stripeCustomerId = userData.stripeCustomerId || null;
 
-        if (customer) {
+        if (stripeCustomerId) {
             // delete stripe customer data
-            const stripeCustomerDataRef = firestore.collection(FIRESTORE_COLLECTIONS.STRIPE).doc(customer);
+            const stripeCustomerDataRef = firestore.collection(FIRESTORE_COLLECTIONS.STRIPE).doc(stripeCustomerId);
             batch.delete(stripeCustomerDataRef)
         }
 

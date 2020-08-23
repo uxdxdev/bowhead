@@ -15,7 +15,7 @@ service cloud.firestore {
     }
 
     function getStripeCustomerId(uid) {
-      return get(/databases/$(database)/documents/users/$(uid)).data.customer;
+      return get(/databases/$(database)/documents/users/$(uid)).data.stripeCustomerId;
     } 
 
     function getStripeData(uid) {
@@ -68,7 +68,7 @@ service cloud.firestore {
 			allow read, write: if isSignedIn(request) && request.auth.uid == userId;
     }
 
-    match /stripe/{customerId} {
+    match /stripe/{stripeCustomerId} {
 			allow read, write: if isSignedIn(request) &&
                               (resource == null || 
                               request.auth.uid == resource.data.uid);
