@@ -17,10 +17,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // theme
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useMediaQuery, CssBaseline } from "@material-ui/core";
-import { PageLoadingSpinner } from "./components";
 import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { AuthenticatedRoute, Signin, Verify, Dashboard } from "./components";
+import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "./components";
 
 const store = createStore(
   rootReducer,
