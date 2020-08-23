@@ -14,11 +14,12 @@ export const userSignOut = () => {
 
 /**
  * 
+ * 
  * @param {*} args.email users email address
-*  @param {*} args.ref reference for email authentication
- * @param {*} args.data object with key/value pairs for URL params
+ * @param {*} args.ref reference for email authentication
+ * @param {*} args.data object with key/value pairs for URL params 
  */
-export const authenticateEmail = ({ email, ref, data }) => {
+export const sendSignInEmail = ({ email, ref, data }) => {
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
         : `${process.env.REACT_APP_NETLIFY_URL}/verify`;
