@@ -8123,7 +8123,7 @@ eslint@^6.6.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-eslint@^7.5.0:
+eslint@^7.5.0, eslint@^7.7.0:
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.7.0.tgz#18beba51411927c4b64da0a8ceadefe4030d6073"
   integrity sha512-1KUxLzos0ZVsyL81PnRN335nDtQ8/vZUD6uMtWbF+5zDtjKcsklIi78XoE0MVL93QvWTu+E5y44VyyCsOMBrIg==
@@ -8817,9 +8817,9 @@ find-versions@^3.2.0:
     semver-regex "^2.0.0"
 
 firebase-admin@^9.0.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-9.1.0.tgz#c8b7f8da32cc52d5f15b0be47fd88979c5e86618"
-  integrity sha512-tGGREJpoRM/mbV/5bs/q9SQRZkVhxMMq1HIJEzSEh3mtz5hC9VtaCkuLt6chuAsqHMBoc1pvnrGTOC5nOme9VQ==
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-9.1.1.tgz#153aff515140a41d92ebc51231c12c7b2f4c3e69"
+  integrity sha512-HkzY9yN/kOe1EQgjheURAQ4pFBerI54TBL0+nj1fwzKnAnGCpcI73Bbwx99Pk3u2x4rj6bDcsZfz9bA8y7DWtQ==
   dependencies:
     "@firebase/database" "^0.6.10"
     "@firebase/database-types" "^0.5.2"
@@ -13314,7 +13314,7 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
-netlify-cli@^2.59.0:
+netlify-cli@^2.59.1:
   version "2.59.1"
   resolved "https://registry.yarnpkg.com/netlify-cli/-/netlify-cli-2.59.1.tgz#6ce9b7314a4a2156f0dffcf0440a9f04961fed17"
   integrity sha512-HoqWho35I89wkJToOjMkcyfs3vXaeRG8/IDaKCXlVWfxLa4X4tEcN+YA/Xt6fHmiRTL8dvZttTO+rwlru7JaBQ==
@@ -15907,7 +15907,7 @@ react-router@5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scripts@^3.4.0:
+react-scripts@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.3.tgz#21de5eb93de41ee92cd0b85b0e1298d0bb2e6c51"
   integrity sha512-oSnoWmii/iKdeQiwaO6map1lUaZLmG0xIUyb/HwCVFLT7gNbj8JZ9RmpvMCZ4fB98ZUMRfNmp/ft8uy/xD1RLA==
