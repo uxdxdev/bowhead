@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-
 import {
   Typography,
   Button,
@@ -12,8 +11,8 @@ import {
   TextField,
 } from "@material-ui/core";
 import { deleteCurrentUserAccount } from "../../../../store/actions/authActions";
-import ButtonLoadingSpinner from "../../../../components/button-loading-spinner/button-loading-spinner";
-import ButtonBox from "../../../../components/button-box/button-box";
+import { ButtonBox, ButtonLoadingSpinner } from "../../../";
+
 
 const DeleteAccount = ({
   email,

@@ -16,10 +16,10 @@ import { useMediaQuery, CssBaseline } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // custom
-import rootReducer from "./store/rootReducer";
+import rootReducer from "../store/rootReducer";
 import { firebase } from "../utils/frontend/firebaseFrontend";
 import { FIRESTORE_COLLECTIONS } from "../utils/constants";
-import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "./components";
+import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "../components";
 import { LandingPage } from "../pages/landing-page";
 
 

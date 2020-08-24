@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { FIRESTORE_COLLECTIONS, STRIPE_SUBSCRIPTION_STATUS, USER_ROLES } from '../../../../utils/constants'
+import { FIRESTORE_COLLECTIONS, STRIPE_SUBSCRIPTION_STATUS, USER_ROLES } from '../../../utils/constants'
 
 const useAccount = () => {
   const state = useSelector((state) => state);

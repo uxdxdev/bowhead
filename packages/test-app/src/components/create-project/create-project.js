@@ -6,8 +6,7 @@ import {
 } from "../../store/actions/projectActions";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { ButtonLoadingSpinner } from "../";
-import { ButtonBox } from "../";
+import { ButtonLoadingSpinner, ButtonBox } from "../";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

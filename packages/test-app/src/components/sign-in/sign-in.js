@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonLoadingSpinner, ButtonBox, CheckEmail } from "../../components";
-import { AUTH_TYPE } from "../../../utils/constants";
+import { AUTH_TYPE } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   section: {
