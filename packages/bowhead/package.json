@@ -21,7 +21,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
+    "jest": "^26.4.2",
     "microbundle": "^0.12.3",
     "serve": "^11.3.2"
   },
