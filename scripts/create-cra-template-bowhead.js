@@ -1,6 +1,6 @@
 const sh = require('shelljs')
 const fs = require('fs');
-const bowheadPackageJson = require('../packages/bowhead/package.json')
+const bowheadPackageJson = require('../packages/test-app/package.json')
 
 // prepare bowhead template directory
 if (sh.rm('-rf', './packages/cra-template-bowhead/template/*').code !== 0) {
@@ -19,26 +19,26 @@ if (sh.mkdir('-p', './packages/cra-template-bowhead/template').code !== 0) {
     sh.exit(1);
 }
 
-// copy directories from bowhead to cra-template-bowhead/template
+// copy directories from test-app to cra-template-bowhead/template
 const directories = ['config', 'public', 'scripts', 'src']
 directories.forEach(directory => {
-    if (sh.cp('-r', `./packages/bowhead/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
+    if (sh.cp('-r', `./packages/test-app/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
         sh.echo('Error: Copying bowhead directories to template directory');
         sh.exit(1);
     }
 })
 
-// copy files from bowhead to cra-template-bowhead/template
+// copy files from test-app to cra-template-bowhead/template
 const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore', '.env.sample']
 files.forEach(file => {
-    if (sh.cp(`./packages/bowhead/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
+    if (sh.cp(`./packages/test-app/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
         sh.exit(1);
     }
 })
 
-// rename files from bowhead to cra-template-bowhead/template
-if (sh.cp(`./packages/bowhead/.gitignore`, `./packages/cra-template-bowhead/template/gitignore`).code !== 0) {
+// rename files from test-app to cra-template-bowhead/template
+if (sh.cp(`./packages/test-app/.gitignore`, `./packages/cra-template-bowhead/template/gitignore`).code !== 0) {
     sh.echo('Error: Copying .gitignore');
     sh.exit(1);
 }
@@ -60,7 +60,7 @@ fs.writeFileSync('./packages/cra-template-bowhead/template.json', templateJsonSt
 });
 
 // copy readme file
-if (sh.cp(`./packages/bowhead/README.md`, `./packages/cra-template-bowhead/README.md`).code !== 0) {
+if (sh.cp(`./packages/test-app/README.md`, `./packages/cra-template-bowhead/README.md`).code !== 0) {
     sh.echo('Error: Copying README.md failed');
     sh.exit(1);
 }
