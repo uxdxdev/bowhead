@@ -1,6 +1,6 @@
 {
   "name": "@mortond/bowhead",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Bowhead components",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
@@ -29,6 +29,9 @@
     "extends": [
       "@mortond/eslint-config"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "jest": {
     "preset": "ts-jest",
