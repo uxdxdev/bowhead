@@ -12,7 +12,7 @@
     "eslint": "^7.7.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "firebase": "^7.17.2",
-    "firebase-admin": "^9.0.0",
+    "firebase-admin": "^9.1.1",
     "firebase-tools": "^8.7.0",
     "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
