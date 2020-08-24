@@ -5,9 +5,9 @@ import {
   UserManagement,
   DeleteAccount,
   Workspaces,
-  Billing
-} from "./components";
-import { PageLoadingSpinner } from "../";
+  Billing,
+  PageLoadingSpinner
+} from "../";
 import { useStyles } from "./styles";
 import { useAccount } from "./hooks";
 

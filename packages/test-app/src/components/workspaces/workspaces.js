@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { USER_ROLES } from '../../../../utils/constants'
+import { USER_ROLES } from '../../utils/constants'
 import {
   Typography,
   List,
@@ -10,7 +10,7 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { leaveWorkspace, deleteWorkspace } from "../../../../store/actions/workspaceActions";
+import { leaveWorkspace, deleteWorkspace } from "../../store/actions/workspaceActions";
 
 const useStyles = makeStyles((theme) => ({
   listItemText: {

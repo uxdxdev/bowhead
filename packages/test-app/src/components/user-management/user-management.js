@@ -15,10 +15,10 @@ import {
   authenticateWithEmailLink,
   resetSendEmailLink,
   removeMember,
-} from "../../../../store/actions/authActions";
+} from "../../store/actions/authActions";
 
-import { ButtonLoadingSpinner, ButtonBox } from "../../../";
-import { AUTH_TYPE, USER_ROLES } from "../../../../utils/constants";
+import { ButtonLoadingSpinner, ButtonBox } from "../";
+import { AUTH_TYPE, USER_ROLES } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
