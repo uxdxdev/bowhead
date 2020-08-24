@@ -16,9 +16,9 @@ import {
   resetSendEmailLink,
   removeMember,
 } from "../../../../store/actions/authActions";
-import ButtonLoadingSpinner from "../../../../components/button-loading-spinner/button-loading-spinner";
-import ButtonBox from "../../../../components/button-box/button-box";
-import { AUTH_TYPE, USER_ROLES } from "../../../../../utils/constants";
+
+import { ButtonLoadingSpinner, ButtonBox } from "../../../";
+import { AUTH_TYPE, USER_ROLES } from "../../../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

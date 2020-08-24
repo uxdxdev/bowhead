@@ -10,8 +10,8 @@ import {
 import { Star as StarBorder } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { stripe } from '../../../utils/frontend/stripeFrontend'
-import { getToken } from '../../../utils/frontend/firebaseFrontend'
+import { stripe } from '../../utils/frontend/stripeFrontend'
+import { getToken } from '../../utils/frontend/firebaseFrontend'
 import { connect } from "react-redux";
 
 const tiers = [

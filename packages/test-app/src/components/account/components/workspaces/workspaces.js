@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { USER_ROLES } from '../../../../../utils/constants'
+import { USER_ROLES } from '../../../../utils/constants'
 import {
   Typography,
   List,

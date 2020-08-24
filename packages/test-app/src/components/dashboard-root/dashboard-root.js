@@ -1,7 +1,7 @@
 import React from 'react'
 import { CreateWorkspace, Pricing } from "../";
 import { connect } from "react-redux";
-import { STRIPE_SUBSCRIPTION_STATUS, USER_ROLES } from '../../../utils/constants';
+import { STRIPE_SUBSCRIPTION_STATUS, USER_ROLES } from '../../utils/constants';
 
 const DashboardRoot = (props) => {
 

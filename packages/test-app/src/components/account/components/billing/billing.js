@@ -4,8 +4,8 @@ import { Typography, Button, Paper } from "@material-ui/core";
 import { useStyles } from './billing-styles'
 import { ButtonBox, ButtonLoadingSpinner } from "../../../";
 import { useHistory } from 'react-router-dom'
-import { getToken } from '../../../../../utils/frontend/firebaseFrontend'
-import { STRIPE_SUBSCRIPTION_STATUS } from "../../../../../utils/constants";
+import { getToken } from '../../../../utils/frontend/firebaseFrontend'
+import { STRIPE_SUBSCRIPTION_STATUS } from "../../../../utils/constants";
 
 const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();

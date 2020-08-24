@@ -1,4 +1,4 @@
-import { AUTH_TYPE } from "../../../utils/constants";
+import { AUTH_TYPE } from "../../utils/constants";
 import {
   userSignOut,
   sendSignInEmail,
