@@ -1,4 +1,4 @@
-import { getToken } from '../../../utils/frontend/firebaseFrontend'
+import { getToken } from '../../utils/frontend/firebaseFrontend'
 
 export const deleteStripeCustomerAndSubscription = async (stripeCustomerId) => {
     const token = await getToken();

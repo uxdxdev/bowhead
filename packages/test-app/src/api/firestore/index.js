@@ -1,5 +1,5 @@
-import { FIRESTORE_COLLECTIONS, USER_ROLES } from "../../../utils/constants";
-import { firestore, firebase } from '../../../utils/frontend/firebaseFrontend'
+import { FIRESTORE_COLLECTIONS, USER_ROLES } from "../../utils/constants";
+import { firestore, firebase } from '../../utils/frontend/firebaseFrontend'
 
 export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
     const userRef = firestore.collection(FIRESTORE_COLLECTIONS.USERS).doc(uid);

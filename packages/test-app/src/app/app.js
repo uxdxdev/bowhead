@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./store/rootReducer";
 import { Provider, useSelector } from "react-redux";
 import thunk from "redux-thunk";
 import {
@@ -11,15 +10,18 @@ import {
   ReactReduxFirebaseProvider,
   isLoaded,
 } from "react-redux-firebase";
-import { firebase } from "../utils/frontend/firebaseFrontend";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-// theme
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useMediaQuery, CssBaseline } from "@material-ui/core";
-import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+// custom
+import rootReducer from "./store/rootReducer";
+import { firebase } from "../utils/frontend/firebaseFrontend";
+import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "./components";
+import { LandingPage } from "../pages/landing-page";
+
 
 const store = createStore(
   rootReducer,
@@ -58,7 +60,7 @@ const AuthIsLoaded = ({ children }) => {
   return children;
 };
 
-const App = ({ children }) => {
+const App = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = useMemo(
@@ -124,7 +126,8 @@ const App = ({ children }) => {
             <CssBaseline />
             <BrowserRouter>
               <Switch>
-                {children}
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/terms" component={() => <div>Terms</div>} />
                 <Route path="/signin" component={Signin} />
                 <Route path="/verify" component={Verify} />
                 <AuthenticatedRoute path="/dashboard" component={Dashboard} />
