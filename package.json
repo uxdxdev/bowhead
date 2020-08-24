@@ -21,9 +21,10 @@
     "build": "lerna run build --stream",
     "build:netlify": "lerna exec --stream --scope test-app -- yarn build:netlify",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
-    "clean": "lerna exec --stream -- rm -rf node_modules build && rm -rf node_modules",
+    "clean": "lerna run clean --stream && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes"
+    "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
+    "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",

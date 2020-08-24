@@ -9,27 +9,27 @@ const isValidStatus = (status) => {
 }
 
 const dbUpdateSubscriptionByCustomerId = async (data) => {
-  const customer = data.customer || null;
+  const stripeCustomerId = data.customer || null;
   const status = data.status || null;
   const planId = data.plan.id || null;
   const interval = data.plan.interval || null;
-  if (isValidStatus(status) && customer && planId && interval) {
+  if (isValidStatus(status) && stripeCustomerId && planId && interval) {
     if (status === STRIPE_SUBSCRIPTION_STATUS.CANCELLED) {
       // delete stripe customer data from DB
-      await firestore.collection("stripe").doc(customer).delete();
+      await firestore.collection("stripe").doc(stripeCustomerId).delete();
     } else {
       // update stripe customer data in DB
-      await firestore.collection("stripe").doc(customer).set({ status, planId, interval }, { merge: true });
+      await firestore.collection("stripe").doc(stripeCustomerId).set({ status, planId, interval }, { merge: true });
     }
   }
 }
 
 const dbUpdateCustomerData = (data) => {
 
-  const customer = data.customer || null;
+  const stripeCustomerId = data.customer || null;
   const uid = data.client_reference_id || null;
 
-  if (customer && uid) {
+  if (stripeCustomerId && uid) {
 
     const userRef = firestore.collection("users").doc(uid);
     const batch = firestore.batch();
@@ -38,14 +38,14 @@ const dbUpdateCustomerData = (data) => {
     batch.set(
       userRef,
       {
-        customer
+        stripeCustomerId
       },
       { merge: true }
     );
 
 
     // stripe
-    const stripeRef = firestore.collection("stripe").doc(customer);
+    const stripeRef = firestore.collection("stripe").doc(stripeCustomerId);
     batch.set(
       stripeRef,
       {
@@ -64,6 +64,7 @@ const dbUpdateCustomerData = (data) => {
 
 exports.handler = async (event, context, callback) => {
   const sig = event.headers['stripe-signature'];
+
   const endpointSecret = process.env.REACT_APP_STRIPE_SIGNING_SECRET;
   let verifiedEvent;
   try {
