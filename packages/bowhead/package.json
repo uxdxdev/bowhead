@@ -30,6 +30,9 @@
       "@mortond/eslint-config"
     ]
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "jest": {
     "preset": "ts-jest",
     "coverageThreshold": {
