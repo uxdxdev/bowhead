@@ -5,8 +5,8 @@ exports.handler = async (event, context, callback) => {
     const user = await verifyToken(event.queryStringParameters.token);
     if (!user) callback(null, { statusCode: 401 })
 
-    const { customer } = JSON.parse(event.body);
-    await stripe.customers.del(customer).then(() => {
+    const { stripeCustomerId } = JSON.parse(event.body);
+    await stripe.customers.del(stripeCustomerId).then(() => {
         callback(null, {
             statusCode: 200
         })

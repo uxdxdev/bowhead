@@ -1,7 +1,5 @@
 import React, { useMemo } from "react";
-import { Routes } from "./routes";
 import { createStore, applyMiddleware } from "redux";
-import rootReducer from "./store/rootReducer";
 import { Provider, useSelector } from "react-redux";
 import thunk from "redux-thunk";
 import {
@@ -12,15 +10,18 @@ import {
   ReactReduxFirebaseProvider,
   isLoaded,
 } from "react-redux-firebase";
-import { firebase } from "../utils/frontend/firebaseFrontend";
 import { composeWithDevTools } from "redux-devtools-extension";
-
-// theme
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useMediaQuery, CssBaseline } from "@material-ui/core";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { PageLoadingSpinner } from "./components";
+// custom
+import rootReducer from "../store/rootReducer";
+import { firebase } from "../utils/frontend/firebaseFrontend";
 import { FIRESTORE_COLLECTIONS } from "../utils/constants";
+import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "../components";
+import { LandingPage } from "../pages/landing-page";
+
 
 const store = createStore(
   rootReducer,
@@ -123,7 +124,15 @@ const App = () => {
         <ReactReduxFirebaseProvider {...reactReduxFirebaseConfig}>
           <AuthIsLoaded>
             <CssBaseline />
-            <Routes />
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/terms" component={() => <div>Terms</div>} />
+                <Route path="/signin" component={Signin} />
+                <Route path="/verify" component={Verify} />
+                <AuthenticatedRoute path="/dashboard" component={Dashboard} />
+              </Switch>
+            </BrowserRouter>
           </AuthIsLoaded>
         </ReactReduxFirebaseProvider>
       </ThemeProvider>
