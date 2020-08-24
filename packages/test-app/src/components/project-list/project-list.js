@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectListItem } from "./project-list-item";
+import { ProjectListItem } from "../";
 import { connect } from "react-redux";
 import { PageLoadingSpinner } from "../";
 import { Typography, Paper } from "@material-ui/core";

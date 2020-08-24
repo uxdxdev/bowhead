@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import moment from "moment";
 import { Paper, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ButtonBox from "../../button-box/button-box";
+import { ButtonBox } from "../";
 import { useProjectListItem } from "./hooks";
 
 const useStyles = makeStyles((theme) => ({
