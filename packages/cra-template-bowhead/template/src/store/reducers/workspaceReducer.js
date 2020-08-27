@@ -19,7 +19,7 @@ const workspaceReducer = (state = initState, action) => {
       return {
         ...state,
         isCreatingWorkspace: false,
-        createWorkspaceError: "Error creating project"
+        createWorkspaceError: "Error creating workspace"
       };
     case "CREATE_WORKSPACE_RESET":
       return {

@@ -143,11 +143,11 @@ export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
   }
 };
 
-export const removeMember = ({ uid, workspaceId, email }) => {
+export const removeMember = ({ uid, workspaceId }) => {
   return (dispatch) => {
     dispatch({ type: "REMOVE_MEMBER" });
 
-    return removeUserFromWorkspace({ uid, workspaceId, email })
+    return removeUserFromWorkspace({ uid, workspaceId })
       .then(() => {
         dispatch({ type: "REMOVE_MEMBER_SUCCESS" });
       })
