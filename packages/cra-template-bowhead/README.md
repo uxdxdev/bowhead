@@ -7,6 +7,7 @@ Bowhead is a Create-React-App template for fast MicroSaas prototyping.
 ## Includes
 
 - ReactJS
+- Redux
 - MaterialUI
 - Stripe subscription management
 - Firebase authentication
