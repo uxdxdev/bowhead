@@ -43,7 +43,6 @@ const UserManagement = ({
   isEmailLinkSent,
   authenticateWithEmailLink,
   resetSendEmailLink,
-  uid,
   email,
   activeWorkspaceId,
   members,
@@ -88,8 +87,8 @@ const UserManagement = ({
     };
   }, [resetSendEmailLink]);
 
-  const handleRemoveMember = (member) => {
-    removeMember({ uid, workspaceId: activeWorkspaceId, email: member });
+  const handleRemoveMember = ({ uid }) => {
+    removeMember({ uid, workspaceId: activeWorkspaceId });
   };
 
   return (
@@ -140,16 +139,17 @@ const UserManagement = ({
 
       <List dense>
         {members &&
-          Object.keys(members).map((member) => {
-            const role = members[member];
+          Object.keys(members).map((uid) => {
+            const role = members[uid].role;
+            const email = members[uid].email;
             const isOwner = role === USER_ROLES.OWNER;
             return (
-              <ListItem key={member} classes={{
+              <ListItem key={uid} classes={{
                 secondaryAction: classes.listItemSecondary,
               }} >
                 <ListItemText
-                  primary={`${member} `}
-                  secondary={`${members[member]}`}
+                  primary={`${email} `}
+                  secondary={`${role}`}
                   classes={{
                     primary: classes.listItemText,
                     secondary: classes.listItemText
@@ -160,7 +160,7 @@ const UserManagement = ({
                     <Button
                       color="secondary"
                       variant="contained"
-                      onClick={() => !isOwner && handleRemoveMember(member)}
+                      onClick={() => !isOwner && handleRemoveMember({ uid })}
                     >
                       Remove
                     </Button>
@@ -184,7 +184,6 @@ const mapStateToProps = (state) => {
     },
     firebase: {
       auth: {
-        uid,
         email
       }
     },
@@ -197,7 +196,6 @@ const mapStateToProps = (state) => {
     firestoreWorkspaces && firestoreWorkspaces[activeWorkspaceId];
 
   return {
-    uid,
     sendEmailAuthError,
     isSendingEmailLink,
     isEmailLinkSent,
@@ -213,8 +211,8 @@ const mapDispatchToProps = (dispatch) => {
     authenticateWithEmailLink: ({ email, data }) =>
       dispatch(authenticateWithEmailLink({ email, ref: AUTH_TYPE.INVITE, data })),
     resetSendEmailLink: () => dispatch(resetSendEmailLink()),
-    removeMember: (activeWorkspaceId, member) =>
-      dispatch(removeMember(activeWorkspaceId, member)),
+    removeMember: ({ workspaceId, uid }) =>
+      dispatch(removeMember({ workspaceId, uid })),
   };
 };
 
