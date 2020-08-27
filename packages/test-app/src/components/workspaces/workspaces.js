@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Workspaces = (props) => {
-  const { firestoreWorkspaces, profileWorkspaces, leaveWorkspace, deleteWorkspace, uid, workspaceErrors, email } = props;
+  const { firestoreWorkspaces, profileWorkspaces, leaveWorkspace, deleteWorkspace, uid, workspaceErrors } = props;
 
   const classes = useStyles();
 
   const handleLeaveWorkspace = (workspaceId) => {
     if (uid && workspaceId) {
-      leaveWorkspace({ uid, email, workspaceId });
+      leaveWorkspace({ uid, workspaceId });
     } else {
       console.error("handleLeaveWorkspace");
     }
@@ -126,7 +126,7 @@ const mapStateToProps = (state) => {
   const {
     firebase: {
       auth: { uid },
-      profile: { email, workspaces: profileWorkspaces },
+      profile: { workspaces: profileWorkspaces },
     },
     firestore
   } = state;
@@ -137,7 +137,6 @@ const mapStateToProps = (state) => {
   } = firestore;
 
   return {
-    email,
     firestoreWorkspaces,
     profileWorkspaces,
     workspaceErrors: byQuery,
@@ -147,8 +146,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    leaveWorkspace: ({ uid, email, workspaceId }) =>
-      dispatch(leaveWorkspace({ uid, email, workspaceId })),
+    leaveWorkspace: ({ uid, workspaceId }) =>
+      dispatch(leaveWorkspace({ uid, workspaceId })),
     deleteWorkspace: ({ uid, email, workspaceId }) =>
       dispatch(deleteWorkspace({ uid, email, workspaceId })),
   };
