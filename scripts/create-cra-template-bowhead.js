@@ -29,13 +29,24 @@ directories.forEach(directory => {
 })
 
 // copy files from test-app to cra-template-bowhead/template
-const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore', '.env.sample']
+const files = ['firestore.rules', 'netlify.toml', 'README.md', 'yarn.lock', '.eslintignore']
 files.forEach(file => {
     if (sh.cp(`./packages/test-app/${file}`, `./packages/cra-template-bowhead/template/${file}`).code !== 0) {
         sh.echo('Error: Copying bowhead files to template directory');
         sh.exit(1);
     }
 })
+
+if (sh.cp(`./packages/test-app/.env`, `./packages/cra-template-bowhead/template/.env.sample`).code !== 0) {
+    sh.echo('Error: Copying .env');
+    sh.exit(1);
+}
+
+// replace all env variable values
+if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/.env.sample').code !== 0) {
+    sh.echo('Error: Replacing values in .env.sample');
+    sh.exit(1);
+}
 
 // rename files from test-app to cra-template-bowhead/template
 if (sh.cp(`./packages/test-app/.gitignore`, `./packages/cra-template-bowhead/template/gitignore`).code !== 0) {

@@ -11,7 +11,7 @@
   "scripts": {
     "build": "microbundle --jsx React.createElement",
     "start": "microbundle watch --jsx React.createElement",
-    "test": "jest --coverage --verbose --color",
+    "test": "jest --coverage --verbose --color --passWithNoTests",
     "view:coverage": "serve coverage/lcov-report",
     "lint": "eslint .",
     "clean": "rm -rf node_modules dist"
@@ -34,7 +34,6 @@
     "access": "public"
   },
   "jest": {
-    "preset": "ts-jest",
     "coverageThreshold": {
       "global": {
         "branches": 80,

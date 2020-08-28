@@ -17,25 +17,13 @@ jobs:
       script:
         - yarn lint
         - yarn build
-        - yarn build:cra-template-bowhead
-        - yarn test:user
+        - yarn test
     - stage: publish
       before_script:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
         - git config user.email "davidmortonmail@gmail.com"
         - git config user.name "daithimorton"
-        - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
-        - git fetch origin master
-        - git checkout master
-      script:
-        - yarn build:cra-template-bowhead
-        - yarn licenses generate-disclaimer > NOTICES.txt
-      after_success:
-        - git pull
-        - git status
-        - git add .
-        - git commit -m "chore(*) TravisCI update [skip ci]"
-        - git push origin HEAD:master
+        - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git        
       deploy:
         - provider: script
           script: yarn release          
