@@ -15,7 +15,6 @@ jobs:
   include: 
     - stage: test
       script:
-        - yarn lint
         - yarn test
     - stage: publish
       before_script:
