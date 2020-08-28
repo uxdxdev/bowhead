@@ -60,7 +60,8 @@ const templateJson = {
         dependencies: bowheadPackageJson.dependencies,
         scripts: bowheadPackageJson.scripts,
         eslintConfig: bowheadPackageJson.eslintConfig,
-        browserslist: bowheadPackageJson.browserslist
+        browserslist: bowheadPackageJson.browserslist,
+        jest: bowheadPackageJson.jest
     }
 }
 const templateJsonStr = JSON.stringify(templateJson, null, 2);
