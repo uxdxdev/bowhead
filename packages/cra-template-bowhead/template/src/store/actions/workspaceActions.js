@@ -1,4 +1,4 @@
-import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeUserFromWorkspace } from '../../api/firestore'
+import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeWorkspaceFromUser } from '../../api/firestore'
 
 export const setActiveWorkspace = activeWorkspaceId => {
   return dispatch => {
@@ -22,11 +22,11 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
 }
 
 
-export const leaveWorkspace = ({ uid, email, workspaceId }) => {
+export const leaveWorkspace = ({ uid, workspaceId }) => {
   return async (dispatch) => {
     dispatch({ type: "LEAVE_WORKSPACE" });
 
-    await removeUserFromWorkspace({ uid, email, workspaceId })
+    await removeWorkspaceFromUser({ uid, workspaceId })
       .then(() => {
         dispatch({ type: "LEAVE_WORKSPACE_SUCCESS" });
       })
@@ -34,7 +34,6 @@ export const leaveWorkspace = ({ uid, email, workspaceId }) => {
         console.error(error);
         dispatch({ type: "LEAVE_WORKSPACE_ERROR", error });
       });
-
   };
 };
 
