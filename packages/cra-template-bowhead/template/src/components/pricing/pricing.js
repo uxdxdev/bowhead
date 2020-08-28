@@ -112,12 +112,9 @@ const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
                 cancel_url: cancelUrl,
                 customer_email: email,
                 client_reference_id: uid,
-                // do not provide a free trial if they were previously a customer
-                ...(!stripeCustomerId && {
-                    subscription_data: {
-                        trial_period_days: '14'
-                    }
-                })
+                subscription_data: {
+                    trial_period_days: '14'
+                }
             })
         })
             .then(result => result.json())
