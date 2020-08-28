@@ -64,4 +64,4 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 ## Netlify
 
 - Go to https://app.netlify.com/ and connect this projects `GIT` repo as part of the setup
-- Use `yarn build` for build command, and `build/` for publish directory
+- Use `yarn app:build:netlify` for build command, and `packages/test-app/build` for publish directory
