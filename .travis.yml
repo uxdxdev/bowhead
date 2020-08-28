@@ -26,7 +26,6 @@ jobs:
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git        
       deploy:
         - provider: script
-          script: yarn release          
-          skip_cleanup: true
+          script: yarn release        
           on:
             branch: master
