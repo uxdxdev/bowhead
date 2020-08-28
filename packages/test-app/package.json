@@ -4,6 +4,9 @@
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
@@ -45,7 +48,7 @@
     "build:functions": "netlify-lambda build src/functions --config ./config/webpack.functions.js",
     "build:netlify": "yarn build && yarn deploy:firebase:rules",
     "deploy:firebase:rules": "node scripts/deploy-firebase-rules.js",
-    "test": "react-scripts test --coverage --passWithNoTests",
+    "test": "react-scripts test --coverage --verbose --passWithNoTests",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules build functions",
     "lint": "eslint ."

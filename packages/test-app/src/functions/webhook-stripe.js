@@ -60,8 +60,6 @@ const dbUpdateCustomerData = (data) => {
   }
 }
 
-
-
 exports.handler = async (event, context, callback) => {
   const sig = event.headers['stripe-signature'];
 
@@ -70,7 +68,7 @@ exports.handler = async (event, context, callback) => {
   try {
     verifiedEvent = stripe.webhooks.constructEvent(event.body, sig, endpointSecret);
   } catch (error) {
-    callback(error, { statusCode: 400 })
+    return callback(error, { statusCode: 400 })
   }
 
   switch (verifiedEvent.type) {
