@@ -21,7 +21,9 @@ jobs:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
         - git config user.email "davidmortonmail@gmail.com"
         - git config user.name "daithimorton"
-        - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git        
+        - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
+        - git fetch origin master
+        - git checkout master    
       deploy:
         - provider: script
           script: yarn release
