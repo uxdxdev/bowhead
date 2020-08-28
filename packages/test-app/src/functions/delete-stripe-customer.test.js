@@ -4,6 +4,9 @@ import { verifyToken } from '../utils/backend/firebaseBackend';
 
 jest.mock('../utils/backend/firebaseBackend')
 jest.mock('../utils/backend/stripeBackend')
+jest.mock('firebase-admin', () => ({
+    firestore: jest.fn()
+}));
 
 test('should return 401 when token unauthorized', async () => {
     // given        
