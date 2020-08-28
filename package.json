@@ -14,17 +14,23 @@
     ]
   },
   "scripts": {
-    "start": "lerna run start --stream --ignore test-app & yarn start:test-app",
+    "start": "npm-run-all -p --race start:*",
+    "start:lerna": "lerna run start --stream --ignore test-app",
     "start:test-app": "cd packages/test-app && yarn start",
-    "test": "lerna run test --stream",
+    "start:cra-template-bowhead": "nodemon --watch packages/test-app --exec 'node scripts/create-cra-template-bowhead.js'",
+    "start:notices": "nodemon --watch 'packages/**/*/package.json' --exec 'yarn licenses generate-disclaimer > NOTICES.txt'",
+    "test": "npm-run-all -p --race test:*",
+    "test:lerna": "lerna run test --stream",
     "test:user": "node scripts/user-test.js",
     "build": "lerna run build --stream",
     "build:netlify": "lerna exec --stream --scope test-app -- yarn build:netlify",
-    "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",
     "clean": "lerna run clean --stream && rm -rf node_modules",
     "lint": "lerna run lint --stream",
     "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "postinstall": "lerna bootstrap"
+  },
+  "nodemonConfig": {
+    "ext": "js,json,html,.env,.rules,.md,.firebaserc,.eslintignore,.toml"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
@@ -33,6 +39,8 @@
     "dotenv": "^8.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.22.1",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
     "shelljs": "^0.8.4"
   },
   "husky": {
