@@ -7,7 +7,7 @@ service cloud.firestore {
     }
 
     function getRole(rsc, req) {
-      return rsc.data.members[req.auth.token['email']];
+      return rsc.data.members[req.auth.uid].role;
     }
 
     function isOneOfRoles(rsc, req, array) {
@@ -38,11 +38,11 @@ service cloud.firestore {
                          resource == null) // if the workspace does not exist we still want to allow listeners to be mounted
       
       allow update: if isSignedIn(request) && (isOneOfRoles(resource, request, ['owner']) ||
-                          // allow users to update their status from 'pending' to 'member' 
-                          isOneOfRoles(resource, request, ['pending']) ||
+                          // allow users to update if invite 'pending'
+                          resource.data.invites[request.auth.token['email']] in ['pending'] ||
                           // allow users to remove themselves from the members list
                           (isOneOfRoles(resource, request, ['member']) &&
-                           (request.auth.token['email'] in request.resource.data.members.keys()) == false))
+                           (request.auth.uid in request.resource.data.members.keys()) == false))
       
       allow delete: if isSignedIn(request) &&
                         isOneOfRoles(resource, request, ['owner']);

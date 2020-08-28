@@ -29,27 +29,20 @@ export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
     return batch.commit()
 }
 
-export const removeUserFromWorkspace = ({ uid, email, workspaceId }) => {
-    const userRef = firestore.collection(FIRESTORE_COLLECTIONS.USERS).doc(uid)
-    const workspaceRef = firestore.collection(FIRESTORE_COLLECTIONS.WORKSPACES).doc(workspaceId)
+export const removeUserFromWorkspace = ({ uid, workspaceId }) => {
+    return firestore.collection(FIRESTORE_COLLECTIONS.WORKSPACES).doc(workspaceId).set({
+        members: {
+            [uid]: firebase.firestore.FieldValue.delete()
+        }
+    }, { merge: true })
+}
 
-    const batch = firestore.batch();
-
-    batch.set(workspaceRef,
-        {
-            members: {
-                [email]: firebase.firestore.FieldValue.delete()
-            }
-        }, { merge: true })
-
-    batch.set(userRef,
-        {
-            workspaces: {
-                [workspaceId]: firebase.firestore.FieldValue.delete()
-            }
-        }, { merge: true });
-
-    return batch.commit()
+export const removeWorkspaceFromUser = ({ uid, workspaceId }) => {
+    return firestore.collection(FIRESTORE_COLLECTIONS.USERS).doc(uid).set({
+        workspaces: {
+            [workspaceId]: firebase.firestore.FieldValue.delete()
+        }
+    }, { merge: true })
 }
 
 export const createWorkspaceWithData = ({ workspaceName, uid, email }) => {
@@ -67,19 +60,17 @@ export const createWorkspaceWithData = ({ workspaceName, uid, email }) => {
     batch.set(workspaceRef, {
         name: workspaceName,
         members: {
-            [email]: USER_ROLES.OWNER
+            [uid]: { role: USER_ROLES.OWNER, email }
         }
     });
 
     // update user profile
-    batch.set(
-        userRef,
-        {
-            email,
-            workspaces: {
-                [workspaceRef.id]: { role: USER_ROLES.OWNER, name: workspaceName }
-            }
-        },
+    batch.set(userRef, {
+        email,
+        workspaces: {
+            [workspaceRef.id]: { role: USER_ROLES.OWNER, name: workspaceName }
+        }
+    },
         { merge: true }
     );
 
@@ -115,7 +106,7 @@ export const updateMemberStatus = ({ workspaceId, email, status }) => {
     return firestore
         .collection(FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc(workspaceId).set({
-            members: {
+            invites: {
                 [email]: status
             }
         }, { merge: true });
@@ -145,8 +136,11 @@ export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email 
     batch.set(
         workspaceRef,
         {
+            invites: {
+                [email]: firebase.firestore.FieldValue.delete()
+            },
             members: {
-                [email]: USER_ROLES.MEMBER
+                [uid]: { role: USER_ROLES.MEMBER, email }
             }
         },
         { merge: true }
@@ -179,7 +173,6 @@ export const deleteUserAccountAndData = async uid => {
     const batch = firestore.batch();
 
     if (userData) {
-        const email = userData.email || null;
         const workspaces = userData.workspaces || null;
         const stripeCustomerId = userData.stripeCustomerId || null;
 
@@ -189,7 +182,7 @@ export const deleteUserAccountAndData = async uid => {
             batch.delete(stripeCustomerDataRef)
         }
 
-        if (email && workspaces) {
+        if (workspaces) {
             // workspaces
             for (let key in workspaces) {
                 const workspaceData = workspaces[key];
@@ -201,7 +194,7 @@ export const deleteUserAccountAndData = async uid => {
                     batch.set(workspaceRef,
                         {
                             members: {
-                                [email]: firebase.firestore.FieldValue.delete()
+                                [uid]: firebase.firestore.FieldValue.delete()
                             }
                         },
                         { merge: true }
