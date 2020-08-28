@@ -29,7 +29,7 @@ jobs:
         - git checkout master
       script:
         - yarn build:cra-template-bowhead
-        - yarn licenses generate-disclaimer > notices.txt
+        - yarn licenses generate-disclaimer > NOTICES.txt
       after_success:
         - git pull
         - git status
