@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.5](https://github.com/daithimorton/bowhead/compare/test-app@0.0.4...test-app@0.0.5) (2020-08-28)
+
+
+### Bug Fixes
+
+* fixing tests ([9aece40](https://github.com/daithimorton/bowhead/commit/9aece400eee075975a45b9687c2241286029a49c))
+* **test-app:** fix build step with --passWithNoTests flag to jest ([c396e7f](https://github.com/daithimorton/bowhead/commit/c396e7f5075733ca92ce2480a114f3984451f9e1))
+* **test-app:** fixed some tests ([be73563](https://github.com/daithimorton/bowhead/commit/be73563b1977b297dddcd647c57deb2536a174cf))
+* **test-app:** fixed some tests ([6d01aec](https://github.com/daithimorton/bowhead/commit/6d01aece08a91c90e1ebf3468d0084086a129012))
+* **test-app:** fixed some tests ([11e8392](https://github.com/daithimorton/bowhead/commit/11e8392a53836ffee1c36975471395a22fb4b293))
+* **test-app:** fixed some tests ([11e59e6](https://github.com/daithimorton/bowhead/commit/11e59e6506c4a358bdafc88328aad88724d48a04))
+
+
+
+
+
 ## 0.0.4 (2020-08-28)
 
 
