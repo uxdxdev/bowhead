@@ -1,14 +1,14 @@
 {
   "name": "test-app",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
-    "@mortond/bowhead": "^0.0.6",
-    "@mortond/eslint-config": "^0.2.16",
+    "@mortond/bowhead": "^0.0.7",
+    "@mortond/eslint-config": "^0.2.17",
     "@stripe/stripe-js": "^1.8.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
