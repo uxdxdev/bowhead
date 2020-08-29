@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d06353cb-6708-48fa-a4b5-3d455bc72227/deploy-status)](https://app.netlify.com/sites/sad-tereshkova-9a21f9/deploys) [![Build Status](https://travis-ci.org/daithimorton/bowhead.svg?branch=master)](https://travis-ci.org/daithimorton/bowhead)
+
 # Bowhead monorepo
 
 > The bowhead whale is a species of baleen whale belonging to the family Balaenidae and the only living representative of the genus Balaena. It is the only baleen whale endemic to the Arctic and subarctic waters.
@@ -21,7 +23,6 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 ```
 
 [Code of conduct](https://github.com/daithimorton/bowhead/blob/master/code-of-conduct.md)
-
 
 
 <a href="https://www.netlify.com">

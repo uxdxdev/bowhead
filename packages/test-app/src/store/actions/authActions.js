@@ -4,7 +4,7 @@ import {
   sendSignInEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
-  deleteLoggedInFirebaseUser
+  deleteCurrentUser
 } from '../../api/firebase'
 import {
   removeUserFromWorkspace,
@@ -129,7 +129,7 @@ export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
         dispatch({ type: "DELETING_USER_DATA_ERROR", error });
       })
 
-    await deleteLoggedInFirebaseUser()
+    await deleteCurrentUser()
       .catch(error => {
         if (error.code === "auth/requires-recent-login") {
           window.alert("Your login credentials need to be re-verified. Please login again and retry your previous action. We do this to make sure your data stays safe.");
