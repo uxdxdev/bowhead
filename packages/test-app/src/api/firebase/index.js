@@ -1,6 +1,6 @@
 import { firebase } from '../../utils/frontend/firebaseFrontend'
 
-export const deleteLoggedInFirebaseUser = () => {
+export const deleteCurrentUser = () => {
     return firebase
         .auth()
         .currentUser.delete()
