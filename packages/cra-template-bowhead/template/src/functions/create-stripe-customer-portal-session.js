@@ -2,10 +2,11 @@ import { stripe } from '../utils/backend/stripeBackend'
 import { verifyToken } from '../utils/backend/firebaseBackend';
 
 exports.handler = async (event, context, callback) => {
-    const user = await verifyToken(event.queryStringParameters.token);
-    if (!user) callback(null, { statusCode: 401 })
+    const user = await verifyToken(event?.queryStringParameters?.token);
+    if (!user) return callback(null, { statusCode: 401 })
 
-    const data = JSON.parse(event.body);
+    const data = JSON.parse(event?.body);
+
     await stripe.billingPortal.sessions.create(data).then((session) => {
         callback(null, {
             statusCode: 200, body: JSON.stringify(session)

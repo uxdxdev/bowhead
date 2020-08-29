@@ -1,4 +1,4 @@
-import sample from './sample';
+import example from './example';
 
 test('should return 200 ok', async () => {
     // given
@@ -11,7 +11,7 @@ test('should return 200 ok', async () => {
     }
 
     // when
-    await sample.handler(event, context, callback);
+    await example.handler(event, context, callback);
 
     // then
     expect(result.error).toBeNull();
