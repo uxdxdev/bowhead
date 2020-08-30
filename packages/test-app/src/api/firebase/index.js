@@ -1,4 +1,4 @@
-import { firebase } from '../../utils/frontend/firebaseFrontend'
+import { firebase } from '../../utils/firebaseFrontend'
 
 export const deleteCurrentUser = () => {
     return firebase

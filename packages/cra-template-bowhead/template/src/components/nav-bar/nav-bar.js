@@ -57,20 +57,11 @@ const NavBar = ({ uid, signOut }) => {
         variant="outlined"
         color="inherit"
       >
-        {/* if authenticated use styling for toolbarAuthed else use normal styling */}
         <Toolbar className={classes.toolbar}>
           <Hidden smUp>
             {uid ? (
               <>
                 <Typography component="span">
-                  {/* <Link
-                    component={NavLink}
-                    to="/dashboard"
-                    className={classes.link}
-                  >
-                    Dashboard
-                  </Link> */}
-
                   <Button
                     component={NavLink}
                     to="/dashboard"
@@ -150,14 +141,6 @@ const NavBar = ({ uid, signOut }) => {
                     </Link>
                   </Typography>
                   <Typography component="span">
-                    {/* <Link
-                      component={NavLink}
-                      to="/dashboard"
-                      className={classes.link}
-                    >
-                      Dashboard
-                    </Link> */}
-
                     <Button
                       component={NavLink}
                       to="/dashboard"
@@ -189,8 +172,7 @@ const NavBar = ({ uid, signOut }) => {
                       className={classes.link}
                     >
                       Sign In
-                  </Button>
-
+                    </Button>
                     <Button
                       component={NavLink}
                       to="/signin"
@@ -198,14 +180,13 @@ const NavBar = ({ uid, signOut }) => {
                       variant="contained"
                     >
                       Get Started
-                  </Button>
+                    </Button>
                   </>
                 )}
             </nav>
           </Hidden>
 
           <Hidden smUp>
-            {/* burger menu is only visible when not authenticated */}
             <IconButton onClick={handleDrawerToggle} edge="start">
               <MenuIcon />
             </IconButton>
@@ -227,10 +208,6 @@ const NavBar = ({ uid, signOut }) => {
                 <>
                   <ListItem>
                     <Typography component="span">
-                      {/* <Link href="/dashboard" className={classes.link}>
-                        Dashboard
-                      </Link> */}
-
                       <Button
                         component={NavLink}
                         to="/dashboard"

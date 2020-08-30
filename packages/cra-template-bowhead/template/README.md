@@ -38,14 +38,11 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 ## Firebase
 
 - Go to https://console.firebase.google.com/ and create a new project
-- Register app in Firebase
+- Register this app in Firebase
 - Create a new `Firestore` database, start in production mode
 - Set Authentication sign-in method to `email/password` and enable `Email link`
 - Add the projects `*.netlify.app` URL to `Authorized domains`
-
-### Frontend
-
-- Copy Firebase project config details to `src/config/frontend/firebaseConfig.js`
+- Update `./config.js` with your Firebase project configuration
 
 ### Backend
 
@@ -65,4 +62,5 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 ## Netlify
 
 - Go to https://app.netlify.com/ and connect this projects `GIT` repo as part of the setup
-- Use `yarn app:build:netlify` for build command, and `packages/test-app/build` for publish directory
+- `yarn build` will build the CRA app into the `build` directory and Netlify functions to `functions`
+- `yarn deploy` will upload your `build` and `functions` directory to Netlify, and your Firestore rules to Firebase.
