@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/daithimorton/bowhead/compare/test-app@0.0.11...test-app@0.0.12) (2020-08-30)
+
+
+### Bug Fixes
+
+* **test-app:** fixed function tests ([2c4a6a1](https://github.com/daithimorton/bowhead/commit/2c4a6a1fb134866e76624d690314448008b7c2a8))
+
+
+
+
+
 ## [0.0.11](https://github.com/daithimorton/bowhead/compare/test-app@0.0.10...test-app@0.0.11) (2020-08-30)
 
 **Note:** Version bump only for package test-app
