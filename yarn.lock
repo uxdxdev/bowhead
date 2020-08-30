@@ -3338,6 +3338,16 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@reduxjs/toolkit@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.4.0.tgz#ee2e2384cc3d1d76780d844b9c2da3580d32710d"
+  integrity sha512-hkxQwVx4BNVRsYdxjNF6cAseRmtrkpSlcgJRr3kLUcHPIAMZAmMJkXmHh/eUEGTMqPzsYpJLM7NN2w9fxQDuGw==
+  dependencies:
+    immer "^7.0.3"
+    redux "^4.0.0"
+    redux-thunk "^2.3.0"
+    reselect "^4.0.0"
+
 "@rollup/plugin-alias@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-alias/-/plugin-alias-3.1.1.tgz#bb96cf37fefeb0a953a6566c284855c7d1cd290c"
@@ -10766,6 +10776,11 @@ immer@3.2.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-3.2.0.tgz#53686471e9dd2b070e0fb5500c6fdecd3a99375f"
   integrity sha512-+a2R8z9eELHst6aht++nzVzJ8LJ+Hsg49qttfg9Kc/vmoxEdPXw5/rV6+4DYWGgnq+B36KbLr4OTaGtS9mDjtg==
 
+immer@^7.0.3:
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-7.0.8.tgz#41dcbc5669a76500d017bef3ad0d03ce0a1d7c1e"
+  integrity sha512-XnpIN8PXBBaOD43U8Z17qg6RQiKQYGDGGCIbz1ixmLGwBkSWwmrmx5X7d+hTtXDM8ur7m5OdLE0PiO+y5RB3pw==
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
@@ -16849,11 +16864,6 @@ reduce-reducers@^1.0.4:
   resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-1.0.4.tgz#fb77e751a9eb0201760ac5a605ca8c9c2d0537f8"
   integrity sha512-Mb2WZ2bJF597exiqX7owBzrqJ74DHLK3yOQjCyPAaNifRncE8OD0wFIuoMhXxTnHK07+8zZ2SJEKy/qtiyR7vw==
 
-redux-devtools-extension@^2.13.8:
-  version "2.13.8"
-  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
-  integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
-
 redux-firestore@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/redux-firestore/-/redux-firestore-0.11.0.tgz#d4f63ec2c1334d2898884f928eaa51bbd29d446d"
@@ -16868,7 +16878,7 @@ redux-thunk@^2.3.0:
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
-redux@^4.0.5:
+redux@^4.0.0, redux@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
   integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
@@ -17096,6 +17106,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reselect@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+  integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 resolve-cwd@^2.0.0:
   version "2.0.0"

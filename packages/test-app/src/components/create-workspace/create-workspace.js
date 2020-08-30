@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import {
   createWorkspace
-} from "../../store/actions/workspaceActions";
+} from "../../actions/workspaceActions";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonLoadingSpinner, ButtonBox } from "../";

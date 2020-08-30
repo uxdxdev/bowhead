@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   createProject,
   resetCreateProjectState,
-} from "../../store/actions/projectActions";
+} from "../../actions/projectActions";
 import { Paper, Typography, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { ButtonLoadingSpinner, ButtonBox } from "../";

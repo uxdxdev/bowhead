@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { signOut } from "../../store/actions/authActions";
+import { signOut } from "../../actions/authActions";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,

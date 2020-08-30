@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
-import { createStore, applyMiddleware } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider, useSelector } from "react-redux";
-import thunk from "redux-thunk";
 import {
   createFirestoreInstance,
   reduxFirestore,
@@ -10,32 +9,29 @@ import {
   ReactReduxFirebaseProvider,
   isLoaded,
 } from "react-redux-firebase";
-import { composeWithDevTools } from "redux-devtools-extension";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useMediaQuery, CssBaseline } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // custom
-import rootReducer from "../store/rootReducer";
-import { firebase } from "../utils/frontend/firebaseFrontend";
-import { FIRESTORE_COLLECTIONS } from "../utils/constants";
-import { AuthenticatedRoute, Signin, Verify, Dashboard, PageLoadingSpinner } from "../components";
-import { LandingPage } from "../pages/landing-page";
+import rootReducer from "./store/rootReducer";
+import { firebase } from "./utils/frontend/firebaseFrontend";
+import { FIRESTORE_COLLECTIONS } from "./utils/constants";
+import { AuthenticatedRoute, PageLoadingSpinner } from "./components";
+import { LandingPage, SignIn, Verify, Dashboard, Terms } from "./pages";
 
-
-const store = createStore(
-  rootReducer,
-  // composeWithDevTools() is used to combine store enhancements similar to how reducers
-  // are combined. This version of compose allows the redux store to be viewed in dev tools.
-  composeWithDevTools(
-    applyMiddleware(thunk),
-    // enhancements to connect redux to Firebase
-    // pass in the firebase config details
-    reduxFirestore(firebase, {
-      logListenerError: false,
-    })
-  )
-);
+const store = configureStore(
+  {
+    reducer: rootReducer,
+    // default: middleware: [thunk]
+    enhancers: [
+      // enhancements to connect redux to Firebase
+      // pass in the firebase config details
+      reduxFirestore(firebase, {
+        logListenerError: false,
+      })]
+  },
+)
 
 const reactReduxFirebaseConfig = {
   firebase,
@@ -127,8 +123,8 @@ const App = () => {
             <BrowserRouter>
               <Switch>
                 <Route exact path="/" component={LandingPage} />
-                <Route path="/terms" component={() => <div>Terms</div>} />
-                <Route path="/signin" component={Signin} />
+                <Route path="/terms" component={Terms} />
+                <Route path="/signin" component={SignIn} />
                 <Route path="/verify" component={Verify} />
                 <AuthenticatedRoute path="/dashboard" component={Dashboard} />
               </Switch>

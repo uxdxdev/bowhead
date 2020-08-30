@@ -10,7 +10,7 @@ import {
   DialogContentText,
   TextField,
 } from "@material-ui/core";
-import { deleteCurrentUserAccount } from "../../store/actions/authActions";
+import { deleteCurrentUserAccount } from "../../actions/authActions";
 import { ButtonBox, ButtonLoadingSpinner } from "../";
 
 

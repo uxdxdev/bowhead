@@ -1,4 +1,4 @@
-import { createProjectWithData, deleteProject } from '../../api/firestore'
+import { createProjectWithData, deleteProject } from '../api/firestore'
 
 export const resetCreateProjectState = () => {
   return dispatch => {

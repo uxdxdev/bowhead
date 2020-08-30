@@ -1,8 +1,9 @@
-import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeWorkspaceFromUser } from '../../api/firestore'
+import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeWorkspaceFromUser } from '../api/firestore'
+import { setWorkspace } from '../store/authSlice'
 
 export const setActiveWorkspace = activeWorkspaceId => {
   return dispatch => {
-    dispatch({ type: "SET_WORKSPACE", activeWorkspaceId });
+    dispatch(setWorkspace(activeWorkspaceId));
   };
 };
 
@@ -13,7 +14,7 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
     await createWorkspaceWithData({ workspaceName, uid, email })
       .then(({ activeWorkspaceId }) => {
         dispatch({ type: "CREATE_WORKSPACE_SUCCESS" });
-        dispatch({ type: "SET_WORKSPACE", activeWorkspaceId });
+        dispatch(setWorkspace(activeWorkspaceId));
       })
       .catch(error => {
         dispatch({ type: "CREATE_WORKSPACE_ERROR", error });
