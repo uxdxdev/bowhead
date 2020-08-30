@@ -1,9 +1,9 @@
 import testFunction from './create-stripe-checkout-session';
-import { stripe } from '../utils/backend/stripeBackend'
-import { verifyToken } from '../utils/backend/firebaseBackend';
+import { stripe } from '../utils/stripeBackend'
+import { verifyToken } from '../utils/firebaseBackend';
 
-jest.mock('../utils/backend/firebaseBackend')
-jest.mock('../utils/backend/stripeBackend')
+jest.mock('../utils/firebaseBackend')
+jest.mock('../utils/stripeBackend')
 jest.mock('firebase-admin', () => ({
     firestore: jest.fn()
 }));

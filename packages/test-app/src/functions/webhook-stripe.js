@@ -1,5 +1,5 @@
-import { stripe } from '../utils/backend/stripeBackend'
-import { firestore } from '../utils/backend/firebaseBackend';
+import { stripe } from '../utils/stripeBackend'
+import { firestore } from '../utils/firebaseBackend';
 import { STRIPE_SUBSCRIPTION_STATUS } from '../utils/constants';
 
 const isValidStatus = (status) => {
