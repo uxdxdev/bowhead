@@ -28,7 +28,7 @@ jobs:
         - git fetch origin master
         - git checkout master
       script:
-        - yarn release
+        - yarn publish:npm
     - stage: deploy
       script:
         - yarn build
