@@ -26,7 +26,8 @@ jobs:
         - git config user.name "daithimorton"
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
         - git fetch origin master
-        - git checkout master  
+        - git checkout master
+      script:
         - yarn release
     - stage: deploy
       script:
