@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/daithimorton/bowhead/compare/test-app@0.0.8...test-app@0.0.9) (2020-08-30)
+
+
+### Bug Fixes
+
+* **test-app:** fix bug on pricing page ([2787a6f](https://github.com/daithimorton/bowhead/commit/2787a6f5257869689bc5204791cd532c5e029f8d))
+
+
+
+
+
 ## [0.0.8](https://github.com/daithimorton/bowhead/compare/test-app@0.0.7...test-app@0.0.8) (2020-08-30)
 
 
