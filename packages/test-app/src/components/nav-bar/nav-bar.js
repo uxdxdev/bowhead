@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = ({ auth: { uid }, signOut }) => {
+const NavBar = ({ uid, signOut }) => {
   const classes = useStyles();
 
   // side drawer on landing page
@@ -302,9 +302,9 @@ const NavBar = ({ auth: { uid }, signOut }) => {
   );
 };
 
-const mapStateToProps = ({ firebase: { auth } }) => {
+const mapStateToProps = ({ firebase: { auth: { uid } } }) => {
   return {
-    auth,
+    uid,
   };
 };
 

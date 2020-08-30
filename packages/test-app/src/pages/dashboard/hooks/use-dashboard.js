@@ -16,7 +16,7 @@ const useDashboard = () => {
       status: { requesting },
       data
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
     workspace: { isCreatingWorkspace }
   } = state;
 

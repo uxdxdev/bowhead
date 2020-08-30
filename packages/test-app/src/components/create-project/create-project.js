@@ -110,7 +110,7 @@ const mapStateToProps = (state) => {
       auth: { uid },
     },
     project: { isCreatingProject, createProjectError },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
 
   return {

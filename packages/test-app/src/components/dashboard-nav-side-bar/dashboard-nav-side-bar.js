@@ -146,7 +146,7 @@ const mapStateToProps = (state) => {
     firebase: {
       profile: { workspaces },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
 
   return {

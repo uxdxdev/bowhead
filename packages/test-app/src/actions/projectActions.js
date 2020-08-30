@@ -1,37 +1,38 @@
-import { createProjectWithData, deleteProject } from '../api/firestore'
+import * as firestore from '../api/firestore'
+import * as projectSlice from '../store/projectSlice'
 
 export const resetCreateProjectState = () => {
   return dispatch => {
-    dispatch({ type: "CREATE_PROJECT_ERROR_RESET" });
+    dispatch(projectSlice.createProjectErrorReset());
   };
 };
 
 export const createProject = ({ workspaceId, title, summary }) => {
   return async (dispatch) => {
 
-    dispatch({ type: "CREATE_PROJECT" });
+    dispatch(projectSlice.createProject());
 
-    await createProjectWithData({ workspaceId, title, summary })
+    await firestore.createProject({ workspaceId, title, summary })
       .then(() => {
-        dispatch({ type: "CREATE_PROJECT_SUCCESS" });
+        dispatch(projectSlice.createProjectSuccess());
       })
       .catch(error => {
-        dispatch({ type: "CREATE_PROJECT_ERROR", error });
+        dispatch(projectSlice.createProjectError(error));
       });
   };
 };
 
-export const deleteProjectFromWorkspace = ({ projectId, workspaceId }) => {
+export const deleteProject = ({ projectId, workspaceId }) => {
   return async (dispatch) => {
 
-    dispatch({ type: "DELETE_PROJECT" });
+    dispatch(projectSlice.deleteProject());
 
-    await deleteProject({ projectId, workspaceId })
+    await firestore.deleteProject({ projectId, workspaceId })
       .then(() => {
-        dispatch({ type: "DELETE_PROJECT_SUCCESS" });
+        dispatch(projectSlice.deleteProjectSuccess());
       })
       .catch(error => {
-        dispatch({ type: "DELETE_PROJECT_ERROR", error });
+        dispatch(projectSlice.deleteProjectError(error));
       });
   };
 };

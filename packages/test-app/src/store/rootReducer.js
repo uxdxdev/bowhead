@@ -1,14 +1,16 @@
 import authSlice from "./authSlice";
-import projectReducer from "./reducers/projectReducer";
-import workspaceReducer from "./reducers/workspaceReducer";
+import userSlice from "./userSlice";
+import projectSlice from "./projectSlice";
+import workspaceSlice from "./workspaceSlice";
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer = combineReducers({
   auth: authSlice,
-  project: projectReducer,
-  workspace: workspaceReducer,
+  user: userSlice,
+  project: projectSlice,
+  workspace: workspaceSlice,
   firestore: firestoreReducer,
   firebase: firebaseReducer
 });

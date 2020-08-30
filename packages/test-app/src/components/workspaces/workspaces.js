@@ -128,13 +128,11 @@ const mapStateToProps = (state) => {
       auth: { uid },
       profile: { workspaces: profileWorkspaces },
     },
-    firestore
+    firestore: {
+      errors: { byQuery },
+      data: { workspaces: firestoreWorkspaces }
+    }
   } = state;
-
-  const {
-    errors: { byQuery },
-    data: { workspaces: firestoreWorkspaces }
-  } = firestore;
 
   return {
     firestoreWorkspaces,

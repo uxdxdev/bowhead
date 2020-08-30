@@ -45,7 +45,7 @@ const mapStateToProps = (state, props) => {
       data,
       status: { requesting },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
   const {
     match: {

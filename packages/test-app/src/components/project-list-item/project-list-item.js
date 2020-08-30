@@ -24,7 +24,7 @@ const ProjectListItem = (props) => {
   const {
     activeWorkspaceId,
     isOwner,
-    deleteProject
+    handleDeleteProject
   } = useProjectListItem()
 
   return (
@@ -47,7 +47,7 @@ const ProjectListItem = (props) => {
         {isOwner && <Button
           color="secondary"
           variant="contained"
-          onClick={() => deleteProject({ projectId: id, workspaceId: activeWorkspaceId })}
+          onClick={() => handleDeleteProject({ projectId: id, workspaceId: activeWorkspaceId })}
           size="small"
         >
           Delete
