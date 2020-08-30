@@ -7,7 +7,7 @@ const workspaceSlice = createSlice({
     setActiveWorkspace(state, action) {
       return {
         ...state,
-        activeWorkspaceId: action.activeWorkspaceId
+        activeWorkspaceId: action.payload
       }
     },
     createWorkspace(state) {

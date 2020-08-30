@@ -182,29 +182,27 @@ const mapStateToProps = (state) => {
       sendEmailAuthError,
       isSendingEmailLink,
       isEmailLinkSent,
-      activeWorkspaceId,
     },
+    workspace: { activeWorkspaceId },
     firebase: {
       auth: {
         email
       }
     },
     firestore: {
-      data: { workspaces: firestoreWorkspaces },
+      data: { workspaces },
     },
   } = state;
 
-  const firestoreWorkspace =
-    firestoreWorkspaces && firestoreWorkspaces[activeWorkspaceId];
-
+  const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
   return {
     sendEmailAuthError,
     isSendingEmailLink,
     isEmailLinkSent,
     email,
     activeWorkspaceId,
-    members: firestoreWorkspace?.members,
-    workspaceName: firestoreWorkspace?.name,
+    members: activeWorkspace?.members,
+    workspaceName: activeWorkspace?.name,
   };
 };
 
