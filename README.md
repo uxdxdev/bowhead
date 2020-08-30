@@ -10,7 +10,7 @@ Bowhead is a Create-React-App template for fast MicroSaas prototyping.
 
 - Read the code of conduct  
 
-[Code of conduct](https://github.com/daithimorton/bowhead/blob/master/code-of-conduct.md)
+[Code of conduct](https://github.com/daithimorton/bowhead/blob/master/CODE-OF-CONDUCT.md)
 
 - Read the contributing guide  
 
