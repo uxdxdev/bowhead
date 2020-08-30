@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.3.1...@mortond/cra-template-bowhead@0.3.2) (2020-08-30)
+
+
+### Bug Fixes
+
+* **test-app:** fix bug on pricing page ([2787a6f](https://github.com/daithimorton/bowhead/commit/2787a6f5257869689bc5204791cd532c5e029f8d))
+
+
+
+
+
 ## [0.3.1](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.3.0...@mortond/cra-template-bowhead@0.3.1) (2020-08-30)
 
 **Note:** Version bump only for package @mortond/cra-template-bowhead
