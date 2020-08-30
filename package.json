@@ -28,7 +28,7 @@
     "deploy": "lerna exec --stream --scope test-app -- yarn deploy",
     "clean": "lerna run clean --stream && rm -rf node_modules",
     "lint": "lerna run lint --stream",
-    "release": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
+    "publish:npm": "cross-env HUSKY_BYPASS=true lerna publish --conventional-commits --yes",
     "postinstall": "lerna bootstrap"
   },
   "nodemonConfig": {
