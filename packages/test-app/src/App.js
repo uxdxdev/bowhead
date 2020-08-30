@@ -23,7 +23,7 @@ import { LandingPage, SignIn, Verify, Dashboard, Terms } from "./pages";
 const store = configureStore(
   {
     reducer: rootReducer,
-    // default: middleware: [thunk]
+    // middleware: [thunk] // default
     enhancers: [
       // enhancements to connect redux to Firebase
       // pass in the firebase config details
