@@ -63,7 +63,7 @@ const dbUpdateCustomerData = (data) => {
 exports.handler = async (event, context, callback) => {
   const sig = event.headers['stripe-signature'];
 
-  const endpointSecret = process.env.REACT_APP_STRIPE_SIGNING_SECRET;
+  const endpointSecret = process.env.REACT_APP_STRIPE_WEBHOOK_SIGNING_SECRET;
   let verifiedEvent;
   try {
     verifiedEvent = stripe.webhooks.constructEvent(event.body, sig, endpointSecret);

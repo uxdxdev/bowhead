@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
         firestore: {
             data
         },
-        auth: { activeWorkspaceId },
+        workspace: { activeWorkspaceId },
     } = state;
 
     const role = workspaces && workspaces[activeWorkspaceId]?.role

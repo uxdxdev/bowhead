@@ -6,7 +6,7 @@ export const deleteCurrentUser = () => {
         .currentUser.delete()
 }
 
-export const userSignOut = () => {
+export const signOut = () => {
     return firebase
         .auth()
         .signOut()

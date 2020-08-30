@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
       ordered,
       status: { requesting },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
 
   const projects = ordered && ordered[`${activeWorkspaceId}::projects`];

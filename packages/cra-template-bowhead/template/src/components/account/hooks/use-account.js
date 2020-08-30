@@ -7,7 +7,7 @@ const useAccount = () => {
     firebase: {
       profile: { workspaces, stripeCustomerId },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
     firestore: {
       status: { requested },
       data: { stripe }
