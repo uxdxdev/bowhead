@@ -6,13 +6,14 @@ Bowhead is a Create-React-App template for fast MicroSaas prototyping.
 
 ## Includes
 
-- ReactJS
-- Redux
-- MaterialUI
-- Stripe subscription management
-- Firebase authentication
-- Firestore database
-- Netlify hosting and functions
+- [ReactJS](https://reactjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org)
+- [React Redux Firebase](https://react-redux-firebase.com/)
+- [MaterialUI](https://material-ui.com/)
+- [Stripe subscription management](https://stripe.com/docs/billing/subscriptions/customer-portal)
+- [Firebase authentication](https://firebase.google.com/docs/auth)
+- [Firestore database](https://firebase.google.com/docs/firestore)
+- [Netlify hosting and functions](https://docs.netlify.com/)
 
 ## How to use
 

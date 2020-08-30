@@ -9,7 +9,6 @@ export const resetCreateProjectState = () => {
 
 export const createProject = ({ workspaceId, title, summary }) => {
   return async (dispatch) => {
-
     dispatch(projectSlice.createProject());
 
     await firestore.createProject({ workspaceId, title, summary })
