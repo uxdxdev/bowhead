@@ -22,7 +22,7 @@ const Verify = ({
 const mapStateToProps = (
   state
 ) => {
-  const { firebase: { auth: { uid } }, auth: { isVerifyingUser, isVerified } } = state;
+  const { firebase: { auth: { uid } }, user: { isVerifyingUser, isVerified } } = state;
 
   const isLoading = uid && !isVerifyingUser && isVerified;
   return {

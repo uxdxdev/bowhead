@@ -130,7 +130,7 @@ const DeleteAccount = ({
 const mapStateToProps = (state) => {
   const {
     firebase: { auth: { email, uid }, profile: { stripeCustomerId } },
-    auth: { deletingUserDataError, isDeletingUserData },
+    user: { deletingUserDataError, isDeletingUserData },
   } = state;
 
   return {

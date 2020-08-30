@@ -14,7 +14,7 @@ import { useStyles } from './sign-in-styles'
 const SignIn = () => {
   const {
     sendEmailAuthError,
-    handleAuthenticateWithEmailLink,
+    handleSendSignInEmailLink,
     isSendingEmailLink,
     isEmailLinkSent,
     uid,
@@ -37,7 +37,7 @@ const SignIn = () => {
     e.preventDefault();
     const email = formInput?.email;
     if (!isSendingEmailLink && email) {
-      handleAuthenticateWithEmailLink({ email });
+      handleSendSignInEmailLink({ email });
     }
   };
 

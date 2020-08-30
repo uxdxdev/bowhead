@@ -1,24 +1,24 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProjectFromWorkspace } from "../../../actions/projectActions";
+import { deleteProject } from "../../../actions/projectActions";
 
 const useProjectListItem = () => {
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
 
     const {
-        auth: { activeWorkspaceId },
+        workspace: { activeWorkspaceId },
         firebase: { profile: { workspaces } }
     } = state;
 
     const role = workspaces[activeWorkspaceId]?.role
     const isOwner = role === 'owner'
 
-    const deleteProject = ({ projectId, workspaceId }) => dispatch(deleteProjectFromWorkspace({ projectId, workspaceId }))
+    const handleDeleteProject = ({ projectId, workspaceId }) => dispatch(deleteProject({ projectId, workspaceId }))
 
     return {
         activeWorkspaceId,
         isOwner,
-        deleteProject
+        handleDeleteProject
     };
 }
 

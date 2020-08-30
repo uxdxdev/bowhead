@@ -1,11 +1,6 @@
 import { AUTH_TYPE } from "../utils/constants";
-import {
-  userSignOut,
-  sendSignInEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
-  deleteCurrentUser
-} from '../api/firebase'
+import * as firebase from '../api/firebase'
+
 import {
   removeUserFromWorkspace,
   verifyUserInviteUpdate,
@@ -14,38 +9,33 @@ import {
   deleteUserAccountAndData
 } from "../api/firestore";
 import { deleteStripeCustomerAndSubscription } from '../api/stripe'
-import {
-  sendEmailLink,
-  sendEmailLinkSuccess,
-  sendEmailLinkReset,
-  sendEmailLinkError
-} from '../store/authSlice'
+import * as authSlice from '../store/authSlice'
 
 export const resetSendEmailLink = () => {
   return dispatch => {
-    dispatch(sendEmailLinkReset());
+    dispatch(authSlice.sendEmailLinkReset());
   };
 };
 
 export const signOut = () => {
   return async (dispatch) => {
-    dispatch({ type: "SIGNING_OUT" });
+    dispatch(authSlice.signOut());
 
-    await userSignOut()
+    await firebase.signOut()
       .then(() => {
-        dispatch({ type: "SIGN_OUT_SUCCESS" });
+        dispatch(authSlice.signOutSuccess());
       })
       .catch(error => {
-        dispatch({ type: "SIGN_OUT_ERROR", error });
+        dispatch(authSlice.signOutError(error));
       });
   };
 };
 
-export const authenticateWithEmailLink = ({ email, ref, data }) => {
+export const sendSignInEmailLink = ({ email, ref, data }) => {
   return async (dispatch) => {
-    dispatch(sendEmailLink());
+    dispatch(authSlice.sendEmailLink());
 
-    await sendSignInEmail({ email, ref, data })
+    await firebase.sendSignInEmail({ email, ref, data })
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
 
@@ -56,10 +46,10 @@ export const authenticateWithEmailLink = ({ email, ref, data }) => {
         }
       })
       .then(() => {
-        dispatch(sendEmailLinkSuccess());
+        dispatch(authSlice.sendEmailLinkSuccess());
       })
       .catch(error => {
-        dispatch(sendEmailLinkError(error));
+        dispatch(authSlice.sendEmailLinkError(error));
       });
   };
 };
@@ -72,7 +62,7 @@ export const verifySignUp = () => {
     const params = new URLSearchParams(window.location.search);
     const ref = params.get("ref");
 
-    if (isSignInWithEmailLink({ location: window.location.href })) {
+    if (firebase.isSignInWithEmailLink({ location: window.location.href })) {
       var email = window.localStorage.getItem("emailForSignIn");
       window.localStorage.removeItem("emailForSignIn");
       if (!email) {
@@ -81,7 +71,7 @@ export const verifySignUp = () => {
         email = window.prompt("Please provide your email for confirmation");
       }
 
-      await signInWithEmailLink({ email, location: window.location.href })
+      await firebase.signInWithEmailLink({ email, location: window.location.href })
         .then(async result => {
           const uid = result.user.uid;
 
@@ -135,12 +125,12 @@ export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
         dispatch({ type: "DELETING_USER_DATA_ERROR", error });
       })
 
-    await deleteCurrentUser()
+    await firebase.deleteCurrentUser()
       .catch(error => {
         if (error.code === "auth/requires-recent-login") {
           window.alert("Your login credentials need to be re-verified. Please login again and retry your previous action. We do this to make sure your data stays safe.");
           dispatch({ type: "DELETING_USER_DATA_ERROR", error });
-          userSignOut();
+          firebase.signOut();
         }
       });
 

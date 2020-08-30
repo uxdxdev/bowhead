@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { authenticateWithEmailLink } from "../../../actions/authActions";
+import { sendSignInEmailLink } from "../../../actions/authActions";
 import { AUTH_TYPE } from "../../../utils/constants";
 
 const useSignIn = () => {
@@ -12,13 +12,13 @@ const useSignIn = () => {
 
   const { sendEmailAuthError, isSendingEmailLink, isEmailLinkSent } = auth;
 
-  const handleAuthenticateWithEmailLink = ({ email }) => {
-    dispatch(authenticateWithEmailLink({ email, ref: AUTH_TYPE.SIGN_IN }))
+  const handleSendSignInEmailLink = ({ email }) => {
+    dispatch(sendSignInEmailLink({ email, ref: AUTH_TYPE.SIGN_IN }))
   }
 
   return {
     sendEmailAuthError,
-    handleAuthenticateWithEmailLink,
+    handleSendSignInEmailLink,
     isSendingEmailLink,
     isEmailLinkSent,
     uid,

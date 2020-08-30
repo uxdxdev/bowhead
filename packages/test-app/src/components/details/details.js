@@ -3,8 +3,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { Typography } from "@material-ui/core";
 
-const Details = ({ firebaseAuth }) => {
-  const { email, createdAt, lastLoginAt } = firebaseAuth;
+const Details = ({ email, createdAt, lastLoginAt }) => {
 
   return (
     <>
@@ -29,13 +28,13 @@ const Details = ({ firebaseAuth }) => {
 const mapStateToProps = state => {
   const {
     firebase: {
-      auth: firebaseAuth,
+      auth: { email, createdAt, lastLoginAt },
     },
   } = state;
 
 
   return {
-    firebaseAuth
+    email, createdAt, lastLoginAt
   };
 };
 

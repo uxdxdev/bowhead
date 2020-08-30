@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
     firebase: {
       profile: { workspaces },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
 
   const role = workspaces && workspaces[activeWorkspaceId]?.role

@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  authenticateWithEmailLink,
+  sendSignInEmailLink,
   resetSendEmailLink,
   removeMember,
 } from "../../actions/authActions";
@@ -41,7 +41,7 @@ const UserManagement = ({
   sendEmailAuthError,
   isSendingEmailLink,
   isEmailLinkSent,
-  authenticateWithEmailLink,
+  sendSignInEmailLink,
   resetSendEmailLink,
   email,
   activeWorkspaceId,
@@ -60,7 +60,7 @@ const UserManagement = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isSendingEmailLink && emailInput) {
-      authenticateWithEmailLink({
+      sendSignInEmailLink({
         email: emailInput,
         data: {
           workspaceId: activeWorkspaceId,
@@ -208,8 +208,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    authenticateWithEmailLink: ({ email, data }) =>
-      dispatch(authenticateWithEmailLink({ email, ref: AUTH_TYPE.INVITE, data })),
+    sendSignInEmailLink: ({ email, data }) =>
+      dispatch(sendSignInEmailLink({ email, ref: AUTH_TYPE.INVITE, data })),
     resetSendEmailLink: () => dispatch(resetSendEmailLink()),
     removeMember: ({ workspaceId, uid }) =>
       dispatch(removeMember({ workspaceId, uid })),
