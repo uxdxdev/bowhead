@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/daithimorton/bowhead/compare/test-app@0.0.7...test-app@0.0.8) (2020-08-30)
+
+
+### Bug Fixes
+
+* fixed active workspace id null ([cfffe4d](https://github.com/daithimorton/bowhead/commit/cfffe4df34403ef332362a85331ef844c96ac3d5))
+
+
+
+
+
 ## [0.0.7](https://github.com/daithimorton/bowhead/compare/test-app@0.0.6...test-app@0.0.7) (2020-08-29)
 
 **Note:** Version bump only for package test-app
