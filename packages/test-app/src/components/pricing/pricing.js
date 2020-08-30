@@ -11,7 +11,7 @@ import { Star as StarBorder } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { stripe } from '../../utils/frontend/stripeFrontend'
-import { getToken } from '../../utils/frontend/firebaseFrontend'
+import { createStripeCheckoutSession } from '../../api/stripe'
 import { connect } from "react-redux";
 
 const tiers = [
@@ -98,29 +98,16 @@ const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
     const handleRedirectToStripe = async (priceId) => {
         setIsRedirecting(true)
         const stripeInstance = await stripe;
-        const token = await getToken();
-        const data = await fetch(`/.netlify/functions/create-stripe-checkout-session?token=${token}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                ...(stripeCustomerId && { customer: stripeCustomerId }),
-                payment_method_types: ['card'],
-                line_items: [
-                    { price: priceId, quantity: 1 }
-                ],
-                mode: 'subscription',
-                success_url: successUrl,
-                cancel_url: cancelUrl,
-                customer_email: email,
-                client_reference_id: uid,
-                subscription_data: {
-                    trial_period_days: '14'
-                }
-            })
+        const data = await createStripeCheckoutSession({
+            stripeCustomerId,
+            priceId,
+            successUrl,
+            cancelUrl,
+            email,
+            uid
+        }).catch(() => {
+            setIsRedirecting(false)
         })
-            .then(result => result.json())
-            .catch(() => {
-                setIsRedirecting(false)
-            })
 
         if (data.id) {
             await stripeInstance.redirectToCheckout({

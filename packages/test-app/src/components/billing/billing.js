@@ -4,8 +4,8 @@ import { Typography, Button, Paper } from "@material-ui/core";
 import { useStyles } from './billing-styles'
 import { ButtonBox, ButtonLoadingSpinner } from "..";
 import { useHistory } from 'react-router-dom'
-import { getToken } from '../../utils/frontend/firebaseFrontend'
 import { STRIPE_SUBSCRIPTION_STATUS } from "../../utils/constants";
+import { createStripeCustomerPortalSession } from '../../api/stripe'
 
 const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();
@@ -17,13 +17,10 @@ const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   const handleCreateSessionOpenPortal = async () => {
     setIsRedirectingToStripeCustomerPortal(true)
 
-    const token = await getToken();
-    const data = await fetch(`/.netlify/functions/create-stripe-customer-portal-session?token=${token}`, {
-      method: 'POST',
-      body: JSON.stringify({ customer: stripeCustomerId })
-    }).then(result => result.json()).catch(() => {
-      setIsRedirectingToStripeCustomerPortal(false)
-    })
+    const data = await createStripeCustomerPortalSession(stripeCustomerId)
+      .catch(() => {
+        setIsRedirectingToStripeCustomerPortal(false)
+      })
 
     // redirect use to stripe portal
     const url = data.url || null

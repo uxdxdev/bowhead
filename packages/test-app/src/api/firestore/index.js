@@ -45,7 +45,7 @@ export const removeWorkspaceFromUser = ({ uid, workspaceId }) => {
     }, { merge: true })
 }
 
-export const createWorkspaceWithData = ({ workspaceName, uid, email }) => {
+export const createWorkspace = ({ workspaceName, uid, email }) => {
     const workspaceRef = firestore
         .collection(FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc();
