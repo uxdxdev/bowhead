@@ -13,7 +13,7 @@ export const signOut = () => {
 }
 
 /**
- * 
+ * Sends sign in email and appends ref and data to URL.
  * 
  * @param {*} args.email users email address
  * @param {*} args.ref reference for email authentication
