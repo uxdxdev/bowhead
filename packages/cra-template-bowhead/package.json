@@ -2,7 +2,7 @@
     "name": "@mortond/cra-template-bowhead",
     "description": "Create-React-App template for fast MicroSaas prototyping.",
     "author": "David Morton (https://github.ibm.com/DMorton)",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "license": "MIT",
     "main": "template.json",
     "files": [
