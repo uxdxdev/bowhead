@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { authenticateWithEmailLink } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
 import {
   Button,
@@ -9,27 +7,21 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { ButtonLoadingSpinner, ButtonBox, CheckEmail } from "../../components";
-import { AUTH_TYPE } from "../../utils/constants";
+import { useSignIn } from './hooks'
+import { useStyles } from './sign-in-styles'
 
-const useStyles = makeStyles((theme) => ({
-  section: {
-    margin: theme.spacing(10, 0, 10),
-    justifyContent: "center",
-  },
-}));
-
-const Signin = ({
-  sendEmailAuthError,
-  authenticateWithEmailLink,
-  isSendingEmailLink,
-  isEmailLinkSent,
-  firebaseAuth: { uid },
-}) => {
+const SignIn = () => {
+  const {
+    sendEmailAuthError,
+    handleSendSignInEmailLink,
+    isSendingEmailLink,
+    isEmailLinkSent,
+    uid,
+  } = useSignIn();
   const [formInput, setFormInput] = useState({});
 
-  const classes = useStyles();
+  const { section } = useStyles();
 
   if (uid) return <Redirect to="/dashboard" />;
 
@@ -45,13 +37,13 @@ const Signin = ({
     e.preventDefault();
     const email = formInput?.email;
     if (!isSendingEmailLink && email) {
-      authenticateWithEmailLink({ email });
+      handleSendSignInEmailLink({ email });
     }
   };
 
   return (
     <Container component="main">
-      <Grid container component="section" className={classes.section}>
+      <Grid container component="section" className={section}>
         <Grid item xs={12} sm={6}>
           {isEmailLinkSent ? (
             <CheckEmail />
@@ -104,21 +96,5 @@ const Signin = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  const { auth, firebase: { auth: firebaseAuth } } = state;
-  const { sendEmailAuthError, isSendingEmailLink, isEmailLinkSent } = auth;
-  return {
-    firebaseAuth,
-    sendEmailAuthError,
-    isSendingEmailLink,
-    isEmailLinkSent,
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    authenticateWithEmailLink: ({ email }) =>
-      dispatch(authenticateWithEmailLink({ email, ref: AUTH_TYPE.SIGN_IN })),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default SignIn;

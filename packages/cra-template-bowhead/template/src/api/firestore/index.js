@@ -87,7 +87,7 @@ export const deleteProject = ({ projectId, workspaceId }) => {
         .delete()
 }
 
-export const createProjectWithData = ({ workspaceId, title, summary }) => {
+export const createProject = ({ workspaceId, title, summary }) => {
     return firestore
         .collection(FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc(workspaceId)
@@ -99,8 +99,6 @@ export const createProjectWithData = ({ workspaceId, title, summary }) => {
             createdAt: new Date()
         })
 }
-
-
 
 export const updateMemberStatus = ({ workspaceId, email, status }) => {
     return firestore

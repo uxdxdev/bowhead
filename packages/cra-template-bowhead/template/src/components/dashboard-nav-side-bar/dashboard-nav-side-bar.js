@@ -9,7 +9,7 @@ import {
   DoubleArrow as DoubleArrowIcon,
 } from "@material-ui/icons";
 import { SidebarMenuItem } from "../";
-import { setActiveWorkspace } from "../../store/actions/workspaceActions";
+import { setActiveWorkspace } from "../../actions/workspaceActions";
 import { useHistory } from 'react-router-dom'
 
 // sidebar
@@ -146,7 +146,7 @@ const mapStateToProps = (state) => {
     firebase: {
       profile: { workspaces },
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
   } = state;
 
   return {

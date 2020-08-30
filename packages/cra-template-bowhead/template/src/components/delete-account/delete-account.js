@@ -10,7 +10,7 @@ import {
   DialogContentText,
   TextField,
 } from "@material-ui/core";
-import { deleteCurrentUserAccount } from "../../store/actions/authActions";
+import { deleteCurrentUserAccount } from "../../actions/userActions";
 import { ButtonBox, ButtonLoadingSpinner } from "../";
 
 
@@ -130,7 +130,7 @@ const DeleteAccount = ({
 const mapStateToProps = (state) => {
   const {
     firebase: { auth: { email, uid }, profile: { stripeCustomerId } },
-    auth: { deletingUserDataError, isDeletingUserData },
+    user: { deletingUserDataError, isDeletingUserData },
   } = state;
 
   return {

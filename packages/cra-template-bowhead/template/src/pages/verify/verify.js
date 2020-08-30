@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { verifySignUp } from "../../store/actions/authActions";
+import { verifyUser } from "../../actions/userActions";
 import { PageLoadingSpinner } from "../../components";
 
 const Verify = ({
-  verifySignUp,
+  verifyUser,
   isLoading
 }) => {
   useEffect(() => {
-    verifySignUp();
-  }, [verifySignUp]);
+    verifyUser();
+  }, [verifyUser]);
 
   if (isLoading) {
     return <Redirect to="/dashboard" />;
@@ -22,7 +22,7 @@ const Verify = ({
 const mapStateToProps = (
   state
 ) => {
-  const { firebase: { auth: { uid } }, auth: { isVerifyingUser, isVerified } } = state;
+  const { firebase: { auth: { uid } }, user: { isVerifyingUser, isVerified } } = state;
 
   const isLoading = uid && !isVerifyingUser && isVerified;
   return {
@@ -32,7 +32,7 @@ const mapStateToProps = (
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    verifySignUp: () => dispatch(verifySignUp()),
+    verifyUser: () => dispatch(verifyUser()),
   };
 };
 

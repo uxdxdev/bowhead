@@ -10,7 +10,7 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { leaveWorkspace, deleteWorkspace } from "../../store/actions/workspaceActions";
+import { leaveWorkspace, deleteWorkspace } from "../../actions/workspaceActions";
 
 const useStyles = makeStyles((theme) => ({
   listItemText: {
@@ -128,13 +128,11 @@ const mapStateToProps = (state) => {
       auth: { uid },
       profile: { workspaces: profileWorkspaces },
     },
-    firestore
+    firestore: {
+      errors: { byQuery },
+      data: { workspaces: firestoreWorkspaces }
+    }
   } = state;
-
-  const {
-    errors: { byQuery },
-    data: { workspaces: firestoreWorkspaces }
-  } = firestore;
 
   return {
     firestoreWorkspaces,

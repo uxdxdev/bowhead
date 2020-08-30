@@ -12,10 +12,12 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  authenticateWithEmailLink,
+  sendSignInEmailLink,
   resetSendEmailLink,
+} from "../../actions/authActions";
+import {
   removeMember,
-} from "../../store/actions/authActions";
+} from "../../actions/workspaceActions";
 
 import { ButtonLoadingSpinner, ButtonBox } from "../";
 import { AUTH_TYPE, USER_ROLES } from "../../utils/constants";
@@ -41,7 +43,7 @@ const UserManagement = ({
   sendEmailAuthError,
   isSendingEmailLink,
   isEmailLinkSent,
-  authenticateWithEmailLink,
+  sendSignInEmailLink,
   resetSendEmailLink,
   email,
   activeWorkspaceId,
@@ -60,7 +62,7 @@ const UserManagement = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isSendingEmailLink && emailInput) {
-      authenticateWithEmailLink({
+      sendSignInEmailLink({
         email: emailInput,
         data: {
           workspaceId: activeWorkspaceId,
@@ -180,36 +182,34 @@ const mapStateToProps = (state) => {
       sendEmailAuthError,
       isSendingEmailLink,
       isEmailLinkSent,
-      activeWorkspaceId,
     },
+    workspace: { activeWorkspaceId },
     firebase: {
       auth: {
         email
       }
     },
     firestore: {
-      data: { workspaces: firestoreWorkspaces },
+      data: { workspaces },
     },
   } = state;
 
-  const firestoreWorkspace =
-    firestoreWorkspaces && firestoreWorkspaces[activeWorkspaceId];
-
+  const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
   return {
     sendEmailAuthError,
     isSendingEmailLink,
     isEmailLinkSent,
     email,
     activeWorkspaceId,
-    members: firestoreWorkspace?.members,
-    workspaceName: firestoreWorkspace?.name,
+    members: activeWorkspace?.members,
+    workspaceName: activeWorkspace?.name,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    authenticateWithEmailLink: ({ email, data }) =>
-      dispatch(authenticateWithEmailLink({ email, ref: AUTH_TYPE.INVITE, data })),
+    sendSignInEmailLink: ({ email, data }) =>
+      dispatch(sendSignInEmailLink({ email, ref: AUTH_TYPE.INVITE, data })),
     resetSendEmailLink: () => dispatch(resetSendEmailLink()),
     removeMember: ({ workspaceId, uid }) =>
       dispatch(removeMember({ workspaceId, uid })),

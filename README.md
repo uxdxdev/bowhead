@@ -6,24 +6,25 @@
 
 Bowhead is a Create-React-App template for fast MicroSaas prototyping.
 
-## Includes
+## Contributing
 
-- ReactJS
-- Redux
-- MaterialUI
-- Stripe subscription management
-- Firebase authentication
-- Firestore database
-- Netlify hosting and functions
-
-## How to use
-
-```bash
-npx create-react-app my-app --template @mortond/cra-template-bowhead
-```
+- Read the code of conduct  
 
 [Code of conduct](https://github.com/daithimorton/bowhead/blob/master/code-of-conduct.md)
 
+- Read the contributing guide  
+
+[Contributing guide](https://github.com/daithimorton/bowhead/blob/master/CONTRIBUTING.md)
+
+## Setup
+
+- Update `packages/test-app/.env`
+- Start the project
+```bash
+cd bowhead
+yarn # install dependencies
+yarn start # start all packages
+```
 
 <a href="https://www.netlify.com">
     <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />

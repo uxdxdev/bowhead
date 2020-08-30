@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveWorkspace } from '../../../store/actions/workspaceActions'
+import { setActiveWorkspace } from '../../../actions/workspaceActions'
 import { useFirestoreConnect } from "react-redux-firebase";
 import { FIRESTORE_COLLECTIONS, STRIPE_SUBSCRIPTION_STATUS, USER_ROLES } from "../../../utils/constants";
 
@@ -16,7 +16,7 @@ const useDashboard = () => {
       status: { requesting },
       data
     },
-    auth: { activeWorkspaceId },
+    workspace: { activeWorkspaceId },
     workspace: { isCreatingWorkspace }
   } = state;
 

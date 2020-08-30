@@ -33,7 +33,7 @@
     "postinstall": "lerna bootstrap"
   },
   "nodemonConfig": {
-    "ext": "js,json,html,.env,.rules,.md,.firebaserc,.eslintignore,.toml"
+    "ext": ".js,.json,.html,.env,.rules,.md,.firebaserc,.eslintignore,.toml"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.1",
