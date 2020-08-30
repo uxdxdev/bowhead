@@ -8,25 +8,27 @@ cache:
 
 stages:  
   - test
-  - name: publish
+  - name: publish:npm
+    if: branch = master
+  - name: deploy
     if: branch = master
 
 jobs:
   include: 
     - stage: test
       script:
-        - yarn test
-    - stage: publish
+        - yarn test # unit/integration
+        - yarn test:user # user environment test
+    - stage: publish:npm
       before_script:
         - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc  
         - git config user.email "davidmortonmail@gmail.com"
         - git config user.name "daithimorton"
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/daithimorton/bowhead.git
         - git fetch origin master
-        - git checkout master    
-      deploy:
-        - provider: script
-          script: yarn release
-          skip_cleanup: true     
-          on:
-            branch: master
+        - git checkout master  
+        - yarn release
+    - stage: deploy
+      script:
+        - yarn build
+        - yarn deploy
