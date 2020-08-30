@@ -1,8 +1,8 @@
 import testFunction from './webhook-stripe';
-import { stripe } from '../utils/backend/stripeBackend'
+import { stripe } from '../utils/stripeBackend'
 
-jest.mock('../utils/backend/firebaseBackend')
-jest.mock('../utils/backend/stripeBackend')
+jest.mock('../utils/firebaseBackend')
+jest.mock('../utils/stripeBackend')
 jest.mock('firebase-admin', () => ({
     firestore: jest.fn()
 }));
