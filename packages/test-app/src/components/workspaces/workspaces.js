@@ -10,7 +10,7 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { leaveWorkspace, deleteWorkspace } from "../../store/actions/workspaceActions";
+import { leaveWorkspace, deleteWorkspace } from "../../actions/workspaceActions";
 
 const useStyles = makeStyles((theme) => ({
   listItemText: {

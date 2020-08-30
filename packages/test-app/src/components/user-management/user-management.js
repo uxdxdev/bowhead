@@ -15,7 +15,7 @@ import {
   authenticateWithEmailLink,
   resetSendEmailLink,
   removeMember,
-} from "../../store/actions/authActions";
+} from "../../actions/authActions";
 
 import { ButtonLoadingSpinner, ButtonBox } from "../";
 import { AUTH_TYPE, USER_ROLES } from "../../utils/constants";

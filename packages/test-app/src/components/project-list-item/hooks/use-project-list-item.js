@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProjectFromWorkspace } from "../../../store/actions/projectActions";
+import { deleteProjectFromWorkspace } from "../../../actions/projectActions";
 
 const useProjectListItem = () => {
     const state = useSelector((state) => state);

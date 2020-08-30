@@ -1,23 +1,29 @@
-import { AUTH_TYPE } from "../../utils/constants";
+import { AUTH_TYPE } from "../utils/constants";
 import {
   userSignOut,
   sendSignInEmail,
   isSignInWithEmailLink,
   signInWithEmailLink,
   deleteCurrentUser
-} from '../../api/firebase'
+} from '../api/firebase'
 import {
   removeUserFromWorkspace,
   verifyUserInviteUpdate,
   verifyUserSignInUpdate,
   updateMemberStatus,
   deleteUserAccountAndData
-} from "../../api/firestore";
-import { deleteStripeCustomerAndSubscription } from '../../api/stripe'
+} from "../api/firestore";
+import { deleteStripeCustomerAndSubscription } from '../api/stripe'
+import {
+  sendEmailLink,
+  sendEmailLinkSuccess,
+  sendEmailLinkReset,
+  sendEmailLinkError
+} from '../store/authSlice'
 
 export const resetSendEmailLink = () => {
   return dispatch => {
-    dispatch({ type: "SEND_EMAIL_LINK_RESET" });
+    dispatch(sendEmailLinkReset());
   };
 };
 
@@ -37,7 +43,7 @@ export const signOut = () => {
 
 export const authenticateWithEmailLink = ({ email, ref, data }) => {
   return async (dispatch) => {
-    dispatch({ type: "SEND_EMAIL_LINK" });
+    dispatch(sendEmailLink());
 
     await sendSignInEmail({ email, ref, data })
       .then(() => {
@@ -50,10 +56,10 @@ export const authenticateWithEmailLink = ({ email, ref, data }) => {
         }
       })
       .then(() => {
-        dispatch({ type: "SEND_EMAIL_LINK_SUCCESS" });
+        dispatch(sendEmailLinkSuccess());
       })
       .catch(error => {
-        dispatch({ type: "SEND_EMAIL_LINK_ERROR", error });
+        dispatch(sendEmailLinkError(error));
       });
   };
 };

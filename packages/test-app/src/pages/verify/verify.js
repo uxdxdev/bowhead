@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { verifySignUp } from "../../store/actions/authActions";
+import { verifySignUp } from "../../actions/authActions";
 import { PageLoadingSpinner } from "../../components";
 
 const Verify = ({
