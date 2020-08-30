@@ -1,5 +1,5 @@
 import * as admin from 'firebase-admin';
-import { firebaseConfig } from '../../config/frontend/firebaseConfig';
+import { firebaseConfig } from '../config'
 
 if (admin.apps && !admin.apps.length) {
     admin.initializeApp({

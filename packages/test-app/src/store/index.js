@@ -6,7 +6,7 @@ import {
     constants as rfConstants
 } from "redux-firestore";
 import rootReducer from "./rootReducer";
-import { firebase } from "../utils/frontend/firebaseFrontend";
+import { firebase } from "../utils/firebaseFrontend";
 import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { Provider } from "react-redux";
 import {
