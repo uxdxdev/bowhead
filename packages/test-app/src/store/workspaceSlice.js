@@ -80,6 +80,27 @@ const workspaceSlice = createSlice({
         isDeletingWorkspaceError: action.error
       }
     },
+    removeUser(state) {
+      return {
+        ...state,
+        isRemovingUserData: true,
+        removingUserDataError: null
+      };
+    },
+    removeUserSuccess(state) {
+      return {
+        ...state,
+        isRemovingUserData: false,
+        removingUserDataError: null
+      };
+    },
+    removeUserError(state, action) {
+      return {
+        ...state,
+        isRemovingUserData: false,
+        removingUserDataError: action.error
+      };
+    },
   }
 })
 
@@ -95,7 +116,10 @@ export const {
   leaveWorkspaceError,
   deleteWorkspace,
   deleteWorkspaceSuccess,
-  deleteWorkspaceError
+  deleteWorkspaceError,
+  removeUser,
+  removeUserSuccess,
+  removeUserError
 } = workspaceSlice.actions
 
 export default workspaceSlice.reducer

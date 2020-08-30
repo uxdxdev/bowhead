@@ -14,8 +14,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   sendSignInEmailLink,
   resetSendEmailLink,
-  removeMember,
 } from "../../actions/authActions";
+import {
+  removeMember,
+} from "../../actions/workspaceActions";
 
 import { ButtonLoadingSpinner, ButtonBox } from "../";
 import { AUTH_TYPE, USER_ROLES } from "../../utils/constants";

@@ -1,4 +1,4 @@
-import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeWorkspaceFromUser } from '../api/firestore'
+import { createWorkspaceWithData, deleteWorkspaceAndProjects, removeWorkspaceFromUser, removeUserFromWorkspace } from '../api/firestore'
 import * as workspaceSlice from '../store/workspaceSlice'
 
 export const setActiveWorkspace = activeWorkspaceId => {
@@ -50,6 +50,20 @@ export const deleteWorkspace = ({ uid, workspaceId }) => {
       .catch(error => {
         console.error(error);
         dispatch(workspaceSlice.deleteWorkspaceError(error));
+      });
+  };
+};
+
+export const removeMember = ({ uid, workspaceId }) => {
+  return (dispatch) => {
+    dispatch(workspaceSlice.removeUser());
+
+    return removeUserFromWorkspace({ uid, workspaceId })
+      .then(() => {
+        dispatch(workspaceSlice.removeUserSuccess());
+      })
+      .catch(error => {
+        dispatch(workspaceSlice.removeUserError(error));
       });
   };
 };
