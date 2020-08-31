@@ -1906,10 +1906,10 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@mortond/bowhead@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@mortond/bowhead/-/bowhead-0.0.8.tgz#7de9204978ac82ce509bbc6ecb025adb0e54fa62"
-  integrity sha512-UKTiug/PfYITgObeeRMgOLl85TgyehEYUnL37t2qzL8ykT+lk4B4ucm+G0qe0htgL2rTkQH5/6HJE16fX0Asxg==
+"@mortond/bowhead@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@mortond/bowhead/-/bowhead-0.0.9.tgz#edb97c96ce67815d8bdc9d0b54646295970aa3d5"
+  integrity sha512-yKRGXsFR3WOadEOFMB3jymew/NTNT8X33r87m434prWuZd3RDi0v6xtK8TCRGplJgrfqWVtP69zaWY3HlSnRCw==
 
 "@mortond/eslint-config@^0.2.17":
   version "0.2.17"
