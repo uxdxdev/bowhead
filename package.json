@@ -20,6 +20,7 @@
     "start:cra-template-bowhead": "nodemon --watch packages/test-app --exec yarn build:cra-template-bowhead",
     "start:notices": "nodemon --watch 'packages/**/*/package.json' --exec yarn build:notices",
     "test": "lerna run test --stream",
+    "test:template": "node scripts/template-test.js",
     "test:user": "node scripts/user-test.js",
     "build": "lerna run build --stream",
     "build:cra-template-bowhead": "node scripts/create-cra-template-bowhead.js",

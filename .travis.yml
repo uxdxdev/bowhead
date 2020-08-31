@@ -18,6 +18,7 @@ jobs:
     - stage: test
       script:
         - yarn test # unit/integration
+        - yarn test:template # cra template test
         - yarn test:user # user environment test
     - stage: publish:npm
       before_script:
