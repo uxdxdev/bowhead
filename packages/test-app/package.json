@@ -35,7 +35,7 @@
     "redux-firestore": "^0.13.0",
     "shelljs": "^0.8.4",
     "stripe": "^8.84.0",
-    "webpack-node-externals": "^2.5.1"
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
     "start": "netlify dev -c 'yarn dev'",
