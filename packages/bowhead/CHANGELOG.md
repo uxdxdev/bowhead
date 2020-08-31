@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.11](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.0.10...@mortond/bowhead@0.0.11) (2020-08-31)
+
+
+### Bug Fixes
+
+* updates to dep versions [skip ci] ([efe67cb](https://github.com/daithimorton/bowhead/commit/efe67cb7b66aa47b719932e2f77353c903bc2111))
+
+
+
+
+
 ## [0.0.10](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.0.9...@mortond/bowhead@0.0.10) (2020-08-31)
 
 **Note:** Version bump only for package @mortond/bowhead
