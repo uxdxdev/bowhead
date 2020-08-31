@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.14](https://github.com/daithimorton/bowhead/compare/test-app@0.0.13...test-app@0.0.14) (2020-08-31)
+
+
+### Bug Fixes
+
+* updates to dep versions [skip ci] ([efe67cb](https://github.com/daithimorton/bowhead/commit/efe67cb7b66aa47b719932e2f77353c903bc2111))
+
+
+
+
+
 ## [0.0.13](https://github.com/daithimorton/bowhead/compare/test-app@0.0.12...test-app@0.0.13) (2020-08-31)
 
 **Note:** Version bump only for package test-app
