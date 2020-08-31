@@ -8,6 +8,7 @@ import { PageLoadingSpinner } from "../";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
+    margin: theme.spacing(2, 0, 2, 0),
   },
   title: { overflowWrap: "break-word" },
   summary: {
@@ -23,7 +24,11 @@ const ProjectDetails = ({ project, isFirestoreRequesting }) => {
   }
 
   if (!project) {
-    return <Typography>Project does not exist in this workspace</Typography>;
+    return (<Paper className={classes.paper} variant="outlined">
+      <Typography align="center">
+        No projects in this workspace.
+    </Typography>
+    </Paper>)
   }
 
   const { title, summary, createdAt } = project;

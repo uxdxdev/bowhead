@@ -64,6 +64,15 @@ const DashboardNavSidebar = ({
   // sidebar menu items
   const plugins = [
     {
+      Icon: AccountTreeIcon,
+      text: "Workspaces",
+      items: workspacesCollection,
+      isDefaultOpen: true
+    },
+    {
+      Component: Divider,
+    },
+    {
       Icon: DashboardIcon,
       text: "Dashboard",
       link: "/dashboard",
@@ -88,15 +97,6 @@ const DashboardNavSidebar = ({
         backgroundColor:
           activeMenuItem === 'projects' && "rgba(0, 0, 0, 0.04)",
       }
-    },
-    {
-      Component: Divider,
-    },
-    {
-      Icon: AccountTreeIcon,
-      text: "Workspaces",
-      items: workspacesCollection,
-      isDefaultOpen: true
     }
   ];
 
