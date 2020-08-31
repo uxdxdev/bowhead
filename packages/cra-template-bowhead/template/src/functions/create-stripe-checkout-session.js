@@ -1,5 +1,5 @@
-import { stripe } from '../utils/backend/stripeBackend'
-import { verifyToken } from '../utils/backend/firebaseBackend';
+import { stripe } from '../utils/stripeBackend'
+import { verifyToken } from '../utils/firebaseBackend';
 
 exports.handler = async (event, context, callback) => {
     const user = await verifyToken(event?.queryStringParameters?.token);
