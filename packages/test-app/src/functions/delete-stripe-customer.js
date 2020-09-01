@@ -1,16 +1,10 @@
-import { stripe } from '../utils/stripeBackend'
-import { verifyToken } from '../utils/firebaseBackend';
+import { functions } from '@mortond/bowhead-functions'
 
 exports.handler = async (event, context, callback) => {
-    const user = await verifyToken(event?.queryStringParameters?.token);
-    if (!user) return callback(null, { statusCode: 401 })
-
-    const { stripeCustomerId } = JSON.parse(event?.body);
-    await stripe.customers.del(stripeCustomerId).then(() => {
-        callback(null, {
-            statusCode: 200
-        })
-    }).catch(error => {
-        callback(error, { statusCode: 400 })
-    });
+    return await functions.deleteStripeCustomer({ token: event.queryStringParameters.token, body: event.body })
+        .then(() => {
+            callback(null, { statusCode: 200 })
+        }).catch(error => {
+            callback(error, { statusCode: 400 })
+        });
 }

@@ -1,1 +1,1 @@
-export { default as TestComponent } from './test-component'
+export { default as Bowhead } from './bowhead'

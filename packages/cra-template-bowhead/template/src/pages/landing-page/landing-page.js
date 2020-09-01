@@ -32,7 +32,6 @@ import {
   Container,
 } from "@material-ui/core";
 import { Assessment } from "@material-ui/icons";
-import { Footer, Pricing, NavBar } from "../../components";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -113,9 +112,6 @@ const LandingPage = () => {
 
   return (
     <>
-      {/* header */}
-      <NavBar />
-
       {/* main */}
       <Container component="main">
         {/* hero */}
@@ -438,9 +434,6 @@ const LandingPage = () => {
           </Grid>
         </Grid>
 
-        {/* pricing options */}
-        <Pricing />
-
         {/* FAQ */}
         <Grid component="section" className={classes.section}>
           <Typography component="h2" variant="h2" align="center" gutterBottom>
@@ -544,8 +537,6 @@ const LandingPage = () => {
           </Button>
         </Grid>
       </Container>
-      {/* footer */}
-      <Footer />
     </>
   );
 };

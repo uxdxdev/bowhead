@@ -1,10 +1,21 @@
 import React from "react";
-import Bowhead from "./Bowhead";
+import { Bowhead } from "@mortond/bowhead";
+import { LandingPage, Terms } from './pages'
 
 const App = () => {
 
+  const unauthRoutesConfig = [
+    {
+      path: '/terms',
+      component: Terms,
+    }
+  ]
+
   return (
-    <Bowhead />
+    <Bowhead
+      landingPage={<LandingPage />}
+      unauthRoutesConfig={unauthRoutesConfig}
+    />
   );
 };
 

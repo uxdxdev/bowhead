@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "npm-run-all -p -r start:*",
-    "start:lerna": "lerna run start --stream --ignore test-app",
+    "start:lerna": "lerna run start --parallel --stream --ignore test-app",
     "start:test-app": "cd packages/test-app && yarn start",
     "start:cra-template-bowhead": "nodemon --watch packages/test-app --exec yarn build:cra-template-bowhead",
     "start:notices": "nodemon --watch 'packages/**/*/package.json' --exec yarn build:notices",
