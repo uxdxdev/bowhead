@@ -11,11 +11,7 @@ service cloud.firestore {
     }
 
     match /stripe/{stripeCustomerId} {
-			allow read, write: if isSignedIn(request) &&
-                              // allow listeners to mount initially
-                              (resource == null ||
-                              // when data exists restrict access
-                              request.auth.uid == resource.data.uid); 
+			allow read, write: if isSignedIn(request) && (resource == null || request.auth.uid == resource.data.uid); 
     }
 
     // CUSTOM RULES

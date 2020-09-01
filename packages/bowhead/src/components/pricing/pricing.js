@@ -8,7 +8,6 @@ import {
     Typography
 } from "@material-ui/core";
 import { Star as StarBorder } from "@material-ui/icons";
-import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { stripe } from '../../utils/stripeFrontend'
 import { createStripeCheckoutSession } from '../../api/stripe'
@@ -77,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
+const Pricing = ({ uid, email, stripeCustomerId }) => {
     const classes = useStyles();
 
     const [isRedirecting, setIsRedirecting] = useState(false)
@@ -119,10 +118,6 @@ const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
 
     };
 
-    // only redirect to Stripe if isSubscribed is explicitly 'false'
-    // if undefined do not redirect
-    const redirectToStripe = isSubscribed === false;
-
     return (
         <Grid
             container
@@ -158,13 +153,7 @@ const Pricing = ({ uid, email, isSubscribed, stripeCustomerId }) => {
                                 </div>
                                 <div className={classes.cardPricing}>
                                     <Button
-                                        {...(uid && redirectToStripe
-                                            ? {
-                                                onClick: () => handleRedirectToStripe(tier.priceId)
-                                            } : {
-                                                component: NavLink,
-                                                to: "/signin"
-                                            })}
+                                        onClick={() => handleRedirectToStripe(tier.priceId)}
                                         variant={tier.buttonVariant}
                                         color="primary"
                                         disabled={isRedirecting}

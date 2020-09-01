@@ -5,9 +5,44 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AuthenticatedRoute, AuthIsLoaded } from "./components";
 import { SignIn, Verify, Dashboard, LandingPage } from "./pages";
 import { StoreProvider } from './store'
+import { PLUGIN_TYPES } from './utils/pluginTypes'
+
+const getRoutes = ({ routes, isDashboardRoute }) => {
+  return routes && routes.map((route, index) => {
+    const path = route?.path;
+    let component = route?.component;
+
+    const isValid = path && component;
+    if (!isValid) {
+      console.warn('Please provide path and component in routes configuration.')
+      return null
+    }
+
+    const isLandingPage = path === '/' && !isDashboardRoute;
+    const updatedPath = isDashboardRoute ? `/dashboard${path}` : path;
+    const Component = route?.component;
+
+    return (
+      <Route
+        key={index}
+        exact
+        path={updatedPath}
+        component={isLandingPage ? () => <LandingPage key={index}><Component /></LandingPage> : component} />
+    )
+  })
+}
 
 const Bowhead = ({ theme, config }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const DefaultLandingPage = () => <div>Default landing page</div>;
+  const defaultPlugins = [
+    {
+      type: PLUGIN_TYPES.ROUTE.ROOT,
+      path: '/',
+      component: DefaultLandingPage,
+    }
+  ]
 
   const defaultTheme = useMemo(
     () =>
@@ -64,55 +99,35 @@ const Bowhead = ({ theme, config }) => {
     [prefersDarkMode]
   );
 
-  const routes = ({ config, authConfig }) => {
-    return config && config.map((route, index) => {
-      const path = route?.path;
-      const exactPath = route?.exact || authConfig;
-      const component = route?.component;
+  const plugins = config || defaultPlugins;
 
-      const isValid = path && component;
-      if (!isValid) {
-        console.warn('Please provide path and component in routes configuration.')
-        return null
-      }
-
-      const updatedPath = authConfig ? `/dashboard${path}` : path;
-
-      return (
-        <Route
-          key={index}
-          {...(exactPath && { exact: exactPath })}
-          path={updatedPath}
-          component={component} />
-      )
-    })
-  }
+  const unAuthRoutes = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.ROOT)
+  const dashboardRoutes = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.DASHBOARD)
+  const popoverMenuItems = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+  const sidebarMenuItems = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
+  const reducers = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.REDUCER)
+    .reduce((obj, item) => (obj[item.name] = item.reducer, obj), {});
 
   const AuthedDashboard = (props) => {
     return (
-      <Dashboard {...props}>
-        {routes({ config: config?.dashboardRoutesConfig, authConfig: true }) || null}
+      <Dashboard
+        {...props}
+        popoverMenuItems={popoverMenuItems}
+        sidebarMenuItems={sidebarMenuItems}
+      >
+        {getRoutes({ routes: dashboardRoutes, isDashboardRoute: true })}
       </Dashboard>)
   }
 
-  const UpdatedLandingPage = () => {
-    const Component = config?.landingPage
-    return (
-      <LandingPage>
-        {Component && <Component /> || null}
-      </LandingPage>
-    )
-  }
 
   return (
     <ThemeProvider theme={theme || defaultTheme}>
-      <StoreProvider reducers={config?.reducers}>
+      <StoreProvider reducers={reducers}>
         <AuthIsLoaded>
           <CssBaseline />
           <BrowserRouter>
             <Switch>
-              <Route exact path='/' component={UpdatedLandingPage} />
-              {routes({ config: config?.unauthRoutesConfig })}
+              {getRoutes({ routes: unAuthRoutes })}
               <Route path="/signin" component={SignIn} />
               <Route path="/verify" component={Verify} />
               <AuthenticatedRoute path="/dashboard" component={AuthedDashboard} />

@@ -13,7 +13,9 @@ const useProjectListItem = () => {
     const role = workspaces[activeWorkspaceId]?.role
     const isOwner = role === 'owner'
 
-    const handleDeleteProject = ({ projectId, workspaceId }) => dispatch(deleteProject({ projectId, workspaceId }))
+    const handleDeleteProject = ({ projectId }) => {
+        dispatch(deleteProject({ projectId, workspaceId: activeWorkspaceId }))
+    }
 
     return {
         activeWorkspaceId,

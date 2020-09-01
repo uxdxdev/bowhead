@@ -3,17 +3,9 @@ import { connect } from "react-redux";
 import {
   createWorkspace
 } from "../../actions/workspaceActions";
-import { Paper, Typography, TextField, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, TextField, Button } from "@material-ui/core";
 import { ButtonBox } from "../button-box";
 import { ButtonLoadingSpinner } from "../button-loading-spinner"
-import { useHistory } from 'react-router-dom'
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(2),
-  },
-}));
 
 const CreateWorkspace = ({
   isCreatingWorkspace,
@@ -22,47 +14,39 @@ const CreateWorkspace = ({
   email,
   uid
 }) => {
-  const classes = useStyles();
-  const history = useHistory();
 
-  const [formInput, setFormInput] = useState({});
+  const [formInput, setFormInput] = useState({ workspace: '' });
 
-  const handleChange = (id, value) => {
-    setFormInput((currentState) =>
-      Object.assign(currentState, {
-        [id]: value,
-      })
-    );
+  const handleChange = (e) => {
+    const id = e?.target?.id;
+    const value = e?.target?.value;
+    setFormInput((prevState) => ({ ...prevState, [id]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const workspaceName = formInput?.workspace;
-    createWorkspace({ workspaceName, email, uid }).then(() => {
-      history.push(`/dashboard/project`);
-    })
+    createWorkspace({ workspaceName, email, uid }).then(() => setFormInput({ workspace: '' }))
   };
 
   return (
-    <Paper className={classes.paper} variant="outlined">
+    <>
       <Typography component="h1" variant="h6" gutterBottom>
         Create a new workspace
       </Typography>
-      <form onSubmit={handleSubmit} className={classes.root}>
+      <form onSubmit={handleSubmit}>
         <TextField
           id="workspace"
           label="Workspace name"
           required
           type="text"
           autoComplete="workspace"
-          onChange={({ target: { id, value } }) =>
-            handleChange(id, value)
-          }
+          onChange={handleChange}
           fullWidth
           inputProps={{ maxLength: "50" }}
           variant="outlined"
           margin="dense"
+          value={formInput.workspace}
         />
         <ButtonBox>
           <Button
@@ -80,7 +64,7 @@ const CreateWorkspace = ({
           <Typography color="error">{createWorkspaceError}</Typography>
         ) : null}
       </form>
-    </Paper>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   sendSignInEmailLink,
   resetSendEmailLink,
-} from "../../actions/authActions";
+} from "@mortond/bowhead";
 import {
   removeMember,
 } from "../../actions/workspaceActions";
