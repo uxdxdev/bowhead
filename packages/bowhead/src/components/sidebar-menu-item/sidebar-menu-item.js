@@ -8,7 +8,9 @@ import {
   ListItemText,
   ListItemIcon,
   Collapse,
+  Divider
 } from "@material-ui/core";
+
 import {
   ExpandMore as IconExpandMore,
   ExpandLess as IconExpandLess,
@@ -27,57 +29,80 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SidebarMenuItem = (props) => {
-  const { text, link, Icon, items = [], Component, onClick, style, isDefaultOpen } = props;
+  const {
+    text,
+    path,
+    menuIcon,
+    items = [],
+    onClick,
+    handleDrawerToggle,
+    setActiveMenuItem,
+    activeMenuItem,
+    isDefaultOpen
+  } = props;
   const classes = useStyles();
   const isExpandable = items && items.length > 0;
   const [open, setOpen] = React.useState(isDefaultOpen);
 
   function handleClick() {
-    // call onClick if in plugin
-    onClick && onClick();
-
-    isExpandable && setOpen(!open);
+    if (!isExpandable) {
+      handleDrawerToggle();
+      setActiveMenuItem(text);
+      onClick && onClick()
+    } else {
+      setOpen(!open);
+    }
   }
 
+  const Icon = menuIcon && menuIcon;
+
   const MenuItemRoot = (
-    <ListItem
-      key={link}
-      button
-      component={link ? NavLink : null}
-      to={link ? link : null}
-      className={classes.listItem}
-      style={style}
-      underline="none"
-      onClick={handleClick}
-    >
-      <ListItemIcon className={classes.listItemIcon}>
-        {Icon ? <Icon /> : <></>}
-      </ListItemIcon>
-      <ListItemText className={classes.listItemText}>{text}</ListItemText>
-      {/* Display the expand menu if the item has children */}
-      {isExpandable && !open && <IconExpandMore />}
-      {isExpandable && open && <IconExpandLess />}
-    </ListItem>
+    <>
+      <ListItem
+        key={path}
+        button
+        component={path ? NavLink : null}
+        to={path ? path : null}
+        className={classes.listItem}
+        style={{
+          backgroundColor: activeMenuItem === text && "rgba(0, 0, 0, 0.04)",
+        }}
+        underline="none"
+        onClick={handleClick}
+      >
+        <ListItemIcon className={classes.listItemIcon}>
+          {Icon ? <Icon /> : null}
+        </ListItemIcon>
+        <ListItemText className={classes.listItemText}>{text}</ListItemText>
+        {/* Display the expand menu if the item has children */}
+        {isExpandable && !open && <IconExpandMore />}
+        {isExpandable && open && <IconExpandLess />}
+      </ListItem>
+      {isExpandable && <Divider />}
+    </>
   );
 
   const MenuItemChildren = isExpandable ? (
     <Collapse in={open} timeout="auto" unmountOnExit>
       <List component="div" disablePadding>
         {items.map((item, index) => (
-          <SidebarMenuItem {...item} key={index} />
+          <SidebarMenuItem {...item}
+            key={index}
+            activeMenuItem={activeMenuItem}
+            setActiveMenuItem={setActiveMenuItem}
+            handleDrawerToggle={handleDrawerToggle}
+          />
         ))}
       </List>
     </Collapse>
   ) : null;
 
-  return Component ? (
-    <Component />
-  ) : (
-      <>
-        {MenuItemRoot}
-        {MenuItemChildren}
-      </>
-    );
+  return (
+    <>
+      {MenuItemRoot}
+      {MenuItemChildren}
+    </>
+  );
 };
 
 export default SidebarMenuItem;

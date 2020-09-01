@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
+const DashboardNavBar = ({ signOut, handleDrawerToggle, popoverMenuItems }) => {
   const classes = useStyles();
 
   // dropdown settings menu
@@ -59,6 +59,42 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const menuItemConfig = [
+    {
+      path: "/account",
+      menuIcon: SettingsIcon,
+      text: 'Account'
+    },
+    ...popoverMenuItems
+  ]
+
+  const menuItems = (config) => {
+
+    return config && config.map((item, index) => {
+      if (!item) return null;
+
+      const path = item?.path;
+      const onClick = item?.onClick;
+      const Icon = item?.menuIcon;
+      const text = item?.text;
+      return (
+        <MenuItem
+          key={index}
+          component={NavLink}
+          to={`/dashboard${path}`}
+          onClick={onClick}
+          color="textPrimary"
+          underline="none"
+        >
+          <ListItemIcon className={classes.listItemIcon}>
+            {Icon && <Icon /> || null}
+          </ListItemIcon>
+          <ListItemText>{text}</ListItemText>
+        </MenuItem>
+      )
+    })
+  }
 
 
 
@@ -120,17 +156,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
                 onClick={handleMenuClose}
                 onKeyDown={handleMenuClose}
               >
-                <MenuItem
-                  component={NavLink}
-                  to="/dashboard/account"
-                  color="textPrimary"
-                  underline="none"
-                >
-                  <ListItemIcon className={classes.listItemIcon}>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  <ListItemText>Account</ListItemText>
-                </MenuItem>
+                {menuItems(menuItemConfig)}
                 <MenuItem
                   component={NavLink}
                   to="/signin"

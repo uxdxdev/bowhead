@@ -1,2 +1,6 @@
 export { default as Bowhead } from './bowhead'
-export { firestore } from './utils/firebaseFrontend'
+export { firebase, firestore } from './utils/firebaseFrontend'
+export { sendSignInEmailLink, resetSendEmailLink } from './actions/authActions'
+export { updateFirestoreListeners } from './actions/listenerActions'
+export { registerPlugins } from './actions/pluginActions'
+export { PLUGIN_TYPES } from './utils/pluginTypes'

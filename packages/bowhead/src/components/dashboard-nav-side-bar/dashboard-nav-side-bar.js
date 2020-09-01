@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Hidden, Drawer, Divider } from "@material-ui/core";
+import { Hidden, Drawer } from "@material-ui/core";
 import {
-  List as ListIcon,
   Dashboard as DashboardIcon,
   AccountTree as AccountTreeIcon,
   DoubleArrow as DoubleArrowIcon,
 } from "@material-ui/icons";
 import { SidebarMenuItem } from "../sidebar-menu-item";
 import { setActiveWorkspace } from "../../actions/workspaceActions";
-import { useHistory } from 'react-router-dom'
 
 // sidebar
 const drawerWidth = 240;
@@ -33,30 +31,24 @@ const DashboardNavSidebar = ({
   activeWorkspaceId,
   handleDrawerToggle,
   mobileOpen,
+  sidebarMenuItems
 }) => {
   const classes = useStyles();
-  const history = useHistory();
 
   // currently selected menu item 
   const [activeMenuItem, setActiveMenuItem] = useState('initialState')
 
   // workspaces
   const workspacesArray = workspaces && Object.keys(workspaces);
-  const workspaceExists = workspacesArray?.length > 0;
   const workspacesCollection = workspacesArray?.filter((workspaceId) => workspaces[workspaceId]?.name && workspaceId)
     .map((workspaceId) => {
       const workspaceName = workspaces[workspaceId]?.name;
       return {
-        Icon: activeWorkspaceId === workspaceId && DoubleArrowIcon,
+        menuIcon: activeWorkspaceId === workspaceId && DoubleArrowIcon,
         text: workspaceName,
+        path: '/dashboard/project',
         onClick: () => {
           setActiveWorkspace(workspaceId);
-          handleDrawerToggle();
-          history.push('/dashboard/project')
-        },
-        style: {
-          backgroundColor:
-            activeWorkspaceId === workspaceId && "rgba(0, 0, 0, 0.04)",
         },
       };
     });
@@ -64,46 +56,33 @@ const DashboardNavSidebar = ({
   // sidebar menu items
   const plugins = [
     {
-      Icon: AccountTreeIcon,
+      menuIcon: DashboardIcon,
+      text: "Dashboard",
+      path: "/dashboard",
+    },
+    ...sidebarMenuItems,
+    // {
+    //   menuIcon: ListIcon,
+    //   text: "Projects",
+    //   link: "/dashboard/project",
+    // },
+    {
+      menuIcon: AccountTreeIcon,
       text: "Workspaces",
       items: workspacesCollection,
-      isDefaultOpen: true
     },
-    {
-      Component: Divider,
-    },
-    {
-      Icon: DashboardIcon,
-      text: "Dashboard",
-      link: "/dashboard",
-      onClick: () => {
-        handleDrawerToggle();
-        setActiveMenuItem('dashboard')
-      },
-      style: {
-        backgroundColor:
-          activeMenuItem === 'dashboard' && "rgba(0, 0, 0, 0.04)",
-      }
-    },
-    workspaceExists && {
-      Icon: ListIcon,
-      text: "Projects",
-      link: "/dashboard/project",
-      onClick: () => {
-        handleDrawerToggle();
-        setActiveMenuItem('projects')
-      },
-      style: {
-        backgroundColor:
-          activeMenuItem === 'projects' && "rgba(0, 0, 0, 0.04)",
-      }
-    }
   ];
 
   const drawer = () => {
     return plugins.map(
       (menuItem, index) =>
-        menuItem && <SidebarMenuItem key={index} {...menuItem} />
+        menuItem && <SidebarMenuItem
+          key={index}
+          {...menuItem}
+          activeMenuItem={activeMenuItem}
+          setActiveMenuItem={setActiveMenuItem}
+          handleDrawerToggle={handleDrawerToggle}
+        />
     );
   };
 

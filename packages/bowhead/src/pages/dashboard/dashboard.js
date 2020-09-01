@@ -3,7 +3,7 @@ import { Switch, Route, Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Breadcrumbs, Typography, Link, Container } from "@material-ui/core";
 import { useDashboard } from './hooks'
-import { DashboardNavSidebar, DashboardNavBar, DashboardRoot, Account, PageLoadingSpinner } from '../../components'
+import { DashboardNavSidebar, DashboardNavBar, Pricing, Account, PageLoadingSpinner } from '../../components'
 
 const drawerWidth = 240;
 
@@ -36,7 +36,7 @@ const createLinkText = (to) => {
 };
 
 const Dashboard = (props) => {
-  const { match, children } = props;
+  const { match, children, popoverMenuItems, sidebarMenuItems } = props;
   const {
     isSubscribed,
     isLoading,
@@ -56,9 +56,13 @@ const Dashboard = (props) => {
 
   return (
     <>
-      <DashboardNavBar handleDrawerToggle={handleDrawerToggle} />
+      <DashboardNavBar
+        handleDrawerToggle={handleDrawerToggle}
+        popoverMenuItems={popoverMenuItems}
+      />
       {isSubscribed &&
         <DashboardNavSidebar
+          sidebarMenuItems={sidebarMenuItems}
           handleDrawerToggle={handleDrawerToggle}
           mobileOpen={mobileOpen}
         />}
@@ -100,9 +104,11 @@ const Dashboard = (props) => {
 
         <Switch>
           <>
-            <Route exact path={`${match.path}/`} component={DashboardRoot} />
+            {isSubscribed ?
+              children :
+              <Route exact path={`${match.path}/`} component={Pricing} />
+            }
             <Route exact path={`${match.path}/account`} component={Account} />
-            {children}
           </>
         </Switch>
       </Container>
