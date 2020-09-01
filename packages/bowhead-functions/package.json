@@ -1,0 +1,51 @@
+{
+  "name": "@mortond/bowhead-functions",
+  "version": "0.0.1",
+  "description": "Bowhead functions",
+  "author": "David Morton (https://github.ibm.com/DMorton)",
+  "license": "MIT",
+  "source": "src/index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "microbundle --format es,cjs --target node",
+    "start": "microbundle watch --format es,cjs --target node",
+    "test": "jest --coverage --verbose --color --passWithNoTests",
+    "view:coverage": "serve coverage/lcov-report",
+    "lint": "eslint .",
+    "clean": "rm -rf node_modules dist"
+  },
+  "peerDependencies": {
+    "firebase-admin": "^9.0.0",
+    "stripe": "^8.84.0"
+  },
+  "devDependencies": {
+    "@mortond/eslint-config": "^0.2.17",
+    "jest": "^24.9.0",
+    "microbundle": "^0.12.3",
+    "serve": "^11.3.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@mortond/eslint-config"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    },
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ]
+  }
+}
