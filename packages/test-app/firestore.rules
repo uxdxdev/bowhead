@@ -6,6 +6,19 @@ service cloud.firestore {
       return req.auth != null;
     }
 
+    match /users/{userId} {
+			allow read, write: if isSignedIn(request) && request.auth.uid == userId;
+    }
+
+    match /stripe/{stripeCustomerId} {
+			allow read, write: if isSignedIn(request) &&
+                              // allow listeners to mount initially
+                              (resource == null ||
+                              // when data exists restrict access
+                              request.auth.uid == resource.data.uid); 
+    }
+
+    // CUSTOM RULES
     function getRole(rsc, req) {
       return rsc.data.members[req.auth.uid].role;
     }
@@ -62,16 +75,6 @@ service cloud.firestore {
         allow delete: if isSignedIn(request) && 
                           isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner']);
       }
-    }
-    
-    match /users/{userId} {
-			allow read, write: if isSignedIn(request) && request.auth.uid == userId;
-    }
-
-    match /stripe/{stripeCustomerId} {
-			allow read, write: if isSignedIn(request) &&
-                              (resource == null || 
-                              request.auth.uid == resource.data.uid);
     }
     
   }

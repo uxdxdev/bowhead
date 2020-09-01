@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { useMediaQuery, CssBaseline } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { AuthenticatedRoute, AuthIsLoaded, Projects, ProjectDetails } from "./components";
+import { AuthenticatedRoute, AuthIsLoaded } from "./components";
 import { SignIn, Verify, Dashboard, LandingPage } from "./pages";
 import { StoreProvider } from './store'
 
-const Bowhead = ({ theme, unauthRoutesConfig, landingPage }) => {
+const Bowhead = ({ theme, config }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const defaultTheme = useMemo(
@@ -64,19 +64,8 @@ const Bowhead = ({ theme, unauthRoutesConfig, landingPage }) => {
     [prefersDarkMode]
   );
 
-  const dashboardRoutesConfig = [
-    {
-      path: '/project',
-      component: Projects,
-    },
-    {
-      path: '/project/:id',
-      component: ProjectDetails,
-    }
-  ]
-
   const routes = ({ config, authConfig }) => {
-    return config.map((route, index) => {
+    return config && config.map((route, index) => {
       const path = route?.path;
       const exactPath = route?.exact || authConfig;
       const component = route?.component;
@@ -102,27 +91,28 @@ const Bowhead = ({ theme, unauthRoutesConfig, landingPage }) => {
   const AuthedDashboard = (props) => {
     return (
       <Dashboard {...props}>
-        {routes({ config: dashboardRoutesConfig, authConfig: true }) || null}
+        {routes({ config: config?.dashboardRoutesConfig, authConfig: true }) || null}
       </Dashboard>)
   }
 
   const UpdatedLandingPage = () => {
+    const Component = config?.landingPage
     return (
       <LandingPage>
-        {landingPage || null}
+        {Component && <Component /> || null}
       </LandingPage>
     )
   }
 
   return (
     <ThemeProvider theme={theme || defaultTheme}>
-      <StoreProvider>
+      <StoreProvider reducers={config?.reducers}>
         <AuthIsLoaded>
           <CssBaseline />
           <BrowserRouter>
             <Switch>
               <Route exact path='/' component={UpdatedLandingPage} />
-              {routes({ config: unauthRoutesConfig })}
+              {routes({ config: config?.unauthRoutesConfig })}
               <Route path="/signin" component={SignIn} />
               <Route path="/verify" component={Verify} />
               <AuthenticatedRoute path="/dashboard" component={AuthedDashboard} />
