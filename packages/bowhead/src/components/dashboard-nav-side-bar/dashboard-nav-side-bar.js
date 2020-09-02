@@ -61,11 +61,6 @@ const DashboardNavSidebar = ({
       path: "/dashboard",
     },
     ...sidebarMenuItems,
-    // {
-    //   menuIcon: ListIcon,
-    //   text: "Projects",
-    //   link: "/dashboard/project",
-    // },
     {
       menuIcon: AccountTreeIcon,
       text: "Workspaces",

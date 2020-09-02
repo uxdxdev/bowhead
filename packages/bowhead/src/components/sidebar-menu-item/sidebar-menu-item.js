@@ -8,7 +8,6 @@ import {
   ListItemText,
   ListItemIcon,
   Collapse,
-  Divider
 } from "@material-ui/core";
 
 import {
@@ -78,7 +77,6 @@ const SidebarMenuItem = (props) => {
         {isExpandable && !open && <IconExpandMore />}
         {isExpandable && open && <IconExpandLess />}
       </ListItem>
-      {isExpandable && <Divider />}
     </>
   );
 

@@ -36,7 +36,7 @@ export const createStripeCheckoutSession = async ({
             mode: 'subscription',
             success_url: successUrl,
             cancel_url: cancelUrl,
-            customer_email: email,
+            ...(!stripeCustomerId && { customer_email: email }),
             client_reference_id: uid,
             subscription_data: {
                 trial_period_days: '14'

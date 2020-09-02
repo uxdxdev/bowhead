@@ -13,6 +13,7 @@ const dbUpdateSubscriptionByCustomerId = async (data) => {
   const status = data.status || null;
   const planId = data.plan.id || null;
   const interval = data.plan.interval || null;
+  console.log(status, stripeCustomerId)
   if (isValidStatus(status) && stripeCustomerId && planId && interval) {
     if (status === STRIPE_SUBSCRIPTION_STATUS.CANCELLED) {
       // delete stripe customer data from DB
