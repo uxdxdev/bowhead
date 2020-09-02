@@ -12,10 +12,11 @@ import {
     ReactReduxFirebaseProvider,
     actionTypes as rrfActionTypes
 } from "react-redux-firebase";
-import { reducerRegistry } from '../registry/reducer-registry'
+import { pluginRegistry } from '../registry/plugin-registry'
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
+import { PLUGIN_TYPES } from '../utils/pluginTypes';
 
 const getStore = () => {
 
@@ -38,10 +39,21 @@ const getStore = () => {
         })
     ]
 
+    const getReducers = (plugins) => {
+        const reducers = {}
+        plugins.forEach(plugin => {
+            reducers[plugin.name] = plugin.reducer
+        })
+        return reducers
+    }
+
+    const reducerPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.REDUCER)
+    const reducers = getReducers(reducerPlugins);
+
     // see: https://github.com/reduxjs/redux-toolkit
     const store = configureStore(
         {
-            reducer: combineReducers(reducerRegistry.getReducers()),
+            reducer: combineReducers(reducers),
             middleware,
             enhancers: [
                 // enhancements to connect redux to Firebase
@@ -52,9 +64,11 @@ const getStore = () => {
         },
     )
 
-    reducerRegistry.setChangeListener(reducers => {
+    pluginRegistry.setChangeListener(plugins => {
+        const reducers = getReducers(plugins.filter(plugin => plugin.type === PLUGIN_TYPES.REDUCER));
         store.replaceReducer(combineReducers(reducers));
     });
+
     return store;
 }
 
@@ -72,8 +86,17 @@ const StoreProvider = ({ children }) => {
         dispatch: store.dispatch,
     };
 
-    reducerRegistry.register('firestore', firestoreReducer)
-    reducerRegistry.register('firebase', firebaseReducer)
+    pluginRegistry.register({
+        type: PLUGIN_TYPES.REDUCER,
+        name: 'firestore',
+        reducer: firestoreReducer
+    })
+
+    pluginRegistry.register({
+        type: PLUGIN_TYPES.REDUCER,
+        name: 'firebase',
+        reducer: firebaseReducer
+    })
 
     return (
         <Provider store={store}>

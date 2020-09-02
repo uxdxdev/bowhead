@@ -6,8 +6,9 @@ import { AuthenticatedRoute, AuthIsLoaded } from "./components";
 import { SignIn, Verify, Dashboard, LandingPage } from "./pages";
 import { StoreProvider } from './store'
 import { PLUGIN_TYPES } from './utils/pluginTypes'
+import { pluginRegistry } from "./registry/plugin-registry";
 
-const getRoutes = ({ routes, isDashboardRoute }) => {
+const getRoutes = ({ routes, isAuthRoute }) => {
   return routes && routes.map((route, index) => {
     const path = route?.path;
     let component = route?.component;
@@ -18,8 +19,8 @@ const getRoutes = ({ routes, isDashboardRoute }) => {
       return null
     }
 
-    const isLandingPage = path === '/' && !isDashboardRoute;
-    const updatedPath = isDashboardRoute ? `/dashboard${path}` : path;
+    const isLandingPage = path === '/' && !isAuthRoute;
+    const updatedPath = isAuthRoute ? `/dashboard${path}` : path;
     const Component = route?.component;
 
     return (
@@ -32,17 +33,8 @@ const getRoutes = ({ routes, isDashboardRoute }) => {
   })
 }
 
-const Bowhead = ({ theme, pluginConfig }) => {
+const Bowhead = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
-  const DefaultLandingPage = () => <div>Default landing page</div>;
-  const defaultPlugins = [
-    {
-      type: PLUGIN_TYPES.ROUTE.ROOT,
-      path: '/',
-      component: DefaultLandingPage,
-    }
-  ]
 
   const defaultTheme = useMemo(
     () =>
@@ -99,13 +91,12 @@ const Bowhead = ({ theme, pluginConfig }) => {
     [prefersDarkMode]
   );
 
-  const configuredPlugins = pluginConfig || defaultPlugins;
-
-  const unAuthRoutes = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.ROOT)
-  const dashboardRoutes = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.DASHBOARD)
-  const popoverMenuItems = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
-  const sidebarMenuItems = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
-
+  const unAuthRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
+  const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.AUTHENTICATED_ROUTE)
+  const popoverMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
+  const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)
+  const theme = themes.length > 0 && themes[0].theme;
 
   const AuthedDashboard = (props) => {
     return (
@@ -114,7 +105,7 @@ const Bowhead = ({ theme, pluginConfig }) => {
         popoverMenuItems={popoverMenuItems}
         sidebarMenuItems={sidebarMenuItems}
       >
-        {getRoutes({ routes: dashboardRoutes, isDashboardRoute: true })}
+        {getRoutes({ routes: authenticatedRoutes, isAuthRoute: true })}
       </Dashboard>)
   }
 

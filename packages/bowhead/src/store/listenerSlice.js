@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { reducerRegistry } from '../registry/reducer-registry'
+import { pluginRegistry } from '../registry/plugin-registry'
+import { PLUGIN_TYPES } from '../utils/pluginTypes'
 
 const listenerSlice = createSlice({
   name: 'listeners',
@@ -14,7 +15,11 @@ const listenerSlice = createSlice({
   }
 })
 
-reducerRegistry.register('listeners', listenerSlice.reducer)
+pluginRegistry.register({
+  type: PLUGIN_TYPES.REDUCER,
+  name: 'listeners',
+  reducer: listenerSlice.reducer
+})
 
 export const {
   updateListeners,

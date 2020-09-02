@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { reducerRegistry } from '../registry/reducer-registry'
+import { pluginRegistry } from '../registry/plugin-registry'
+import { PLUGIN_TYPES } from '../utils/pluginTypes'
 
 const workspaceSlice = createSlice({
   name: 'workspace',
@@ -105,7 +106,11 @@ const workspaceSlice = createSlice({
   }
 })
 
-reducerRegistry.register('workspace', workspaceSlice.reducer)
+pluginRegistry.register({
+  type: PLUGIN_TYPES.REDUCER,
+  name: 'workspace',
+  reducer: workspaceSlice.reducer
+})
 
 export const {
   setActiveWorkspace,
