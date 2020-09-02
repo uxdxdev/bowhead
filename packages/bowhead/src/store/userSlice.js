@@ -54,7 +54,7 @@ const userSlice = createSlice({
   }
 })
 
-pluginRegistry.register({
+pluginRegistry.register('user-reducer', {
   type: PLUGIN_TYPES.REDUCER,
   name: 'user',
   reducer: userSlice.reducer

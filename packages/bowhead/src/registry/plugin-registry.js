@@ -1,17 +1,18 @@
 export class PluginRegistry {
     constructor() {
-        this.plugins = [];
+        this.plugins = {};
         this.listeners = [];
     }
 
     getPluginsByType(type) {
-        return this.plugins.filter(plugin => plugin.type === type);
+        return Object.values(this.plugins).filter(plugin => plugin.type === type);
     }
 
-    register(plugin) {
-        this.plugins.push(plugin)
+    register(name, plugin) {
+        this.plugins[`${plugin.type}-${name}`] = plugin;
         if (this.listeners.length > 0) {
-            this.listeners.forEach(listener => listener(this.plugins))
+            const pluginData = Object.values(this.plugins)
+            this.listeners.forEach(listener => listener(pluginData))
         }
     }
 

@@ -120,8 +120,8 @@ const App = () => {
     }
   ]
 
-  plugins.forEach(plugin => {
-    pluginRegistry.register(plugin)
+  plugins.forEach((plugin, index) => {
+    pluginRegistry.register(`${plugin.type}-${index}`, plugin)
   })
 
   return (

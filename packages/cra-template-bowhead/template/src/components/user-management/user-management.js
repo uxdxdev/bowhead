@@ -182,7 +182,6 @@ const mapStateToProps = (state) => {
       isSendingEmailLink,
       isEmailLinkSent,
     },
-    workspace: { activeWorkspaceId },
     firebase: {
       auth: {
         email
@@ -193,6 +192,7 @@ const mapStateToProps = (state) => {
     },
   } = state;
 
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
   return {
     sendEmailAuthError,

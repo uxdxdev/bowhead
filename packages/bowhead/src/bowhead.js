@@ -96,7 +96,7 @@ const Bowhead = () => {
   const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)
   const theme = themes.length > 0 && themes[0].theme;
 
-  const AuthedDashboard = (props) => {
+  const DashboardWrapper = (props) => {
     return (
       <Dashboard {...props} >
         {getRoutes({ routes: authenticatedRoutes, isAuthRoute: true })}
@@ -114,7 +114,8 @@ const Bowhead = () => {
               {getRoutes({ routes: unAuthenticatedRoutes })}
               <Route path="/signin" component={SignIn} />
               <Route path="/verify" component={Verify} />
-              <AuthenticatedRoute path="/dashboard" component={AuthedDashboard} />
+              <AuthenticatedRoute path="/dashboard" component={DashboardWrapper} />
+              <Route component={() => <div>Oops, looks like you got lost.</div>} />
             </Switch>
           </BrowserRouter>
         </AuthIsLoaded>

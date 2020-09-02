@@ -15,7 +15,7 @@ const listenerSlice = createSlice({
   }
 })
 
-pluginRegistry.register({
+pluginRegistry.register('listener-reducer', {
   type: PLUGIN_TYPES.REDUCER,
   name: 'listeners',
   reducer: listenerSlice.reducer

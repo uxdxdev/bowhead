@@ -6,10 +6,10 @@ const useProjectListItem = () => {
     const dispatch = useDispatch();
 
     const {
-        workspace: { activeWorkspaceId },
         firebase: { profile: { workspaces } }
     } = state;
 
+    const activeWorkspaceId = state.workspace?.activeWorkspaceId
     const role = workspaces[activeWorkspaceId]?.role
     const isOwner = role === 'owner'
 

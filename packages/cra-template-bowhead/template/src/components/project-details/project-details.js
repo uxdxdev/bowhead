@@ -4,6 +4,7 @@ import moment from "moment";
 import { Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PageLoadingSpinner } from "../page-loading-spinner";
+import { useWorkspaces } from '../../hooks'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,16 +20,21 @@ const useStyles = makeStyles((theme) => ({
 const ProjectDetails = ({ project, isFirestoreRequesting }) => {
   const classes = useStyles();
 
+  // init listeners
+  useWorkspaces();
+
   if (isFirestoreRequesting) {
     return <PageLoadingSpinner />;
   }
 
   if (!project) {
-    return (<Paper className={classes.paper} variant="outlined">
-      <Typography align="center">
-        No projects in this workspace.
-    </Typography>
-    </Paper>)
+    return (
+      <Paper className={classes.paper} variant="outlined">
+        <Typography align="center">
+          No projects in this workspace.
+        </Typography>
+      </Paper>
+    )
   }
 
   const { title, summary, createdAt } = project;
@@ -50,14 +56,15 @@ const mapStateToProps = (state, props) => {
       data,
       status: { requesting },
     },
-    workspace: { activeWorkspaceId },
   } = state;
+
   const {
     match: {
       params: { id },
     },
   } = props;
 
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const projects = data && data[`${activeWorkspaceId}::projects`];
   const project = projects && projects[id];
   const isFirestoreRequesting = requesting[activeWorkspaceId];

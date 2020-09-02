@@ -7,13 +7,12 @@ const useAccount = () => {
     firebase: {
       profile: { stripeCustomerId },
     },
-    workspace: { activeWorkspaceId },
     firestore: {
       status: { requested },
     },
   } = state;
 
-
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId
   const isRequestedStripeCustomer = requested[`${constants.FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
   const isRequestedActiveWorkspace = requested[`${constants.FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
   const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
