@@ -7,7 +7,7 @@ const listenerSlice = createSlice({
     updateListeners: (state, action) => {
       return {
         ...state,
-        collections: action.payload
+        collections: action.payload || []
       }
     },
   }
