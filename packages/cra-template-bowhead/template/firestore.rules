@@ -35,6 +35,10 @@ service cloud.firestore {
       return getStripeData(uid).status == 'trialing' || getStripeData(uid).status == 'active';
     }
 
+    match /userWorkspaces/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
     match /workspaces/{workspaceId} {
  
       allow create: if isSignedIn(request) &&
@@ -62,8 +66,9 @@ service cloud.firestore {
                           resource == null && // resource does not already exist
                           isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner']);
 
-        allow read: if isSignedIn(request) &&
-                          isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner', 'member'])
+        allow read: if isSignedIn(request) && 
+                        (isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner', 'member']) ||
+                        resource.data.projects[projectId] == null)
 
         allow update: if isSignedIn(request) &&
                           isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner', 'member']);

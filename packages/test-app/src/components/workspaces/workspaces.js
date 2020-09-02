@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Workspaces = (props) => {
-  const { firestoreWorkspaces, profileWorkspaces, leaveWorkspace, deleteWorkspace, uid, workspaceErrors } = props;
+  const { workspaces, leaveWorkspace, deleteWorkspace, uid, workspaceErrors } = props;
 
   const classes = useStyles();
 
@@ -44,7 +44,7 @@ const Workspaces = (props) => {
     }
   };
 
-  const isMemberOfWorkspaces = profileWorkspaces && Object.keys(profileWorkspaces).length > 0;
+  const isMemberOfWorkspaces = workspaces && Object.keys(workspaces).length > 0;
 
   return (
     <>
@@ -53,15 +53,14 @@ const Workspaces = (props) => {
       </Typography>
       {isMemberOfWorkspaces ? (
         <List dense>
-          {Object.keys(profileWorkspaces).map((workspaceId) => {
+          {Object.keys(workspaces).map((workspaceId) => {
 
-            const workspaceRole = profileWorkspaces[workspaceId]?.role;
+            const workspaceRole = workspaces[workspaceId]?.role;
             const isMember = workspaceRole === constants.USER_ROLES.MEMBER;
             const isOwner = workspaceRole === constants.USER_ROLES.OWNER;
             const workspacePermissionDenied = workspaceErrors[`workspaces/${workspaceId}`]?.code === "permission-denied";
-            const workspaceDeleted = firestoreWorkspaces && firestoreWorkspaces[workspaceId] === null;
-            const errorMessage = (workspacePermissionDenied || workspaceDeleted) ? "Permission Denied" : null;
-            const workspaceName = profileWorkspaces[workspaceId]?.name;
+            const errorMessage = workspacePermissionDenied ? "Permission Denied" : null;
+            const workspaceName = workspaces[workspaceId]?.name;
             return (
               workspaceName && (
                 <ListItem key={`workspace-${workspaceId}`}
@@ -126,17 +125,17 @@ const mapStateToProps = (state) => {
   const {
     firebase: {
       auth: { uid },
-      profile: { workspaces: profileWorkspaces },
     },
     firestore: {
       errors: { byQuery },
-      data: { workspaces: firestoreWorkspaces }
-    }
+      data: { userWorkspaces }
+    },
   } = state;
 
+  const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces;
+
   return {
-    firestoreWorkspaces,
-    profileWorkspaces,
+    workspaces,
     workspaceErrors: byQuery,
     uid
   };

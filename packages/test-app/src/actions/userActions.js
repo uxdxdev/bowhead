@@ -1,6 +1,7 @@
 import * as constants from "../utils/constants";
 import * as firebase from '../api/firebase'
 import {
+  verifyUserInviteUpdate,
   verifyUserSignInUpdate,
   deleteUserAccountAndData
 } from "../api/firestore";
@@ -10,6 +11,10 @@ import * as userSlice from '../store/userSlice'
 export const verifyUser = () => {
   return async (dispatch) => {
     dispatch(userSlice.verifyUser());
+
+    // get url params
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
 
     if (firebase.isSignInWithEmailLink({ location: window.location.href })) {
       var email = window.localStorage.getItem("emailForSignIn");
@@ -24,7 +29,19 @@ export const verifyUser = () => {
         .then(async result => {
           const uid = result.user.uid;
 
-          if (constants.AUTH_TYPE.SIGN_IN) {
+          // invite
+          if (ref === constants.AUTH_TYPE.INVITE) {
+            const workspaceId = params.get("workspaceId");
+            const workspaceName = params.get("workspaceName");
+
+            await verifyUserInviteUpdate({ workspaceId, workspaceName, email, uid })
+              .then(() => {
+                dispatch(userSlice.verifyUserSuccess());
+              })
+              .catch(error => {
+                dispatch(userSlice.verifyUserError(error));
+              });
+          } else if (constants.AUTH_TYPE.SIGN_IN) {
             await verifyUserSignInUpdate({ uid, email })
               .then(() => {
                 dispatch(userSlice.verifyUserSuccess());

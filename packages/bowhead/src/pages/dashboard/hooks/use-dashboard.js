@@ -6,7 +6,7 @@ const useDashboard = () => {
   const state = useSelector((state) => state);
   const {
     firebase: {
-      profile: { workspaces, stripeCustomerId },
+      profile: { stripeCustomerId },
     },
     firestore: {
       status: { requesting },
@@ -29,7 +29,6 @@ const useDashboard = () => {
   }]);
 
   return {
-    workspaces,
     isSubscribed,
     isLoading,
   };

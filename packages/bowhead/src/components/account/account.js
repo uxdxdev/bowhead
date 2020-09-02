@@ -1,9 +1,7 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
 import { Details } from "../details";
-// import { UserManagement } from "../user-management";
 import { DeleteAccount } from "../delete-account";
-// import { Workspaces } from "../workspaces";
 import { Billing } from "../billing";
 import { PageLoadingSpinner } from "../page-loading-spinner";
 import { useStyles } from "./styles";

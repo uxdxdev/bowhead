@@ -6,8 +6,11 @@ const useProjectListItem = () => {
     const dispatch = useDispatch();
 
     const {
-        firebase: { profile: { workspaces } }
+        firebase: { auth: { uid } },
+        firestore: { data: { userWorkspaces } }
     } = state;
+
+    const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces
 
     const activeWorkspaceId = state.workspace?.activeWorkspaceId
     const role = workspaces[activeWorkspaceId]?.role

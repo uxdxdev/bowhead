@@ -12,16 +12,9 @@ const useAccount = () => {
     },
   } = state;
 
-  const activeWorkspaceId = state.workspace?.activeWorkspaceId
   const isRequestedStripeCustomer = requested[`${constants.FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
-  const isRequestedActiveWorkspace = requested[`${constants.FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
-  const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
   const isLoading = isRequestedStripeCustomer &&
-    !(isRequestedStripeCustomer === true) &&
-    isRequestedActiveWorkspaceData &&
-    !(isRequestedActiveWorkspace === true) &&
-    isRequestedActiveWorkspaceData &&
-    !(isRequestedActiveWorkspaceData === true);
+    !(isRequestedStripeCustomer === true)
 
   return { isLoading };
 };

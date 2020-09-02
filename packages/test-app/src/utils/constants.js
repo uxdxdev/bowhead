@@ -1,14 +1,11 @@
 export const AUTH_TYPE = {
-  INVITE: 'invite',
-  SIGN_IN: 'signin',
-  SIGN_UP: 'signup'
+  INVITE: 'invite'
 };
 
 export const FIRESTORE_COLLECTIONS = {
   WORKSPACES: 'workspaces',
-  USERS: 'users',
-  PROJECTS: 'projects',
-  STRIPE: 'stripe'
+  USER_WORKSPACES: 'userWorkspaces',
+  PROJECTS: 'projects'
 };
 
 export const STRIPE_SUBSCRIPTION_STATUS = {
