@@ -1,5 +1,5 @@
 import React from "react";
-import { Bowhead, PLUGIN_TYPES } from "@mortond/bowhead";
+import { Bowhead, PLUGIN_TYPES, reducerRegistry } from "@mortond/bowhead";
 import { LandingPage, Terms } from './pages'
 import { Projects, ProjectDetails, Settings, Dashboard } from './components'
 import projectSlice from "./store/projectSlice";
@@ -40,10 +40,6 @@ const App = () => {
       type: PLUGIN_TYPES.ROUTE.DASHBOARD,
       path: '/settings',
       component: Settings,
-    }, {
-      type: PLUGIN_TYPES.REDUCER,
-      name: 'project',
-      reducer: projectSlice
     },
     {
       type: PLUGIN_TYPES.MENU_ITEM.POP_OVER,
@@ -59,9 +55,11 @@ const App = () => {
     }
   ]
 
+  reducerRegistry.register('project', projectSlice)
+
   return (
     <Bowhead
-      config={plugins}
+      pluginConfig={plugins}
     />
   );
 };

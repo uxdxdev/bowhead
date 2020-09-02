@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { reducerRegistry } from '../registry/reducer-registry'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -60,6 +61,8 @@ const authSlice = createSlice({
   }
 })
 
+reducerRegistry.register('auth', authSlice.reducer)
+
 export const {
   sendEmailLink,
   sendEmailLinkSuccess,
@@ -69,5 +72,6 @@ export const {
   signOutSuccess,
   signOutError
 } = authSlice.actions
+
 
 export default authSlice.reducer

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { reducerRegistry } from '../registry/reducer-registry'
 
 const userSlice = createSlice({
   name: 'user',
@@ -51,6 +52,9 @@ const userSlice = createSlice({
     },
   }
 })
+
+
+reducerRegistry.register('user', userSlice.reducer)
 
 export const {
   deleteUser,

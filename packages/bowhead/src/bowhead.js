@@ -32,7 +32,7 @@ const getRoutes = ({ routes, isDashboardRoute }) => {
   })
 }
 
-const Bowhead = ({ theme, config }) => {
+const Bowhead = ({ theme, pluginConfig }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const DefaultLandingPage = () => <div>Default landing page</div>;
@@ -99,14 +99,13 @@ const Bowhead = ({ theme, config }) => {
     [prefersDarkMode]
   );
 
-  const plugins = config || defaultPlugins;
+  const configuredPlugins = pluginConfig || defaultPlugins;
 
-  const unAuthRoutes = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.ROOT)
-  const dashboardRoutes = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.DASHBOARD)
-  const popoverMenuItems = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
-  const sidebarMenuItems = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
-  const reducers = plugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.REDUCER)
-    .reduce((obj, item) => (obj[item.name] = item.reducer, obj), {});
+  const unAuthRoutes = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.ROOT)
+  const dashboardRoutes = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.ROUTE.DASHBOARD)
+  const popoverMenuItems = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+  const sidebarMenuItems = configuredPlugins?.filter(plugin => plugin?.type === PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
+
 
   const AuthedDashboard = (props) => {
     return (
@@ -122,7 +121,7 @@ const Bowhead = ({ theme, config }) => {
 
   return (
     <ThemeProvider theme={theme || defaultTheme}>
-      <StoreProvider reducers={reducers}>
+      <StoreProvider>
         <AuthIsLoaded>
           <CssBaseline />
           <BrowserRouter>

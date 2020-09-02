@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { reducerRegistry } from '../registry/reducer-registry'
 
 const workspaceSlice = createSlice({
   name: 'workspace',
@@ -104,6 +105,7 @@ const workspaceSlice = createSlice({
   }
 })
 
+reducerRegistry.register('workspace', workspaceSlice.reducer)
 
 export const {
   setActiveWorkspace,
