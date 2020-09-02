@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Breadcrumbs, Typography, Link, Container } from "@material-ui/core";
 import { useDashboard } from './hooks'
 import { DashboardNavSidebar, DashboardNavBar, Pricing, Account, PageLoadingSpinner } from '../../components'
+import { PLUGIN_TYPES } from '../../utils/pluginTypes'
+import { pluginRegistry } from "../../registry/plugin-registry";
 
 const drawerWidth = 240;
 
@@ -36,7 +38,7 @@ const createLinkText = (to) => {
 };
 
 const Dashboard = (props) => {
-  const { match, children, popoverMenuItems, sidebarMenuItems } = props;
+  const { match, children } = props;
   const {
     isSubscribed,
     isLoading,
@@ -53,6 +55,9 @@ const Dashboard = (props) => {
   if (isLoading) {
     return <PageLoadingSpinner />
   }
+
+  const popoverMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
 
   return (
     <>
