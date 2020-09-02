@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { reducerRegistry } from '../registry/reducer-registry'
 
 const listenerSlice = createSlice({
   name: 'listeners',
@@ -12,6 +13,8 @@ const listenerSlice = createSlice({
     },
   }
 })
+
+reducerRegistry.register('listeners', listenerSlice.reducer)
 
 export const {
   updateListeners,

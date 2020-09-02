@@ -5,7 +5,6 @@ import {
     createFirestoreInstance,
     constants as rfConstants
 } from "redux-firestore";
-import { getRootReducer } from "./rootReducer";
 import { firebase } from "../utils/firebaseFrontend";
 import * as constants from "../utils/constants";
 import { Provider } from "react-redux";
@@ -13,8 +12,12 @@ import {
     ReactReduxFirebaseProvider,
     actionTypes as rrfActionTypes
 } from "react-redux-firebase";
+import { reducerRegistry } from '../registry/reducer-registry'
+import { combineReducers } from "redux";
+import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer } from "react-redux-firebase";
 
-const getStore = ({ reducers }) => {
+const getStore = () => {
 
     // see: https://redux-toolkit.js.org/usage/usage-guide#use-with-react-redux-firebase
     const middleware = [
@@ -38,7 +41,7 @@ const getStore = ({ reducers }) => {
     // see: https://github.com/reduxjs/redux-toolkit
     const store = configureStore(
         {
-            reducer: getRootReducer({ reducers }),
+            reducer: combineReducers(reducerRegistry.getReducers()),
             middleware,
             enhancers: [
                 // enhancements to connect redux to Firebase
@@ -48,11 +51,15 @@ const getStore = ({ reducers }) => {
                 })]
         },
     )
+
+    reducerRegistry.setChangeListener(reducers => {
+        store.replaceReducer(combineReducers(reducers));
+    });
     return store;
 }
 
-const StoreProvider = ({ reducers, children }) => {
-    const store = getStore({ reducers })
+const StoreProvider = ({ children }) => {
+    const store = getStore()
 
     // see: https://github.com/prescottprue/react-redux-firebase
     const reactReduxFirebaseConfig = {
@@ -64,6 +71,9 @@ const StoreProvider = ({ reducers, children }) => {
         },
         dispatch: store.dispatch,
     };
+
+    reducerRegistry.register('firestore', firestoreReducer)
+    reducerRegistry.register('firebase', firebaseReducer)
 
     return (
         <Provider store={store}>
