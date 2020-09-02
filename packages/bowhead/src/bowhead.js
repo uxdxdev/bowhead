@@ -91,20 +91,14 @@ const Bowhead = () => {
     [prefersDarkMode]
   );
 
-  const unAuthRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
+  const unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
   const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.AUTHENTICATED_ROUTE)
-  const popoverMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
-  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
   const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)
   const theme = themes.length > 0 && themes[0].theme;
 
   const AuthedDashboard = (props) => {
     return (
-      <Dashboard
-        {...props}
-        popoverMenuItems={popoverMenuItems}
-        sidebarMenuItems={sidebarMenuItems}
-      >
+      <Dashboard {...props} >
         {getRoutes({ routes: authenticatedRoutes, isAuthRoute: true })}
       </Dashboard>)
   }
@@ -117,7 +111,7 @@ const Bowhead = () => {
           <CssBaseline />
           <BrowserRouter>
             <Switch>
-              {getRoutes({ routes: unAuthRoutes })}
+              {getRoutes({ routes: unAuthenticatedRoutes })}
               <Route path="/signin" component={SignIn} />
               <Route path="/verify" component={Verify} />
               <AuthenticatedRoute path="/dashboard" component={AuthedDashboard} />
