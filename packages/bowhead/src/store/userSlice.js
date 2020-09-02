@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { reducerRegistry } from '../registry/reducer-registry'
+import { pluginRegistry } from '../registry/plugin-registry'
+import { PLUGIN_TYPES } from '../utils/pluginTypes'
 
 const userSlice = createSlice({
   name: 'user',
@@ -53,8 +54,11 @@ const userSlice = createSlice({
   }
 })
 
-
-reducerRegistry.register('user', userSlice.reducer)
+pluginRegistry.register({
+  type: PLUGIN_TYPES.REDUCER,
+  name: 'user',
+  reducer: userSlice.reducer
+})
 
 export const {
   deleteUser,

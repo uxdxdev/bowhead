@@ -1,13 +1,12 @@
 const PLUGIN_TYPES = {
-  ROUTE: {
-    ROOT: 'plugin-type-route',
-    DASHBOARD: 'plugin-type-route-dashboard'
-  },
+  UNAUTHENTICATED_ROUTE: 'plugin-type-unauthenticated-route',
+  AUTHENTICATED_ROUTE: 'plugin-type-authenticated-route',
   MENU_ITEM: {
-    POP_OVER: 'plugin-type-menu-popover',
-    SIDEBAR: 'plugin-type-menu-sidebar'
+    POP_OVER: 'plugin-type-menu-item-popover',
+    SIDEBAR: 'plugin-type-menu-item-sidebar'
   },
-  REDUCER: 'REDUCER'
+  REDUCER: 'plugin-type-reducer',
+  THEME: 'plugin-type-theme'
 };
 
 export { PLUGIN_TYPES }
