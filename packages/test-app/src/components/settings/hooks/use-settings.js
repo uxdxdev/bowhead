@@ -1,19 +1,23 @@
 import { useSelector } from "react-redux";
 import * as constants from "../../../utils/constants"
+import { useWorkspaces } from "../../../hooks";
 
-const useAccount = () => {
+const useSettings = () => {
+  // init workspaces
+  useWorkspaces();
+
   const state = useSelector((state) => state);
   const {
     firebase: {
       profile: { workspaces, stripeCustomerId },
     },
-    workspace: { activeWorkspaceId },
     firestore: {
       status: { requested },
       data: { stripe }
     },
   } = state;
 
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const isOwner = workspaces && workspaces[activeWorkspaceId]?.role === constants.USER_ROLES.OWNER;
   const stripeData = stripe && stripe[stripeCustomerId]
   const isSubscribed = stripeData?.status === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
@@ -31,4 +35,4 @@ const useAccount = () => {
   return { isLoading, isOwner, isSubscribed };
 };
 
-export default useAccount;
+export default useSettings;

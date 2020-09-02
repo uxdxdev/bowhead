@@ -21,6 +21,7 @@ const CreateProject = ({
   createProjectError,
   activeWorkspaceId,
 }) => {
+
   const classes = useStyles();
 
   const [formInput, setFormInput] = useState({ title: '', summary: '' });
@@ -111,8 +112,9 @@ const mapStateToProps = (state) => {
       auth: { uid },
     },
     project: { isCreatingProject, createProjectError },
-    workspace: { activeWorkspaceId },
   } = state;
+
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
 
   return {
     activeWorkspaceId,

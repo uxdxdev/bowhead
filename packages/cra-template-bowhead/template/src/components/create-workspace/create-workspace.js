@@ -70,11 +70,13 @@ const CreateWorkspace = ({
 
 const mapStateToProps = (state) => {
   const {
-    workspace: { isCreatingWorkspace, createWorkspaceError },
     firebase: {
       auth: { uid, email }
     },
   } = state;
+
+  const isCreatingWorkspace = state.workspace?.isCreatingWorkspace;
+  const createWorkspaceError = state.workspace?.createWorkspaceError;
 
   return {
     isCreatingWorkspace,

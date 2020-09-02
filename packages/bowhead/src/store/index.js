@@ -86,13 +86,13 @@ const StoreProvider = ({ children }) => {
         dispatch: store.dispatch,
     };
 
-    pluginRegistry.register({
+    pluginRegistry.register('firestore-reducer', {
         type: PLUGIN_TYPES.REDUCER,
         name: 'firestore',
         reducer: firestoreReducer
     })
 
-    pluginRegistry.register({
+    pluginRegistry.register('firebase-reducer', {
         type: PLUGIN_TYPES.REDUCER,
         name: 'firebase',
         reducer: firebaseReducer

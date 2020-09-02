@@ -57,7 +57,6 @@ const Dashboard = (props) => {
   }
 
   const popoverMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
-  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
 
   return (
     <>
@@ -67,7 +66,6 @@ const Dashboard = (props) => {
       />
       {isSubscribed &&
         <DashboardNavSidebar
-          sidebarMenuItems={sidebarMenuItems}
           handleDrawerToggle={handleDrawerToggle}
           mobileOpen={mobileOpen}
         />}
@@ -108,13 +106,13 @@ const Dashboard = (props) => {
         </Route>
 
         <Switch>
-          <>
-            {isSubscribed ?
-              children :
-              <Route exact path={`${match.path}/`} component={Pricing} />
-            }
-            <Route exact path={`${match.path}/account`} component={Account} />
-          </>
+
+          {isSubscribed ?
+            children :
+            <Route exact path={`${match.path}/`} component={Pricing} />
+          }
+          <Route exact path={`${match.path}/account`} component={Account} />
+          <Route component={() => <div>Oops, looks like you got lost.</div>} />
         </Switch>
       </Container>
 

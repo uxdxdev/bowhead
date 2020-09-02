@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Hidden, Drawer } from "@material-ui/core";
 import {
   Dashboard as DashboardIcon,
-  AccountTree as AccountTreeIcon,
-  DoubleArrow as DoubleArrowIcon,
 } from "@material-ui/icons";
 import { SidebarMenuItem } from "../sidebar-menu-item";
-import { setActiveWorkspace } from "../../actions/workspaceActions";
+import { pluginRegistry } from '../../registry/plugin-registry'
+import { PLUGIN_TYPES } from '../../utils/pluginTypes'
 
 // sidebar
 const drawerWidth = 240;
@@ -26,50 +24,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DashboardNavSidebar = ({
-  workspaces,
-  setActiveWorkspace,
-  activeWorkspaceId,
   handleDrawerToggle,
-  mobileOpen,
-  sidebarMenuItems
+  mobileOpen
 }) => {
   const classes = useStyles();
 
   // currently selected menu item 
   const [activeMenuItem, setActiveMenuItem] = useState('initialState')
 
-  // workspaces
-  const workspacesArray = workspaces && Object.keys(workspaces);
-  const workspacesCollection = workspacesArray?.filter((workspaceId) => workspaces[workspaceId]?.name && workspaceId)
-    .map((workspaceId) => {
-      const workspaceName = workspaces[workspaceId]?.name;
-      return {
-        menuIcon: activeWorkspaceId === workspaceId && DoubleArrowIcon,
-        text: workspaceName,
-        path: '/dashboard/project',
-        onClick: () => {
-          setActiveWorkspace(workspaceId);
-        },
-      };
-    });
+  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
 
-  // sidebar menu items
-  const plugins = [
-    {
-      menuIcon: DashboardIcon,
-      text: "Dashboard",
-      path: "/dashboard",
-    },
-    ...sidebarMenuItems,
-    {
-      menuIcon: AccountTreeIcon,
-      text: "Workspaces",
-      items: workspacesCollection,
-    },
-  ];
+  // always add dashboard link to top of the menu
+  sidebarMenuItems.unshift({
+    type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+    menuIcon: DashboardIcon,
+    text: "Dashboard",
+    path: "/dashboard",
+  })
 
   const drawer = () => {
-    return plugins.map(
+    return sidebarMenuItems.map(
       (menuItem, index) =>
         menuItem && <SidebarMenuItem
           key={index}
@@ -115,28 +89,5 @@ const DashboardNavSidebar = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  const {
-    firebase: {
-      profile: { workspaces },
-    },
-    workspace: { activeWorkspaceId },
-  } = state;
 
-  return {
-    workspaces,
-    activeWorkspaceId
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setActiveWorkspace: (workspaceId) =>
-      dispatch(setActiveWorkspace(workspaceId)),
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DashboardNavSidebar);
+export default DashboardNavSidebar;

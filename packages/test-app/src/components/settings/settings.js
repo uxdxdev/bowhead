@@ -9,7 +9,9 @@ import { useSettings } from "./hooks";
 
 const Settings = () => {
   const { paper } = useStyles();
+
   const { isLoading, isOwner, isSubscribed } = useSettings();
+
 
   return isLoading ? (
     <PageLoadingSpinner />

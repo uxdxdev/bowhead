@@ -62,7 +62,7 @@ const authSlice = createSlice({
   }
 })
 
-pluginRegistry.register({
+pluginRegistry.register('auth-reducer', {
   type: PLUGIN_TYPES.REDUCER,
   name: 'auth',
   reducer: authSlice.reducer

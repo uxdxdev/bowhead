@@ -45,11 +45,11 @@ const mapStateToProps = (state) => {
       ordered,
       status: { requesting },
     },
-    workspace: { activeWorkspaceId },
   } = state;
 
-  const projects = ordered && ordered[`${activeWorkspaceId}::projects`];
-  const isFirestoreRequesting = requesting[activeWorkspaceId];
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId
+  const projects = activeWorkspaceId && ordered && ordered[`${activeWorkspaceId}::projects`];
+  const isFirestoreRequesting = activeWorkspaceId && requesting[activeWorkspaceId];
 
   return {
     projects,
