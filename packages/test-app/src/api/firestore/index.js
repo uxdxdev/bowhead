@@ -2,8 +2,8 @@ import * as constants from "../../utils/constants";
 import { firestore, firebase } from '@mortond/bowhead'
 
 export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
-    const userRef = firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
+    const userWorkspacesRef = firestore
+        .collection(constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid);
 
     const workspaceRef = firestore
@@ -27,7 +27,7 @@ export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
 
     // remove workspace from user data
     batch.set(
-        userRef,
+        userWorkspacesRef,
         {
             workspaces: {
                 [workspaceId]: firebase.firestore.FieldValue.delete()
@@ -66,8 +66,8 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
         .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc();
 
-    const userRef = firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
+    const userWorkspacesRef = firestore
+        .collection(constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid);
 
     const batch = firestore.batch();
@@ -75,13 +75,13 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
     // create new workspace
     batch.set(workspaceRef, {
         name: workspaceName,
+        owner: uid,
         members: {
             [uid]: { role: constants.USER_ROLES.OWNER, email }
         }
     });
 
-    // update user profile
-    batch.set(userRef, {
+    batch.set(userWorkspacesRef, {
         email,
         workspaces: {
             [workspaceRef.id]: { role: constants.USER_ROLES.OWNER, name: workspaceName }

@@ -10,7 +10,7 @@ import { useSettings } from "./hooks";
 const Settings = () => {
   const { paper } = useStyles();
 
-  const { isLoading, isOwner, isSubscribed } = useSettings();
+  const { isLoading, isOwner } = useSettings();
 
 
   return isLoading ? (
@@ -24,7 +24,7 @@ const Settings = () => {
         <Paper className={paper} variant="outlined">
           <Workspaces />
         </Paper>
-        {isSubscribed && isOwner && (
+        {isOwner && (
           <Paper className={paper} variant="outlined">
             <UserManagement />
           </Paper>

@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   sendSignInEmailLink,
   resetSendEmailLink,
-} from "@mortond/bowhead";
+} from "../../actions/authActions";
 import {
   removeMember,
 } from "../../actions/workspaceActions";
@@ -194,6 +194,7 @@ const mapStateToProps = (state) => {
 
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
+
   return {
     sendEmailAuthError,
     isSendingEmailLink,

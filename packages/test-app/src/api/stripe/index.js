@@ -1,6 +1,6 @@
 import { getToken } from '../../utils/firebaseFrontend'
 
-const deleteStripeCustomer = async (stripeCustomerId) => {
+export const deleteStripeCustomerAndSubscription = async (stripeCustomerId) => {
     const token = await getToken();
     return fetch(`/.netlify/functions/delete-stripe-customer?token=${token}`, {
         method: 'POST',
@@ -8,7 +8,7 @@ const deleteStripeCustomer = async (stripeCustomerId) => {
     })
 }
 
-const createStripeCustomerPortalSession = async (stripeCustomerId) => {
+export const createStripeCustomerPortalSession = async (stripeCustomerId) => {
     const token = await getToken();
     return fetch(`/.netlify/functions/create-stripe-customer-portal-session?token=${token}`, {
         method: 'POST',
@@ -16,7 +16,7 @@ const createStripeCustomerPortalSession = async (stripeCustomerId) => {
     }).then(response => response.json())
 }
 
-const createStripeCheckoutSession = async ({
+export const createStripeCheckoutSession = async ({
     stripeCustomerId,
     priceId,
     successUrl,
@@ -43,10 +43,4 @@ const createStripeCheckoutSession = async ({
             }
         })
     }).then(response => response.json())
-}
-
-export {
-    deleteStripeCustomer,
-    createStripeCustomerPortalSession,
-    createStripeCheckoutSession
 }

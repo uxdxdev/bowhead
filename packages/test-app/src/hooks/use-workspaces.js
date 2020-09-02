@@ -17,27 +17,38 @@ const useWorkspaces = () => {
 
     const {
         firebase: {
-            profile: { workspaces },
+            auth: { uid }
         },
+        firestore: {
+            data: { userWorkspaces }
+        }
     } = state;
 
+    const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces
+
     const activeWorkspaceId = state.workspace?.activeWorkspaceId
-    const role = workspaces[activeWorkspaceId]?.role
+    const role = workspaces && workspaces[activeWorkspaceId]?.role
     const isWorkspaceOwner = role === 'owner'
 
     useEffect(() => {
-        const collections = workspaces && Object.keys(workspaces).map((workspaceId) => {
-            return {
+        const collections = []
+        workspaces && Object.keys(workspaces).forEach((workspaceId) => {
+            collections.push({
                 collection: constants.FIRESTORE_COLLECTIONS.WORKSPACES,
                 doc: workspaceId,
                 orderBy: ["createdAt", "desc"],
                 subcollections: [{ collection: constants.FIRESTORE_COLLECTIONS.PROJECTS }],
                 storeAs: `${workspaceId}::projects`,
-            }
+            })
+        })
+
+        collections.push({
+            collection: constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES,
+            doc: uid
         })
 
         dispatch(updateFirestoreListeners(collections))
-    }, [workspaces, dispatch]);
+    }, [workspaces, dispatch, uid]);
 
     useEffect(() => {
         const firstWorkspace = workspaces && Object.keys(workspaces)[0];
@@ -65,12 +76,9 @@ const useWorkspaces = () => {
             text: "Workspaces",
             items: workspacesCollection,
         })
-    }, [workspaces, activeWorkspaceId])
+    }, [workspaces, activeWorkspaceId, dispatch])
 
     return {
-        workspaces,
-        setActiveWorkspace,
-        activeWorkspaceId,
         isWorkspaceOwner
     }
 }

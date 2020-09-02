@@ -13,15 +13,11 @@ const useSettings = () => {
     },
     firestore: {
       status: { requested },
-      data: { stripe }
     },
   } = state;
 
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const isOwner = workspaces && workspaces[activeWorkspaceId]?.role === constants.USER_ROLES.OWNER;
-  const stripeData = stripe && stripe[stripeCustomerId]
-  const isSubscribed = stripeData?.status === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
-    stripeData?.status === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
   const isRequestedStripeCustomer = requested[`${constants.FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
   const isRequestedActiveWorkspace = requested[`${constants.FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
   const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
@@ -32,7 +28,7 @@ const useSettings = () => {
     isRequestedActiveWorkspaceData &&
     !(isRequestedActiveWorkspaceData === true);
 
-  return { isLoading, isOwner, isSubscribed };
+  return { isLoading, isOwner };
 };
 
 export default useSettings;

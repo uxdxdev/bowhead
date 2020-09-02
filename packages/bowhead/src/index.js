@@ -1,6 +1,6 @@
 export { default as Bowhead } from './bowhead'
 export { firebase, firestore } from './utils/firebaseFrontend'
-export { sendSignInEmailLink, resetSendEmailLink } from './actions/authActions'
 export { updateFirestoreListeners } from './actions/listenerActions'
 export { PLUGIN_TYPES } from './utils/pluginTypes'
 export { pluginRegistry } from './registry/plugin-registry'
+export { deleteStripeCustomer } from './api/stripe'

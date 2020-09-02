@@ -6,6 +6,12 @@ export const deleteCurrentUser = () => {
         .currentUser.delete()
 }
 
+export const signOut = () => {
+    return firebase
+        .auth()
+        .signOut()
+}
+
 /**
  * Sends sign in email and appends ref and data to URL.
  * 
