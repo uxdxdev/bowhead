@@ -18448,9 +18448,9 @@ strip-outer@^1.0.0:
     escape-string-regexp "^1.0.2"
 
 stripe@^8.84.0:
-  version "8.90.0"
-  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.90.0.tgz#4709916e89f6d3c385b9b33a2d738ea2e76f9362"
-  integrity sha512-0qvy0isFNlqiigLsXbosY0BllLjcz3XR/eyZLbdkkyc3DUVaFnP3+PwJsmOBSVNWcoN3oL7DVIzPZo/LDgcr3g==
+  version "8.92.0"
+  resolved "https://registry.yarnpkg.com/stripe/-/stripe-8.92.0.tgz#f38fb394347eec3b55ee951d99d24b47388a7f55"
+  integrity sha512-1LmHDs4GUyi0g4ZCA08orsJSgmo9FmQB9BLBSdFqAJsV8cWbMYV9v8Ioj4G3H3hi9pVEfpn3MDc26EFDkGrWdg==
   dependencies:
     "@types/node" ">=8.1.0"
     qs "^6.6.0"
