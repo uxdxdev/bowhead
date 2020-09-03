@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { signOut } from "../../actions/authActions";
@@ -23,6 +23,8 @@ import {
   Timeline as TimelineIcon,
 } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
+import { PLUGIN_TYPES } from '../../utils/pluginTypes'
+import { pluginRegistry } from "../../registry/plugin-registry";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -46,8 +48,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DashboardNavBar = ({ signOut, handleDrawerToggle, popoverMenuItems }) => {
+const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
   const classes = useStyles();
+
+  const [popoverMenuItems, setPopoverMenuItems] = useState()
 
   // dropdown settings menu
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,6 +63,13 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle, popoverMenuItems }) => {
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  useEffect(() => {
+    pluginRegistry.setChangeListener((plugins) => {
+      const menuItemPlugins = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+      setPopoverMenuItems(menuItemPlugins)
+    })
+  }, [])
 
   const menuItemConfig = [
     {
