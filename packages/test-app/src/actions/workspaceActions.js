@@ -12,9 +12,8 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
     dispatch(workspaceSlice.createWorkspace());
 
     await firestore.createWorkspace({ workspaceName, uid, email })
-      .then(({ activeWorkspaceId }) => {
+      .then(() => {
         dispatch(workspaceSlice.createWorkspaceSuccess());
-        dispatch(workspaceSlice.setActiveWorkspace(activeWorkspaceId));
       })
       .catch(error => {
         dispatch(workspaceSlice.createWorkspaceError(error));
@@ -42,7 +41,7 @@ export const deleteWorkspace = ({ uid, workspaceId }) => {
   return async (dispatch) => {
     dispatch(workspaceSlice.deleteWorkspace());
 
-    await firestore.deleteWorkspaceAndProjects({ uid, workspaceId })
+    await firestore.deleteWorkspace({ uid, workspaceId })
       .then(() => {
         dispatch(workspaceSlice.deleteWorkspaceSuccess(workspaceId));
         dispatch(workspaceSlice.setActiveWorkspace(null));

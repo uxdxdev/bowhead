@@ -1,11 +1,11 @@
 import React from "react";
 import { CreateProject } from '../create-project'
 import { ProjectList } from '../project-list'
-import { useWorkspaces } from '../../hooks'
+import { useInit } from '../../hooks'
 
 const Projects = () => {
 
-  const { isWorkspaceOwner } = useWorkspaces();
+  const { isWorkspaceOwner } = useInit();
 
   return (
     <>

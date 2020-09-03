@@ -25,9 +25,6 @@ const CreateProject = ({
   const classes = useStyles();
 
   const [formInput, setFormInput] = useState({ title: '', summary: '' });
-
-
-
   const handleChange = (e) => {
     const id = e?.target?.id;
     const value = e?.target?.value;

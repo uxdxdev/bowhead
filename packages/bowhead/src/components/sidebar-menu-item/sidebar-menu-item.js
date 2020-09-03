@@ -61,7 +61,7 @@ const SidebarMenuItem = (props) => {
         key={path}
         button
         component={path ? NavLink : null}
-        to={path ? path : null}
+        to={path ? `/dashboard${path}` : null}
         className={classes.listItem}
         style={{
           backgroundColor: activeMenuItem === text && "rgba(0, 0, 0, 0.04)",

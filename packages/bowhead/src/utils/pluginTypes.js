@@ -6,7 +6,8 @@ const PLUGIN_TYPES = {
     SIDEBAR: 'plugin-type-menu-item-sidebar'
   },
   REDUCER: 'plugin-type-reducer',
-  THEME: 'plugin-type-theme'
+  THEME: 'plugin-type-theme',
+  FIRESTORE_LISTENER: 'plugin-type-firestore-listener'
 };
 
 export { PLUGIN_TYPES }

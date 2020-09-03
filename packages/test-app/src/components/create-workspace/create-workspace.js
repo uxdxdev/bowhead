@@ -26,7 +26,7 @@ const CreateWorkspace = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const workspaceName = formInput?.workspace;
-    createWorkspace({ workspaceName, email, uid }).then(() => setFormInput({ workspace: '' }))
+    !isCreatingWorkspace && createWorkspace({ workspaceName, email, uid }).then(() => setFormInput({ workspace: '' }))
   };
 
   return (

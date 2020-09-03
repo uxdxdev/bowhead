@@ -21,8 +21,8 @@ export const signOut = () => {
  */
 export const sendSignInEmail = ({ email, ref, data }) => {
     const urlStr = process.env.NODE_ENV === "development"
-        ? `http://localhost:8888/verify`
-        : `${process.env.REACT_APP_NETLIFY_URL}/verify`;
+        ? `http://localhost:8888/invite`
+        : `${process.env.REACT_APP_NETLIFY_URL}/invite`;
 
     const url = new URL(urlStr);
 

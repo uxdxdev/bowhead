@@ -4,7 +4,7 @@ import moment from "moment";
 import { Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PageLoadingSpinner } from "../page-loading-spinner";
-import { useWorkspaces } from '../../hooks'
+import { useInit } from "../../hooks";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProjectDetails = ({ project, isFirestoreRequesting }) => {
+const ProjectDetails = ({ project, isLoading }) => {
+
+  useInit();
+
   const classes = useStyles();
 
-  // init listeners
-  useWorkspaces();
-
-  if (isFirestoreRequesting) {
+  if (isLoading) {
     return <PageLoadingSpinner />;
   }
 
@@ -53,8 +53,8 @@ const ProjectDetails = ({ project, isFirestoreRequesting }) => {
 const mapStateToProps = (state, props) => {
   const {
     firestore: {
-      data,
-      status: { requesting },
+      data: { workspaces },
+      status: { requested },
     },
   } = state;
 
@@ -64,12 +64,13 @@ const mapStateToProps = (state, props) => {
     },
   } = props;
 
-  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
-  const projects = data && data[`${activeWorkspaceId}::projects`];
-  const project = projects && projects[id];
-  const isFirestoreRequesting = requesting[activeWorkspaceId];
 
-  return { project, isFirestoreRequesting };
+  const activeWorkspaceId = state.workspace?.activeWorkspaceId;
+  const projects = workspaces && workspaces[`${activeWorkspaceId}`]?.projects;
+  const project = projects && Object.keys(projects).map(key => projects[key]).filter(project => project.id === id)[0];
+  const isLoading = !requested[`workspaces/${activeWorkspaceId}`];
+
+  return { project, isLoading };
 };
 
 export default connect(mapStateToProps)(ProjectDetails);

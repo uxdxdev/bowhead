@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  sendSignInEmailLink,
+  inviteUserSendEmailLink,
   resetSendEmailLink,
 } from "../../actions/authActions";
 import {
@@ -42,7 +42,7 @@ const UserManagement = ({
   sendEmailAuthError,
   isSendingEmailLink,
   isEmailLinkSent,
-  sendSignInEmailLink,
+  inviteUserSendEmailLink,
   resetSendEmailLink,
   email,
   activeWorkspaceId,
@@ -50,6 +50,7 @@ const UserManagement = ({
   removeMember,
   workspaceName,
 }) => {
+
   const classes = useStyles();
 
   const [emailInput, setEmailInput] = useState("");
@@ -61,7 +62,7 @@ const UserManagement = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isSendingEmailLink && emailInput) {
-      sendSignInEmailLink({
+      inviteUserSendEmailLink({
         email: emailInput,
         data: {
           workspaceId: activeWorkspaceId,
@@ -184,14 +185,16 @@ const mapStateToProps = (state) => {
     },
     firebase: {
       auth: {
+        uid,
         email
       }
     },
     firestore: {
-      data: { workspaces },
+      data: { userWorkspaces },
     },
   } = state;
 
+  const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
 
@@ -208,8 +211,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendSignInEmailLink: ({ email, data }) =>
-      dispatch(sendSignInEmailLink({ email, ref: constants.AUTH_TYPE.INVITE, data })),
+    inviteUserSendEmailLink: ({ email, data }) =>
+      dispatch(inviteUserSendEmailLink({ email, ref: constants.AUTH_TYPE.INVITE, data })),
     resetSendEmailLink: () => dispatch(resetSendEmailLink()),
     removeMember: ({ workspaceId, uid }) =>
       dispatch(removeMember({ workspaceId, uid })),

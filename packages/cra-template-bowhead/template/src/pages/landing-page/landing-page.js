@@ -22,6 +22,8 @@ import companyLogoInvision from "../../images/logos/invision.png";
 import companyLogoSpotify from "../../images/logos/spotify.png";
 import companyLogotwilio from "../../images/logos/twilio.png";
 
+import { Footer } from '../../components/footer'
+
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -537,6 +539,7 @@ const LandingPage = () => {
           </Button>
         </Grid>
       </Container>
+      <Footer />
     </>
   );
 };

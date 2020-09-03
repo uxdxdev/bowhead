@@ -13,14 +13,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectList = (props) => {
-  const { projects, isFirestoreRequesting } = props;
+
+  const { projects, isLoading } = props;
   const classes = useStyles();
 
-  if (isFirestoreRequesting) {
+  if (isLoading) {
     return <PageLoadingSpinner />;
   }
 
-  if (!projects || projects?.length === 0) {
+  console.log(projects)
+  if (projects === undefined || projects.length <= 0) {
     return (
       <Paper className={classes.paper} variant="outlined">
         <Typography align="center">
@@ -32,9 +34,11 @@ const ProjectList = (props) => {
 
   return (
     <>
-      {projects?.map((project) => (
-        <ProjectListItem key={project.id} project={project} />
-      ))}
+      {projects && projects?.map((project) => {
+        return (
+          <ProjectListItem key={project.id} project={project} />
+        )
+      })}
     </>
   );
 };
@@ -42,18 +46,19 @@ const ProjectList = (props) => {
 const mapStateToProps = (state) => {
   const {
     firestore: {
-      ordered,
+      data: { workspaces },
       status: { requesting },
     },
   } = state;
 
   const activeWorkspaceId = state.workspace?.activeWorkspaceId
-  const projects = activeWorkspaceId && ordered && ordered[`${activeWorkspaceId}::projects`];
-  const isFirestoreRequesting = activeWorkspaceId && requesting[activeWorkspaceId];
+  const projectsMap = workspaces && workspaces[`${activeWorkspaceId}`]?.projects;
+  const projects = projectsMap && Object.keys(projectsMap).map(key => projectsMap[key])
+  const isLoading = requesting[`workspaces/${activeWorkspaceId}`]
 
   return {
     projects,
-    isFirestoreRequesting,
+    isLoading,
   };
 };
 

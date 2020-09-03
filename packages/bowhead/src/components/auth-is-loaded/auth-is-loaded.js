@@ -6,7 +6,7 @@ import {
 import { PageLoadingSpinner } from "../page-loading-spinner";
 
 const AuthIsLoaded = ({ children }) => {
-    const auth = useSelector((state) => state.firebase.auth);
+    const auth = useSelector((state) => state?.firebase?.auth);
     if (!isLoaded(auth)) return <PageLoadingSpinner />;
     return children;
 };
