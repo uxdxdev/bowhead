@@ -1,1 +1,1 @@
-export { default as useWorkspaces } from './use-workspaces'
+export { default as useInit } from './use-init'

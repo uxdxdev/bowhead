@@ -17,6 +17,8 @@ import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
 import { PLUGIN_TYPES } from '../utils/pluginTypes';
+import authSlice from '../store/authSlice'
+import userSlice from '../store/userSlice'
 
 const getStore = () => {
 
@@ -32,7 +34,7 @@ const getStore = () => {
                     ...Object.keys(rrfActionTypes).map(
                         type => `@@reactReduxFirebase/${type}`
                     ),
-                    'user/deleteUserError'
+                    'bowheadUser/deleteUserError'
                 ],
                 ignoredPaths: ['firebase', 'firestore']
             }
@@ -44,6 +46,13 @@ const getStore = () => {
         plugins.forEach(plugin => {
             reducers[plugin.name] = plugin.reducer
         })
+
+        // bowhead redux slices
+        reducers.bowheadAuth = authSlice
+        reducers.bowheadUser = userSlice
+        reducers.firestore = firestoreReducer
+        reducers.firebase = firebaseReducer
+
         return reducers
     }
 
@@ -73,6 +82,7 @@ const getStore = () => {
 }
 
 const StoreProvider = ({ children }) => {
+
     const store = getStore()
 
     // see: https://github.com/prescottprue/react-redux-firebase
@@ -85,18 +95,6 @@ const StoreProvider = ({ children }) => {
         },
         dispatch: store.dispatch,
     };
-
-    pluginRegistry.register('firestore-reducer', {
-        type: PLUGIN_TYPES.REDUCER,
-        name: 'firestore',
-        reducer: firestoreReducer
-    })
-
-    pluginRegistry.register('firebase-reducer', {
-        type: PLUGIN_TYPES.REDUCER,
-        name: 'firebase',
-        reducer: firebaseReducer
-    })
 
     return (
         <Provider store={store}>

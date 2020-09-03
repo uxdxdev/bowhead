@@ -6,6 +6,7 @@ service cloud.firestore {
       return req.auth != null;
     }
 
+    // BOWHEAD RULES START
     match /users/{userId} {
 			allow read, write: if isSignedIn(request) && request.auth.uid == userId;
     }
@@ -13,8 +14,9 @@ service cloud.firestore {
     match /stripe/{stripeCustomerId} {
 			allow read, write: if isSignedIn(request) && (resource == null || request.auth.uid == resource.data.uid); 
     }
+    // BOWHEAD RULES END
 
-    // CUSTOM RULES
+    // TEST-APP RULES START
     function getRole(rsc, req) {
       return rsc.data.members[req.auth.uid].role;
     }
@@ -46,9 +48,7 @@ service cloud.firestore {
                         isOneOfRoles(request.resource, request, ['owner']) && // incoming resource has member 'owner'
                         isUserSubscribed(request.auth.uid); 
       
-      allow read: if isSignedIn(request) &&
-                        (isOneOfRoles(resource, request, ['owner', 'member']) ||
-                         resource == null) // if the workspace does not exist we still want to allow listeners to be mounted
+      allow read: if isSignedIn(request) && (isOneOfRoles(resource, request, ['owner', 'member']) || resource == null)
       
       allow update: if isSignedIn(request) && (isOneOfRoles(resource, request, ['owner']) ||
                           // allow users to update if invite 'pending'
@@ -57,26 +57,9 @@ service cloud.firestore {
                           (isOneOfRoles(resource, request, ['member']) &&
                            (request.auth.uid in request.resource.data.members.keys()) == false))
       
-      allow delete: if isSignedIn(request) &&
-                        isOneOfRoles(resource, request, ['owner']);
-
-      match /projects/{projectId} {
-      	        
-        allow create: if isSignedIn(request) &&
-                          resource == null && // resource does not already exist
-                          isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner']);
-
-        allow read: if isSignedIn(request) && 
-                        (isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner', 'member']) ||
-                        resource.data.projects[projectId] == null)
-
-        allow update: if isSignedIn(request) &&
-                          isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner', 'member']);
-
-        allow delete: if isSignedIn(request) && 
-                          isOneOfRoles(get(/databases/$(database)/documents/workspaces/$(workspaceId)), request, ['owner']);
-      }
+      allow delete: if isSignedIn(request) && isOneOfRoles(resource, request, ['owner']);
     }
-    
+
+    // TEST-APP RULES END
   }
 }

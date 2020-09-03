@@ -56,7 +56,7 @@ const workspaceSlice = createSlice({
     leaveWorkspaceError(state, action) {
       return {
         ...state,
-        isLeavingWorkspace: true,
+        isLeavingWorkspace: false,
         isLeavingWorkspaceError: action.error
       }
     },
@@ -77,7 +77,7 @@ const workspaceSlice = createSlice({
     deleteWorkspaceError(state, action) {
       return {
         ...state,
-        isDeletingWorkspace: true,
+        isDeletingWorkspace: false,
         isDeletingWorkspaceError: action.error
       }
     },

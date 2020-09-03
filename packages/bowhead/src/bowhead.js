@@ -34,6 +34,7 @@ const getRoutes = ({ routes, isAuthRoute }) => {
 }
 
 const Bowhead = () => {
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const defaultTheme = useMemo(
@@ -91,10 +92,19 @@ const Bowhead = () => {
     [prefersDarkMode]
   );
 
-  const unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
+  let unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
   const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.AUTHENTICATED_ROUTE)
   const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)
   const theme = themes.length > 0 && themes[0].theme;
+
+  const DefaultLandingPage = () => <div>Default landing page</div>
+  const defaultUnAuthRoutes = [{
+    path: '/',
+    component: DefaultLandingPage
+  }]
+
+  // set default routes
+  if (unAuthenticatedRoutes.length <= 0) unAuthenticatedRoutes = defaultUnAuthRoutes
 
   const DashboardWrapper = (props) => {
     return (
@@ -115,7 +125,7 @@ const Bowhead = () => {
               <Route path="/signin" component={SignIn} />
               <Route path="/verify" component={Verify} />
               <AuthenticatedRoute path="/dashboard" component={DashboardWrapper} />
-              <Route component={() => <div>Oops, looks like you got lost.</div>} />
+              <Route component={() => <div>No page found</div>} />
             </Switch>
           </BrowserRouter>
         </AuthIsLoaded>

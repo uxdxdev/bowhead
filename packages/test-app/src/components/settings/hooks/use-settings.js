@@ -1,15 +1,14 @@
 import { useSelector } from "react-redux";
 import * as constants from "../../../utils/constants"
-import { useWorkspaces } from "../../../hooks";
+import { useInit } from "../../../hooks";
 
 const useSettings = () => {
-  // init workspaces
-  useWorkspaces();
+  const { isWorkspaceOwner, isSubscribed } = useInit();
 
   const state = useSelector((state) => state);
   const {
     firebase: {
-      profile: { workspaces, stripeCustomerId },
+      profile: { stripeCustomerId },
     },
     firestore: {
       status: { requested },
@@ -17,7 +16,6 @@ const useSettings = () => {
   } = state;
 
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
-  const isOwner = workspaces && workspaces[activeWorkspaceId]?.role === constants.USER_ROLES.OWNER;
   const isRequestedStripeCustomer = requested[`${constants.FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
   const isRequestedActiveWorkspace = requested[`${constants.FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
   const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
@@ -28,7 +26,7 @@ const useSettings = () => {
     isRequestedActiveWorkspaceData &&
     !(isRequestedActiveWorkspaceData === true);
 
-  return { isLoading, isOwner };
+  return { isLoading, isSubscribed, isWorkspaceOwner };
 };
 
 export default useSettings;

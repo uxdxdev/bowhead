@@ -1,10 +1,9 @@
 import React from "react";
-import { useWorkspaces } from "../../hooks";
+import { useInit } from "../../hooks";
 
 const Dashboard = () => {
 
-  // init
-  useWorkspaces();
+  useInit();
 
   return (<div>This the dashboard</div>);
 };

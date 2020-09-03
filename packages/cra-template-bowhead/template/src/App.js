@@ -1,10 +1,8 @@
 import React, { useMemo } from "react";
 import { Bowhead, PLUGIN_TYPES, pluginRegistry } from "@mortond/bowhead";
-import { LandingPage, Terms } from './pages'
-import { Projects, ProjectDetails, Settings, Dashboard } from './components'
-import projectSlice from "./store/projectSlice";
+import { LandingPage, Terms, Invite, DashboardRoot } from './pages'
+import { Projects, ProjectDetails, Settings } from './components'
 import {
-  Settings as SettingsIcon,
   List as ListIcon,
 } from "@material-ui/icons";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -82,9 +80,14 @@ const App = () => {
       component: Terms,
     },
     {
+      type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      path: '/invite',
+      component: Invite,
+    },
+    {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
       path: '/',
-      component: Dashboard,
+      component: DashboardRoot,
     },
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
@@ -102,21 +105,10 @@ const App = () => {
       component: Settings,
     },
     {
-      type: PLUGIN_TYPES.MENU_ITEM.POP_OVER,
-      path: "/settings",
-      menuIcon: SettingsIcon,
-      text: 'Settings'
-    },
-    {
       type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
       menuIcon: ListIcon,
       text: "Projects",
-      path: "/dashboard/project",
-    },
-    {
-      type: PLUGIN_TYPES.REDUCER,
-      name: 'project',
-      reducer: projectSlice
+      path: "/project",
     }
   ]
 

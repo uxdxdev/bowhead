@@ -8,10 +8,13 @@ import { useStyles } from "./styles";
 import { useSettings } from "./hooks";
 
 const Settings = () => {
+
   const { paper } = useStyles();
+  const { isLoading, isWorkspaceOwner, isSubscribed } = useSettings();
 
-  const { isLoading, isOwner } = useSettings();
-
+  if (!isSubscribed) {
+    return <div>Please subscribe to access settings</div>
+  }
 
   return isLoading ? (
     <PageLoadingSpinner />
@@ -24,7 +27,7 @@ const Settings = () => {
         <Paper className={paper} variant="outlined">
           <Workspaces />
         </Paper>
-        {isOwner && (
+        {isWorkspaceOwner && (
           <Paper className={paper} variant="outlined">
             <UserManagement />
           </Paper>

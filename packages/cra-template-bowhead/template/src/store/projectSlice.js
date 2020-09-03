@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { pluginRegistry, PLUGIN_TYPES } from '@mortond/bowhead'
 
 const projectSlice = createSlice({
   name: 'project',
@@ -54,6 +55,12 @@ const projectSlice = createSlice({
       }
     },
   }
+})
+
+pluginRegistry.register('project-reducer', {
+  type: PLUGIN_TYPES.REDUCER,
+  name: 'project',
+  reducer: projectSlice.reducer
 })
 
 export const {

@@ -1,7 +1,8 @@
 import * as constants from "../../utils/constants";
 import { firestore, firebase } from '@mortond/bowhead'
+import { uuid } from '../../utils/uuid'
 
-export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
+export const deleteWorkspace = async ({ uid, workspaceId }) => {
     const userWorkspacesRef = firestore
         .collection(constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid);
@@ -11,16 +12,6 @@ export const deleteWorkspaceAndProjects = async ({ uid, workspaceId }) => {
         .doc(workspaceId);
 
     const batch = firestore.batch();
-    // delete projects
-    const projectsRef = await firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
-        .doc(workspaceId)
-        .collection(constants.FIRESTORE_COLLECTIONS.PROJECTS)
-        .get();
-
-    projectsRef.docs.forEach((project) => {
-        batch.delete(project.ref)
-    });
 
     // delete workspace
     batch.delete(workspaceRef)
@@ -98,22 +89,28 @@ export const deleteProject = ({ projectId, workspaceId }) => {
     return firestore
         .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc(workspaceId)
-        .collection(constants.FIRESTORE_COLLECTIONS.PROJECTS)
-        .doc(projectId)
-        .delete()
+        .set({
+            projects: {
+                [projectId]: firebase.firestore.FieldValue.delete()
+            }
+        }, { merge: true })
 }
 
 export const createProject = ({ workspaceId, title, summary }) => {
+    const projectId = uuid();
     return firestore
         .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc(workspaceId)
-        .collection(constants.FIRESTORE_COLLECTIONS.PROJECTS)
-        .doc()
         .set({
-            title,
-            summary,
-            createdAt: new Date()
-        })
+            projects: {
+                [projectId]: {
+                    id: projectId,
+                    title,
+                    summary,
+                    createdAt: new Date()
+                }
+            }
+        }, { merge: true })
 }
 
 export const updateMemberStatus = ({ workspaceId, email, status }) => {
@@ -127,24 +124,13 @@ export const updateMemberStatus = ({ workspaceId, email, status }) => {
         }, { merge: true });
 }
 
-export const verifyUserSignInUpdate = ({ uid, email }) => {
-    return firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
-        .doc(uid)
-        .set({
-            email,
-        },
-            { merge: true }
-        );
-}
-
 export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email }) => {
     const workspaceRef = firestore
         .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
         .doc(workspaceId);
 
     const userRef = firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
+        .collection(constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid);
 
     const batch = firestore.batch();
@@ -226,16 +212,6 @@ export const deleteUserAccountAndData = async uid => {
                 }
 
                 if (workspaceRole === constants.USER_ROLES.OWNER) {
-                    // delete projects
-                    const projectsRef = await firestore
-                        .collection(constants.FIRESTORE_COLLECTIONS.WORKSPACES)
-                        .doc(key)
-                        .collection(constants.FIRESTORE_COLLECTIONS.PROJECTS)
-                        .get();
-                    projectsRef.docs.forEach((project) => {
-                        batch.delete(project.ref)
-                    });
-
                     // delete workspace
                     batch.delete(workspaceRef)
                 }

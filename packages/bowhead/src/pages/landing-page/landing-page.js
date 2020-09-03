@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, NavBar } from "../../components";
+import { NavBar } from "../../components";
 
 const LandingPage = ({ children }) => {
 
@@ -7,7 +7,6 @@ const LandingPage = ({ children }) => {
     <>
       <NavBar />
       {children}
-      <Footer />
     </>
   );
 };

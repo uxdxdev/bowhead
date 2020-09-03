@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { pluginRegistry } from '../registry/plugin-registry'
-import { PLUGIN_TYPES } from '../utils/pluginTypes'
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'bowheadAuth',
   initialState: {},
   reducers: {
     sendEmailLink(state) {
@@ -60,12 +58,6 @@ const authSlice = createSlice({
       };
     },
   }
-})
-
-pluginRegistry.register('auth-reducer', {
-  type: PLUGIN_TYPES.REDUCER,
-  name: 'auth',
-  reducer: authSlice.reducer
 })
 
 export const {

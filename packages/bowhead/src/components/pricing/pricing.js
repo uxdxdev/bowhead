@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 const tiers = [
     {
         title: "Basic",
-        price: "249",
+        price: "10",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_BASIC,
         description: [
             "10 Projects",
@@ -30,7 +30,7 @@ const tiers = [
     {
         title: "Pro",
         subheader: "Most popular",
-        price: "599",
+        price: "50",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_PRO,
         description: [
             "25 Projects",
@@ -43,7 +43,7 @@ const tiers = [
     },
     {
         title: "Enterprise",
-        price: "1399",
+        price: "250",
         priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_ENTERPRISE,
         description: [
             "125 Projects",

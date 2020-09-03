@@ -1,36 +1,47 @@
 import { useSelector } from "react-redux";
-import { useFirestoreConnect } from "react-redux-firebase";
+import { useState, useEffect } from 'react'
 import * as constants from "../../../utils/constants";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { pluginRegistry } from "../../../registry/plugin-registry";
+import { PLUGIN_TYPES } from '../../../utils/pluginTypes'
 
 const useDashboard = () => {
   const state = useSelector((state) => state);
   const {
-    firebase: {
-      profile: { stripeCustomerId },
-    },
     firestore: {
       status: { requesting },
-      data
+      data: { stripe }
     },
-    listeners: { collections }
+    firebase: {
+      profile: { stripeCustomerId },
+    }
   } = state;
 
-  const subscriptionStatus = data && data.stripe && data.stripe[stripeCustomerId]?.status
-  const isSubscribed = subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
-    subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE
   const isLoading = requesting &&
     (Object.keys(requesting).length === 0 || // if we haven't made a request yet
-      Object.keys(requesting).filter(value => /^stripe/.test(value)).filter(key => requesting[key] === true).length > 0) // if any stripe related requests are 'true'
+      Object.keys(requesting).filter(value => /^stripe/.test(value)).filter(key => requesting[key] === true).length > 0) // if any 
 
-  // keep stripe data listener enabled
-  useFirestoreConnect([...collections, {
+
+  const [listeners, setListeners] = useState([])
+  const subscriptionStatus = stripe && stripe[stripeCustomerId]?.status
+  const isSubscribed = subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
+    subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE
+
+  useEffect(() => {
+    pluginRegistry.setChangeListener((plugins) => {
+      const pluginListeners = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.FIRESTORE_LISTENER)
+      setListeners(pluginListeners)
+    })
+  }, [])
+
+  useFirestoreConnect([...listeners, {
     collection: constants.FIRESTORE_COLLECTIONS.STRIPE,
     doc: stripeCustomerId,
-  }]);
+  }])
 
   return {
-    isSubscribed,
     isLoading,
+    isSubscribed
   };
 };
 

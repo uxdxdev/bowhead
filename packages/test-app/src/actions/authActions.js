@@ -11,7 +11,7 @@ export const resetSendEmailLink = () => {
   };
 };
 
-export const sendSignInEmailLink = ({ email, ref, data }) => {
+export const inviteUserSendEmailLink = ({ email, ref, data }) => {
   return async (dispatch) => {
     dispatch(authSlice.sendEmailLink());
 

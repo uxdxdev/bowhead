@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { Switch, Route, Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Breadcrumbs, Typography, Link, Container } from "@material-ui/core";
-import { useDashboard } from './hooks'
 import { DashboardNavSidebar, DashboardNavBar, Pricing, Account, PageLoadingSpinner } from '../../components'
 import { PLUGIN_TYPES } from '../../utils/pluginTypes'
 import { pluginRegistry } from "../../registry/plugin-registry";
-
+import { useDashboard } from './hooks'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -39,9 +38,10 @@ const createLinkText = (to) => {
 
 const Dashboard = (props) => {
   const { match, children } = props;
+
   const {
-    isSubscribed,
     isLoading,
+    isSubscribed
   } = useDashboard();
 
   const classes = useStyles();
@@ -106,13 +106,10 @@ const Dashboard = (props) => {
         </Route>
 
         <Switch>
-
-          {isSubscribed ?
-            children :
-            <Route exact path={`${match.path}/`} component={Pricing} />
-          }
+          {!isSubscribed && <Route exact path={`${match.path}/`} component={Pricing} />}
+          {children}
           <Route exact path={`${match.path}/account`} component={Account} />
-          <Route component={() => <div>Oops, looks like you got lost.</div>} />
+          <Route component={() => <div>No page found</div>} />
         </Switch>
       </Container>
 
