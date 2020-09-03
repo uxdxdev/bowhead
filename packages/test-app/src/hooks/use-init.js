@@ -67,7 +67,7 @@ const useInit = () => {
                 return {
                     menuIcon: activeWorkspaceId === workspaceId && DoubleArrowIcon,
                     text: workspaceName,
-                    path: '/dashboard/project',
+                    path: '/project',
                     onClick: () => {
                         dispatch(setActiveWorkspace(workspaceId))
                     },

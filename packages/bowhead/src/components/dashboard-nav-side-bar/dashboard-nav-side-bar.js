@@ -39,7 +39,7 @@ const DashboardNavSidebar = ({
     type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
     menuIcon: DashboardIcon,
     text: "Dashboard",
-    path: "/dashboard",
+    path: "/",
   })
 
   const drawer = () => {
