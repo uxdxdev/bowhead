@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { signOut } from "../../actions/authActions";
@@ -18,13 +18,12 @@ import {
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  Settings as SettingsIcon,
   ExitToApp as ExitToAppIcon,
   Timeline as TimelineIcon,
+  Settings as SettingsIcon,
 } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
-import { PLUGIN_TYPES } from '../../utils/pluginTypes'
-import { pluginRegistry } from "../../registry/plugin-registry";
+import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -51,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
   const classes = useStyles();
 
-  const [popoverMenuItems, setPopoverMenuItems] = useState()
-
   // dropdown settings menu
   const [anchorEl, setAnchorEl] = useState(null);
   const isMenuOpen = Boolean(anchorEl);
@@ -64,21 +61,13 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  useEffect(() => {
-    pluginRegistry.setChangeListener((plugins) => {
-      const menuItemPlugins = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.MENU_ITEM.POP_OVER)
-      setPopoverMenuItems(menuItemPlugins)
-    })
-  }, [])
+  const menuItemPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
 
-  const menuItemConfig = [
-    {
-      path: "/account",
-      menuIcon: SettingsIcon,
-      text: 'Account'
-    },
-    ...popoverMenuItems
-  ]
+  menuItemPlugins.unshift({
+    path: "/account",
+    menuIcon: SettingsIcon,
+    text: 'Account'
+  })
 
   const menuItems = (config) => {
 
@@ -106,8 +95,6 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
       )
     })
   }
-
-
 
   return (
     <>
@@ -167,7 +154,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
                 onClick={handleMenuClose}
                 onKeyDown={handleMenuClose}
               >
-                {menuItems(menuItemConfig)}
+                {menuItems(menuItemPlugins)}
                 <MenuItem
                   component={NavLink}
                   to="/signin"

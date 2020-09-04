@@ -5,8 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AuthenticatedRoute, AuthIsLoaded } from "./components";
 import { SignIn, Verify, Dashboard, LandingPage } from "./pages";
 import { StoreProvider } from './store'
-import { PLUGIN_TYPES } from './utils/pluginTypes'
-import { pluginRegistry } from "./registry/plugin-registry";
+import { pluginRegistry, PLUGIN_TYPES } from "./registry/plugin-registry";
 
 const getRoutes = ({ routes, isAuthRoute }) => {
   return routes && routes.map((route, index) => {

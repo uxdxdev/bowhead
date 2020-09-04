@@ -21,7 +21,6 @@ const ProjectList = (props) => {
     return <PageLoadingSpinner />;
   }
 
-  console.log(projects)
   if (projects === undefined || projects.length <= 0) {
     return (
       <Paper className={classes.paper} variant="outlined">
@@ -31,6 +30,9 @@ const ProjectList = (props) => {
       </Paper>
     )
   }
+
+  // sort by latest at the top
+  projects.sort((a, b) => b.createdAt - a.createdAt)
 
   return (
     <>

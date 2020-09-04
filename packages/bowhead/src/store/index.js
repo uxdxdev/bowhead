@@ -12,11 +12,10 @@ import {
     ReactReduxFirebaseProvider,
     actionTypes as rrfActionTypes
 } from "react-redux-firebase";
-import { pluginRegistry } from '../registry/plugin-registry'
+import { pluginRegistry, PLUGIN_TYPES } from '../registry/plugin-registry'
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
-import { PLUGIN_TYPES } from '../utils/pluginTypes';
 import authSlice from '../store/authSlice'
 import userSlice from '../store/userSlice'
 
