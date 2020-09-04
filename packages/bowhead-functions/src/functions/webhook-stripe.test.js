@@ -21,7 +21,7 @@ test('should return 401 when stripe.webhooks.constructEvent fails', async () => 
     const event = { headers: { 'stripe-signature': 'test' } }
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(400);

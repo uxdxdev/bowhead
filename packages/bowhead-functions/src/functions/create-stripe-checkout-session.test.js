@@ -1,4 +1,4 @@
-import testFunction from './create-stripe-checkout-session';
+import { createStripeCheckoutSession } from './create-stripe-checkout-session';
 import { stripe } from '../utils/stripeBackend'
 import { verifyToken } from '../utils/firebaseBackend';
 
@@ -15,16 +15,11 @@ test('should return 401 when token unauthorized', async () => {
 
     stripe.checkout.sessions.create.mockResolvedValue({});
 
-    let result = null;
-    const callback = (error, response) => {
-        result = { error, response }
-    }
-
     // when
-    await testFunction.handler(null, null, callback);
+    const result = await createStripeCheckoutSession({ token: 'test', body: {} });
 
     // then
-    expect(result.response.statusCode).toBe(401);
+    expect(result.data.statusCode).toBe(401);
 });
 
 test('should return 200 ok when stripe checkout session creation succeeds', async () => {
@@ -33,18 +28,13 @@ test('should return 200 ok when stripe checkout session creation succeeds', asyn
 
     JSON.parse = jest.fn().mockImplementationOnce((eventBody) => eventBody);
 
-    stripe.checkout.sessions.create.mockResolvedValue({});
-
-    let result = null;
-    const callback = (error, response) => {
-        result = { error, response }
-    }
+    stripe.checkout.sessions.create.mockResolvedValue({ data: { statusCode: 200 } });
 
     // when
-    await testFunction.handler(null, null, callback);
+    const result = await createStripeCheckoutSession({ token: 'test', body: {} });
 
     // then
-    expect(result.response.statusCode).toBe(200);
+    expect(result.data.statusCode).toBe(200);
 });
 
 test('should return error when stripe checkout session creation fails', async () => {
@@ -60,17 +50,11 @@ test('should return error when stripe checkout session creation fails', async ()
     // create stripe session failed
     stripe.checkout.sessions.create.mockRejectedValue(error);
 
-    let result = null;
-    const callback = (error, response) => {
-        result = { error, response }
-    }
-
     // when
-    await testFunction.handler(null, null, callback);
+    const result = await createStripeCheckoutSession({ token: 'test', body: {} }).catch(error => error);
 
     // then
-    expect(result.response.statusCode).toBe(400);
-    expect(result.error).toBe(error);
+    expect(result).toBe(error);
 });
 
 test('should remove subscription_data before call to stripe API when customer data exists', async () => {
@@ -81,16 +65,13 @@ test('should remove subscription_data before call to stripe API when customer da
 
     stripe.checkout.sessions.create.mockResolvedValue({});
 
-    const event = {
-        body: {
+    // when
+    await createStripeCheckoutSession({
+        token: 'test', body: {
             customer: 'test',
             'subscription_data': 'test'
-        },
-    }
-    const callback = jest.fn();
-
-    // when
-    await testFunction.handler(event, null, callback);
+        }
+    });
 
     // then    
     expect(stripe.checkout.sessions.create).toHaveBeenCalledWith({ customer: 'test' })
@@ -100,21 +81,17 @@ test('should send subscription_data to stripe API when customer data does not ex
     // given        
     verifyToken.mockImplementationOnce(() => true)
 
-    const event = {
-        body: {
-            // no customer data
-            'subscription_data': 'test'
-        },
-    }
-
     JSON.parse = jest.fn().mockImplementationOnce((eventBody) => eventBody);
 
-    stripe.checkout.sessions.create.mockResolvedValue(event);
-
-    const callback = jest.fn();
+    stripe.checkout.sessions.create.mockResolvedValue({});
 
     // when
-    await testFunction.handler(event, null, callback);
+    await createStripeCheckoutSession({
+        token: 'test', body: {
+            // no customer data
+            'subscription_data': 'test'
+        }
+    });
 
     // then    
     expect(stripe.checkout.sessions.create).toHaveBeenCalledWith({ 'subscription_data': 'test' })

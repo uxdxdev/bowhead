@@ -21,7 +21,7 @@ test('should return 401 when token unauthorized', async () => {
     }
 
     // when
-    await testFunction.handler(null, null, callback);
+    await testFunction(null, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(401);
@@ -42,7 +42,7 @@ test('should return 200 ok when stripe billing portal session creation succeeds'
     }
 
     // when
-    await testFunction.handler(null, null, callback);
+    await testFunction(null, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(200);
@@ -66,7 +66,7 @@ test('should return error when stripe billing session creation fails', async () 
     }
 
     // when
-    await testFunction.handler(null, null, callback);
+    await testFunction(null, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(400);
@@ -90,7 +90,7 @@ test('should send correct data to stripe', async () => {
     const callback = jest.fn();
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then    
     expect(stripe.billingPortal.sessions.create).toHaveBeenCalledWith(event.body)

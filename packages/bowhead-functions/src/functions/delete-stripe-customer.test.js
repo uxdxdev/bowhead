@@ -25,7 +25,7 @@ test('should return 401 when token unauthorized', async () => {
 
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(401);
@@ -47,7 +47,7 @@ test('should return 200 ok when stripe delete customer succeeds', async () => {
     const event = { body: { stripeCustomerId: 'test' } }
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(200);
@@ -73,7 +73,7 @@ test('should return error when stripe fails', async () => {
     const event = { body: { stripeCustomerId: 'test' } }
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then
     expect(result.response.statusCode).toBe(400);
@@ -94,7 +94,7 @@ test('should delete customer by customerId', async () => {
     const event = { body: { stripeCustomerId } }
 
     // when
-    await testFunction.handler(event, null, callback);
+    await testFunction(event, null, callback);
 
     // then    
     expect(stripe.customers.del).toHaveBeenCalledWith(stripeCustomerId)
