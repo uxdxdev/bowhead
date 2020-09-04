@@ -3,7 +3,7 @@ import { verifyToken } from '../utils/firebaseBackend';
 
 export const createStripeCheckoutSession = async ({ token, body }) => {
     const user = await verifyToken(token);
-    if (!user) return { error: 'Error: request unauthorised', dat: { statusCode: 401 } }
+    if (!user) return { error: 'Error: request unauthorised', data: { statusCode: 401 } }
 
     const data = JSON.parse(body);
 
