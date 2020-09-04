@@ -35,7 +35,7 @@ const ProjectListItem = (props) => {
       <ButtonBox>
         <Button
           component={NavLink}
-          to={`/dashboard/project/${id}`}
+          to={`/dashboard/projects/${id}`}
           variant="contained"
           color="primary"
           className={classes.button}

@@ -5,8 +5,7 @@ import {
   Dashboard as DashboardIcon,
 } from "@material-ui/icons";
 import { SidebarMenuItem } from "../sidebar-menu-item";
-import { pluginRegistry } from '../../registry/plugin-registry'
-import { PLUGIN_TYPES } from '../../utils/pluginTypes'
+import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
 // sidebar
 const drawerWidth = 240;
@@ -30,11 +29,10 @@ const DashboardNavSidebar = ({
   const classes = useStyles();
 
   // currently selected menu item 
-  const [activeMenuItem, setActiveMenuItem] = useState('initialState')
+  const [activeMenuItem, setActiveMenuItem] = useState('')
 
   const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
 
-  // always add dashboard link to top of the menu
   sidebarMenuItems.unshift({
     type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
     menuIcon: DashboardIcon,

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LinkRouter = (props) => <Link {...props} component={RouterLink} />;
+
 const createLinkText = (to) => {
   const capitalize = (s) => {
     if (typeof s !== 'string') return ''
@@ -34,6 +35,7 @@ const createLinkText = (to) => {
   const end = paths[paths.length - 1];
   return capitalize(end)
 };
+
 
 const Dashboard = (props) => {
   const { match, children } = props;

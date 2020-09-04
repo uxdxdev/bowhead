@@ -4,6 +4,8 @@ import { LandingPage, Terms, Invite, DashboardRoot } from './pages'
 import { Projects, ProjectDetails, Settings } from './components'
 import {
   List as ListIcon,
+  Settings as SettingsIcon,
+  AccountTree as AccountTreeIcon
 } from "@material-ui/icons";
 import { createMuiTheme } from "@material-ui/core/styles";
 
@@ -12,53 +14,8 @@ const App = () => {
   const theme = useMemo(
     () =>
       createMuiTheme({
-        typography: {
-          fontFamily: ["Inter", "-apple-system"].join(","),
-          h1: {
-            fontWeight: 700,
-            fontSize: "64px",
-          },
-          subtitle1: {
-            fontWeight: 500,
-            fontSize: "32px",
-          },
-          h2: {
-            fontWeight: 600,
-            fontSize: "40px",
-          },
-          subtitle2: {
-            fontWeight: 400,
-            fontSize: "24px",
-          },
-          h3: {
-            fontWeight: 600,
-            fontSize: "32px",
-          },
-          h4: {
-            fontWeight: 600,
-            fontSize: "28px",
-          },
-          h5: {
-            fontWeight: 600,
-            fontSize: "24px",
-          },
-          h6: {
-            fontWeight: 600,
-            fontSize: "20px",
-          },
-          body1: {
-            fontWeight: 400,
-            fontSize: "14px",
-          },
-          body2: {
-            fontWeight: 400,
-            fontSize: "18px",
-          },
-        },
         palette: {
           type: "dark",
-          primary: { main: "#00B0FF" },
-          secondary: { main: "#F50057" },
         },
       }),
     []
@@ -67,53 +24,85 @@ const App = () => {
   const plugins = [
     {
       type: PLUGIN_TYPES.THEME,
+      name: 'theme',
       theme: theme
     },
+    // unauthenticated routes are available outside the
+    // dashboard routes
     {
       type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      name: 'route-landing-page',
       path: '/',
       component: LandingPage,
     },
     {
       type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      name: 'route-terms',
       path: '/terms',
       component: Terms,
     },
     {
       type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      name: 'route-invite',
       path: '/invite',
       component: Invite,
     },
+    // authenticated routes are available at /dashboard/*
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      name: 'route-dashboard-root',
       path: '/',
       component: DashboardRoot,
     },
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
-      path: '/project',
+      name: 'route-projects',
+      path: '/projects',
       component: Projects,
     },
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
-      path: '/project/:id',
+      name: 'route-project-details',
+      path: '/projects/:id',
       component: ProjectDetails,
     },
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      name: 'route-settings',
       path: '/settings',
       component: Settings,
     },
+    // menu items should be registered before the Bowhead
+    // shell is rendered because when the Bowhead nav bar 
+    // and sidebar are mounted the plugin registry is checked
     {
       type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+      name: 'menu-item-projects',
       menuIcon: ListIcon,
       text: "Projects",
-      path: "/project",
+      path: "/projects",
+    },
+    {
+      type: PLUGIN_TYPES.MENU_ITEM.POP_OVER,
+      name: 'menu-item-settings',
+      path: "/settings",
+      menuIcon: SettingsIcon,
+      text: 'Settings'
+    },
+    // add "Workspaces" menu item to sidebar when app is loaded
+    // see src/hooks/use-init.js where this menu item is replaced
+    // and child menu items are added for new workspaces
+    {
+      type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+      name: 'menu-item-workspaces',
+      menuIcon: AccountTreeIcon,
+      text: "Workspaces",
+      path: '/projects'
     }
   ]
 
-  plugins.forEach((plugin, index) => {
-    pluginRegistry.register(`${plugin.type}-${index}`, plugin)
+  plugins.forEach(plugin => {
+    pluginRegistry.register(plugin.name, plugin)
   })
 
   return (
