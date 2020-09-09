@@ -7,26 +7,78 @@ import {
   Settings as SettingsIcon,
   AccountTree as AccountTreeIcon
 } from "@material-ui/icons";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme, } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core"
+import { firebase, firestore } from "./utils/firebase"
+import { getStripe } from "./utils/stripe"
 
 const App = () => {
+
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = useMemo(
     () =>
       createMuiTheme({
+        typography: {
+          fontFamily: ["Inter", "-apple-system"].join(","),
+          h1: {
+            fontWeight: 700,
+            fontSize: "64px",
+          },
+          subtitle1: {
+            fontWeight: 500,
+            fontSize: "32px",
+          },
+          h2: {
+            fontWeight: 600,
+            fontSize: "40px",
+          },
+          subtitle2: {
+            fontWeight: 400,
+            fontSize: "24px",
+          },
+          h3: {
+            fontWeight: 600,
+            fontSize: "32px",
+          },
+          h4: {
+            fontWeight: 600,
+            fontSize: "28px",
+          },
+          h5: {
+            fontWeight: 600,
+            fontSize: "24px",
+          },
+          h6: {
+            fontWeight: 600,
+            fontSize: "20px",
+          },
+          body1: {
+            fontWeight: 400,
+            fontSize: "14px",
+          },
+          body2: {
+            fontWeight: 400,
+            fontSize: "18px",
+          },
+        },
         palette: {
-          type: "dark",
+          type: prefersDarkMode ? "dark" : "light",
+          primary: { main: "#00B0FF" },
+          secondary: { main: "#F50057" },
         },
       }),
-    []
+    [prefersDarkMode]
   );
 
-  const plugins = [
-    {
-      type: PLUGIN_TYPES.THEME,
-      name: 'theme',
-      theme: theme
-    },
+  pluginRegistry.register('bowhead-theme', {
+    type: PLUGIN_TYPES.THEME,
+    name: 'theme',
+    theme: theme
+  })
+
+
+  const routesAndMenuItems = [
     // unauthenticated routes are available outside the
     // dashboard routes
     {
@@ -101,21 +153,73 @@ const App = () => {
     }
   ]
 
-
-  plugins.forEach(plugin => {
+  routesAndMenuItems.forEach(plugin => {
     pluginRegistry.register(plugin.name, plugin)
   })
 
   const bowheadConfig = {
+    app: {
+      productionUrl: process.env.REACT_APP_BOWHEAD_PRODUCTION_URL
+    },
+    // These APIs are required for Bowhead to manage a users stripe subscription
     api: {
       deleteStripeCustomer: process.env.REACT_APP_BOWHEAD_API_DELETE_STRIPE_CUSTOMER,
       createStripeCustomerPortalSession: process.env.REACT_APP_BOWHEAD_API_CREATE_STRIPE_CUSTOMER_PORTAL_SESSION,
       createStripeCheckoutSession: process.env.REACT_APP_BOWHEAD_API_CREATE_STRIPE_CHECKOUT_SESSION
-    }
+    },
+    // Provide information for each Stripe subscription
+    plans: {
+      basic: {
+        title: "Basic",
+        price: "10",
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
+        description: [
+          "10 Projects",
+          "Unlimited Users",
+          "Live Support",
+          "14 Day Free Trial",
+        ],
+        buttonText: "Get started",
+        // button variant uses MaterialUI variants 
+        // https://material-ui.com/api/button/#props
+        buttonVariant: "outlined",
+      },
+      pro: {
+        title: "Pro",
+        subheader: "Most popular",
+        price: "50",
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
+        description: [
+          "25 Projects",
+          "Unlimited Users",
+          "Live Support",
+          "14 Day Free Trial",
+        ],
+        buttonText: "Get started",
+        buttonVariant: "contained",
+      },
+      enterprise: {
+        title: "Enterprise",
+        price: "250",
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
+        description: [
+          "125 Projects",
+          "Unlimited Users",
+          "Live Support",
+          "14 Day Free Trial",
+        ],
+        buttonText: "Get started",
+        buttonVariant: "outlined",
+      }
+    },
+    // Provide initialised Firebase and Firestore instances
+    firebase: firebase,
+    firestore: firestore,
+    stripe: getStripe()
   }
 
   pluginRegistry.register('bowhead-configuration', {
-    type: PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION,
+    type: PLUGIN_TYPES.BOWHEAD_CONFIGURATION,
     config: bowheadConfig
   })
 

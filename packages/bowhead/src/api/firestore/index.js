@@ -1,8 +1,8 @@
 import { FIRESTORE_COLLECTIONS } from "../../utils/constants";
-import { firestore } from '../../utils/firebaseFrontend'
+import { getFirestore } from '../../utils/firebase'
 
 export const verifyUserSignInUpdate = ({ uid, email }) => {
-    return firestore
+    return getFirestore()
         .collection(FIRESTORE_COLLECTIONS.USERS)
         .doc(uid)
         .set({
@@ -14,20 +14,20 @@ export const verifyUserSignInUpdate = ({ uid, email }) => {
 
 export const deleteUserAccountAndData = async uid => {
 
-    const userDataRef = firestore
+    const userDataRef = getFirestore()
         .collection(FIRESTORE_COLLECTIONS.USERS)
         .doc(uid);
 
     const userDataDoc = await userDataRef.get();
     const userData = userDataDoc.data();
-    const batch = firestore.batch();
+    const batch = getFirestore().batch();
 
     if (userData) {
         const stripeCustomerId = userData.stripeCustomerId || null;
 
         if (stripeCustomerId) {
             // delete stripe customer data
-            const stripeCustomerDataRef = firestore
+            const stripeCustomerDataRef = getFirestore()
                 .collection(FIRESTORE_COLLECTIONS.STRIPE)
                 .doc(stripeCustomerId);
             batch.delete(stripeCustomerDataRef)

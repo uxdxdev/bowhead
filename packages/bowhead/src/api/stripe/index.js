@@ -1,11 +1,11 @@
-import { getToken } from '../../utils/firebaseFrontend'
+import { getToken } from '../../utils/firebase'
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry';
 
 const deleteStripeCustomer = async (stripeCustomerId) => {
-    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION)[0]?.config?.api
+    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.api
 
     if (!api || !api.deleteStripeCustomer) {
-        console.error(`deleteStripeCustomer API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION}`)
+        console.error(`deleteStripeCustomer API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_CONFIGURATION}`)
     }
 
     const token = await getToken();
@@ -16,10 +16,10 @@ const deleteStripeCustomer = async (stripeCustomerId) => {
 }
 
 const createStripeCustomerPortalSession = async (stripeCustomerId) => {
-    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION)[0]?.config?.api
+    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.api
 
     if (!api || !api.createStripeCustomerPortalSession) {
-        console.error(`createStripeCustomerPortalSession API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION}`)
+        console.error(`createStripeCustomerPortalSession API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_CONFIGURATION}`)
     }
 
     const token = await getToken();
@@ -37,10 +37,10 @@ const createStripeCheckoutSession = async ({
     email,
     uid
 }) => {
-    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION)[0]?.config?.api
+    const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.api
 
     if (!api || !api.createStripeCheckoutSession) {
-        console.error(`createStripeCheckoutSession API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION}`)
+        console.error(`createStripeCheckoutSession API does not exist in bowhead configuration. Plugin: ${PLUGIN_TYPES.BOWHEAD_CONFIGURATION}`)
         return;
     }
 

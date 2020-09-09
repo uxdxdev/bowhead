@@ -5,8 +5,7 @@ const firebase = (config) => {
     const projectId = config.projectId
     const privateKey = config.privateKey
     const clientEmail = config.clientEmail
-    const databaseUrlProduction = config.databaseUrlProduction
-    const databaseUrlDevelopment = config.databaseUrlDevelopment
+    const databaseProductionUrl = config.databaseProductionUrl
 
     if (admin.apps && !admin.apps.length) {
         admin.initializeApp({
@@ -15,12 +14,12 @@ const firebase = (config) => {
                 "private_key": privateKey?.replace(/\\n/g, '\n'),
                 "client_email": clientEmail
             }),
-            databaseURL: databaseUrlProduction
+            databaseURL: databaseProductionUrl
         });
 
         if (process.env.NODE_ENV === 'development') {
             admin.firestore().settings({
-                host: databaseUrlDevelopment || "localhost:8080",
+                host: "localhost:8080",
                 ssl: false
             });
         }

@@ -7,6 +7,7 @@ import { ButtonLoadingSpinner } from "../button-loading-spinner";
 import { useHistory } from 'react-router-dom'
 import { STRIPE_SUBSCRIPTION_STATUS } from "../../utils/constants";
 import { createStripeCustomerPortalSession } from '../../api/stripe'
+import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
 const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();
@@ -92,18 +93,20 @@ const mapStateToProps = (state) => {
   const isSubscribed = stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
     stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
 
+  const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.plans
+
   let plan = '';
   switch (planId) {
-    case process.env.STRIPE_SUBSCRIPTION_PLAN_BASIC: {
-      plan = 'Basic';
+    case plans.basic.priceId: {
+      plan = plans.basic.title;
       break;
     }
-    case process.env.STRIPE_SUBSCRIPTION_PLAN_PRO: {
-      plan = 'Pro';
+    case plans.pro.priceId: {
+      plan = plans.pro.title;
       break;
     }
-    case process.env.STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE: {
-      plan = 'Enterprise';
+    case plans.enterprise.priceId: {
+      plan = plans.enterprise.title;
       break;
     }
     default:

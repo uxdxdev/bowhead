@@ -1,5 +1,5 @@
 import { FIRESTORE_COLLECTIONS, USER_ROLES } from "../../utils/constants";
-import { firestore, firebase } from '@mortond/bowhead'
+import { firestore, firebase } from '../../utils/firebase'
 import { uuid } from '../../utils/uuid'
 
 export const deleteWorkspace = async ({ uid, workspaceId }) => {
