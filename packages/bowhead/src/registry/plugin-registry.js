@@ -1,16 +1,16 @@
 const PLUGIN_TYPES = {
     UNAUTHENTICATED_ROUTE: 'plugin-type-unauthenticated-route',
     AUTHENTICATED_ROUTE: 'plugin-type-authenticated-route',
-    MENU_ITEM: {
-        POP_OVER: 'plugin-type-menu-item-popover',
-        SIDEBAR: 'plugin-type-menu-item-sidebar'
-    },
+    MENU_ITEM_POPOVER: 'plugin-type-menu-item-popover',
+    MENU_ITEM_SIDEBAR: 'plugin-type-menu-item-SIDEBAR',
     REDUCER: 'plugin-type-reducer',
     THEME: 'plugin-type-theme',
-    FIRESTORE_LISTENER: 'plugin-type-firestore-listener'
+    FIRESTORE_LISTENER: 'plugin-type-firestore-listener',
+    BOWHEAD_API_CONFIGURATION: 'plugin-type-bowhead-configuration',
+    CUSTOM: 'plugin-type-custom'
 };
 
-export class PluginRegistry {
+class PluginRegistry {
     constructor() {
         this.plugins = {};
         this.listeners = [];
@@ -21,10 +21,18 @@ export class PluginRegistry {
     }
 
     register(name, plugin) {
+        if (!name || !plugin) {
+            console.error(`All plugins must have a unique name and plugin configuration. Name: ${name}`, plugin)
+            return;
+        }
+        if (!plugin.type || !Object.values(PLUGIN_TYPES).includes(plugin.type)) {
+            console.error(`Plugin configurations must be one of pluginRegistry.PLUGIN_TYPES. Name: ${name}`, plugin)
+            return;
+        }
         this.plugins[`${plugin.type}-${name}`] = plugin;
         if (this.listeners.length > 0) {
-            const pluginData = Object.values(this.plugins)
-            this.listeners.forEach(listener => listener(pluginData))
+            const plugins = Object.values(this.plugins)
+            this.listeners.forEach(listener => listener(plugins))
         }
     }
 

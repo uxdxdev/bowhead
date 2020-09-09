@@ -5,7 +5,7 @@ import { useStyles } from './billing-styles'
 import { ButtonBox } from "../button-box";
 import { ButtonLoadingSpinner } from "../button-loading-spinner";
 import { useHistory } from 'react-router-dom'
-import * as constants from "../../utils/constants";
+import { STRIPE_SUBSCRIPTION_STATUS } from "../../utils/constants";
 import { createStripeCustomerPortalSession } from '../../api/stripe'
 
 const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
@@ -89,20 +89,20 @@ const mapStateToProps = (state) => {
   const stripeData = stripe && stripe[stripeCustomerId];
   const planId = stripeData?.planId
   const status = stripeData?.status
-  const isSubscribed = stripeData?.status === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
-    stripeData?.status === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
+  const isSubscribed = stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
+    stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
 
   let plan = '';
   switch (planId) {
-    case process.env.REACT_APP_SUBSCRIPTION_PLAN_BASIC: {
+    case process.env.STRIPE_SUBSCRIPTION_PLAN_BASIC: {
       plan = 'Basic';
       break;
     }
-    case process.env.REACT_APP_SUBSCRIPTION_PLAN_PRO: {
+    case process.env.STRIPE_SUBSCRIPTION_PLAN_PRO: {
       plan = 'Pro';
       break;
     }
-    case process.env.REACT_APP_SUBSCRIPTION_PLAN_ENTERPRISE: {
+    case process.env.STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE: {
       plan = 'Enterprise';
       break;
     }

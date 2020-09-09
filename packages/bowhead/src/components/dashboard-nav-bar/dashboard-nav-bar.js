@@ -61,7 +61,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const menuItemPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.POP_OVER)
+  const menuItemPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM_POPOVER)
 
   menuItemPlugins.unshift({
     path: "/account",

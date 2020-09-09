@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import * as constants from '../utils/constants'
+import { STRIPE_SUBSCRIPTION_STATUS } from '@mortond/bowhead'
+import { FIRESTORE_COLLECTIONS } from '../utils/constants'
 import { setActiveWorkspace } from '../actions/workspaceActions'
 import {
     DoubleArrow as DoubleArrowIcon,
@@ -30,8 +31,8 @@ const useInit = () => {
     const role = workspaces && workspaces[activeWorkspaceId]?.role
     const isWorkspaceOwner = role === 'owner'
     const subscriptionStatus = stripe && stripe[stripeCustomerId]?.status
-    const isSubscribed = subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
-        subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE
+    const isSubscribed = subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
+        subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.ACTIVE
 
     useEffect(() => {
         const firstWorkspace = workspaces && Object.keys(workspaces)[0];
@@ -42,9 +43,9 @@ const useInit = () => {
     // register new workspace listeners when new workspaces are created
     useEffect(() => {
         workspaces && Object.keys(workspaces).forEach((workspaceId) => {
-            pluginRegistry.register(`firestore-listener-${constants.FIRESTORE_COLLECTIONS.WORKSPACES}-${workspaceId}`, {
+            pluginRegistry.register(`firestore-listener-${FIRESTORE_COLLECTIONS.WORKSPACES}-${workspaceId}`, {
                 type: PLUGIN_TYPES.FIRESTORE_LISTENER,
-                collection: constants.FIRESTORE_COLLECTIONS.WORKSPACES,
+                collection: FIRESTORE_COLLECTIONS.WORKSPACES,
                 doc: workspaceId,
             })
         })
@@ -52,9 +53,9 @@ const useInit = () => {
 
     // register userWorkspaces listener
     useEffect(() => {
-        pluginRegistry.register(`firestore-listener-${constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES}`, {
+        pluginRegistry.register(`firestore-listener-${FIRESTORE_COLLECTIONS.USER_WORKSPACES}`, {
             type: PLUGIN_TYPES.FIRESTORE_LISTENER,
-            collection: constants.FIRESTORE_COLLECTIONS.USER_WORKSPACES,
+            collection: FIRESTORE_COLLECTIONS.USER_WORKSPACES,
             doc: uid
         })
     }, [uid]);
@@ -76,7 +77,7 @@ const useInit = () => {
             });
 
         pluginRegistry.register('menu-item-workspaces', {
-            type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+            type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
             menuIcon: AccountTreeIcon,
             text: "Workspaces",
             items: workspacesCollection,

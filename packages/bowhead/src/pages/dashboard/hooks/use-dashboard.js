@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from 'react'
-import * as constants from "../../../utils/constants";
+import { STRIPE_SUBSCRIPTION_STATUS, FIRESTORE_COLLECTIONS } from "../../../utils/constants";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { pluginRegistry, PLUGIN_TYPES } from "../../../registry/plugin-registry";
 
@@ -22,8 +22,8 @@ const useDashboard = () => {
 
   const [listeners, setListeners] = useState([])
   const subscriptionStatus = stripe && stripe[stripeCustomerId]?.status
-  const isSubscribed = subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
-    subscriptionStatus === constants.STRIPE_SUBSCRIPTION_STATUS.ACTIVE
+  const isSubscribed = subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
+    subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.ACTIVE
 
   useEffect(() => {
     pluginRegistry.setChangeListener((plugins) => {
@@ -33,7 +33,7 @@ const useDashboard = () => {
   }, [])
 
   useFirestoreConnect([...listeners, {
-    collection: constants.FIRESTORE_COLLECTIONS.STRIPE,
+    collection: FIRESTORE_COLLECTIONS.STRIPE,
     doc: stripeCustomerId,
   }])
 

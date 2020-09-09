@@ -22,7 +22,7 @@ export const signOut = () => {
 export const sendSignInEmail = ({ email, ref, data }) => {
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
-        : `${process.env.REACT_APP_NETLIFY_URL}/verify`;
+        : `${process.env.REACT_APP_BOWHEAD_NETLIFY_URL}/verify`;
 
     const url = new URL(urlStr);
 

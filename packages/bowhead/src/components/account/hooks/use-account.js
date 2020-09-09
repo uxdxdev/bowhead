@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import * as constants from "../../../utils/constants"
+import { FIRESTORE_COLLECTIONS } from "../../../utils/constants"
 
 const useAccount = () => {
   const state = useSelector((state) => state);
@@ -12,7 +12,7 @@ const useAccount = () => {
     },
   } = state;
 
-  const isRequestedStripeCustomer = requested[`${constants.FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
+  const isRequestedStripeCustomer = requested[`${FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
   const isLoading = isRequestedStripeCustomer &&
     !(isRequestedStripeCustomer === true)
 

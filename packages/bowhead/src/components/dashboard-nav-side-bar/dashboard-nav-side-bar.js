@@ -31,10 +31,10 @@ const DashboardNavSidebar = ({
   // currently selected menu item 
   const [activeMenuItem, setActiveMenuItem] = useState('')
 
-  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM.SIDEBAR)
+  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM_SIDEBAR)
 
   sidebarMenuItems.unshift({
-    type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+    type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
     menuIcon: DashboardIcon,
     text: "Dashboard",
     path: "/",

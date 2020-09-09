@@ -32,11 +32,19 @@ import {
   Typography,
   Paper,
   Container,
+  Card,
+  CardContent,
+  CardHeader,
 } from "@material-ui/core";
-import { Assessment } from "@material-ui/icons";
+import { Assessment, StarBorder } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   section: {
+    '& .MuiCardContent-root > ul': {
+      margin: 0,
+      padding: 0,
+      listStyle: "none",
+    },
     margin: theme.spacing(10, 0, 10),
     width: "100%",
     alignItems: "center",
@@ -108,6 +116,47 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+
+const tiers = [
+  {
+    title: "Basic",
+    price: "10",
+    description: [
+      "10 Projects",
+      "Unlimited Users",
+      "Live Support",
+      "14 Day Free Trial",
+    ],
+    buttonText: "Get started",
+    buttonVariant: "outlined",
+  },
+  {
+    title: "Pro",
+    subheader: "Most popular",
+    price: "50",
+    description: [
+      "25 Projects",
+      "Unlimited Users",
+      "Live Support",
+      "14 Day Free Trial",
+    ],
+    buttonText: "Get started",
+    buttonVariant: "contained",
+  },
+  {
+    title: "Enterprise",
+    price: "250",
+    description: [
+      "125 Projects",
+      "Unlimited Users",
+      "Live Support",
+      "14 Day Free Trial",
+    ],
+    buttonText: "Get started",
+    buttonVariant: "outlined",
+  },
+];
 
 const LandingPage = () => {
   const classes = useStyles();
@@ -435,6 +484,62 @@ const LandingPage = () => {
             </Grid>
           </Grid>
         </Grid>
+
+        <Grid
+          container
+          component="section"
+          className={classes.section}
+          alignItems="flex-end"
+          spacing={6}
+        >
+          {
+            tiers.map((tier) => (
+              // Enterprise card is full width at sm breakpoint
+              <Grid
+                item
+                key={tier.title}
+                xs={12}
+                sm={tier.title === "Enterprise" ? 12 : 6}
+                md={4}
+              >
+                <Card>
+                  <CardHeader
+                    title={tier.title}
+                    subheader={tier.subheader}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{ align: "center" }}
+                    action={tier.title === "Pro" ? <StarBorder /> : null}
+                  />
+                  <CardContent>
+                    <div className={classes.cardPricing}>
+                      <Typography component="h2" variant="h2">
+                        €{tier.price}
+                      </Typography>
+                      <Typography>/ month</Typography>
+                    </div>
+                    <div className={classes.cardPricing}>
+                      <Button
+                        component={NavLink}
+                        to="/dashboard"
+                        variant={tier.buttonVariant}
+                        color="primary"
+                      >
+                        {tier.buttonText}
+                      </Button>
+                    </div>
+                    <ul>
+                      {tier.description.map((line) => (
+                        <Typography component="li" align="center" key={line}>
+                          {line}
+                        </Typography>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))
+          }
+        </Grid >
 
         {/* FAQ */}
         <Grid component="section" className={classes.section}>

@@ -76,14 +76,14 @@ const App = () => {
     // shell is rendered because when the Bowhead nav bar 
     // and sidebar are mounted the plugin registry is checked
     {
-      type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+      type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
       name: 'menu-item-projects',
       menuIcon: ListIcon,
       text: "Projects",
       path: "/projects",
     },
     {
-      type: PLUGIN_TYPES.MENU_ITEM.POP_OVER,
+      type: PLUGIN_TYPES.MENU_ITEM_POPOVER,
       name: 'menu-item-settings',
       path: "/settings",
       menuIcon: SettingsIcon,
@@ -93,7 +93,7 @@ const App = () => {
     // see src/hooks/use-init.js where this menu item is replaced
     // and child menu items are added for new workspaces
     {
-      type: PLUGIN_TYPES.MENU_ITEM.SIDEBAR,
+      type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
       name: 'menu-item-workspaces',
       menuIcon: AccountTreeIcon,
       text: "Workspaces",
@@ -101,8 +101,22 @@ const App = () => {
     }
   ]
 
+
   plugins.forEach(plugin => {
     pluginRegistry.register(plugin.name, plugin)
+  })
+
+  const bowheadConfig = {
+    api: {
+      deleteStripeCustomer: process.env.REACT_APP_BOWHEAD_API_DELETE_STRIPE_CUSTOMER,
+      createStripeCustomerPortalSession: process.env.REACT_APP_BOWHEAD_API_CREATE_STRIPE_CUSTOMER_PORTAL_SESSION,
+      createStripeCheckoutSession: process.env.REACT_APP_BOWHEAD_API_CREATE_STRIPE_CHECKOUT_SESSION
+    }
+  }
+
+  pluginRegistry.register('bowhead-configuration', {
+    type: PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION,
+    config: bowheadConfig
   })
 
   return (
