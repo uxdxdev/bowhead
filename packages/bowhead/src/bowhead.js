@@ -91,6 +91,9 @@ const Bowhead = () => {
     [prefersDarkMode]
   );
 
+  // VERIFY ENVIRONMENT VARIABLES AT CORRECTLY SET
+
+  // CUSTOM ROUTES CONFIGURATION
   let unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
   const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.AUTHENTICATED_ROUTE)
   const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)

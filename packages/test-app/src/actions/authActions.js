@@ -1,4 +1,4 @@
-import * as constants from "../utils/constants";
+import { AUTH_TYPE } from "../utils/constants";
 import * as firebase from '../api/firebase'
 import {
   updateMemberStatus,
@@ -20,7 +20,7 @@ export const inviteUserSendEmailLink = ({ email, ref, data }) => {
         window.localStorage.setItem("emailForSignIn", email);
 
         // invite
-        if (ref === constants.AUTH_TYPE.INVITE) {
+        if (ref === AUTH_TYPE.INVITE) {
           const { workspaceId } = data;
           return updateMemberStatus({ workspaceId, email, status: "pending" })
         }

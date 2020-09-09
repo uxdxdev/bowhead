@@ -6,7 +6,7 @@ import {
     constants as rfConstants
 } from "redux-firestore";
 import { firebase } from "../utils/firebaseFrontend";
-import * as constants from "../utils/constants";
+import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { Provider } from "react-redux";
 import {
     ReactReduxFirebaseProvider,
@@ -89,7 +89,7 @@ const StoreProvider = ({ children }) => {
         firebase, // authentication data
         createFirestoreInstance, // firestore data
         config: {
-            userProfile: constants.FIRESTORE_COLLECTIONS.USERS,
+            userProfile: FIRESTORE_COLLECTIONS.USERS,
             useFirestoreForProfile: true,
         },
         dispatch: store.dispatch,

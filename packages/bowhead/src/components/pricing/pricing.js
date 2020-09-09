@@ -17,7 +17,7 @@ const tiers = [
     {
         title: "Basic",
         price: "10",
-        priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_BASIC,
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
         description: [
             "10 Projects",
             "Unlimited Users",
@@ -31,7 +31,7 @@ const tiers = [
         title: "Pro",
         subheader: "Most popular",
         price: "50",
-        priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_PRO,
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
         description: [
             "25 Projects",
             "Unlimited Users",
@@ -44,7 +44,7 @@ const tiers = [
     {
         title: "Enterprise",
         price: "250",
-        priceId: process.env.REACT_APP_SUBSCRIPTION_PLAN_ENTERPRISE,
+        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
         description: [
             "125 Projects",
             "Unlimited Users",
@@ -57,16 +57,14 @@ const tiers = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-    "@global": {
-        ul: {
-            margin: 0,
-            padding: 0,
-            listStyle: "none",
-        },
-    },
     section: {
         alignItems: "center",
         justifyContent: "center",
+        '& .MuiCardContent-root > ul': {
+            margin: 0,
+            padding: 0,
+            listStyle: "none",
+        }
     },
     cardPricing: {
         display: "flex",
@@ -84,12 +82,12 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
     const successUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `${process.env.REACT_APP_NETLIFY_URL}/dashboard`;
+            : `${process.env.REACT_APP_BOWHEAD_NETLIFY_URL}/dashboard`;
 
     const cancelUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `${process.env.REACT_APP_NETLIFY_URL}/dashboard`;
+            : `${process.env.REACT_APP_BOWHEAD_NETLIFY_URL}/dashboard`;
 
 
     const handleRedirectToStripe = async (priceId) => {
@@ -106,13 +104,14 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
             setIsRedirecting(false)
         })
 
-        if (data.id) {
+        if (data && data.id) {
             await stripeInstance.redirectToCheckout({
                 sessionId: data.id
             }).catch(error => {
                 console.log(error)
             });
         } else {
+            console.warn('Error calling createStripeCheckoutSession(). Check the Bowhead configuration for this API endpoint. e.g. PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION')
             setIsRedirecting(false)
         }
 

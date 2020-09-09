@@ -7,12 +7,6 @@ export const FIRESTORE_COLLECTIONS = {
   USER_WORKSPACES: 'userWorkspaces',
 };
 
-export const STRIPE_SUBSCRIPTION_STATUS = {
-  TRIALING: 'trialing',
-  ACTIVE: 'active',
-  CANCELLED: 'cancelled'
-}
-
 export const USER_ROLES = {
   OWNER: 'owner',
   MEMBER: 'member'

@@ -1,6 +1,4 @@
-import { stripe } from '../utils/stripeBackend'
-import { firestore } from '../utils/firebaseBackend';
-import { STRIPE_SUBSCRIPTION_STATUS } from '../utils/constants';
+import { STRIPE_SUBSCRIPTION_STATUS } from './constants';
 
 const isValidStatus = (status) => {
   return status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
@@ -8,24 +6,26 @@ const isValidStatus = (status) => {
     status === STRIPE_SUBSCRIPTION_STATUS.CANCELLED
 }
 
-const dbUpdateSubscriptionByCustomerId = async (data) => {
+export const dbUpdateSubscriptionByCustomerId = async (firestore, data) => {
   const stripeCustomerId = data.customer || null;
   const status = data.status || null;
   const planId = data.plan.id || null;
   const interval = data.plan.interval || null;
-  console.log(status, stripeCustomerId)
+
   if (isValidStatus(status) && stripeCustomerId && planId && interval) {
     if (status === STRIPE_SUBSCRIPTION_STATUS.CANCELLED) {
       // delete stripe customer data from DB
       await firestore.collection("stripe").doc(stripeCustomerId).delete();
-    } else {
+    } else {      
       // update stripe customer data in DB
       await firestore.collection("stripe").doc(stripeCustomerId).set({ status, planId, interval }, { merge: true });
     }
+  } else {
+    throw new Error(`dbUpdateSubscriptionByCustomerId(): status:${status} stripeCustomerId:${stripeCustomerId} planId:${planId} interval:${interval}`)
   }
 }
 
-const dbUpdateCustomerData = (data) => {
+export const dbUpdateCustomerData = (firestore, data) => {
 
   const stripeCustomerId = data.customer || null;
   const uid = data.client_reference_id || null;
@@ -57,39 +57,6 @@ const dbUpdateCustomerData = (data) => {
 
     return batch.commit()
   } else {
-    throw new Error('dbUpdateCustomerData() : no uid provided')
+    throw new Error(`dbUpdateCustomerData(): stripeCustomerId: ${stripeCustomerId} uid:${uid}`)
   }
-}
-
-export const webhookStripe = async ({ headers, body }) => {
-  const sig = headers['stripe-signature'];
-
-  const endpointSecret = process.env.REACT_APP_STRIPE_WEBHOOK_SIGNING_SECRET;
-  let verifiedEvent;
-  try {
-    verifiedEvent = stripe.webhooks.constructEvent(body, sig, endpointSecret);
-  } catch (error) {
-    // invalid event
-    return;
-  }
-
-  switch (verifiedEvent.type) {
-    case 'customer.subscription.created':
-      await dbUpdateSubscriptionByCustomerId(verifiedEvent.data.object)
-      break;
-    case 'customer.subscription.updated':
-      await dbUpdateSubscriptionByCustomerId(verifiedEvent.data.object)
-      break;
-    case 'customer.subscription.deleted':
-      await dbUpdateSubscriptionByCustomerId(verifiedEvent.data.object)
-      break;
-    case 'checkout.session.completed':
-      await dbUpdateCustomerData(verifiedEvent.data.object)
-      break;
-    default:
-      // unexpected event type
-      return;
-  }
-
-  return true;
 }

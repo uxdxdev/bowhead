@@ -10,6 +10,7 @@
     "build": "microbundle --format es,cjs --target node",
     "start": "microbundle watch --format es,cjs --target node",
     "test": "jest --coverage --verbose --color --passWithNoTests",
+    "test:watch": "jest --watch --verbose --color",
     "view:coverage": "serve coverage/lcov-report",
     "lint": "eslint .",
     "clean": "rm -rf node_modules dist"

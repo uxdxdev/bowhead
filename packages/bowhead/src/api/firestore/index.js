@@ -1,9 +1,9 @@
-import * as constants from "../../utils/constants";
+import { FIRESTORE_COLLECTIONS } from "../../utils/constants";
 import { firestore } from '../../utils/firebaseFrontend'
 
 export const verifyUserSignInUpdate = ({ uid, email }) => {
     return firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
+        .collection(FIRESTORE_COLLECTIONS.USERS)
         .doc(uid)
         .set({
             email,
@@ -15,7 +15,7 @@ export const verifyUserSignInUpdate = ({ uid, email }) => {
 export const deleteUserAccountAndData = async uid => {
 
     const userDataRef = firestore
-        .collection(constants.FIRESTORE_COLLECTIONS.USERS)
+        .collection(FIRESTORE_COLLECTIONS.USERS)
         .doc(uid);
 
     const userDataDoc = await userDataRef.get();
@@ -28,7 +28,7 @@ export const deleteUserAccountAndData = async uid => {
         if (stripeCustomerId) {
             // delete stripe customer data
             const stripeCustomerDataRef = firestore
-                .collection(constants.FIRESTORE_COLLECTIONS.STRIPE)
+                .collection(FIRESTORE_COLLECTIONS.STRIPE)
                 .doc(stripeCustomerId);
             batch.delete(stripeCustomerDataRef)
         }

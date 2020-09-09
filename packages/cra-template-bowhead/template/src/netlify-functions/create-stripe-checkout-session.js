@@ -1,4 +1,4 @@
-import { functions } from '@mortond/bowhead-functions'
+import { functions } from '../utils/bowheadFunctions'
 
 exports.handler = async (event, context, callback) => {
     return await functions.createStripeCheckoutSession({ token: event.queryStringParameters.token, body: event.body })

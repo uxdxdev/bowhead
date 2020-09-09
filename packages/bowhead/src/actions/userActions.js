@@ -1,4 +1,4 @@
-import * as constants from "../utils/constants";
+import { AUTH_TYPE } from "../utils/constants";
 import * as firebase from '../api/firebase'
 import {
   verifyUserSignInUpdate,
@@ -24,7 +24,7 @@ export const verifyUser = () => {
         .then(async result => {
           const uid = result.user.uid;
 
-          if (constants.AUTH_TYPE.SIGN_IN) {
+          if (AUTH_TYPE.SIGN_IN) {
             await verifyUserSignInUpdate({ uid, email })
               .then(() => {
                 dispatch(userSlice.verifyUserSuccess());
@@ -46,7 +46,7 @@ export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
     dispatch(userSlice.deleteUser());
 
     // stripe
-    stripeCustomerId && await deleteStripeCustomer(stripeCustomerId)
+    await deleteStripeCustomer(stripeCustomerId)
       .then((response) => {
         if (!response.ok) {
           return dispatch(userSlice.deleteUserError({ error: 'failed to delete stripe customer data' }));

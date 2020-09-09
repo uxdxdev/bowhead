@@ -1,4 +1,4 @@
-import * as constants from "../utils/constants";
+import { AUTH_TYPE } from "../utils/constants";
 import * as firebase from '../api/firebase'
 import {
   verifyUserInviteUpdate
@@ -27,7 +27,7 @@ export const verifyInvitedUser = () => {
           const uid = result.user.uid;
 
           // invite
-          if (ref === constants.AUTH_TYPE.INVITE) {
+          if (ref === AUTH_TYPE.INVITE) {
             const workspaceId = params.get("workspaceId");
             const workspaceName = params.get("workspaceName");
 
