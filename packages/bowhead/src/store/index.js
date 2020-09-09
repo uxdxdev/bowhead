@@ -5,7 +5,6 @@ import {
     createFirestoreInstance,
     constants as rfConstants
 } from "redux-firestore";
-import { firebase } from "../utils/firebaseFrontend";
 import { FIRESTORE_COLLECTIONS } from "../utils/constants";
 import { Provider } from "react-redux";
 import {
@@ -19,7 +18,7 @@ import { firebaseReducer } from "react-redux-firebase";
 import authSlice from '../store/authSlice'
 import userSlice from '../store/userSlice'
 
-const getStore = () => {
+const getStore = (firebase) => {
 
     // see: https://redux-toolkit.js.org/usage/usage-guide#use-with-react-redux-firebase
     const middleware = [
@@ -82,7 +81,9 @@ const getStore = () => {
 
 const StoreProvider = ({ children }) => {
 
-    const store = getStore()
+    const firebase = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.firebase
+
+    const store = getStore(firebase)
 
     // see: https://github.com/prescottprue/react-redux-firebase
     const reactReduxFirebaseConfig = {

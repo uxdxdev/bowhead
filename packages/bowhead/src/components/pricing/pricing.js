@@ -9,52 +9,12 @@ import {
 } from "@material-ui/core";
 import { Star as StarBorder } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import { stripe } from '../../utils/stripeFrontend'
+import { getStripe } from '../../utils/stripe'
 import { createStripeCheckoutSession } from '../../api/stripe'
 import { connect } from "react-redux";
+import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
-const tiers = [
-    {
-        title: "Basic",
-        price: "10",
-        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
-        description: [
-            "10 Projects",
-            "Unlimited Users",
-            "Live Support",
-            "14 Day Free Trial",
-        ],
-        buttonText: "Get started",
-        buttonVariant: "outlined",
-    },
-    {
-        title: "Pro",
-        subheader: "Most popular",
-        price: "50",
-        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
-        description: [
-            "25 Projects",
-            "Unlimited Users",
-            "Live Support",
-            "14 Day Free Trial",
-        ],
-        buttonText: "Get started",
-        buttonVariant: "contained",
-    },
-    {
-        title: "Enterprise",
-        price: "250",
-        priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
-        description: [
-            "125 Projects",
-            "Unlimited Users",
-            "Live Support",
-            "14 Day Free Trial",
-        ],
-        buttonText: "Get started",
-        buttonVariant: "outlined",
-    },
-];
+
 
 const useStyles = makeStyles((theme) => ({
     section: {
@@ -79,43 +39,50 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
 
     const [isRedirecting, setIsRedirecting] = useState(false)
 
-    const successUrl =
+    const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.app
+
+    const dashboardUrl =
         process.env.NODE_ENV === "development"
             ? `http://localhost:8888/dashboard`
-            : `${process.env.REACT_APP_BOWHEAD_NETLIFY_URL}/dashboard`;
-
-    const cancelUrl =
-        process.env.NODE_ENV === "development"
-            ? `http://localhost:8888/dashboard`
-            : `${process.env.REACT_APP_BOWHEAD_NETLIFY_URL}/dashboard`;
-
+            : `${app.productionUrl}/dashboard`;
 
     const handleRedirectToStripe = async (priceId) => {
         setIsRedirecting(true)
-        const stripeInstance = await stripe;
         const data = await createStripeCheckoutSession({
             stripeCustomerId,
             priceId,
-            successUrl,
-            cancelUrl,
+            successUrl: dashboardUrl,
+            cancelUrl: dashboardUrl,
             email,
             uid
         }).catch(() => {
             setIsRedirecting(false)
         })
 
+
         if (data && data.id) {
-            await stripeInstance.redirectToCheckout({
+            const stripe = await getStripe();
+            stripe.redirectToCheckout({
                 sessionId: data.id
             }).catch(error => {
                 console.log(error)
             });
         } else {
-            console.warn('Error calling createStripeCheckoutSession(). Check the Bowhead configuration for this API endpoint. e.g. PLUGIN_TYPES.BOWHEAD_API_CONFIGURATION')
+            console.warn('Error calling createStripeCheckoutSession(). Check the Bowhead configuration for this API endpoint. e.g. PLUGIN_TYPES.BOWHEAD_CONFIGURATION')
             setIsRedirecting(false)
         }
 
     };
+
+    const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.plans
+
+    if (!plans?.basic || !plans?.pro || !plans?.enterprise) return 'Please provide a configuration for Stripe subscription plans'
+
+    const tiers = [
+        plans.basic,
+        plans.pro,
+        plans.enterprise
+    ];
 
     return (
         <Grid

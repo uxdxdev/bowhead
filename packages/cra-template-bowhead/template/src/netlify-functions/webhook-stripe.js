@@ -1,4 +1,4 @@
-import { functions } from '../utils/bowheadFunctions'
+import { functions } from '../utils/functions'
 
 exports.handler = async (event, context, callback) => {
   const stripeSignature = event.headers['stripe-signature'];

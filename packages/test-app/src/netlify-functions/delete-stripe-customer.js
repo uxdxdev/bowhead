@@ -1,7 +1,8 @@
-import { functions } from '../utils/bowheadFunctions'
+import { functions } from '../utils/functions'
 
 exports.handler = async (event, context, callback) => {
-    return await functions.deleteStripeCustomer({ token: event.queryStringParameters.token, body: event.body })
+    const stripeCustomerId = event.body.stripeCustomerId;
+    return await functions.deleteStripeCustomer({ token: event.queryStringParameters.token, stripeCustomerId })
         .then(() => {
             callback(null, { statusCode: 200 })
         }).catch(error => {

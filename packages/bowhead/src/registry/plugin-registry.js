@@ -6,7 +6,7 @@ const PLUGIN_TYPES = {
     REDUCER: 'plugin-type-reducer',
     THEME: 'plugin-type-theme',
     FIRESTORE_LISTENER: 'plugin-type-firestore-listener',
-    BOWHEAD_API_CONFIGURATION: 'plugin-type-bowhead-configuration',
+    BOWHEAD_CONFIGURATION: 'plugin-type-bowhead-configuration',
     CUSTOM: 'plugin-type-custom'
 };
 

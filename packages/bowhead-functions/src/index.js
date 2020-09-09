@@ -29,9 +29,9 @@ class BowheadFunctions {
         try {
             verifiedEvent = this._stripe.webhooks.constructEvent(rawBody, stripeSignature, this._stripeWebhookSigningSecret);
         } catch (error) {
-            // invalid event
-            throw new Error(error.message)
-        }        
+            // invalid event            
+            return Promise.reject(error.message)
+        }
 
         switch (verifiedEvent.type) {
             case 'customer.subscription.created':
@@ -48,17 +48,16 @@ class BowheadFunctions {
                 break;
             default:
                 // unexpected event type
-                return;
+                return Promise.resolve('unexpected event type');
         }
 
-        return true;
+        return Promise.resolve('webhook done');
     }
 
-    async deleteStripeCustomer({ token, body }) {
+    async deleteStripeCustomer({ token, stripeCustomerId }) {
         const user = await this._firebase.verifyToken(token);
         if (!user) return this._requestUnauthourised()
-        const data = JSON.parse(body);
-        return await this._stripe.customers.del(data);
+        return await this._stripe.customers.del(stripeCustomerId);
     }
 
     async createStripeCustomerPortalSession({ token, body }) {
