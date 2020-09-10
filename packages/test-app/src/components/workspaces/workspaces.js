@@ -13,7 +13,7 @@ const Settings = () => {
   const { isLoading, isWorkspaceOwner, isSubscribed } = useWorkspaces();
 
   if (!isSubscribed) {
-    return <div>Please subscribe to access settings</div>
+    return <div>Please subscribe to access Workspaces</div>
   }
 
   return isLoading ? (

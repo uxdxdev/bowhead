@@ -5,10 +5,10 @@
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
   "source": "src/index.js",
-  "main": "dist/index.js",
+  "module": "dist/bowhead.js",
   "scripts": {
-    "build": "microbundle --format cjs --jsx React.createElement --jsxFragment React.Fragment",
-    "start": "microbundle watch --format cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "build": "microbundle --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
+    "start": "microbundle watch --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
     "test": "jest --coverage --verbose --color --passWithNoTests",
     "view:coverage": "serve coverage/lcov-report",
     "lint": "eslint .",
@@ -29,7 +29,6 @@
     "redux-firestore": "^0.13.0"
   },
   "devDependencies": {
-    "eslint": "^7.7.0",
     "@mortond/eslint-config": "^0.2.17",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",

@@ -76,13 +76,8 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
 
     const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.plans
 
-    if (!plans?.basic || !plans?.pro || !plans?.enterprise) return 'Please provide a configuration for Stripe subscription plans'
+    if (!plans || plans.length <= 0) return 'Please provide a configuration for Stripe subscription plans'
 
-    const tiers = [
-        plans.basic,
-        plans.pro,
-        plans.enterprise
-    ];
 
     return (
         <Grid
@@ -93,7 +88,7 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
             spacing={6}
         >
             {
-                tiers.map((tier) => (
+                plans.map((tier) => (
                     // Enterprise card is full width at sm breakpoint
                     <Grid
                         item
