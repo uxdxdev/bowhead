@@ -1,9 +1,9 @@
-import { functions } from '../utils/functions'
+import { bowhead } from '../functions-utils/bowhead'
 
 exports.handler = async (event, context, callback) => {
   const stripeSignature = event.headers['stripe-signature'];
 
-  return await functions.webhookStripe({ stripeSignature, rawBody: event.body })
+  return await bowhead.webhookStripe({ stripeSignature, rawBody: event.body })
     .then(() => {
       callback(null, { statusCode: 200 })
     }).catch(error => {

@@ -13,5 +13,5 @@ const config = {
     }
 }
 
-const functions = new BowheadFunctions(config);
-export { functions };
+const bowhead = new BowheadFunctions(config);
+export { bowhead };
