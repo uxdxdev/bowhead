@@ -5,10 +5,10 @@
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
   "source": "src/index.js",
-  "main": "dist/index.js",
+  "module": "dist/bowhead-functions.js",
   "scripts": {
-    "build": "microbundle  --format cjs --target node",
-    "start": "microbundle watch --format cjs --target node",
+    "build": "microbundle --format es --no-compress",
+    "start": "microbundle watch --format es --no-compress",
     "test": "jest --coverage --verbose --color --passWithNoTests",
     "test:watch": "jest --watch --verbose --color",
     "view:coverage": "serve coverage/lcov-report",

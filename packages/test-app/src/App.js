@@ -167,8 +167,8 @@ const App = () => {
       createStripeCheckoutSession: process.env.REACT_APP_BOWHEAD_API_CREATE_STRIPE_CHECKOUT_SESSION
     },
     // Provide information for each Stripe subscription
-    plans: {
-      basic: {
+    plans: [
+      {
         title: "Basic",
         price: "10",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
@@ -183,7 +183,7 @@ const App = () => {
         // https://material-ui.com/api/button/#props
         buttonVariant: "outlined",
       },
-      pro: {
+      {
         title: "Pro",
         subheader: "Most popular",
         price: "50",
@@ -197,7 +197,7 @@ const App = () => {
         buttonText: "Get started",
         buttonVariant: "contained",
       },
-      enterprise: {
+      {
         title: "Enterprise",
         price: "250",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
@@ -210,7 +210,7 @@ const App = () => {
         buttonText: "Get started",
         buttonVariant: "outlined",
       }
-    },
+    ],
     // Provide initialised Firebase, Firestore, and Stripe instances
     firebase: firebase,
     firestore: firestore,

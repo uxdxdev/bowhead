@@ -20,7 +20,7 @@ if (sh.mkdir('-p', './packages/cra-template-bowhead/template').code !== 0) {
 }
 
 // copy directories from test-app to cra-template-bowhead/template
-const directories = ['config', 'public', 'scripts', 'src']
+const directories = ['config', 'public', 'scripts', 'src', 'functions-netlify', 'functions-utils']
 directories.forEach(directory => {
     if (sh.cp('-r', `./packages/test-app/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
         sh.echo('Error: Copying bowhead directories to template directory');
