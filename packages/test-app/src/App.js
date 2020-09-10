@@ -1,10 +1,9 @@
 import React, { useMemo } from "react";
 import { Bowhead, PLUGIN_TYPES, pluginRegistry } from "@mortond/bowhead";
 import { LandingPage, Terms, Invite, DashboardRoot } from './pages'
-import { Projects, ProjectDetails, Settings } from './components'
+import { Projects, ProjectDetails, Workspaces } from './components'
 import {
   List as ListIcon,
-  Settings as SettingsIcon,
   AccountTree as AccountTreeIcon
 } from "@material-ui/icons";
 import { createMuiTheme, } from "@material-ui/core/styles";
@@ -120,9 +119,9 @@ const App = () => {
     },
     {
       type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
-      name: 'route-settings',
-      path: '/settings',
-      component: Settings,
+      name: 'route-workspaces',
+      path: '/workspaces',
+      component: Workspaces,
     },
     // menu items should be registered before the Bowhead
     // shell is rendered because when the Bowhead nav bar 
@@ -136,10 +135,10 @@ const App = () => {
     },
     {
       type: PLUGIN_TYPES.MENU_ITEM_POPOVER,
-      name: 'menu-item-settings',
-      path: "/settings",
-      menuIcon: SettingsIcon,
-      text: 'Settings'
+      name: 'menu-item-workspaces',
+      path: "/workspaces",
+      menuIcon: AccountTreeIcon,
+      text: 'Workspaces'
     },
     // add "Workspaces" menu item to sidebar when app is loaded
     // see src/hooks/use-init.js where this menu item is replaced
@@ -149,7 +148,7 @@ const App = () => {
       name: 'menu-item-workspaces',
       menuIcon: AccountTreeIcon,
       text: "Workspaces",
-      path: '/projects'
+      path: '/workspaces'
     }
   ]
 

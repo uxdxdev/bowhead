@@ -7,8 +7,8 @@
   "source": "src/index.js",
   "main": "dist/index.js",
   "scripts": {
-    "build": "microbundle --format es,cjs --jsx React.createElement --jsxFragment React.Fragment",
-    "start": "microbundle watch --format es,cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "build": "microbundle --format cjs --jsx React.createElement --jsxFragment React.Fragment",
+    "start": "microbundle watch --format cjs --jsx React.createElement --jsxFragment React.Fragment",
     "test": "jest --coverage --verbose --color --passWithNoTests",
     "view:coverage": "serve coverage/lcov-report",
     "lint": "eslint .",
@@ -17,12 +17,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.42",
     "@reduxjs/toolkit": "^1.4.0",
-    "@stripe/stripe-js": "^1.8.0",
-    "eslint": "^7.7.0",
-    "firebase": "^7.17.2",
-    "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
@@ -31,10 +26,10 @@
     "react-redux-firebase": "^3.1.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
-    "redux-firestore": "^0.13.0",
-    "stripe": "^8.84.0"
+    "redux-firestore": "^0.13.0"
   },
   "devDependencies": {
+    "eslint": "^7.7.0",
     "@mortond/eslint-config": "^0.2.17",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",
