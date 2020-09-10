@@ -81,6 +81,7 @@ const useInit = () => {
             menuIcon: AccountTreeIcon,
             text: "Workspaces",
             items: workspacesCollection,
+            path: '/workspaces'
         })
     }, [workspaces, activeWorkspaceId, dispatch, isSubscribed])
 

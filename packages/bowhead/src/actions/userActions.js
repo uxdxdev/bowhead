@@ -46,7 +46,7 @@ export const deleteCurrentUserAccount = ({ uid, stripeCustomerId }) => {
     dispatch(userSlice.deleteUser());
 
     // stripe
-    await deleteStripeCustomer(stripeCustomerId)
+    stripeCustomerId && await deleteStripeCustomer(stripeCustomerId)
       .then((response) => {
         if (!response.ok) {
           return dispatch(userSlice.deleteUserError({ error: 'failed to delete stripe customer data' }));

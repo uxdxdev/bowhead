@@ -7,8 +7,8 @@
   "source": "src/index.js",
   "main": "dist/index.js",
   "scripts": {
-    "build": "microbundle --format es,cjs --target node",
-    "start": "microbundle watch --format es,cjs --target node",
+    "build": "microbundle  --format cjs --target node",
+    "start": "microbundle watch --format cjs --target node",
     "test": "jest --coverage --verbose --color --passWithNoTests",
     "test:watch": "jest --watch --verbose --color",
     "view:coverage": "serve coverage/lcov-report",

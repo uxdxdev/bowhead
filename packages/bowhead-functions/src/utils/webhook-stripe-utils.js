@@ -16,12 +16,10 @@ export const dbUpdateSubscriptionByCustomerId = async (firestore, data) => {
     if (status === STRIPE_SUBSCRIPTION_STATUS.CANCELLED) {
       // delete stripe customer data from DB
       await firestore.collection("stripe").doc(stripeCustomerId).delete();
-    } else {      
+    } else {
       // update stripe customer data in DB
       await firestore.collection("stripe").doc(stripeCustomerId).set({ status, planId, interval }, { merge: true });
     }
-  } else {
-    throw new Error(`dbUpdateSubscriptionByCustomerId(): status:${status} stripeCustomerId:${stripeCustomerId} planId:${planId} interval:${interval}`)
   }
 }
 
