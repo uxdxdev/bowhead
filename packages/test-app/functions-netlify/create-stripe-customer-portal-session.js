@@ -1,7 +1,7 @@
-import { functions } from '../utils/functions'
+import { bowhead } from '../functions-utils/bowhead'
 
 exports.handler = async (event, context, callback) => {
-    return await functions.createStripeCheckoutSession({ token: event.queryStringParameters.token, body: event.body })
+    return await bowhead.createStripeCustomerPortalSession({ token: event.queryStringParameters.token, body: event.body })
         .then((result) => {
             callback(null, { statusCode: 200, body: JSON.stringify(result) })
         }).catch(error => {
