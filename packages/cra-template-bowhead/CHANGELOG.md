@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.2...@mortond/cra-template-bowhead@0.4.3) (2020-09-11)
+
+
+### Bug Fixes
+
+* **test-app:** updates for env variables ([0a00f26](https://github.com/daithimorton/bowhead/commit/0a00f261d84eea14467a5e652048b43c7f78f380))
+
+
+
+
+
 ## [0.4.2](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.1...@mortond/cra-template-bowhead@0.4.2) (2020-09-11)
 
 **Note:** Version bump only for package @mortond/cra-template-bowhead
