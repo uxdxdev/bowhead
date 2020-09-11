@@ -9,7 +9,7 @@ const deleteStripeCustomer = async (stripeCustomerId) => {
     }
 
     const token = await getToken();
-    return fetch(`${api.deleteStripeCustomer}?token = ${token} `, {
+    return fetch(`${api.deleteStripeCustomer}?token=${token} `, {
         method: 'POST',
         body: JSON.stringify({ stripeCustomerId })
     })
@@ -23,7 +23,7 @@ const createStripeCustomerPortalSession = async (stripeCustomerId) => {
     }
 
     const token = await getToken();
-    return fetch(`${api.createStripeCustomerPortalSession}?token = ${token} `, {
+    return fetch(`${api.createStripeCustomerPortalSession}?token=${token} `, {
         method: 'POST',
         body: JSON.stringify({ customer: stripeCustomerId })
     }).then(response => response.json())
@@ -45,7 +45,7 @@ const createStripeCheckoutSession = async ({
     }
 
     const token = await getToken();
-    return fetch(`${api.createStripeCheckoutSession}?token = ${token} `, {
+    return fetch(`${api.createStripeCheckoutSession}?token=${token} `, {
         method: 'POST',
         body: JSON.stringify({
             ...(stripeCustomerId && { customer: stripeCustomerId }),
