@@ -4,21 +4,18 @@
 
 > The bowhead whale is a species of baleen whale belonging to the family Balaenidae and the only living representative of the genus Balaena. It is the only baleen whale endemic to the Arctic and subarctic waters.
 
-Bowhead is a Create-React-App template for fast MicroSaas prototyping.
+Bowhead is a ReactJS component you can use to speed up Software-as-a-service prototyping.
 
 ## Contributing
 
-- Read the code of conduct  
+- Read the [Code of conduct](https://github.com/daithimorton/bowhead/blob/master/CODE-OF-CONDUCT.md)
 
-[Code of conduct](https://github.com/daithimorton/bowhead/blob/master/CODE-OF-CONDUCT.md)
-
-- Read the contributing guide  
-
-[Contributing guide](https://github.com/daithimorton/bowhead/blob/master/CONTRIBUTING.md)
+- Read the [Contributing guide](https://github.com/daithimorton/bowhead/blob/master/CONTRIBUTING.md)
 
 ## Setup
 
-- Update `packages/test-app/.env`
+- Clone this repo
+- Configure the testing application [here](https://github.com/daithimorton/bowhead/tree/master/packages/test-app)
 - Start the project
 ```bash
 cd bowhead
