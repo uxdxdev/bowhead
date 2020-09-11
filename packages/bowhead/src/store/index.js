@@ -81,7 +81,7 @@ const getStore = (firebase) => {
 
 const StoreProvider = ({ children }) => {
 
-    const firebase = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.firebase
+    const firebase = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.firebase
 
     const store = getStore(firebase)
 

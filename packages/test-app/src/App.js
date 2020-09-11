@@ -81,44 +81,44 @@ const App = () => {
     // unauthenticated routes are available outside the
     // dashboard routes
     {
-      type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_UNAUTHENTICATED,
       name: 'route-landing-page',
       path: '/',
       component: LandingPage,
     },
     {
-      type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_UNAUTHENTICATED,
       name: 'route-terms',
       path: '/terms',
       component: Terms,
     },
     {
-      type: PLUGIN_TYPES.UNAUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_UNAUTHENTICATED,
       name: 'route-invite',
       path: '/invite',
       component: Invite,
     },
     // authenticated routes are available at /dashboard/*
     {
-      type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_AUTHENTICATED,
       name: 'route-dashboard-root',
       path: '/',
       component: DashboardRoot,
     },
     {
-      type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_AUTHENTICATED,
       name: 'route-projects',
       path: '/projects',
       component: Projects,
     },
     {
-      type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_AUTHENTICATED,
       name: 'route-project-details',
       path: '/projects/:id',
       component: ProjectDetails,
     },
     {
-      type: PLUGIN_TYPES.AUTHENTICATED_ROUTE,
+      type: PLUGIN_TYPES.ROUTE_AUTHENTICATED,
       name: 'route-workspaces',
       path: '/workspaces',
       component: Workspaces,
@@ -127,14 +127,14 @@ const App = () => {
     // shell is rendered because when the Bowhead nav bar 
     // and sidebar are mounted the plugin registry is checked
     {
-      type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
+      type: PLUGIN_TYPES.LINK_SIDEBAR,
       name: 'menu-item-projects',
       menuIcon: ListIcon,
       text: "Projects",
       path: "/projects",
     },
     {
-      type: PLUGIN_TYPES.MENU_ITEM_POPOVER,
+      type: PLUGIN_TYPES.LINK_POPOVER,
       name: 'menu-item-workspaces',
       path: "/workspaces",
       menuIcon: AccountTreeIcon,
@@ -144,11 +144,23 @@ const App = () => {
     // see src/hooks/use-init.js where this menu item is replaced
     // and child menu items are added for new workspaces
     {
-      type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
-      name: 'menu-item-workspaces',
+      type: PLUGIN_TYPES.LINK_SIDEBAR,
+      name: 'link-workspaces',
       menuIcon: AccountTreeIcon,
       text: "Workspaces",
       path: '/workspaces'
+    },
+    {
+      type: PLUGIN_TYPES.LINK_LANDING_PAGE_NAV,
+      name: 'navlink-features',
+      labelText: 'Features',
+      path: '#features'
+    },
+    {
+      type: PLUGIN_TYPES.LINK_LANDING_PAGE_NAV,
+      name: 'navlink-pricing',
+      labelText: 'Pricing',
+      path: '#pricing'
     }
   ]
 
@@ -158,6 +170,7 @@ const App = () => {
 
   const bowheadConfig = {
     app: {
+      name: "Bowhead",
       productionUrl: process.env.REACT_APP_BOWHEAD_PRODUCTION_URL
     },
     // These APIs are required for Bowhead to manage a users stripe subscription
@@ -217,8 +230,8 @@ const App = () => {
     stripe: stripe
   }
 
-  pluginRegistry.register('bowhead-configuration', {
-    type: PLUGIN_TYPES.BOWHEAD_CONFIGURATION,
+  pluginRegistry.register('configuration-bowhead', {
+    type: PLUGIN_TYPES.CONFIGURATION_BOWHEAD,
     config: bowheadConfig
   })
 

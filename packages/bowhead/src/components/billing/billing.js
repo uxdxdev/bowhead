@@ -9,7 +9,7 @@ import { STRIPE_SUBSCRIPTION_STATUS } from "../../utils/constants";
 import { createStripeCustomerPortalSession } from '../../api/stripe'
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
-const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
+const Billing = ({ stripeCustomerId, planTitle, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();
   const history = useHistory();
 
@@ -37,10 +37,10 @@ const Billing = ({ stripeCustomerId, plan, status, isSubscribed }) => {
   return (
     <Paper className={paper} variant="outlined">
       <Typography component="h2" variant="h6">
-        Subsciption
+        Subscription
       </Typography>
 
-      <Typography>{plan || 'Not subscribed to any plan yet.'}</Typography>
+      <Typography>{planTitle || 'Not subscribed to any plan yet.'}</Typography>
 
       {status && <>
         <Typography component="h2" variant="h6">
@@ -93,29 +93,13 @@ const mapStateToProps = (state) => {
   const isSubscribed = stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.TRIALING ||
     stripeData?.status === STRIPE_SUBSCRIPTION_STATUS.ACTIVE;
 
-  const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.plans
+  const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.plans
 
-  let plan = '';
-  switch (planId) {
-    case plans.basic.priceId: {
-      plan = plans.basic.title;
-      break;
-    }
-    case plans.pro.priceId: {
-      plan = plans.pro.title;
-      break;
-    }
-    case plans.enterprise.priceId: {
-      plan = plans.enterprise.title;
-      break;
-    }
-    default:
-      break;
-  }
+  let planTitle = plans.filter(plan => plan.priceId === planId)[0].title
 
   return {
     stripeCustomerId,
-    plan,
+    planTitle,
     status,
     isSubscribed
   };

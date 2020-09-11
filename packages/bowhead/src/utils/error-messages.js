@@ -1,4 +1,32 @@
+export const noAppName = `
+Please provide a name for your application. 
 
+See: https://github.com/daithimorton/bowhead
+
+Example:
+
+const bowheadConfig = {
+    app: {
+      name: 'Bowhead app'
+    },
+    ...
+}
+`
+
+export const noProductionUrl = `
+Production URL is not provided in Bowhead configuration. When this app is deployed, users who are signing in will not be correctly verified. Please provide the URL of the deployed application. 
+
+See: https://github.com/daithimorton/bowhead
+
+Example:
+
+const bowheadConfig = {
+    app: {
+      productionUrl: https://your-awesome-app.com
+    },
+    ...
+}
+`
 
 export const noApiConfiguration = `
 Please provide a configuration defining the required API endpoints. 
@@ -15,10 +43,6 @@ const bowheadConfig = {
   },
   ...
 }
-pluginRegistry.register('bowhead-configuration', {
-  type: PLUGIN_TYPES.BOWHEAD_CONFIGURATION,
-  config: bowheadConfig
-})
 `
 
 export const noFirebaseConfiguration = `
@@ -32,10 +56,6 @@ const bowheadConfig = {
   firebase: firebase,
   ...
 }
-pluginRegistry.register('bowhead-configuration', {
-  type: PLUGIN_TYPES.BOWHEAD_CONFIGURATION,
-  config: bowheadConfig
-})
 `
 
 export const noStripeConfiguration = `
@@ -90,8 +110,4 @@ const bowheadConfig = {
   }
   ...
 }
-pluginRegistry.register('bowhead-configuration', {
-  type: PLUGIN_TYPES.BOWHEAD_CONFIGURATION,
-  config: bowheadConfig
-})
 `

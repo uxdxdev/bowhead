@@ -1,5 +1,6 @@
 import { getFirebase } from '../../utils/firebase'
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
+import { noProductionUrl } from '../../utils/error-messages'
 
 export const deleteCurrentUser = () => {
     return getFirebase()
@@ -22,8 +23,11 @@ export const signOut = () => {
  */
 export const sendSignInEmail = ({ email, ref, data }) => {
 
-    const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.app
+    const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
 
+    if (!app?.productionUrl) {
+        console.error(noProductionUrl)
+    }
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
         : `${app.productionUrl}/verify`;

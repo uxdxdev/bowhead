@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AuthenticatedRoute, AuthIsLoaded } from "./components";
@@ -36,7 +36,7 @@ const getRoutes = ({ routes, isAuthRoute }) => {
 const Bowhead = () => {
 
   // VERIFY ENVIRONMENT VARIABLES ARE CORRECTLY SET
-  let bowheadConfiguration = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config
+  let bowheadConfiguration = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config
 
   if (!bowheadConfiguration?.api) {
     console.error(noApiConfiguration)
@@ -52,8 +52,8 @@ const Bowhead = () => {
   }
 
   // CUSTOM ROUTES CONFIGURATION
-  let unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.UNAUTHENTICATED_ROUTE)
-  const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.AUTHENTICATED_ROUTE)
+  let unAuthenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.ROUTE_UNAUTHENTICATED)
+  const authenticatedRoutes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.ROUTE_AUTHENTICATED)
   const themes = pluginRegistry.getPluginsByType(PLUGIN_TYPES.THEME)
   const theme = themes.length > 0 && themes[0].theme;
 
@@ -73,11 +73,12 @@ const Bowhead = () => {
       </Dashboard>)
   }
 
+  const defaultTheme = createMuiTheme()
 
   return (<>
     {bowheadConfiguration &&
       <ThemeProvider
-        {...(theme && { theme })}
+        theme={theme || defaultTheme}
       >
         <StoreProvider>
           <AuthIsLoaded>

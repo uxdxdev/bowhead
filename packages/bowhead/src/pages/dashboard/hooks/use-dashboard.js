@@ -27,7 +27,7 @@ const useDashboard = () => {
 
   useEffect(() => {
     pluginRegistry.setChangeListener((plugins) => {
-      const pluginListeners = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.FIRESTORE_LISTENER)
+      const pluginListeners = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.LISTENER_FIRESTORE)
       setListeners(pluginListeners)
     })
   }, [])

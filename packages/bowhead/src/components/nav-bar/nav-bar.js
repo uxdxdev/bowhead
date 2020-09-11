@@ -7,7 +7,6 @@ import {
   AppBar,
   Button,
   Toolbar,
-  Typography,
   IconButton,
   ListItem,
   SwipeableDrawer,
@@ -17,6 +16,8 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon, Timeline as TimelineIcon } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
+import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
+import { noAppName } from '../../utils/error-messages'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const NavBar = ({ uid, signOut }) => {
   const classes = useStyles();
 
@@ -48,40 +50,52 @@ const NavBar = ({ uid, signOut }) => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
+  const name = app?.name || 'Default name';
+
+  if (!app?.name) {
+    console.error(noAppName)
+  }
+
+  const linksConfig = pluginRegistry.getPluginsByType(PLUGIN_TYPES.LINK_LANDING_PAGE_NAV)
+
+  const getLinks = (config) => {
+    return config.map((link, index) => (
+      <Link
+        key={index}
+        href={`${link.path}`} className={classes.link}>
+        {link.labelText}
+      </Link>
+    ))
+  }
+
+  const landingPageLinks = linksConfig && linksConfig.length > 0 && getLinks(linksConfig);
+
   return (
     <>
       <CookieNotification />
-      <AppBar
-        position="sticky"
-        elevation={0}
-        variant="outlined"
-        color="inherit"
-      >
+      <AppBar color="inherit">
         <Toolbar className={classes.toolbar}>
           <Hidden smUp>
             {uid ? (
               <>
-                <Typography component="span">
-                  <Button
-                    component={NavLink}
-                    to="/dashboard"
-                    color="primary"
-                    variant="contained"
-                    size="small"
-                  >
-                    Dashboard
-                  </Button>
-                </Typography>
-                <Typography component="span">
-                  <Link
-                    component={NavLink}
-                    to="/signin"
-                    onClick={signOut}
-                    className={classes.link}
-                  >
-                    Sign out
-                  </Link>
-                </Typography>
+                <Button
+                  component={NavLink}
+                  to="/dashboard"
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                >
+                  Dashboard
+                </Button>
+                <Link
+                  component={NavLink}
+                  to="/signin"
+                  onClick={signOut}
+                  className={classes.link}
+                >
+                  Sign out
+                </Link>
               </>
             ) : (
                 <>
@@ -109,61 +123,41 @@ const NavBar = ({ uid, signOut }) => {
               )}
           </Hidden>
 
-          <Typography
-            component="span"
-            variant="h6"
-            className={classes.toolbarTitle}
+          <Link
+            component={NavLink}
+            to="/"
+            onClick={() => window.scrollTo(0, 0)}
+            className={`${classes.link} ${classes.toolbarTitle}`}
+            underline="none"
           >
-            {/* logo link. when clicked scroll to top of the window && if authenticated navigate to /dashboard else / */}
-            <Link
-              component={NavLink}
-              to="/"
-              onClick={() => window.scrollTo(0, 0)}
-              className={classes.link}
-              underline="none"
-            >
-              <TimelineIcon className={classes.icon} /> Bowhead
-            </Link>
-          </Typography>
+            <TimelineIcon className={classes.icon} /> {name}
+          </Link>
+
 
           <Hidden xsDown>
             <nav>
               {uid ? (
                 <>
-                  <Typography component="span">
-                    <Link
-                      component={NavLink}
-                      to="/signin"
-                      onClick={signOut}
-                      className={classes.link}
-                    >
-                      Sign out
-                    </Link>
-                  </Typography>
-                  <Typography component="span">
-                    <Button
-                      component={NavLink}
-                      to="/dashboard"
-                      color="primary"
-                      variant="contained"
-                      size="small"
-                    >
-                      Dashboard
+                  <Link
+                    component={NavLink}
+                    to="/signin"
+                    onClick={signOut}
+                    className={classes.link}
+                  >
+                    Sign out
+                  </Link>
+                  <Button
+                    component={NavLink}
+                    to="/dashboard"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Dashboard
                   </Button>
-                  </Typography>
                 </>
               ) : (
                   <>
-                    <Typography component="span">
-                      <Link href="#features" className={classes.link}>
-                        Features
-                    </Link>
-                    </Typography>
-                    <Typography component="span">
-                      <Link href="#pricing" className={classes.link}>
-                        Pricing
-                    </Link>
-                    </Typography>
+                    {landingPageLinks || null}
                     <Button
                       component={NavLink}
                       to="/signin"
@@ -207,46 +201,38 @@ const NavBar = ({ uid, signOut }) => {
               {uid ? (
                 <>
                   <ListItem>
-                    <Typography component="span">
-                      <Button
-                        component={NavLink}
-                        to="/dashboard"
-                        color="primary"
-                        variant="contained"
-                        size="small"
-                      >
-                        Dashboard
+                    <Button
+                      component={NavLink}
+                      to="/dashboard"
+                      color="primary"
+                      variant="contained"
+                      size="small"
+                    >
+                      Dashboard
                       </Button>
-                    </Typography>
                   </ListItem>
                   <ListItem>
-                    <Typography component="span">
-                      <Link
-                        component={NavLink}
-                        to="/signin"
-                        onClick={signOut}
-                        className={classes.link}
-                      >
-                        Sign out
+                    <Link
+                      component={NavLink}
+                      to="/signin"
+                      onClick={signOut}
+                      className={classes.link}
+                    >
+                      Sign out
                       </Link>
-                    </Typography>
                   </ListItem>
                 </>
               ) : (
                   <>
                     <ListItem>
-                      <Typography component="span">
-                        <Link href="#features" className={classes.link}>
-                          Features
-                      </Link>{" "}
-                      </Typography>
+                      <Link href="#features" className={classes.link}>
+                        Features
+                      </Link>
                     </ListItem>
                     <ListItem>
-                      <Typography component="span">
-                        <Link href="#pricing" className={classes.link}>
-                          Pricing
-                      </Link>{" "}
-                      </Typography>
+                      <Link href="#pricing" className={classes.link}>
+                        Pricing
+                      </Link>
                     </ListItem>
                     <ListItem>
                       <Button
