@@ -19,7 +19,7 @@ Bowhead Create-React-App template for fast MicroSaas prototyping using the [Bowh
 npx create-react-app my-app --template @mortond/cra-template-bowhead
 ```
 
-# Setup 
+# Install 
 
 - Install Firebase CLI https://firebase.google.com/docs/cli
 - Install Netlify CLI https://docs.netlify.com/cli/get-started/
@@ -57,8 +57,58 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 - **DO NOT** overwrite `firestore.rules`
 - Run `firebase login:ci`, login with your browser, and copy the `token` to the `.env` file.
 
-## Netlify
+## Netlify hosting
 
 - Go to https://app.netlify.com/ and connect this projects `GIT` repo as part of the setup
 - `yarn build` will build the CRA app into the `build` directory and Netlify functions to `functions`
 - `yarn deploy` will upload your `build` and `functions` directory to Netlify, and your Firestore rules to Firebase.
+
+
+## Netlify functions
+
+
+
+```javascript
+// utils/bowhead.js
+const BowheadFunctions = require('@mortond/bowhead-functions')
+
+const config = {
+    firebase: {
+        projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+        privateKey: process.env.REACT_APP_FIREBASE_PRIVATE_KEY,
+        clientEmail: process.env.REACT_APP_FIREBASE_CLIENT_EMAIL,
+        databaseProductionUrl: process.env.REACT_APP_FIREBASE_FIRESTORE_PROD_DATABASE_URL,
+    },
+    stripe: {
+        stripeWebhookSigningSecret: process.env.REACT_APP_STRIPE_WEBHOOK_SIGNING_SECRET,
+        stripeSecretKey: process.env.REACT_APP_STRIPE_SECRET_KEY
+    }
+}
+
+const bowhead = new BowheadFunctions(config);
+export { bowhead };
+
+// netlify-functions/create-stripe-checkout-session.js
+import { bowhead } from '../functions-utils/bowhead'
+
+exports.handler = async (event, context, callback) => {
+    return await bowhead.createStripeCheckoutSession({ token: event.queryStringParameters.token, body: event.body })
+        .then((result) => {
+            callback(null, { statusCode: 200, body: JSON.stringify(result) })
+        }).catch(error => {
+            callback(error, { statusCode: 400 })
+        });
+}
+
+// netlify-functions/webhook-stripe.js
+exports.handler = async (event, context, callback) => {
+  const stripeSignature = event.headers['stripe-signature'];
+
+  return await bowhead.webhookStripe({ stripeSignature, rawBody: event.body })
+    .then(() => {
+      callback(null, { statusCode: 200 })
+    }).catch(error => {
+      callback(error, { statusCode: 400 })
+    });
+}
+```

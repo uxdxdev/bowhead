@@ -49,5 +49,10 @@
       "text",
       "clover"
     ]
-  }
+  },
+  "keywords": [
+    "bowhead",
+    "reactjs",
+    "create-react-app"
+  ]
 }
