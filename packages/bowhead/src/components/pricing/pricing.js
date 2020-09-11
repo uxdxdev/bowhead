@@ -39,7 +39,7 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
 
     const [isRedirecting, setIsRedirecting] = useState(false)
 
-    const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.app
+    const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
 
     const dashboardUrl =
         process.env.NODE_ENV === "development"
@@ -68,13 +68,12 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
                 console.log(error)
             });
         } else {
-            console.warn('Error calling createStripeCheckoutSession(). Check the Bowhead configuration for this API endpoint. e.g. PLUGIN_TYPES.BOWHEAD_CONFIGURATION')
             setIsRedirecting(false)
         }
 
     };
 
-    const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.BOWHEAD_CONFIGURATION)[0]?.config?.plans
+    const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.plans
 
     if (!plans || plans.length <= 0) return 'Please provide a configuration for Stripe subscription plans'
 

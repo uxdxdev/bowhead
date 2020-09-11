@@ -12,6 +12,6 @@ ReactJS component for rapid MicroSaas prototyping:
   - Site navigation and Sidebars
   - Landing page
   - Dashboard
-- Redux Toolkit
+- Redux Toolkit for state management
 
 See the [Bowhead Create-React-App template](https://github.com/daithimorton/bowhead/tree/master/packages/test-app) for more details.

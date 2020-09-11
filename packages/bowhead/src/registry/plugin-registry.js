@@ -1,12 +1,14 @@
 const PLUGIN_TYPES = {
-    UNAUTHENTICATED_ROUTE: 'plugin-type-unauthenticated-route',
-    AUTHENTICATED_ROUTE: 'plugin-type-authenticated-route',
-    MENU_ITEM_POPOVER: 'plugin-type-menu-item-popover',
-    MENU_ITEM_SIDEBAR: 'plugin-type-menu-item-SIDEBAR',
+    ROUTE_UNAUTHENTICATED: 'plugin-type-route-unauthenticated',
+    ROUTE_AUTHENTICATED: 'plugin-type-route-authenticated',
+    LINK_POPOVER: 'plugin-type-link-popover',
+    LINK_SIDEBAR: 'plugin-type-link-sidebar',
+    LINK_LANDING_PAGE_NAV: 'plugin-type-link-landing-page',
+    LINK_DASHBOARD_PAGE_NAV: 'plugin-type-link-dashboard',
     REDUCER: 'plugin-type-reducer',
     THEME: 'plugin-type-theme',
-    FIRESTORE_LISTENER: 'plugin-type-firestore-listener',
-    BOWHEAD_CONFIGURATION: 'plugin-type-bowhead-configuration',
+    LISTENER_FIRESTORE: 'plugin-type-listener-firestore',
+    CONFIGURATION_BOWHEAD: 'plugin-type-configuration-bowhead',
     CUSTOM: 'plugin-type-custom'
 };
 

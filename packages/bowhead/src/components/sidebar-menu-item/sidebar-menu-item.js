@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     color: theme.palette.text.primary,
   },
-  listItemText: {
-    fontWeight: theme.typography.h6.fontWeight,
-  },
   listItemIcon: {
     minWidth: theme.spacing(4),
   },
@@ -72,7 +69,7 @@ const SidebarMenuItem = (props) => {
         <ListItemIcon className={classes.listItemIcon}>
           {Icon ? <Icon /> : null}
         </ListItemIcon>
-        <ListItemText className={classes.listItemText}>{text}</ListItemText>
+        <ListItemText>{text}</ListItemText>
         {/* Display the expand menu if the item has children */}
         {isExpandable && !open && <IconExpandMore />}
         {isExpandable && open && <IconExpandLess />}

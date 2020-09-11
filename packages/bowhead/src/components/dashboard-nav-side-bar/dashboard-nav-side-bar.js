@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: theme.palette.background.default,
-    borderRight: "none",
     '& .MuiCollapse-entered': {
       overflow: 'auto'
     },
@@ -31,10 +30,10 @@ const DashboardNavSidebar = ({
   // currently selected menu item 
   const [activeMenuItem, setActiveMenuItem] = useState('')
 
-  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM_SIDEBAR)
+  const sidebarMenuItems = pluginRegistry.getPluginsByType(PLUGIN_TYPES.LINK_SIDEBAR)
 
   sidebarMenuItems.unshift({
-    type: PLUGIN_TYPES.MENU_ITEM_SIDEBAR,
+    type: PLUGIN_TYPES.LINK_SIDEBAR,
     menuIcon: DashboardIcon,
     text: "Dashboard",
     path: "/",

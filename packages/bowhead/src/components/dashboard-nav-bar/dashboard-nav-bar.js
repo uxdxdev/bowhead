@@ -13,7 +13,6 @@ import {
   IconButton,
   ListItemText,
   Hidden,
-  Typography,
   ListItemIcon,
 } from "@material-ui/core";
 import {
@@ -24,12 +23,12 @@ import {
 } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
 import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
+import { noAppName } from '../../utils/error-messages'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  toolbar: theme.mixins.toolbar,
   listItem: {
     color: theme.palette.text.primary,
   },
@@ -61,7 +60,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const menuItemPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.MENU_ITEM_POPOVER)
+  const menuItemPlugins = pluginRegistry.getPluginsByType(PLUGIN_TYPES.LINK_POPOVER)
 
   menuItemPlugins.unshift({
     path: "/account",
@@ -96,14 +95,18 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
     })
   }
 
+  const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
+  const name = app?.name || 'Default name';
+
+  if (!app?.name) {
+    console.error(noAppName)
+  }
+
   return (
     <>
       <CookieNotification />
       <AppBar
-        position="fixed"
-        elevation={0}
         className={classes.appBar}
-        variant="outlined"
         color="inherit"
       >
         <Toolbar>
@@ -114,24 +117,15 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
             </IconButton>
           </Hidden>
 
-          <Typography
-            component="span"
-            variant="h6"
-            color="textPrimary"
-            className={classes.toolbarTitle}
+          <Link
+            component={NavLink}
+            to="/dashboard"
+            onClick={() => window.scrollTo(0, 0)}
+            className={classes.listItem}
+            underline="none"
           >
-            {/* logo link. when clicked scroll to top of the window && if authenticated navigate to /dashboard else / */}
-            <Link
-              component={NavLink}
-              to="/dashboard"
-              // allow users to jump to the top of the page
-              onClick={() => window.scrollTo(0, 0)}
-              className={classes.listItem}
-              underline="none"
-            >
-              <TimelineIcon className={classes.icon} /> Bowhead
-            </Link>
-          </Typography>
+            <TimelineIcon className={classes.icon} /> {name}
+          </Link>
 
           <nav className={classes.navigation}>
             {/* popover triggered when avatar image clicked */}
