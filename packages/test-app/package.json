@@ -34,7 +34,7 @@
     "redux": "^4.0.5",
     "redux-firestore": "^0.13.0",
     "shelljs": "^0.8.4",
-    "stripe": "^8.84.0",
+    "stripe": "^8.95.0",
     "webpack-node-externals": "^2.5.1"
   },
   "scripts": {
