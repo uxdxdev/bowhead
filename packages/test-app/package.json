@@ -50,7 +50,7 @@
     "deploy": "npm-run-all -p deploy:*",
     "deploy:rules": "node scripts/deploy-firebase-rules.js",
     "deploy:netlify": "node scripts/deploy-netlify.js",
-    "test": "react-scripts test --verbose",
+    "test": "react-scripts test --verbose --passWithNoTests",
     "eject": "react-scripts eject",
     "clean": "rm -rf node_modules build functions",
     "lint": "eslint ."
