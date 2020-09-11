@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
 
   const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.plans
 
-  let planTitle = plans.filter(plan => plan.priceId === planId)[0].title
+  let planTitle = plans.filter(plan => plan.priceId === planId)[0]?.title
 
   return {
     stripeCustomerId,
