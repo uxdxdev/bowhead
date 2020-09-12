@@ -26,11 +26,11 @@ yarn-error.log*
 *.cache
 
 .env
+.env.netlify
 
 .firebase
 
 # lambda functions
-functions
-!src/functions
+functions/build
 
 .DS_Store

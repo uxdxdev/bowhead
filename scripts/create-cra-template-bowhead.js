@@ -14,13 +14,18 @@ if (sh.rm('-f', './packages/cra-template-bowhead/template.json').code !== 0) {
 }
 
 // make template directory
-if (sh.mkdir('-p', './packages/cra-template-bowhead/template').code !== 0) {
+if (sh.mkdir('-p', './packages/cra-template-bowhead/template/functions/src').code !== 0) {
+    sh.echo('Error: Creating template directory');
+    sh.exit(1);
+}
+
+if (sh.mkdir('-p', './packages/cra-template-bowhead/template/functions/utils').code !== 0) {
     sh.echo('Error: Creating template directory');
     sh.exit(1);
 }
 
 // copy directories from test-app to cra-template-bowhead/template
-const directories = ['config', 'public', 'scripts', 'src', 'functions-netlify', 'functions-utils']
+const directories = ['config', 'public', 'scripts', 'src', 'functions/src', 'functions/utils']
 directories.forEach(directory => {
     if (sh.cp('-r', `./packages/test-app/${directory}`, `./packages/cra-template-bowhead/template/${directory}`).code !== 0) {
         sh.echo('Error: Copying bowhead directories to template directory');
@@ -42,8 +47,18 @@ if (sh.cp(`./packages/test-app/.env`, `./packages/cra-template-bowhead/template/
     sh.exit(1);
 }
 
+if (sh.cp(`./packages/test-app/.env.netlify`, `./packages/cra-template-bowhead/template/.env.netlify.sample`).code !== 0) {
+    sh.echo('Error: Copying .env');
+    sh.exit(1);
+}
+
 // replace all env variable values
 if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/.env.sample').code !== 0) {
+    sh.echo('Error: Replacing values in .env.sample');
+    sh.exit(1);
+}
+
+if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/.env.netlify.sample').code !== 0) {
     sh.echo('Error: Replacing values in .env.sample');
     sh.exit(1);
 }
