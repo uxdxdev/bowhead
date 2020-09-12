@@ -25,6 +25,7 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 - Install Netlify CLI https://docs.netlify.com/cli/get-started/
 - Install Stripe CLI https://stripe.com/docs/stripe-cli
 - Rename `.env.sample` to `.env`
+- Rename `.env.netlify.sample` to `.env.netlify`
 
 ## Stripe
 
