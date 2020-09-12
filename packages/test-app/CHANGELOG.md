@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/daithimorton/bowhead/compare/test-app@0.1.3...test-app@0.1.4) (2020-09-12)
+
+
+### Bug Fixes
+
+* updates to env variables ([c1f05c7](https://github.com/daithimorton/bowhead/commit/c1f05c71550e19d707263711bfee0785921feb8a))
+
+
+
+
+
 ## [0.1.3](https://github.com/daithimorton/bowhead/compare/test-app@0.1.2...test-app@0.1.3) (2020-09-11)
 
 
