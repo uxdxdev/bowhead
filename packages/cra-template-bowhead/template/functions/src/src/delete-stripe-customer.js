@@ -1,4 +1,4 @@
-import { bowhead } from '../functions-utils/bowhead'
+import { bowhead } from '../utils/bowhead'
 
 exports.handler = async (event, context, callback) => {
     const stripeCustomerId = event.body.stripeCustomerId;

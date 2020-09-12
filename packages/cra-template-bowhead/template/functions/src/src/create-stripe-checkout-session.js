@@ -1,4 +1,4 @@
-import { bowhead } from '../functions-utils/bowhead'
+import { bowhead } from '../utils/bowhead'
 
 exports.handler = async (event, context, callback) => {
     return await bowhead.createStripeCheckoutSession({ token: event.queryStringParameters.token, body: event.body })
