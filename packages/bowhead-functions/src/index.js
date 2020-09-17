@@ -54,23 +54,25 @@ class BowheadFunctions {
         return Promise.resolve('webhook done');
     }
 
-    async deleteStripeCustomer({ token, stripeCustomerId }) {
+    async deleteStripeCustomer({ token, data }) {
         const user = await this._firebase.verifyToken(token);
+        const stripeCustomerId = data?.stripeCustomerId;
+        // todo validate data
         if (!user) return this._requestUnauthourised()
         return await this._stripe.customers.del(stripeCustomerId);
     }
 
-    async createStripeCustomerPortalSession({ token, body }) {
+    async createStripeCustomerPortalSession({ token, data }) {
         const user = await this._firebase.verifyToken(token);
+        // todo validate data
         if (!user) return this._requestUnauthourised()
-        const data = JSON.parse(body);
         return await this._stripe.billingPortal.sessions.create(data).then((session) => session);
     }
 
-    async createStripeCheckoutSession({ token, body }) {
+    async createStripeCheckoutSession({ token, data }) {
         const user = await this._firebase.verifyToken(token);
+        // todo validate data
         if (!user) return this._requestUnauthourised()
-        const data = JSON.parse(body);
 
         // do not provide a free trial if the user has previously signed up
         data?.customer && delete data?.subscription_data;

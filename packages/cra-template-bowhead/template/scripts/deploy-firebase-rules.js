@@ -1,7 +1,7 @@
 const sh = require('shelljs')
 
 require('dotenv').config({
-    path: './.env.netlify'
+    path: './.env.functions'
 })
 
 if (sh.exec(`firebase deploy --only firestore:rules --token '${process.env.FIREBASE_TOKEN}' --project ${process.env.FIREBASE_PROJECT_ID} --non-interactive`).code !== 0) {
