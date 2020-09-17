@@ -1,7 +1,8 @@
 import { bowhead } from '../utils/bowhead'
 
 exports.handler = async (event, context, callback) => {
-    return await bowhead.createStripeCustomerPortalSession({ token: event.queryStringParameters.token, body: event.body })
+    const data = JSON.parse(event.body);
+    return await bowhead.createStripeCustomerPortalSession({ token: event.queryStringParameters.token, data })
         .then((result) => {
             callback(null, { statusCode: 200, body: JSON.stringify(result) })
         }).catch(error => {

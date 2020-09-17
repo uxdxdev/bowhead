@@ -1,4 +1,4 @@
-THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE THAT MAY BE CONTAINED IN PORTIONS OF THE WORKSPACE AGGREGATOR 721B75C8 11FD 4A71 9DC3 17F5B468D378 PRODUCT.
+THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE THAT MAY BE CONTAINED IN PORTIONS OF THE WORKSPACE AGGREGATOR A7A353D2 91AA 450F B553 D4CA5A4D6915 PRODUCT.
 
 -----
 
@@ -27127,7 +27127,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -----
 
-The following software may be included in this product: workspace-aggregator-721b75c8-11fd-4a71-9dc3-17f5b468d378. This software contains the following license and notice below:
+The following software may be included in this product: workspace-aggregator-a7a353d2-91aa-450f-b553-d4ca5a4d6915. This software contains the following license and notice below:
 
 MIT License
 

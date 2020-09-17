@@ -13,25 +13,127 @@ Bowhead Create-React-App template for fast MicroSaas prototyping using the [Bowh
 - [Firestore database](https://firebase.google.com/docs/firestore)
 - [Netlify hosting and functions](https://docs.netlify.com/)
 
-## How to use
+## How to use (macOS)
+
+- Create project using Bowhead CRA template
 
 ```bash
 npx create-react-app my-app --template @mortond/cra-template-bowhead
 ```
 
-# Install 
-
 - Install Firebase CLI https://firebase.google.com/docs/cli
+
+```bash
+npm install -g firebase-tools
+```
+
 - Install Netlify CLI https://docs.netlify.com/cli/get-started/
+
+```bash
+npm install -g netlify-cli
+```
+
 - Install Stripe CLI https://stripe.com/docs/stripe-cli
+
+```bash
+brew install stripe/stripe-cli/stripe
+```
+
 - Rename `.env.sample` to `.env`
+
+```bash
+mv .env.sample .env
+```
+
+- Rename `.env.functions.sample` to `.env.functions`
+
+```bash
+mv .env.functions.sample .env.functions
+```
+
+## GitHub
+
+- Go to https://github.com/ and create a new repo for this project, this is required to set up your Netlify project
+
+<div>
+  <img src="docs/new-github-repo.png" width="50%" />
+</div>
+
+
+## Netlify
+
+- Go to https://app.netlify.com/ and create a project from GitHub
+
+<div>
+  <img src="docs/netlify-github-project.png" width="100%" />
+</div>
+
+- There is no need to fill in all the details, you will be building and deploying this project from your local development environment for now. 
+
+- Build and deploy the functions needed for the Bowhead ReactJS component.
+
+```bash
+yarn build:functions
+yarn deploy:netlify
+```
 
 ## Stripe
 
 - Go to `https://dashboard.stripe.com/` and create an account for this project
-- Create 3 subscription products, e.g. Basic, Pro, Enterprise and add the IDs to the `.env` file, check the `Products` section
-- Copy your accounts `publishable key` and `secret key` to the `.env` file, check the `API Keys` section under `Developers`
-- Create a webhook that points to `https://<your-project>.netlify.app/.netlify/functions/webhook-stripe` and copy the signing secret to the `.env` file
+
+<div>
+  <img src="docs/stripe-new-account.png" width="50%" />
+</div>
+
+- Create 3 subscription products, e.g. Basic, Pro, Enterprise
+
+<div>
+  <img src="docs/basic-product.png" width="100%" />
+</div>
+
+- Add the price IDs to the `.env` file, check 
+
+```properties
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC=price_1H306XJF9YjhGgt0GNOy1IQS
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO=price_1H307CJF9YjhGgt0ZmRhLsNE
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE=price_1H307mJF9YjhGgt0SxEYD01h
+```
+
+- Go to `API Keys` section under `Developers` and copy your accounts `publishable key` to the `.env` file
+
+<div>
+  <img src="docs/pub-secret-keys.png" width="100%" />
+</div>
+
+```properties
+REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_AGZ3fyOfs22efci91eafdsaAdzyMD00DP2
+```
+
+- Copy your accounts `secret key` to the `.env.functions` file
+
+
+```properties
+STRIPE_SECRET_KEY=sk_test_3PfzJGjks789sTQXH4Dg00ds44323paZ9L
+```
+
+- Create a webhook that points to your deployed netlify function e.g. `https://<your-project>.netlify.app/.netlify/functions/webhook-stripe` and configure the following event types
+
+```
+customer.subscription.deleted
+customer.subscription.updated
+customer.subscription.created
+checkout.session.completed
+```
+
+<div>
+  <img src="docs/webhook.png" width="100%" />
+</div>
+
+- Copy the `webhook signing secret` to the `.env.functions` file
+
+```properties
+STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnfdsa7SJKD8fd89jD7lryYmIDHIo
+```
 
 ## Firebase
 
@@ -57,58 +159,3 @@ npx create-react-app my-app --template @mortond/cra-template-bowhead
 - **DO NOT** overwrite `firestore.rules`
 - Run `firebase login:ci`, login with your browser, and copy the `token` to the `.env` file.
 
-## Netlify hosting
-
-- Go to https://app.netlify.com/ and connect this projects `GIT` repo as part of the setup
-- `yarn build` will build the CRA app into the `build` directory and Netlify functions to `functions`
-- `yarn deploy` will upload your `build` and `functions` directory to Netlify, and your Firestore rules to Firebase.
-
-
-## Netlify functions
-
-
-
-```javascript
-// utils/bowhead.js
-const BowheadFunctions = require('@mortond/bowhead-functions')
-
-const config = {
-    firebase: {
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        databaseProductionUrl: process.env.FIREBASE_FIRESTORE_PROD_DATABASE_URL,
-    },
-    stripe: {
-        stripeWebhookSigningSecret: process.env.STRIPE_WEBHOOK_SIGNING_SECRET,
-        stripeSecretKey: process.env.STRIPE_SECRET_KEY
-    }
-}
-
-const bowhead = new BowheadFunctions(config);
-export { bowhead };
-
-// netlify-functions/create-stripe-checkout-session.js
-import { bowhead } from '../functions-utils/bowhead'
-
-exports.handler = async (event, context, callback) => {
-    return await bowhead.createStripeCheckoutSession({ token: event.queryStringParameters.token, body: event.body })
-        .then((result) => {
-            callback(null, { statusCode: 200, body: JSON.stringify(result) })
-        }).catch(error => {
-            callback(error, { statusCode: 400 })
-        });
-}
-
-// netlify-functions/webhook-stripe.js
-exports.handler = async (event, context, callback) => {
-  const stripeSignature = event.headers['stripe-signature'];
-
-  return await bowhead.webhookStripe({ stripeSignature, rawBody: event.body })
-    .then(() => {
-      callback(null, { statusCode: 200 })
-    }).catch(error => {
-      callback(error, { statusCode: 400 })
-    });
-}
-```

@@ -26,7 +26,7 @@ yarn-error.log*
 *.cache
 
 .env
-.env.netlify
+.env.functions
 
 .firebase
 

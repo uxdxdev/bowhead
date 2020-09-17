@@ -47,7 +47,7 @@ if (sh.cp(`./packages/test-app/.env`, `./packages/cra-template-bowhead/template/
     sh.exit(1);
 }
 
-if (sh.cp(`./packages/test-app/.env.netlify`, `./packages/cra-template-bowhead/template/.env.netlify.sample`).code !== 0) {
+if (sh.cp(`./packages/test-app/.env.functions`, `./packages/cra-template-bowhead/template/.env.functions.sample`).code !== 0) {
     sh.echo('Error: Copying .env');
     sh.exit(1);
 }
@@ -58,7 +58,7 @@ if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bo
     sh.exit(1);
 }
 
-if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/.env.netlify.sample').code !== 0) {
+if (sh.sed('-i', '=.*$', '=YOUR_ENV_VARIABLE_VALUE', './packages/cra-template-bowhead/template/.env.functions.sample').code !== 0) {
     sh.echo('Error: Replacing values in .env.sample');
     sh.exit(1);
 }
