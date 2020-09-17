@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack')
 module.exports = {
     externals: [nodeExternals()],
     plugins: [new Dotenv({
-        path: './.env.functions'
+        path: './.env.functions',
+        systemvars: true
     })],
 };
