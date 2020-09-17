@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.5](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.4...@mortond/cra-template-bowhead@0.4.5) (2020-09-17)
+
+
+### Bug Fixes
+
+* fixed delete stripe customer data ([c098258](https://github.com/daithimorton/bowhead/commit/c0982583ee4856b26b49e90419fcb1f1cf3c3d13))
+
+
+
+
+
 ## [0.4.4](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.3...@mortond/cra-template-bowhead@0.4.4) (2020-09-12)
 
 

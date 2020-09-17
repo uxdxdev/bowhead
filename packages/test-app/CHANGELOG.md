@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.5](https://github.com/daithimorton/bowhead/compare/test-app@0.1.4...test-app@0.1.5) (2020-09-17)
+
+
+### Bug Fixes
+
+* fixed delete stripe customer data ([c098258](https://github.com/daithimorton/bowhead/commit/c0982583ee4856b26b49e90419fcb1f1cf3c3d13))
+
+
+
+
+
 ## [0.1.4](https://github.com/daithimorton/bowhead/compare/test-app@0.1.3...test-app@0.1.4) (2020-09-12)
 
 
