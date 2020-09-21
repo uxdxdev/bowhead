@@ -185,16 +185,14 @@ const mapStateToProps = (state) => {
     },
     firebase: {
       auth: {
-        uid,
         email
       }
     },
     firestore: {
-      data: { userWorkspaces },
+      data: { workspaces },
     },
   } = state;
 
-  const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
   const activeWorkspace = workspaces && workspaces[activeWorkspaceId];
 

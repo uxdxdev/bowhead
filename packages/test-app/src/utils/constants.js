@@ -5,6 +5,7 @@ export const AUTH_TYPE = {
 export const FIRESTORE_COLLECTIONS = {
   WORKSPACES: 'workspaces',
   USER_WORKSPACES: 'userWorkspaces',
+  USERS: 'users'
 };
 
 export const USER_ROLES = {
