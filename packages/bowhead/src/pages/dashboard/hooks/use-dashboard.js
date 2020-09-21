@@ -26,10 +26,15 @@ const useDashboard = () => {
     subscriptionStatus === STRIPE_SUBSCRIPTION_STATUS.ACTIVE
 
   useEffect(() => {
-    pluginRegistry.setChangeListener((plugins) => {
+    const listener = (plugins) => {
       const pluginListeners = plugins.filter(plugin => plugin.type === PLUGIN_TYPES.LISTENER_FIRESTORE)
       setListeners(pluginListeners)
-    })
+    }
+    pluginRegistry.setChangeListener(listener)
+
+    return () => {
+      pluginRegistry.removeChangeListener(listener)
+    }
   }, [])
 
   useFirestoreConnect([...listeners, {

@@ -73,9 +73,7 @@ const bowheadConfig = {
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
       description: [
         "10 Projects",
-        "Unlimited Users",
         "Live Support",
-        "14 Day Free Trial",
       ],
       buttonText: "Get started",          
       buttonVariant: "outlined",
@@ -87,9 +85,7 @@ const bowheadConfig = {
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
       description: [
         "25 Projects",
-        "Unlimited Users",
         "Live Support",
-        "14 Day Free Trial",
       ],
       buttonText: "Get started",
       buttonVariant: "contained",
@@ -100,9 +96,7 @@ const bowheadConfig = {
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
       description: [
         "125 Projects",
-        "Unlimited Users",
         "Live Support",
-        "14 Day Free Trial",
       ],
       buttonText: "Get started",
       buttonVariant: "outlined",
