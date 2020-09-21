@@ -14,8 +14,6 @@ import { createStripeCheckoutSession } from '../../api/stripe'
 import { connect } from "react-redux";
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
-
-
 const useStyles = makeStyles((theme) => ({
     section: {
         alignItems: "center",

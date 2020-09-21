@@ -43,7 +43,7 @@ export const removeUserFromWorkspace = ({ uid, workspaceId }) => {
 
 export const removeWorkspaceFromUser = ({ uid, workspaceId }) => {
     return firestore
-        .collection(FIRESTORE_COLLECTIONS.USERS)
+        .collection(FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid)
         .set({
             workspaces: {
@@ -130,6 +130,10 @@ export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email 
         .doc(workspaceId);
 
     const userRef = firestore
+        .collection(FIRESTORE_COLLECTIONS.USERS)
+        .doc(uid);
+
+    const userWorkspaceRef = firestore
         .collection(FIRESTORE_COLLECTIONS.USER_WORKSPACES)
         .doc(uid);
 
@@ -149,9 +153,9 @@ export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email 
         { merge: true }
     );
 
-    // update user profile
+    // update user workspace
     batch.set(
-        userRef,
+        userWorkspaceRef,
         {
             email,
             workspaces: {
@@ -160,6 +164,15 @@ export const verifyUserInviteUpdate = ({ workspaceId, workspaceName, uid, email 
                     name: workspaceName
                 }
             }
+        },
+        { merge: true }
+    );
+
+    // create user profile when being invited
+    batch.set(
+        userRef,
+        {
+            email,
         },
         { merge: true }
     );
