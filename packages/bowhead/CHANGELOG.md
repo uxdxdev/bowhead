@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.6](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.5...@mortond/bowhead@0.1.6) (2020-09-21)
+
+
+### Bug Fixes
+
+* **test-app:** fixed issue updating unmounted component ([813ad27](https://github.com/daithimorton/bowhead/commit/813ad27614d66345ba34a4fe95d862da84d3cde5))
+* **test-app:** fixed issue with inviting users to workspaces ([cecd4b3](https://github.com/daithimorton/bowhead/commit/cecd4b3f6e805f7f5e811b78cff4d8c0afe8e27f))
+
+
+
+
+
 ## [0.1.5](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.4...@mortond/bowhead@0.1.5) (2020-09-17)
 
 **Note:** Version bump only for package @mortond/bowhead
