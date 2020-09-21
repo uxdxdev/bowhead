@@ -186,10 +186,9 @@ const App = () => {
         price: "10",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
         description: [
+          "1 Workspace",
           "10 Projects",
-          "Unlimited Users",
           "Live Support",
-          "14 Day Free Trial",
         ],
         buttonText: "Get started",
         // button variant uses MaterialUI variants 
@@ -202,10 +201,9 @@ const App = () => {
         price: "50",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
         description: [
-          "25 Projects",
-          "Unlimited Users",
+          "5 Workspaces",
+          "50 Projects",
           "Live Support",
-          "14 Day Free Trial",
         ],
         buttonText: "Get started",
         buttonVariant: "contained",
@@ -215,10 +213,9 @@ const App = () => {
         price: "250",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
         description: [
-          "125 Projects",
-          "Unlimited Users",
+          "25 Workspaces",
+          "250 Projects",
           "Live Support",
-          "14 Day Free Trial",
         ],
         buttonText: "Get started",
         buttonVariant: "outlined",

@@ -41,6 +41,13 @@ class PluginRegistry {
     setChangeListener(listener) {
         this.listeners.push(listener);
     }
+
+    removeChangeListener(listener) {
+        const index = this.listeners.indexOf(listener);
+        if (index > -1) {
+            this.listeners.splice(index, 1);
+        }
+    }
 }
 
 const pluginRegistry = new PluginRegistry();
