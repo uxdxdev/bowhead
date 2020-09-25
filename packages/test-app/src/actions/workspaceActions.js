@@ -1,4 +1,4 @@
-import * as firestore from '../api/firestore'
+import * as firebase from '../api/firebase'
 import * as workspaceSlice from '../store/workspaceSlice'
 
 export const setActiveWorkspace = activeWorkspaceId => {
@@ -11,7 +11,7 @@ export const createWorkspace = ({ workspaceName, uid, email }) => {
   return async (dispatch) => {
     dispatch(workspaceSlice.createWorkspace());
 
-    await firestore.createWorkspace({ workspaceName, uid, email })
+    await firebase.createWorkspace({ workspaceName, uid, email })
       .then(() => {
         dispatch(workspaceSlice.createWorkspaceSuccess());
       })
@@ -26,7 +26,7 @@ export const leaveWorkspace = ({ uid, workspaceId }) => {
   return async (dispatch) => {
     dispatch(workspaceSlice.leaveWorkspace());
 
-    await firestore.removeWorkspaceFromUser({ uid, workspaceId })
+    await firebase.removeWorkspaceFromUser({ uid, workspaceId })
       .then(() => {
         dispatch(workspaceSlice.leaveWorkspaceSuccess());
       })
@@ -41,7 +41,7 @@ export const deleteWorkspace = ({ uid, workspaceId }) => {
   return async (dispatch) => {
     dispatch(workspaceSlice.deleteWorkspace());
 
-    await firestore.deleteWorkspace({ uid, workspaceId })
+    await firebase.deleteWorkspace({ uid, workspaceId })
       .then(() => {
         dispatch(workspaceSlice.deleteWorkspaceSuccess(workspaceId));
         dispatch(workspaceSlice.setActiveWorkspace(null));
@@ -57,7 +57,7 @@ export const removeMember = ({ uid, workspaceId }) => {
   return (dispatch) => {
     dispatch(workspaceSlice.removeUser());
 
-    return firestore.removeUserFromWorkspace({ uid, workspaceId })
+    return firebase.removeUserFromWorkspace({ uid, workspaceId })
       .then(() => {
         dispatch(workspaceSlice.removeUserSuccess());
       })

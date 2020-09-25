@@ -19,7 +19,7 @@ import {
   Menu as MenuIcon,
   ExitToApp as ExitToAppIcon,
   Timeline as TimelineIcon,
-  Settings as SettingsIcon,
+  AccountCircle as AccountIcon
 } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
 import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
@@ -64,7 +64,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
 
   menuItemPlugins.unshift({
     path: "/account",
-    menuIcon: SettingsIcon,
+    menuIcon: AccountIcon,
     text: 'Account'
   })
 

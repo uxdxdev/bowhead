@@ -6,17 +6,16 @@ service cloud.firestore {
       return req.auth != null;
     }
 
-    // BOWHEAD RULES START
     match /users/{userId} {
 			allow read, write: if isSignedIn(request) && request.auth.uid == userId;
     }
 
     match /stripe/{stripeCustomerId} {
-			allow read, write: if isSignedIn(request) && (resource == null || request.auth.uid == resource.data.uid); 
+			allow read, write: if isSignedIn(request) &&
+                              // allow listeners to mount even when resource is null
+                              (resource == null || request.auth.uid == resource.data.uid);
     }
-    // BOWHEAD RULES END
 
-    // TEST-APP RULES START
     function getRole(rsc, req) {
       return rsc.data.members[req.auth.uid].role;
     }
@@ -37,29 +36,86 @@ service cloud.firestore {
       return getStripeData(uid).status == 'trialing' || getStripeData(uid).status == 'active';
     }
 
-    match /userWorkspaces/{userId} {
-      allow read, write: if request.auth.uid == userId;
+    // STRIPE SUBSCRIPTION LIMITS
+    function getBasicPlanId() {
+      return 'price_1H306XJF9YjhGgt0GNOy1IQS';
+    }
+
+    function getProPlanId() {
+      return 'price_1H307CJF9YjhGgt0ZmRhLsNE';
+    }
+
+    function getEnterprisePlanId() {
+      return 'price_1H307mJF9YjhGgt0SxEYD01h';
+    }
+
+    function getUserSubscriptionPlanId(uid) {
+      return getStripeData(uid).planId;
+    }
+
+    function validateSubscriptionProjectLimits() {
+      return (getUserSubscriptionPlanId(request.auth.uid) == getBasicPlanId() &&
+                                        resource.data.projects.keys().size() <= 10) ||
+              (getUserSubscriptionPlanId(request.auth.uid) == getProPlanId() &&
+                                        resource.data.projects.keys().size() <= 50) ||
+              (getUserSubscriptionPlanId(request.auth.uid) == getEnterprisePlanId() &&
+                                        resource.data.projects.keys().size() <= 250)
+    }
+
+    function getNumberOfWorkspaces() {
+      return exists(/databases/$(database)/documents/userWorkspaces/$(request.auth.uid)) &&
+              "numberOfWorkspaces" in get(/databases/$(database)/documents/userWorkspaces/$(request.auth.uid)).data ?
+                get(/databases/$(database)/documents/userWorkspaces/$(request.auth.uid)).data.numberOfWorkspaces :
+                0      
+    }
+
+    function validateSubscriptionWorkspaceLimits() {
+      return (getUserSubscriptionPlanId(request.auth.uid) == getBasicPlanId() && getNumberOfWorkspaces() < 1) ||
+              (getUserSubscriptionPlanId(request.auth.uid) == getProPlanId() && getNumberOfWorkspaces() < 5) ||
+              (getUserSubscriptionPlanId(request.auth.uid) == getEnterprisePlanId() && getNumberOfWorkspaces() < 25)
+    }
+
+    match /userWorkspaces/{userId} {                            
+      allow read, write: if isSignedIn(request) && 
+                              request.auth.uid == userId;            
     }
 
     match /workspaces/{workspaceId} {
  
       allow create: if isSignedIn(request) &&
-                        resource == null && // resource does not already exist
-                        isOneOfRoles(request.resource, request, ['owner']) && // incoming resource has member 'owner'
-                        isUserSubscribed(request.auth.uid); 
+                        // user is subscribed
+                        isUserSubscribed(request.auth.uid) &&
+                        // resource does not already exist
+                        resource == null && 
+                        // incoming resource has member 'owner'
+                        isOneOfRoles(request.resource, request, ['owner']) && 
+                        // user subscription limits
+                        validateSubscriptionWorkspaceLimits();
+                        
+      allow read: if isSignedIn(request) &&
+                          // user is subscribed
+                          isUserSubscribed(request.auth.uid) &&
+                          // listeners are allowed to mount even if resourse is null
+                          (isOneOfRoles(resource, request, ['owner', 'member']) || resource == null)
       
-      allow read: if isSignedIn(request) && (isOneOfRoles(resource, request, ['owner', 'member']) || resource == null)
-      
-      allow update: if isSignedIn(request) && (isOneOfRoles(resource, request, ['owner']) ||
+      allow update: if isSignedIn(request) &&                          
+                          // user is owner of workspace
+                          // user is subscribed
+                          // check user subscription limits on projects
+                          ((isOneOfRoles(resource, request, ['owner']) &&                           
+                          isUserSubscribed(request.auth.uid) &&                          
+                          validateSubscriptionProjectLimits()) ||
                           // allow users to update if invite 'pending'
                           resource.data.invites[request.auth.token['email']] in ['pending'] ||
                           // allow users to remove themselves from the members list
                           (isOneOfRoles(resource, request, ['member']) &&
                            (request.auth.uid in request.resource.data.members.keys()) == false))
       
-      allow delete: if isSignedIn(request) && isOneOfRoles(resource, request, ['owner']);
+      allow delete: if isSignedIn(request) &&
+                          // user is subscribed
+                          // isUserSubscribed(request.auth.uid) &&
+                          // user is owner of workspace
+                          isOneOfRoles(resource, request, ['owner']);
     }
-
-    // TEST-APP RULES END
   }
 }

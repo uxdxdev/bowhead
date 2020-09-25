@@ -9,7 +9,7 @@ import { STRIPE_SUBSCRIPTION_STATUS } from "../../utils/constants";
 import { createStripeCustomerPortalSession } from '../../api/stripe'
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
 
-const Billing = ({ stripeCustomerId, planTitle, status, isSubscribed }) => {
+const Billing = ({ planTitle, status, isSubscribed }) => {
   const { paper, button, subscriptionStatus } = useStyles();
   const history = useHistory();
 
@@ -19,7 +19,7 @@ const Billing = ({ stripeCustomerId, planTitle, status, isSubscribed }) => {
   const handleCreateSessionOpenPortal = async () => {
     setIsRedirectingToStripeCustomerPortal(true)
 
-    const data = await createStripeCustomerPortalSession(stripeCustomerId)
+    const data = await createStripeCustomerPortalSession()
       .catch(() => {
         setIsRedirectingToStripeCustomerPortal(false)
       })
@@ -98,7 +98,6 @@ const mapStateToProps = (state) => {
   let planTitle = plans.filter(plan => plan.priceId === planId)[0]?.title
 
   return {
-    stripeCustomerId,
     planTitle,
     status,
     isSubscribed

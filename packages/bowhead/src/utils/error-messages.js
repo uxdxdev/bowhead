@@ -37,7 +37,6 @@ Example:
 
 const bowheadConfig = {
   api: {
-    deleteStripeCustomer: '/deleteStripeCustomer',
     createStripeCustomerPortalSession: '/createStripeCustomerPortalSession',
     createStripeCheckoutSession: '/createStripeCheckoutSession'
   },

@@ -28,4 +28,8 @@ if (process.env.NODE_ENV === "development") {
   });
 }
 
-export { firebase, firestore };
+const getToken = () => {
+  return firebase.auth().currentUser.getIdToken();
+}
+
+export { firebase, firestore, getToken };

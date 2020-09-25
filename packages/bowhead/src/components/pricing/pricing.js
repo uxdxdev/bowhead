@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Pricing = ({ uid, email, stripeCustomerId }) => {
+const Pricing = ({ uid, email }) => {
     const classes = useStyles();
 
     const [isRedirecting, setIsRedirecting] = useState(false)
@@ -47,7 +47,6 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
     const handleRedirectToStripe = async (priceId) => {
         setIsRedirecting(true)
         const data = await createStripeCheckoutSession({
-            stripeCustomerId,
             priceId,
             successUrl: dashboardUrl,
             cancelUrl: dashboardUrl,
@@ -137,13 +136,12 @@ const Pricing = ({ uid, email, stripeCustomerId }) => {
 
 const mapStateToProps = (state) => {
     const {
-        firebase: { auth: { uid, email }, profile: { stripeCustomerId } },
+        firebase: { auth: { uid, email } }
     } = state;
 
     return {
         uid,
-        email,
-        stripeCustomerId,
+        email
     };
 };
 
