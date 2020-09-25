@@ -16,7 +16,7 @@ const useSettings = () => {
   } = state;
 
   const activeWorkspaceId = state.workspace?.activeWorkspaceId;
-  const isRequestedStripeCustomer = requested[`${FIRESTORE_COLLECTIONS.STRIPE}/${stripeCustomerId}`];
+  const isRequestedStripeCustomer = requested[`stripe/${stripeCustomerId}`];
   const isRequestedActiveWorkspace = requested[`${FIRESTORE_COLLECTIONS.WORKSPACES}/${activeWorkspaceId}`]
   const isRequestedActiveWorkspaceData = requested[activeWorkspaceId];
   const isLoading = isRequestedStripeCustomer &&

@@ -21,11 +21,11 @@ export const signOut = () => {
   };
 };
 
-export const sendSignInEmailLink = ({ email, ref, data }) => {
+export const sendSignInEmailLink = ({ email, data }) => {
   return async (dispatch) => {
     dispatch(authSlice.sendEmailLink());
 
-    await firebase.sendSignInEmail({ email, ref, data })
+    await firebase.sendSignInEmail({ email, data })
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
       })

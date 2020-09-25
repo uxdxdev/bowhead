@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Workspaces = (props) => {
+const WorkspaceList = (props) => {
   const { workspaces, leaveWorkspace, deleteWorkspace, uid, workspaceErrors } = props;
 
   const classes = useStyles();
@@ -58,8 +58,7 @@ const Workspaces = (props) => {
             const workspaceRole = workspaces[workspaceId]?.role;
             const isMember = workspaceRole === constants.USER_ROLES.MEMBER;
             const isOwner = workspaceRole === constants.USER_ROLES.OWNER;
-            const workspacePermissionDenied = workspaceErrors[`workspaces/${workspaceId}`]?.code === "permission-denied";
-            const errorMessage = workspacePermissionDenied ? "Permission Denied" : null;
+            const errorMessage = workspaceErrors[workspaceId]
             const workspaceName = workspaces[workspaceId]?.name;
             return (
               workspaceName && (
@@ -128,15 +127,24 @@ const mapStateToProps = (state) => {
     },
     firestore: {
       errors: { byQuery },
-      data: { userWorkspaces }
+      data: { workspaces: mountedWorkspaces, userWorkspaces }
     },
   } = state;
 
   const workspaces = userWorkspaces && userWorkspaces[uid]?.workspaces;
 
+  const workspaceErrors = []
+  workspaces && Object.keys(workspaces).forEach(workspaceId => {
+    if (mountedWorkspaces && mountedWorkspaces[workspaceId] === null) {
+      workspaceErrors[workspaceId] = "Workspace deleted"
+    } else if (byQuery[`workspaces/${workspaceId}`]?.code === "permission-denied") {
+      workspaceErrors[workspaceId] = "Permission denied"
+    }
+  })
+
   return {
     workspaces,
-    workspaceErrors: byQuery,
+    workspaceErrors,
     uid
   };
 };
@@ -150,4 +158,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Workspaces);
+export default connect(mapStateToProps, mapDispatchToProps)(WorkspaceList);

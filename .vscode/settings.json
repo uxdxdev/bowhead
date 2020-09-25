@@ -1,6 +1,12 @@
 {
     "editor.formatOnSave": true,
     "cSpell.words": [
-        "firestore"
+        "appbar",
+        "finalise",
+        "firestore",
+        "initialised",
+        "mortond",
+        "navlink",
+        "signin"
     ]
 }

@@ -1,4 +1,4 @@
-import * as firestore from '../api/firestore'
+import * as firebase from '../api/firebase'
 import * as projectSlice from '../store/projectSlice'
 
 export const resetCreateProjectState = () => {
@@ -11,7 +11,7 @@ export const createProject = ({ workspaceId, title, summary }) => {
   return async (dispatch) => {
     dispatch(projectSlice.createProject());
 
-    await firestore.createProject({ workspaceId, title, summary })
+    await firebase.createProject({ workspaceId, title, summary })
       .then(() => {
         dispatch(projectSlice.createProjectSuccess());
       })
@@ -26,7 +26,7 @@ export const deleteProject = ({ projectId, workspaceId }) => {
 
     dispatch(projectSlice.deleteProject());
 
-    await firestore.deleteProject({ projectId, workspaceId })
+    await firebase.deleteProject({ projectId, workspaceId })
       .then(() => {
         dispatch(projectSlice.deleteProjectSuccess());
       })

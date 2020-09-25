@@ -4,27 +4,6 @@ const userSlice = createSlice({
   name: 'bowheadUser',
   initialState: {},
   reducers: {
-    deleteUser(state) {
-      return {
-        ...state,
-        isDeletingUserData: true,
-        deletingUserDataError: null
-      };
-    },
-    deleteUserSuccess(state) {
-      return {
-        ...state,
-        isDeletingUserData: false,
-        deletingUserDataError: null
-      };
-    },
-    deleteUserError(state, action) {
-      return {
-        ...state,
-        isDeletingUserData: false,
-        deletingUserDataError: action.error
-      };
-    },
     verifyUser(state) {
       return {
         ...state,
@@ -53,9 +32,6 @@ const userSlice = createSlice({
 })
 
 export const {
-  deleteUser,
-  deleteUserSuccess,
-  deleteUserError,
   verifyUser,
   verifyUserSuccess,
   verifyUserError

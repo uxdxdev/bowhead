@@ -1,8 +1,4 @@
-import { AUTH_TYPE } from "../utils/constants";
-import * as firebase from '../api/firebase'
-import {
-  updateMemberStatus,
-} from "../api/firestore";
+import { updateMemberStatus, sendSignInEmail } from '../api/firebase'
 import * as authSlice from '../store/authSlice'
 
 export const resetSendEmailLink = () => {
@@ -11,19 +7,15 @@ export const resetSendEmailLink = () => {
   };
 };
 
-export const inviteUserSendEmailLink = ({ email, ref, data }) => {
+export const inviteUserSendEmailLink = ({ email, data }) => {
   return async (dispatch) => {
     dispatch(authSlice.sendEmailLink());
 
-    await firebase.sendSignInEmail({ email, ref, data })
+    await sendSignInEmail({ email, data })
       .then(() => {
         window.localStorage.setItem("emailForSignIn", email);
-
-        // invite
-        if (ref === AUTH_TYPE.INVITE) {
-          const { workspaceId } = data;
-          return updateMemberStatus({ workspaceId, email, status: "pending" })
-        }
+        const { workspaceId } = data;
+        return updateMemberStatus({ workspaceId, email, status: "pending" })
       })
       .then(() => {
         dispatch(authSlice.sendEmailLinkSuccess());

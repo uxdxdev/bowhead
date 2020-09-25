@@ -1,7 +1,9 @@
 import { getToken } from '../../utils/firebase'
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry';
+import { getStipeCustomerId } from '../../utils/stripe'
 
-const deleteStripeCustomer = async (stripeCustomerId) => {
+const deleteStripeCustomer = async () => {
+
     const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.api
 
     if (!api || !api.deleteStripeCustomer) {
@@ -9,13 +11,14 @@ const deleteStripeCustomer = async (stripeCustomerId) => {
     }
 
     const token = await getToken();
+    const stripeCustomerId = await getStipeCustomerId();
     return fetch(`${api.deleteStripeCustomer}?token=${token}`, {
         method: 'POST',
         body: JSON.stringify({ stripeCustomerId })
     })
 }
 
-const createStripeCustomerPortalSession = async (stripeCustomerId) => {
+const createStripeCustomerPortalSession = async () => {
     const api = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.api
 
     if (!api || !api.createStripeCustomerPortalSession) {
@@ -23,6 +26,7 @@ const createStripeCustomerPortalSession = async (stripeCustomerId) => {
     }
 
     const token = await getToken();
+    const stripeCustomerId = await getStipeCustomerId();
     return fetch(`${api.createStripeCustomerPortalSession}?token=${token}`, {
         method: 'POST',
         body: JSON.stringify({ customer: stripeCustomerId })
@@ -30,7 +34,6 @@ const createStripeCustomerPortalSession = async (stripeCustomerId) => {
 }
 
 const createStripeCheckoutSession = async ({
-    stripeCustomerId,
     priceId,
     successUrl,
     cancelUrl,
@@ -45,6 +48,7 @@ const createStripeCheckoutSession = async ({
     }
 
     const token = await getToken();
+    const stripeCustomerId = await getStipeCustomerId();
     return fetch(`${api.createStripeCheckoutSession}?token=${token}`, {
         method: 'POST',
         body: JSON.stringify({

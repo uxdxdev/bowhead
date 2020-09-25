@@ -210,7 +210,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     inviteUserSendEmailLink: ({ email, data }) =>
-      dispatch(inviteUserSendEmailLink({ email, ref: constants.AUTH_TYPE.INVITE, data })),
+      dispatch(inviteUserSendEmailLink({ email, data })),
     resetSendEmailLink: () => dispatch(resetSendEmailLink()),
     removeMember: ({ workspaceId, uid }) =>
       dispatch(removeMember({ workspaceId, uid })),

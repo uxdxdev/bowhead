@@ -56,16 +56,15 @@ mv .env.functions.sample .env.functions
 - Go to https://github.com/ and create a new repo for this project, this is required to set up your Netlify project
 
 <div>
-  <img src="docs/new-github-repo.png" width="50%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/new-github-repo.png" width="50%" />
 </div>
-
 
 ## Netlify
 
 - Go to https://app.netlify.com/ and create a project from GitHub
 
 <div>
-  <img src="docs/netlify-github-project.png" width="100%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/netlify-github-project.png" width="100%" />
 </div>
 
 - There is no need to fill in all the details, you will be building and deploying this project from your local development environment for now. 
@@ -82,13 +81,13 @@ yarn deploy:netlify
 - Go to `https://dashboard.stripe.com/` and create an account for this project
 
 <div>
-  <img src="docs/stripe-new-account.png" width="50%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/stripe-new-account.png" width="50%" />
 </div>
 
 - Create 3 subscription products, e.g. Basic, Pro, Enterprise
 
 <div>
-  <img src="docs/basic-product.png" width="100%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/basic-product.png" width="100%" />
 </div>
 
 - Add the price IDs to the `.env` file, check 
@@ -102,7 +101,7 @@ REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE=price_1H307mJF9YjhGgt0SxEYD01h
 - Go to `API Keys` section under `Developers` and copy your accounts `publishable key` to the `.env` file
 
 <div>
-  <img src="docs/pub-secret-keys.png" width="100%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/pub-secret-keys.png" width="100%" />
 </div>
 
 ```properties
@@ -126,7 +125,7 @@ checkout.session.completed
 ```
 
 <div>
-  <img src="docs/webhook.png" width="100%" />
+  <img src="https://github.com/daithimorton/bowhead/raw/master/packages/test-app/docs/webhook.png" width="100%" />
 </div>
 
 - Copy the `webhook signing secret` to the `.env.functions` file
