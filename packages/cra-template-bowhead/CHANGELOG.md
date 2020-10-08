@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.8](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.7...@mortond/cra-template-bowhead@0.4.8) (2020-10-08)
+
+
+### Bug Fixes
+
+* **cra-template-bowhead:** cra template update ([44da1f8](https://github.com/daithimorton/bowhead/commit/44da1f8f6fd1a679503df632520b3a4f935df686))
+* **test-app:** fixed issues with limits ([49de7f1](https://github.com/daithimorton/bowhead/commit/49de7f1b078a24358582139e177c4f80a020f775))
+* **test-app:** fixed some issues after refactoring ([25875b4](https://github.com/daithimorton/bowhead/commit/25875b48bd310fd08c98ba31fe1eead067ecddf4))
+
+
+
+
+
 ## [0.4.7](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.6...@mortond/cra-template-bowhead@0.4.7) (2020-09-21)
 
 
