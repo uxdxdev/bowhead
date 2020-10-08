@@ -55,11 +55,11 @@ service cloud.firestore {
 
     function validateSubscriptionProjectLimits() {
       return (getUserSubscriptionPlanId(request.auth.uid) == getBasicPlanId() &&
-                                        resource.data.projects.keys().size() <= 10) ||
+                                        (("projects" in resource.data) == false || request.resource.data.projects.keys().size() <= 1)) ||
               (getUserSubscriptionPlanId(request.auth.uid) == getProPlanId() &&
-                                        resource.data.projects.keys().size() <= 50) ||
+                                        (("projects" in resource.data) == false || request.resource.data.projects.keys().size() <= 5)) ||
               (getUserSubscriptionPlanId(request.auth.uid) == getEnterprisePlanId() &&
-                                        resource.data.projects.keys().size() <= 250)
+                                        (("projects" in resource.data) == false || request.resource.data.projects.keys().size() <= 25))
     }
 
     function getNumberOfWorkspaces() {
@@ -106,7 +106,7 @@ service cloud.firestore {
                           isUserSubscribed(request.auth.uid) &&                          
                           validateSubscriptionProjectLimits()) ||
                           // allow users to update if invite 'pending'
-                          resource.data.invites[request.auth.token['email']] in ['pending'] ||
+                          (("invites" in resource.data) && resource.data.invites[request.auth.token['email']] in ['pending']) ||
                           // allow users to remove themselves from the members list
                           (isOneOfRoles(resource, request, ['member']) &&
                            (request.auth.uid in request.resource.data.members.keys()) == false))
