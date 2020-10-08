@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/daithimorton/bowhead/compare/test-app@0.1.7...test-app@0.1.8) (2020-10-08)
+
+
+### Bug Fixes
+
+* **test-app:** fixed issues with limits ([49de7f1](https://github.com/daithimorton/bowhead/commit/49de7f1b078a24358582139e177c4f80a020f775))
+* **test-app:** fixed some issues after refactoring ([25875b4](https://github.com/daithimorton/bowhead/commit/25875b48bd310fd08c98ba31fe1eead067ecddf4))
+
+
+
+
+
 ## [0.1.7](https://github.com/daithimorton/bowhead/compare/test-app@0.1.6...test-app@0.1.7) (2020-09-21)
 
 

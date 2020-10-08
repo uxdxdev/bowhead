@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.6...@mortond/bowhead@0.1.7) (2020-10-08)
+
+
+### Bug Fixes
+
+* **test-app:** fixed some issues after refactoring ([25875b4](https://github.com/daithimorton/bowhead/commit/25875b48bd310fd08c98ba31fe1eead067ecddf4))
+
+
+
+
+
 ## [0.1.6](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.5...@mortond/bowhead@0.1.6) (2020-09-21)
 
 
