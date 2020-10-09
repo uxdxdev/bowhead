@@ -124,8 +124,7 @@ const tiers = [
     price: "10",
     description: [
       "1 Workspace",
-      "10 Projects",
-      "Live Support",
+      "1 Project/per workspace"
     ],
     buttonText: "Get started",
     buttonVariant: "outlined",
@@ -136,8 +135,7 @@ const tiers = [
     price: "50",
     description: [
       "5 Workspaces",
-      "50 Projects",
-      "Live Support",
+      "5 Projects/per workspace"
     ],
     buttonText: "Get started",
     buttonVariant: "contained",
@@ -147,8 +145,7 @@ const tiers = [
     price: "250",
     description: [
       "25 Workspaces",
-      "250 Projects",
-      "Live Support",
+      "25 Projects/per workspace"
     ],
     buttonText: "Get started",
     buttonVariant: "outlined",

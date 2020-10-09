@@ -201,8 +201,7 @@ const App = () => {
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
         description: [
           "1 Workspace",
-          "10 Projects",
-          "Live Support",
+          "1 Project/per workspace"
         ],
         buttonText: "Get started",
         // button variant uses MaterialUI variants 
@@ -216,8 +215,7 @@ const App = () => {
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
         description: [
           "5 Workspaces",
-          "50 Projects",
-          "Live Support",
+          "5 Projects/per workspace"
         ],
         buttonText: "Get started",
         buttonVariant: "contained",
@@ -228,8 +226,7 @@ const App = () => {
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
         description: [
           "25 Workspaces",
-          "250 Projects",
-          "Live Support",
+          "25 Projects/per workspace"
         ],
         buttonText: "Get started",
         buttonVariant: "outlined",
