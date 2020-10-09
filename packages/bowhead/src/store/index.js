@@ -15,8 +15,7 @@ import { pluginRegistry, PLUGIN_TYPES } from '../registry/plugin-registry'
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
-import authSlice from '../store/authSlice'
-import userSlice from '../store/userSlice'
+import bowheadSlice from '../store/bowheadSlice'
 
 const getStore = (firebase) => {
 
@@ -32,7 +31,7 @@ const getStore = (firebase) => {
                     ...Object.keys(rrfActionTypes).map(
                         type => `@@reactReduxFirebase/${type}`
                     ),
-                    'bowheadUser/deleteUserError'
+                    'bowhead/deleteUserError'
                 ],
                 ignoredPaths: ['firebase', 'firestore']
             }
@@ -46,8 +45,7 @@ const getStore = (firebase) => {
         })
 
         // bowhead redux slices
-        reducers.bowheadAuth = authSlice
-        reducers.bowheadUser = userSlice
+        reducers.bowhead = bowheadSlice
         reducers.firestore = firestoreReducer
         reducers.firebase = firebaseReducer
 
