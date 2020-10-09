@@ -5,7 +5,7 @@ const Dashboard = () => {
 
   useInit();
 
-  return (<div>This the dashboard</div>);
+  return (<div>This is the dashboard</div>);
 };
 
 export default Dashboard;

@@ -29,8 +29,10 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
   },
-  listItem: {
+  title: {
     color: theme.palette.text.primary,
+    fontWeight: 400,
+    fontSize: "18px",
   },
   navigation: {
     marginLeft: "auto",
@@ -121,7 +123,7 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
             component={NavLink}
             to="/dashboard"
             onClick={() => window.scrollTo(0, 0)}
-            className={classes.listItem}
+            className={classes.title}
             underline="none"
           >
             <TimelineIcon className={classes.icon} /> {name}

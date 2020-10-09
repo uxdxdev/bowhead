@@ -6,10 +6,10 @@ const useSignIn = () => {
   const dispatch = useDispatch()
 
   const {
-    bowheadAuth, firebase: { auth: { uid } }
+    bowhead, firebase: { auth: { uid } }
   } = state;
 
-  const { sendEmailAuthError, isSendingEmailLink, isEmailLinkSent } = bowheadAuth;
+  const { sendEmailAuthError, isSendingEmailLink, isEmailLinkSent } = bowhead;
 
   const handleSendSignInEmailLink = ({ email }) => {
     dispatch(sendSignInEmailLink({ email }))

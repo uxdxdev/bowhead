@@ -158,3 +158,6 @@ STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnfdsa7SJKD8fd89jD7lryYmIDHIo
 - **DO NOT** overwrite `firestore.rules`
 - Run `firebase login:ci`, login with your browser, and copy the `token` to the `.env` file.
 
+### Theming
+
+Bowhead uses MaterialUI which means the UI can styled by registering a new theme and overwriting the CSS based on the generated classes. See: https://material-ui.com/customization/globals/#global-css

@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
+    fontWeight: 400,
+    fontSize: "18px",
   },
   listItemSecondary: {
     paddingRight: theme.spacing(16),

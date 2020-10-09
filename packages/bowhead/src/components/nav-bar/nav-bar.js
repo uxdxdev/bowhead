@@ -25,8 +25,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row-reverse",
     },
   },
-  toolbarTitle: {
+  title: {
     flexGrow: 1,
+    fontWeight: 400,
+    fontSize: "18px",
   },
   link: {
     color: theme.palette.text.primary,
@@ -127,7 +129,7 @@ const NavBar = ({ uid, signOut }) => {
             component={NavLink}
             to="/"
             onClick={() => window.scrollTo(0, 0)}
-            className={`${classes.link} ${classes.toolbarTitle}`}
+            className={`${classes.link} ${classes.title}`}
             underline="none"
           >
             <TimelineIcon className={classes.icon} /> {name}
