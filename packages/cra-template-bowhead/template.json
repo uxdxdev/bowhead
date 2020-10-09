@@ -49,7 +49,7 @@
       "deploy:netlify": "node scripts/deploy-netlify.js",
       "test": "react-scripts test --verbose --passWithNoTests",
       "eject": "react-scripts eject",
-      "clean": "rm -rf node_modules build functions",
+      "clean": "rm -rf node_modules build",
       "lint": "eslint ."
     },
     "eslintConfig": {
