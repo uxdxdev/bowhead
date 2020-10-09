@@ -6,7 +6,14 @@ import { AuthenticatedRoute, AuthIsLoaded } from "./components";
 import { SignIn, Verify, Dashboard, LandingPage } from "./pages";
 import { StoreProvider } from './store'
 import { pluginRegistry, PLUGIN_TYPES } from "./registry/plugin-registry";
-import { noApiConfiguration, noStripeConfiguration, noFirebaseConfiguration } from './utils/error-messages'
+import {
+  noApiConfiguration,
+  noStripeConfiguration,
+  noFirebaseInstance,
+  noFirestoreInstance,
+  noStripeInstance,
+  noProductionUrl
+} from './utils/error-messages'
 
 const getRoutes = ({ routes, isAuthRoute }) => {
   return routes && routes.map((route, index) => {
@@ -35,7 +42,7 @@ const getRoutes = ({ routes, isAuthRoute }) => {
 
 const Bowhead = () => {
 
-  // VERIFY ENVIRONMENT VARIABLES ARE CORRECTLY SET
+  // VERIFY CONFIGURATION
   let bowheadConfiguration = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config
 
   if (!bowheadConfiguration?.api) {
@@ -48,7 +55,21 @@ const Bowhead = () => {
 
   const firebaseInstance = bowheadConfiguration?.firebase
   if (!firebaseInstance) {
-    console.error(noFirebaseConfiguration)
+    console.error(noFirebaseInstance)
+  }
+
+  const firestoreInstance = bowheadConfiguration?.firestore
+  if (!firestoreInstance) {
+    console.error(noFirestoreInstance)
+  }
+
+  const stripeInstance = bowheadConfiguration?.stripe
+  if (!stripeInstance) {
+    console.error(noStripeInstance)
+  }
+
+  if (!bowheadConfiguration?.app?.productionUrl) {
+    console.error(noProductionUrl)
   }
 
   // CUSTOM ROUTES CONFIGURATION
