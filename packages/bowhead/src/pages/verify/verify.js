@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { verifyUser } from "../../actions/userActions";
+import { verifyUser } from "../../actions/authActions";
 import { PageLoadingSpinner } from "../../components";
 
 const Verify = ({
@@ -22,7 +22,7 @@ const Verify = ({
 const mapStateToProps = (
   state
 ) => {
-  const { firebase: { auth: { uid } }, bowheadUser: { isVerifyingUser, isVerified }
+  const { firebase: { auth: { uid } }, bowhead: { isVerifyingUser, isVerified }
   } = state;
 
   const isLoading = uid && !isVerifyingUser && isVerified;
