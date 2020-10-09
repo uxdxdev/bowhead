@@ -185,7 +185,7 @@ const App = () => {
   const bowheadConfig = {
     app: {
       name: "Bowhead",
-      productionUrl: process.env.REACT_APP_BOWHEAD_PRODUCTION_URL
+      productionUrl: process.env.REACT_APP_PRODUCTION_URL
     },
     // These APIs are required for Bowhead to manage a users stripe subscription
     api: {
