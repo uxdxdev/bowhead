@@ -1,5 +1,4 @@
 import { pluginRegistry, PLUGIN_TYPES } from '../../registry/plugin-registry'
-import { noProductionUrl } from '../../utils/error-messages'
 import { FIRESTORE_COLLECTIONS } from "../../utils/constants";
 import { getFirestore, getFirebase } from '../../utils/firebase'
 import { getStipeCustomerId } from '../../utils/stripe'
@@ -21,9 +20,6 @@ export const sendSignInEmail = ({ email, data }) => {
 
     const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
 
-    if (!app?.productionUrl) {
-        console.error(noProductionUrl)
-    }
     const urlStr = process.env.NODE_ENV === "development"
         ? `http://localhost:8888/verify`
         : `${app.productionUrl}/verify`;

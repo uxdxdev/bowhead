@@ -37,6 +37,7 @@ Example:
 
 const bowheadConfig = {
   api: {
+    deleteStripeCustomer: '/deleteStripeCustomer',
     createStripeCustomerPortalSession: '/createStripeCustomerPortalSession',
     createStripeCheckoutSession: '/createStripeCheckoutSession'
   },
@@ -44,7 +45,7 @@ const bowheadConfig = {
 }
 `
 
-export const noFirebaseConfiguration = `
+export const noFirebaseInstance = `
 Please provide an initialised Firebase instance
 
 See: https://github.com/daithimorton/bowhead
@@ -57,6 +58,32 @@ const bowheadConfig = {
 }
 `
 
+export const noFirestoreInstance = `
+Please provide an initialised Firestore instance
+
+See: https://github.com/daithimorton/bowhead
+    
+Example: 
+
+const bowheadConfig = {
+  firestore: firestore,
+  ...
+}
+`
+
+export const noStripeInstance = `
+Please provide an initialised Stripe instance
+
+See: https://github.com/daithimorton/bowhead
+    
+Example: 
+
+const bowheadConfig = {
+  stripe: stripe,
+  ...
+}
+`
+
 export const noStripeConfiguration = `
 Please provide a configuration defining the required Stripe subscription data. 
 
@@ -65,42 +92,44 @@ See: https://github.com/daithimorton/bowhead
 Example: 
 
 const bowheadConfig = {
-  stripe: {
-    basic: {
+  plans: [
+    {
       title: "Basic",
       price: "10",
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
       description: [
-        "10 Projects",
-        "Live Support",
+        "1 Workspace",
+        "1 Project/pw"
       ],
-      buttonText: "Get started",          
+      buttonText: "Get started",
+      // button variant uses MaterialUI variants 
+      // https://material-ui.com/api/button/#props
       buttonVariant: "outlined",
     },
-    pro: {
+    {
       title: "Pro",
       subheader: "Most popular",
       price: "50",
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
       description: [
-        "25 Projects",
-        "Live Support",
+        "5 Workspaces",
+        "5 Projects/pw"
       ],
       buttonText: "Get started",
       buttonVariant: "contained",
     },
-    enterprise: {
+    {
       title: "Enterprise",
       price: "250",
       priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
       description: [
-        "125 Projects",
-        "Live Support",
+        "25 Workspaces",
+        "25 Projects/pw"
       ],
       buttonText: "Get started",
       buttonVariant: "outlined",
     }
-  }
+  ]
   ...
 }
 `
