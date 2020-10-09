@@ -93,9 +93,9 @@ yarn deploy:netlify
 - Add the price IDs to the `.env` file, check 
 
 ```properties
-REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC=price_1H306XJF9YjhGgt0GNOy1IQS
-REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO=price_1H307CJF9YjhGgt0ZmRhLsNE
-REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE=price_1H307mJF9YjhGgt0SxEYD01h
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC=price_1H306XJ...gt0GNOy1IQS
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO=price_1H307CJF9...gt0ZmRhLsNE
+REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE=price_1H...F9YjhGgt0SxEYD01h
 ```
 
 - Go to `API Keys` section under `Developers` and copy your accounts `publishable key` to the `.env` file
@@ -105,14 +105,14 @@ REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE=price_1H307mJF9YjhGgt0SxEYD01h
 </div>
 
 ```properties
-REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_AGZ3fyOfs22efci91eafdsaAdzyMD00DP2
+REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_AGZ3fyOfs2...afdsaAdzyMD00DP2
 ```
 
 - Copy your accounts `secret key` to the `.env.functions` file
 
 
 ```properties
-STRIPE_SECRET_KEY=sk_test_3PfzJGjks789sTQXH4Dg00ds44323paZ9L
+STRIPE_SECRET_KEY=sk_test_3PfzJ...00ds44323paZ9L
 ```
 
 - Create a webhook that points to your deployed netlify function e.g. `https://<your-project>.netlify.app/.netlify/functions/webhook-stripe` and configure the following event types
@@ -131,7 +131,7 @@ checkout.session.completed
 - Copy the `webhook signing secret` to the `.env.functions` file
 
 ```properties
-STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnfdsa7SJKD8fd89jD7lryYmIDHIo
+STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnfds...fd89jD7lryYmIDHIo
 ```
 
 ## Firebase
@@ -147,6 +147,15 @@ STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnfdsa7SJKD8fd89jD7lryYmIDHIo
 
 - Generate a new Firebase service account private key for this project
 - Open the service account `.json` file and copy the environment variable values to `.env`:
+
+```properties
+FIREBASE_FIRESTORE_PROD_DATABASE_URL=https://<you-app-url>.com
+STRIPE_SECRET_KEY=sk_test_3PZoczJ9M...Dg00zt3paZ9L
+STRIPE_WEBHOOK_SIGNING_SECRET=whsec_jIPnnV1DKk...2CojD7lryYmIDHIo
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADA...lkXctrKM9oOQA=\n-----END PRIVATE KEY-----\n"
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-....@...iam.gserviceaccount.com
+FIREBASE_PROJECT_ID=<project-id>
+```
 
 ### CLI
 
