@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.10](https://github.com/daithimorton/bowhead/compare/test-app@0.1.9...test-app@0.1.10) (2020-11-11)
+
+
+### Bug Fixes
+
+* **test-app:** cache node_modules, use yarn ([755f01e](https://github.com/daithimorton/bowhead/commit/755f01e1dab37a3e948e56e142a8e9e150e4e6ea))
+
+
+
+
+
 ## [0.1.9](https://github.com/daithimorton/bowhead/compare/test-app@0.1.8...test-app@0.1.9) (2020-10-09)
 
 **Note:** Version bump only for package test-app
