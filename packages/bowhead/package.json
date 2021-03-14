@@ -7,7 +7,7 @@
   "source": "src/index.js",
   "module": "dist/bowhead.js",
   "files":[
-    "dist/"
+    "dist/bowhead.js"
   ],
   "scripts": {
     "build": "microbundle --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
