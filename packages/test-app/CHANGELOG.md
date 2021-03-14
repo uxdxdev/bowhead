@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.13](https://github.com/daithimorton/bowhead/compare/test-app@0.1.12...test-app@0.1.13) (2021-03-14)
+
+
+### Bug Fixes
+
+* added netlify-cli ([6f2674b](https://github.com/daithimorton/bowhead/commit/6f2674b8aa9c8e845d7fae2bc9c829d9276b985d))
+
+
+
+
+
 ## [0.1.12](https://github.com/daithimorton/bowhead/compare/test-app@0.1.11...test-app@0.1.12) (2021-03-14)
 
 **Note:** Version bump only for package test-app

@@ -1,6 +1,6 @@
 {
   "name": "@mortond/eslint-config",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "description": "ESLint config",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "main": "index.js",
