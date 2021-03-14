@@ -1,12 +1,12 @@
 {
   "name": "@mortond/bowhead-functions",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Bowhead functions",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
   "source": "src/index.js",
   "module": "dist/bowhead-functions.js",
-  "files":[
+  "files": [
     "dist/bowhead-functions.js"
   ],
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.11.5",
-    "@mortond/eslint-config": "^0.2.23",
+    "@mortond/eslint-config": "^0.2.24",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",
     "serve": "^11.3.2"

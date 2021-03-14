@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.10](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.9...@mortond/bowhead@0.1.10) (2021-03-14)
+
+
+### Bug Fixes
+
+* **bowhead:** publish dist/ to npm ([78971aa](https://github.com/daithimorton/bowhead/commit/78971aa104941060788ef4635ec85c51aec9b2c7))
+
+
+
+
+
 ## [0.1.9](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.8...@mortond/bowhead@0.1.9) (2021-03-14)
 
 
