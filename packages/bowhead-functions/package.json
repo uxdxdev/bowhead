@@ -6,6 +6,9 @@
   "license": "MIT",
   "source": "src/index.js",
   "module": "dist/bowhead-functions.js",
+  "files":[
+    "dist/"
+  ],
   "scripts": {
     "build": "microbundle --format es --no-compress",
     "start": "microbundle watch --format es --no-compress",
