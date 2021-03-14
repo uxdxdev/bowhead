@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.11](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.10...@mortond/cra-template-bowhead@0.4.11) (2021-03-14)
+
+
+### Bug Fixes
+
+* **cra-template-bowhead:** publish dist/ to npm ([28e1e37](https://github.com/daithimorton/bowhead/commit/28e1e374c4d8c10d1b15c082695ea331b04b25ba))
+
+
+
+
+
 ## [0.4.10](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.9...@mortond/cra-template-bowhead@0.4.10) (2020-11-11)
 
 
