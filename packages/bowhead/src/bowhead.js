@@ -11,7 +11,6 @@ import {
   noStripeConfiguration,
   noFirebaseInstance,
   noFirestoreInstance,
-  noStripeInstance,
   noProductionUrl
 } from './utils/error-messages'
 
@@ -61,11 +60,6 @@ const Bowhead = () => {
   const firestoreInstance = bowheadConfiguration?.firestore
   if (!firestoreInstance) {
     console.error(noFirestoreInstance)
-  }
-
-  const stripeInstance = bowheadConfiguration?.stripe
-  if (!stripeInstance) {
-    console.error(noStripeInstance)
   }
 
   if (!bowheadConfiguration?.app?.productionUrl) {

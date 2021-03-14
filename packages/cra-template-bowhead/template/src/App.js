@@ -10,7 +10,6 @@ import {
 import { createMuiTheme, } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core"
 import { firebase, firestore } from "./utils/firebase"
-import { stripe } from "./utils/stripe"
 
 const App = () => {
 
@@ -232,10 +231,9 @@ const App = () => {
         buttonVariant: "outlined",
       }
     ],
-    // Provide initialised Firebase, Firestore, and Stripe instances
+    // Provide initialised Firebase and Firestore
     firebase: firebase,
     firestore: firestore,
-    stripe: stripe
   }
 
   pluginRegistry.register('configuration-bowhead', {

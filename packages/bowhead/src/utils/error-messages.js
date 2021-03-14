@@ -71,19 +71,6 @@ const bowheadConfig = {
 }
 `
 
-export const noStripeInstance = `
-Please provide an initialised Stripe instance
-
-See: https://github.com/daithimorton/bowhead
-    
-Example: 
-
-const bowheadConfig = {
-  stripe: stripe,
-  ...
-}
-`
-
 export const noStripeConfiguration = `
 Please provide a configuration defining the required Stripe subscription data. 
 
