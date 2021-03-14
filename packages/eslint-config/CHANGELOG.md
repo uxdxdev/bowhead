@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.22](https://github.com/daithimorton/bowhead/compare/@mortond/eslint-config@0.2.21...@mortond/eslint-config@0.2.22) (2020-11-11)
+
+
+### Bug Fixes
+
+* revert dep update ([49cae94](https://github.com/daithimorton/bowhead/commit/49cae942eaffa808be8c6e0aeea3e155abaab681))
+
+
+
+
+
 ## [0.2.21](https://github.com/daithimorton/bowhead/compare/@mortond/eslint-config@0.2.20...@mortond/eslint-config@0.2.21) (2020-09-11)
 
 **Note:** Version bump only for package @mortond/eslint-config

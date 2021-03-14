@@ -1,6 +1,6 @@
 {
   "name": "@mortond/bowhead",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Bowhead components",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "redux-firestore": "^0.13.0"
   },
   "devDependencies": {
-    "@mortond/eslint-config": "^0.2.21",
+    "@mortond/eslint-config": "^0.2.22",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",
     "serve": "^11.3.2"
