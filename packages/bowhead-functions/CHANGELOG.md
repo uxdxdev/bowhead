@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.9](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.8...@mortond/bowhead-functions@0.0.9) (2021-03-14)
+
+
+### Bug Fixes
+
+* **bowhead:** publish dist/ to npm ([4cf016c](https://github.com/daithimorton/bowhead/commit/4cf016c4422c787c8dd4edd8e09c014c668c4b4c))
+
+
+
+
+
 ## [0.0.8](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.7...@mortond/bowhead-functions@0.0.8) (2020-11-11)
 
 **Note:** Version bump only for package @mortond/bowhead-functions
