@@ -1,9 +1,10 @@
-import { pluginRegistry, PLUGIN_TYPES } from "../registry/plugin-registry"
 import { FIRESTORE_COLLECTIONS } from "./constants";
 import { getFirestore, getFirebase } from './firebase'
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripe = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const getStripe = () => {
-    const stripe = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.stripe
     return stripe
 }
 
