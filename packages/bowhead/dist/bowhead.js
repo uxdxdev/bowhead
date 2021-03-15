@@ -668,14 +668,14 @@ var Pricing = function Pricing(_ref) {
   };
 
   var plans = (_pluginRegistry$getPl3 = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]) == null ? void 0 : (_pluginRegistry$getPl4 = _pluginRegistry$getPl3.config) == null ? void 0 : _pluginRegistry$getPl4.plans;
-  if (!plans || plans.length <= 0) return 'Please provide a configuration for Stripe subscription plans';
   return /*#__PURE__*/React.createElement(Grid, {
     container: true,
     component: "section",
     className: classes.section,
     alignItems: "flex-end",
     spacing: 6
-  }, plans.map(function (tier) {
+  }, // only use the first 3 entires in the plans array
+  plans.slice(0, 3).map(function (tier, index) {
     return (
       /*#__PURE__*/
       // Enterprise card is full width at sm breakpoint
@@ -706,10 +706,10 @@ var Pricing = function Pricing(_ref) {
         onClick: function onClick() {
           return handleRedirectToStripe(tier.priceId);
         },
-        variant: tier.buttonVariant,
+        variant: index % 2 ? "contained" : "outlined",
         color: "primary",
         disabled: isRedirecting
-      }, tier.buttonText)), /*#__PURE__*/React.createElement("ul", null, tier.description.map(function (line) {
+      }, "Get started")), /*#__PURE__*/React.createElement("ul", null, tier.featureList.map(function (line) {
         return /*#__PURE__*/React.createElement(Typography, {
           component: "li",
           align: "center",
@@ -977,13 +977,6 @@ var verifyUser$1 = function verifyUser$1() {
   };
 };
 
-var noAppName = "\nPlease provide a name for your application. \n\nSee: https://github.com/daithimorton/bowhead\n\nExample:\n\nconst bowheadConfig = {\n    app: {\n      name: 'Bowhead app'\n    },\n    ...\n}\n";
-var noProductionUrl = "\nProduction URL is not provided in Bowhead configuration. When this app is deployed, users who are signing in will not be correctly verified. Please provide the URL of the deployed application. \n\nSee: https://github.com/daithimorton/bowhead\n\nExample:\n\nconst bowheadConfig = {\n    app: {\n      productionUrl: https://your-awesome-app.com\n    },\n    ...\n}\n";
-var noApiConfiguration = "\nPlease provide a configuration defining the required API endpoints. \n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  api: {\n    deleteStripeCustomer: '/deleteStripeCustomer',\n    createStripeCustomerPortalSession: '/createStripeCustomerPortalSession',\n    createStripeCheckoutSession: '/createStripeCheckoutSession'\n  },\n  ...\n}\n";
-var noFirebaseInstance = "\nPlease provide an initialised Firebase instance\n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  firebase: firebase,\n  ...\n}\n";
-var noFirestoreInstance = "\nPlease provide an initialised Firestore instance\n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  firestore: firestore,\n  ...\n}\n";
-var noStripeConfiguration = "\nPlease provide a configuration defining the required Stripe subscription data. \n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  plans: [\n    {\n      title: \"Basic\",\n      price: \"10\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,\n      description: [\n        \"1 Workspace\",\n        \"1 Project/pw\"\n      ],\n      buttonText: \"Get started\",\n      // button variant uses MaterialUI variants \n      // https://material-ui.com/api/button/#props\n      buttonVariant: \"outlined\",\n    },\n    {\n      title: \"Pro\",\n      subheader: \"Most popular\",\n      price: \"50\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,\n      description: [\n        \"5 Workspaces\",\n        \"5 Projects/pw\"\n      ],\n      buttonText: \"Get started\",\n      buttonVariant: \"contained\",\n    },\n    {\n      title: \"Enterprise\",\n      price: \"250\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,\n      description: [\n        \"25 Workspaces\",\n        \"25 Projects/pw\"\n      ],\n      buttonText: \"Get started\",\n      buttonVariant: \"outlined\",\n    }\n  ]\n  ...\n}\n";
-
 var useStyles$4 = makeStyles(function (theme) {
   var _icon;
 
@@ -1060,11 +1053,6 @@ var DashboardNavBar = function DashboardNavBar(_ref) {
 
   var app = (_pluginRegistry$getPl = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]) == null ? void 0 : (_pluginRegistry$getPl2 = _pluginRegistry$getPl.config) == null ? void 0 : _pluginRegistry$getPl2.app;
   var name = (app == null ? void 0 : app.name) || 'Default name';
-
-  if (!(app == null ? void 0 : app.name)) {
-    console.error(noAppName);
-  }
-
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(CookieNotification, null), /*#__PURE__*/React.createElement(AppBar, {
     className: classes.appBar,
     color: "inherit"
@@ -1242,11 +1230,6 @@ var NavBar = function NavBar(_ref) {
 
   var app = (_pluginRegistry$getPl = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]) == null ? void 0 : (_pluginRegistry$getPl2 = _pluginRegistry$getPl.config) == null ? void 0 : _pluginRegistry$getPl2.app;
   var name = (app == null ? void 0 : app.name) || 'Default name';
-
-  if (!(app == null ? void 0 : app.name)) {
-    console.error(noAppName);
-  }
-
   var linksConfig = pluginRegistry.getPluginsByType(PLUGIN_TYPES.LINK_LANDING_PAGE_NAV);
 
   var getLinks = function getLinks(config) {
@@ -1784,6 +1767,12 @@ var StoreProvider = function StoreProvider(_ref) {
   }, /*#__PURE__*/React.createElement(ReactReduxFirebaseProvider, reactReduxFirebaseConfig, children));
 };
 
+var noProductionUrl = "\nProduction URL is not provided in Bowhead configuration. When this app is deployed, users who are signing in will not be correctly verified. Please provide the URL of the deployed application. \n\nSee: https://github.com/daithimorton/bowhead\n\nExample:\n\nconst bowheadConfig = {\n    app: {\n      name: \"Bowhead\",\n      productionUrl: https://your-awesome-app.com\n    },\n    ...\n}\n";
+var noApiConfiguration = "\nPlease provide a configuration defining the required API endpoints. \n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  api: {\n    deleteStripeCustomer: '/deleteStripeCustomer',\n    createStripeCustomerPortalSession: '/createStripeCustomerPortalSession',\n    createStripeCheckoutSession: '/createStripeCheckoutSession'\n  },\n  ...\n}\n";
+var noFirebaseInstance = "\nPlease provide an initialised Firebase instance\n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  firebase: firebase,\n  ...\n}\n";
+var noFirestoreInstance = "\nPlease provide an initialised Firestore instance\n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  firestore: firestore,\n  ...\n}\n";
+var noStripeConfiguration = "\nPlease provide a configuration defining the required Stripe subscription data. \n\nSee: https://github.com/daithimorton/bowhead\n    \nExample: \n\nconst bowheadConfig = {\n  plans: [\n    {\n      title: \"Basic\",\n      price: \"10\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,\n      description: [\n        \"1 Workspace\",\n        \"1 Project/pw\"\n      ],\n      buttonText: \"Get started\",\n      // button variant uses MaterialUI variants \n      // https://material-ui.com/api/button/#props\n      buttonVariant: \"outlined\",\n    },\n    {\n      title: \"Pro\",\n      subheader: \"Most popular\",\n      price: \"50\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,\n      description: [\n        \"5 Workspaces\",\n        \"5 Projects/pw\"\n      ],\n      buttonText: \"Get started\",\n      buttonVariant: \"contained\",\n    },\n    {\n      title: \"Enterprise\",\n      price: \"250\",\n      priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,\n      description: [\n        \"25 Workspaces\",\n        \"25 Projects/pw\"\n      ],\n      buttonText: \"Get started\",\n      buttonVariant: \"outlined\",\n    }\n  ]\n  ...\n}\n";
+
 var getRoutes = function getRoutes(_ref) {
   var routes = _ref.routes,
       isAuthRoute = _ref.isAuthRoute;
@@ -1819,28 +1808,39 @@ var Bowhead = function Bowhead() {
   // VERIFY CONFIGURATION
   var bowheadConfiguration = (_pluginRegistry$getPl = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]) == null ? void 0 : _pluginRegistry$getPl.config;
 
+  var ConfigurationWalkthrough = function ConfigurationWalkthrough() {
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Bowhead configuration walkthrough"), /*#__PURE__*/React.createElement("p", null, "Before you can start using Bowhead you must provide some required configuration information."), !(bowheadConfiguration == null ? void 0 : bowheadConfiguration.api) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Stipe API endpoint configuration"), /*#__PURE__*/React.createElement("p", null, "Bowhead uses the Stripe API to manage user subscription payments. In order for this feature to work you must deploy the following API endpoints and tell Bowhead where these can be accessed"), /*#__PURE__*/React.createElement("pre", null, noApiConfiguration)), !(bowheadConfiguration == null ? void 0 : bowheadConfiguration.plans) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Stipe subscription plans"), /*#__PURE__*/React.createElement("p", null, "Bowhead uses the Stripe API to manage user subscription payments. You must create subscription plans in the Stripe console and provide the details for each plan to Bowhead."), /*#__PURE__*/React.createElement("pre", null, noStripeConfiguration)), !(bowheadConfiguration == null ? void 0 : bowheadConfiguration.firebase) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Firebase instance"), /*#__PURE__*/React.createElement("p", null, "Bowhead uses the Google Firebase platform to provide user authentication features. You must create a new project in the Firebase console, initialise an instance of Firebase in this project, and pass this instance to Bowhead."), /*#__PURE__*/React.createElement("pre", null, noFirebaseInstance)), !(bowheadConfiguration == null ? void 0 : bowheadConfiguration.firestore) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Firebase instance"), /*#__PURE__*/React.createElement("p", null, "Bowhead uses the Google Firestore database to provide user profile management features. You must create a new project in the Firebase console, initialise an instance of Firestore in this project, and pass this instance to Bowhead."), /*#__PURE__*/React.createElement("pre", null, noFirestoreInstance)), !(bowheadConfiguration == null ? void 0 : bowheadConfiguration.app) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Application name and production URL"), /*#__PURE__*/React.createElement("p", null, "Bowhead provides a user verification feature when signing in. In order for this verification step to work you must provide the deployed production URL of this project to Bowhead. You must also set your project name."), /*#__PURE__*/React.createElement("pre", null, noProductionUrl)));
+  };
+
+  var isConfigurationComplete = true;
+
   if (!(bowheadConfiguration == null ? void 0 : bowheadConfiguration.api)) {
     console.error(noApiConfiguration);
+    isConfigurationComplete = false;
   }
 
   if (!(bowheadConfiguration == null ? void 0 : bowheadConfiguration.plans)) {
     console.error(noStripeConfiguration);
+    isConfigurationComplete = false;
   }
 
   var firebaseInstance = bowheadConfiguration == null ? void 0 : bowheadConfiguration.firebase;
 
   if (!firebaseInstance) {
     console.error(noFirebaseInstance);
+    isConfigurationComplete = false;
   }
 
   var firestoreInstance = bowheadConfiguration == null ? void 0 : bowheadConfiguration.firestore;
 
   if (!firestoreInstance) {
     console.error(noFirestoreInstance);
+    isConfigurationComplete = false;
   }
 
   if (!(bowheadConfiguration == null ? void 0 : (_bowheadConfiguration = bowheadConfiguration.app) == null ? void 0 : _bowheadConfiguration.productionUrl)) {
     console.error(noProductionUrl);
+    isConfigurationComplete = false;
   } // CUSTOM ROUTES CONFIGURATION
 
 
@@ -1868,7 +1868,7 @@ var Bowhead = function Bowhead() {
   };
 
   var defaultTheme = createMuiTheme();
-  return /*#__PURE__*/React.createElement(React.Fragment, null, bowheadConfiguration && /*#__PURE__*/React.createElement(ThemeProvider, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, bowheadConfiguration && isConfigurationComplete ? /*#__PURE__*/React.createElement(ThemeProvider, {
     theme: theme || defaultTheme
   }, /*#__PURE__*/React.createElement(StoreProvider, null, /*#__PURE__*/React.createElement(AuthIsLoaded, null, /*#__PURE__*/React.createElement(CssBaseline, null), /*#__PURE__*/React.createElement(BrowserRouter, null, /*#__PURE__*/React.createElement(Switch, null, getRoutes({
     routes: unAuthenticatedRoutes
@@ -1885,7 +1885,7 @@ var Bowhead = function Bowhead() {
     component: function component() {
       return /*#__PURE__*/React.createElement("div", null, "No page found");
     }
-  })))))));
+  })))))) : /*#__PURE__*/React.createElement(ConfigurationWalkthrough, null));
 };
 
 export { Bowhead, PLUGIN_TYPES, STRIPE_SUBSCRIPTION_STATUS, deleteStripeCustomer, deleteUserProfile, pluginRegistry, updateUserProfile };

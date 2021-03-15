@@ -198,38 +198,30 @@ const App = () => {
         title: "Basic",
         price: "10",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_BASIC,
-        description: [
+        featureList: [
           "1 Workspace",
           "1 Project/pw"
         ],
-        buttonText: "Get started",
-        // button variant uses MaterialUI variants 
-        // https://material-ui.com/api/button/#props
-        buttonVariant: "outlined",
       },
       {
         title: "Pro",
         subheader: "Most popular",
         price: "50",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_PRO,
-        description: [
+        featureList: [
           "5 Workspaces",
           "5 Projects/pw"
         ],
-        buttonText: "Get started",
-        buttonVariant: "contained",
       },
       {
         title: "Enterprise",
         price: "250",
         priceId: process.env.REACT_APP_STRIPE_SUBSCRIPTION_PLAN_ENTERPRISE,
-        description: [
+        featureList: [
           "25 Workspaces",
           "25 Projects/pw"
         ],
-        buttonText: "Get started",
-        buttonVariant: "outlined",
-      }
+      },
     ],
     // Provide initialised Firebase and Firestore
     firebase: firebase,

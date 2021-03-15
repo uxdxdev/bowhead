@@ -72,9 +72,6 @@ const Pricing = ({ uid, email }) => {
 
     const plans = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.plans
 
-    if (!plans || plans.length <= 0) return 'Please provide a configuration for Stripe subscription plans'
-
-
     return (
         <Grid
             container
@@ -84,7 +81,8 @@ const Pricing = ({ uid, email }) => {
             spacing={6}
         >
             {
-                plans.map((tier) => (
+                // only use the first 3 entires in the plans array
+                plans.slice(0, 3).map((tier, index) => (
                     // Enterprise card is full width at sm breakpoint
                     <Grid
                         item
@@ -111,15 +109,15 @@ const Pricing = ({ uid, email }) => {
                                 <div className={classes.cardPricing}>
                                     <Button
                                         onClick={() => handleRedirectToStripe(tier.priceId)}
-                                        variant={tier.buttonVariant}
+                                        variant={index % 2 ? "contained" : "outlined"}
                                         color="primary"
                                         disabled={isRedirecting}
                                     >
-                                        {tier.buttonText}
+                                        Get started
                                     </Button>
                                 </div>
                                 <ul>
-                                    {tier.description.map((line) => (
+                                    {tier.featureList.map((line) => (
                                         <Typography component="li" align="center" key={line}>
                                             {line}
                                         </Typography>
