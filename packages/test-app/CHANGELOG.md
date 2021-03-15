@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.14](https://github.com/daithimorton/bowhead/compare/test-app@0.1.13...test-app@0.1.14) (2021-03-15)
+
+
+### Bug Fixes
+
+* moved stripe to bowhead ([1cb522f](https://github.com/daithimorton/bowhead/commit/1cb522fc9757207ef7d65ee5ee24d9e36add1d2c))
+* **test-app:** added dist/ to file array ([3003fdd](https://github.com/daithimorton/bowhead/commit/3003fdd5cec69e08e0036564915657101194871c))
+
+
+
+
+
 ## [0.1.13](https://github.com/daithimorton/bowhead/compare/test-app@0.1.12...test-app@0.1.13) (2021-03-14)
 
 
