@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.18](https://github.com/daithimorton/bowhead/compare/test-app@0.1.17...test-app@0.1.18) (2021-03-15)
+
+
+### Bug Fixes
+
+* **test-app:** removed stipe from test-app ([cf3da25](https://github.com/daithimorton/bowhead/commit/cf3da2586c4c22acf9b2f19519d8f3d7f2db05bf))
+
+
+
+
+
 ## [0.1.17](https://github.com/daithimorton/bowhead/compare/test-app@0.1.16...test-app@0.1.17) (2021-03-15)
 
 
