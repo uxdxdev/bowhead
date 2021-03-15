@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.18](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.17...@mortond/cra-template-bowhead@0.4.18) (2021-03-15)
+
+
+### Bug Fixes
+
+* **cra-template-bowhead:** template updated ([9734db3](https://github.com/daithimorton/bowhead/commit/9734db38e6784daad53bea7424eca57d631091db))
+* **test-app:** removed stipe from test-app ([cf3da25](https://github.com/daithimorton/bowhead/commit/cf3da2586c4c22acf9b2f19519d8f3d7f2db05bf))
+
+
+
+
+
 ## [0.4.17](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.16...@mortond/cra-template-bowhead@0.4.17) (2021-03-15)
 
 
