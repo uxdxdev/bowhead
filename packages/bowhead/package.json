@@ -1,12 +1,14 @@
 {
   "name": "@mortond/bowhead",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Bowhead components",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "license": "MIT",
   "source": "src/index.js",
   "module": "dist/bowhead.js",
-  "files":["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "microbundle --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
     "start": "microbundle watch --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
@@ -31,7 +33,7 @@
     "redux-firestore": "^0.13.0"
   },
   "devDependencies": {
-    "@mortond/eslint-config": "^0.2.25",
+    "@mortond/eslint-config": "^0.2.26",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",
     "serve": "^11.3.2"

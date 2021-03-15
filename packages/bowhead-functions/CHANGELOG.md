@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.11...@mortond/bowhead-functions@0.0.12) (2021-03-15)
+
+
+### Bug Fixes
+
+* **test-app:** added dist/ to file array ([3003fdd](https://github.com/daithimorton/bowhead/commit/3003fdd5cec69e08e0036564915657101194871c))
+
+
+
+
+
 ## [0.0.11](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.10...@mortond/bowhead-functions@0.0.11) (2021-03-14)
 
 
