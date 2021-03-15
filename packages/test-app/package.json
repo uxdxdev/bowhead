@@ -1,14 +1,14 @@
 {
   "name": "test-app",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "author": "David Morton (https://github.ibm.com/DMorton)",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.42",
-    "@mortond/bowhead": "^0.1.12",
-    "@mortond/bowhead-functions": "^0.0.12",
+    "@mortond/bowhead": "^0.1.13",
+    "@mortond/bowhead-functions": "^0.0.13",
     "@mortond/eslint-config": "^0.2.26",
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^5.11.4",
