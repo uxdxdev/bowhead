@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.19](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.18...@mortond/cra-template-bowhead@0.4.19) (2021-03-15)
+
+
+### Bug Fixes
+
+* **cra-template-bowhead:** gen'd dist files ([2eec11f](https://github.com/daithimorton/bowhead/commit/2eec11ff66e5e1eb1ec88f1dc6c2c227a457cb30))
+
+
+
+
+
 ## [0.4.18](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.17...@mortond/cra-template-bowhead@0.4.18) (2021-03-15)
 
 

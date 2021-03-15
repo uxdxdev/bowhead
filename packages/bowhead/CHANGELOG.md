@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.17](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.16...@mortond/bowhead@0.1.17) (2021-03-15)
+
+
+### Bug Fixes
+
+* **bowhead:** removed some plugin types ([7fdafc3](https://github.com/daithimorton/bowhead/commit/7fdafc3994a12f60dfca8c35f7507086b8580d3c))
+* **cra-template-bowhead:** gen'd dist files ([2eec11f](https://github.com/daithimorton/bowhead/commit/2eec11ff66e5e1eb1ec88f1dc6c2c227a457cb30))
+
+
+
+
+
 ## [0.1.16](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.15...@mortond/bowhead@0.1.16) (2021-03-15)
 
 **Note:** Version bump only for package @mortond/bowhead
