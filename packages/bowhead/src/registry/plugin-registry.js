@@ -4,12 +4,10 @@ const PLUGIN_TYPES = {
     LINK_POPOVER: 'plugin-type-link-popover',
     LINK_SIDEBAR: 'plugin-type-link-sidebar',
     LINK_LANDING_PAGE_NAV: 'plugin-type-link-landing-page',
-    LINK_DASHBOARD_PAGE_NAV: 'plugin-type-link-dashboard',
     REDUCER: 'plugin-type-reducer',
     THEME: 'plugin-type-theme',
     LISTENER_FIRESTORE: 'plugin-type-listener-firestore',
-    CONFIGURATION_BOWHEAD: 'plugin-type-configuration-bowhead',
-    CUSTOM: 'plugin-type-custom'
+    CONFIGURATION_BOWHEAD: 'plugin-type-configuration-bowhead'
 };
 
 class PluginRegistry {
