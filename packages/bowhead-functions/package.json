@@ -7,7 +7,7 @@
   "source": "src/index.js",
   "module": "dist/bowhead-functions.js",
   "files": [
-    "dist/"
+    "dist"
   ],
   "scripts": {
     "build": "microbundle --format es --no-compress",
