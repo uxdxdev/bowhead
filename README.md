@@ -12,7 +12,7 @@ Bowhead is a ReactJS component you can use to speed up Software-as-a-service pro
 
 - Read the [Contributing guide](https://github.com/daithimorton/bowhead/blob/master/CONTRIBUTING.md)
 
-## Setup
+## Setup demo test app
 
 - Clone this repo
 - Configure the testing application [here](https://github.com/daithimorton/bowhead/tree/master/packages/test-app)
@@ -22,6 +22,10 @@ cd bowhead
 yarn # install dependencies
 yarn start # start all packages
 ```
+
+## Getting started
+
+- Read the [Getting started guide](https://github.com/daithimorton/bowhead/wiki)
 
 <a href="https://www.netlify.com">
     <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
