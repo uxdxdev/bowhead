@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.13](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.12...@mortond/bowhead-functions@0.0.13) (2021-03-15)
+
+
+### Bug Fixes
+
+* added .npmignore to root ([4de0244](https://github.com/daithimorton/bowhead/commit/4de02440cbaea655553748fd5c1110052dc882f0))
+
+
+
+
+
 ## [0.0.12](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead-functions@0.0.11...@mortond/bowhead-functions@0.0.12) (2021-03-15)
 
 
