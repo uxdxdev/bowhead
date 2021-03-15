@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.17](https://github.com/daithimorton/bowhead/compare/test-app@0.1.16...test-app@0.1.17) (2021-03-15)
+
+
+### Bug Fixes
+
+* **test-app:** some housekeeping updates ([0091c01](https://github.com/daithimorton/bowhead/commit/0091c01afd68fb7555335f66811be7f723fc3cb1))
+
+
+
+
+
 ## [0.1.16](https://github.com/daithimorton/bowhead/compare/test-app@0.1.15...test-app@0.1.16) (2021-03-15)
 
 **Note:** Version bump only for package test-app
