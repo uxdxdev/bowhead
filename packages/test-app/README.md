@@ -2,6 +2,8 @@
 
 Bowhead Create-React-App template for fast MicroSaas prototyping using the [Bowhead ReactJS component](https://www.npmjs.com/package/@mortond/bowhead).
 
+Demo - https://sad-tereshkova-9a21f9.netlify.app/
+
 ## Includes
 
 - [ReactJS](https://reactjs.org/)
