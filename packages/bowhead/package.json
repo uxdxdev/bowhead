@@ -6,6 +6,7 @@
   "license": "MIT",
   "source": "src/index.js",
   "module": "dist/bowhead.js",
+  "files":["dist/"],
   "scripts": {
     "build": "microbundle --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
     "start": "microbundle watch --format es --no-compress --jsx React.createElement --jsxFragment React.Fragment",
