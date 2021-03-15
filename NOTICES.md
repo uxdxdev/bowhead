@@ -2,7 +2,7 @@ info @netlify/traffic-mesh-agent-linux-x64@0.27.10: The platform "darwin" is inc
 info "@netlify/traffic-mesh-agent-linux-x64@0.27.10" is an optional dependency and failed compatibility check. Excluding it from installation.
 info @netlify/traffic-mesh-agent-win32-x64@0.27.10: The platform "darwin" is incompatible with this module.
 info "@netlify/traffic-mesh-agent-win32-x64@0.27.10" is an optional dependency and failed compatibility check. Excluding it from installation.
-THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE THAT MAY BE CONTAINED IN PORTIONS OF THE WORKSPACE AGGREGATOR AC858C12 1505 49A6 9E20 F0726F9BC601 PRODUCT.
+THE FOLLOWING SETS FORTH ATTRIBUTION NOTICES FOR THIRD PARTY SOFTWARE THAT MAY BE CONTAINED IN PORTIONS OF THE WORKSPACE AGGREGATOR 35138C03 96CC 48CB A6D0 F6877B19CB3A PRODUCT.
 
 -----
 
@@ -28744,7 +28744,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -----
 
-The following software may be included in this product: workspace-aggregator-ac858c12-1505-49a6-9e20-f0726f9bc601. This software contains the following license and notice below:
+The following software may be included in this product: workspace-aggregator-35138c03-96cc-48cb-a6d0-f6877b19cb3a. This software contains the following license and notice below:
 
 MIT License
 
