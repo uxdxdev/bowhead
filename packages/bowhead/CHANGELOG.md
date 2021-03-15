@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.15](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.14...@mortond/bowhead@0.1.15) (2021-03-15)
+
+
+### Bug Fixes
+
+* **test-app:** some housekeeping updates ([0091c01](https://github.com/daithimorton/bowhead/commit/0091c01afd68fb7555335f66811be7f723fc3cb1))
+
+
+
+
+
 ## [0.1.14](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.13...@mortond/bowhead@0.1.14) (2021-03-15)
 
 
