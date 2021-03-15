@@ -1,17 +1,4 @@
-export const noAppName = `
-Please provide a name for your application. 
 
-See: https://github.com/daithimorton/bowhead
-
-Example:
-
-const bowheadConfig = {
-    app: {
-      name: 'Bowhead app'
-    },
-    ...
-}
-`
 
 export const noProductionUrl = `
 Production URL is not provided in Bowhead configuration. When this app is deployed, users who are signing in will not be correctly verified. Please provide the URL of the deployed application. 
@@ -22,6 +9,7 @@ Example:
 
 const bowheadConfig = {
     app: {
+      name: "Bowhead",
       productionUrl: https://your-awesome-app.com
     },
     ...

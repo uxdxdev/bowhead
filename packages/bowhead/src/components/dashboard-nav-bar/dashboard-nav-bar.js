@@ -23,7 +23,6 @@ import {
 } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
 import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
-import { noAppName } from '../../utils/error-messages'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -99,10 +98,6 @@ const DashboardNavBar = ({ signOut, handleDrawerToggle }) => {
 
   const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
   const name = app?.name || 'Default name';
-
-  if (!app?.name) {
-    console.error(noAppName)
-  }
 
   return (
     <>

@@ -17,7 +17,6 @@ import {
 import { Menu as MenuIcon, Timeline as TimelineIcon } from "@material-ui/icons";
 import { CookieNotification } from "../cookie-notification";
 import { pluginRegistry, PLUGIN_TYPES } from "../../registry/plugin-registry";
-import { noAppName } from '../../utils/error-messages'
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -54,10 +53,6 @@ const NavBar = ({ uid, signOut }) => {
 
   const app = pluginRegistry.getPluginsByType(PLUGIN_TYPES.CONFIGURATION_BOWHEAD)[0]?.config?.app
   const name = app?.name || 'Default name';
-
-  if (!app?.name) {
-    console.error(noAppName)
-  }
 
   const linksConfig = pluginRegistry.getPluginsByType(PLUGIN_TYPES.LINK_LANDING_PAGE_NAV)
 
@@ -100,29 +95,29 @@ const NavBar = ({ uid, signOut }) => {
                 </Link>
               </>
             ) : (
-                <>
-                  <Button
-                    component={NavLink}
-                    to="/signin"
-                    color="primary"
-                    variant="contained"
-                    size="small"
-                  >
-                    Get Started
+              <>
+                <Button
+                  component={NavLink}
+                  to="/signin"
+                  color="primary"
+                  variant="contained"
+                  size="small"
+                >
+                  Get Started
                   </Button>
 
-                  <Button
-                    component={NavLink}
-                    to="/signin"
-                    color="primary"
-                    variant="outlined"
-                    className={classes.link}
-                    size="small"
-                  >
-                    Sign In
+                <Button
+                  component={NavLink}
+                  to="/signin"
+                  color="primary"
+                  variant="outlined"
+                  className={classes.link}
+                  size="small"
+                >
+                  Sign In
                 </Button>
-                </>
-              )}
+              </>
+            )}
           </Hidden>
 
           <Link
@@ -158,27 +153,27 @@ const NavBar = ({ uid, signOut }) => {
                   </Button>
                 </>
               ) : (
-                  <>
-                    {landingPageLinks || null}
-                    <Button
-                      component={NavLink}
-                      to="/signin"
-                      color="primary"
-                      variant="outlined"
-                      className={classes.link}
-                    >
-                      Sign In
+                <>
+                  {landingPageLinks || null}
+                  <Button
+                    component={NavLink}
+                    to="/signin"
+                    color="primary"
+                    variant="outlined"
+                    className={classes.link}
+                  >
+                    Sign In
                     </Button>
-                    <Button
-                      component={NavLink}
-                      to="/signin"
-                      color="primary"
-                      variant="contained"
-                    >
-                      Get Started
+                  <Button
+                    component={NavLink}
+                    to="/signin"
+                    color="primary"
+                    variant="contained"
+                  >
+                    Get Started
                     </Button>
-                  </>
-                )}
+                </>
+              )}
             </nav>
           </Hidden>
 
@@ -225,40 +220,40 @@ const NavBar = ({ uid, signOut }) => {
                   </ListItem>
                 </>
               ) : (
-                  <>
-                    <ListItem>
-                      <Link href="#features" className={classes.link}>
-                        Features
+                <>
+                  <ListItem>
+                    <Link href="#features" className={classes.link}>
+                      Features
                       </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link href="#pricing" className={classes.link}>
-                        Pricing
+                  </ListItem>
+                  <ListItem>
+                    <Link href="#pricing" className={classes.link}>
+                      Pricing
                       </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Button
-                        component={NavLink}
-                        to="/signin"
-                        color="primary"
-                        variant="outlined"
-                        className={classes.link}
-                      >
-                        Sign In
+                  </ListItem>
+                  <ListItem>
+                    <Button
+                      component={NavLink}
+                      to="/signin"
+                      color="primary"
+                      variant="outlined"
+                      className={classes.link}
+                    >
+                      Sign In
                     </Button>
-                    </ListItem>
-                    <ListItem>
-                      <Button
-                        component={NavLink}
-                        to="/signin"
-                        color="primary"
-                        variant="contained"
-                      >
-                        Get Started
+                  </ListItem>
+                  <ListItem>
+                    <Button
+                      component={NavLink}
+                      to="/signin"
+                      color="primary"
+                      variant="contained"
+                    >
+                      Get Started
                     </Button>
-                    </ListItem>
-                  </>
-                )}
+                  </ListItem>
+                </>
+              )}
             </List>
           </SwipeableDrawer>
         </Toolbar>
