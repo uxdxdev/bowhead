@@ -105,9 +105,9 @@ const workspaceSlice = createSlice({
   }
 })
 
-pluginRegistry.register('workspace-reducer', {
+pluginRegistry.register({
   type: PLUGIN_TYPES.REDUCER,
-  name: 'workspace',
+  name: 'workspace-reducer',
   reducer: workspaceSlice.reducer
 })
 
