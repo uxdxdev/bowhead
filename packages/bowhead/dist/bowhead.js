@@ -176,18 +176,18 @@ var PluginRegistry = /*#__PURE__*/function () {
     });
   };
 
-  _proto.register = function register(name, plugin) {
-    if (!name || !plugin) {
-      console.error("All plugins must have a unique name and plugin configuration. Name: " + name, plugin);
+  _proto.register = function register(plugin) {
+    if (!plugin || plugin && !plugin.name) {
+      console.error("All plugins must have a unique name and plugin configuration. Name: " + plugin.name, plugin);
       return;
     }
 
     if (!plugin.type || !Object.values(PLUGIN_TYPES).includes(plugin.type)) {
-      console.error("Plugin configurations must be one of pluginRegistry.PLUGIN_TYPES. Name: " + name, plugin);
+      console.error("Plugin configurations must be one of pluginRegistry.PLUGIN_TYPES. Name: " + plugin.name, plugin);
       return;
     }
 
-    this.plugins[plugin.type + "-" + name] = plugin;
+    this.plugins[plugin.type + "-" + plugin.name] = plugin;
 
     if (this.listeners.length > 0) {
       var plugins = Object.values(this.plugins);

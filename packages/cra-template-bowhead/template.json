@@ -4,7 +4,7 @@
       "@material-ui/core": "^4.9.1",
       "@material-ui/icons": "^4.9.1",
       "@material-ui/lab": "^4.0.0-alpha.42",
-      "@mortond/bowhead": "^0.1.16",
+      "@mortond/bowhead": "^0.1.17",
       "@mortond/bowhead-functions": "^0.0.14",
       "@mortond/eslint-config": "^0.2.26",
       "@reduxjs/toolkit": "^1.4.0",

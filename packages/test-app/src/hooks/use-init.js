@@ -43,7 +43,8 @@ const useInit = () => {
     // register new workspace listeners when new workspaces are created
     useEffect(() => {
         workspaces && Object.keys(workspaces).forEach((workspaceId) => {
-            pluginRegistry.register(`firestore-listener-${FIRESTORE_COLLECTIONS.WORKSPACES}-${workspaceId}`, {
+            pluginRegistry.register({
+                name: `firestore-listener-${FIRESTORE_COLLECTIONS.WORKSPACES}-${workspaceId}`,
                 type: PLUGIN_TYPES.LISTENER_FIRESTORE,
                 collection: FIRESTORE_COLLECTIONS.WORKSPACES,
                 doc: workspaceId,
@@ -53,7 +54,8 @@ const useInit = () => {
 
     // register userWorkspaces listener
     useEffect(() => {
-        pluginRegistry.register(`firestore-listener-${FIRESTORE_COLLECTIONS.USER_WORKSPACES}`, {
+        pluginRegistry.register({
+            name: `firestore-listener-${FIRESTORE_COLLECTIONS.USER_WORKSPACES}`,
             type: PLUGIN_TYPES.LISTENER_FIRESTORE,
             collection: FIRESTORE_COLLECTIONS.USER_WORKSPACES,
             doc: uid
@@ -76,7 +78,8 @@ const useInit = () => {
                 };
             });
 
-        pluginRegistry.register('link-workspaces', {
+        pluginRegistry.register({
+            name: 'link-workspaces',
             type: PLUGIN_TYPES.LINK_SIDEBAR,
             menuIcon: AccountTreeIcon,
             text: "Workspaces",

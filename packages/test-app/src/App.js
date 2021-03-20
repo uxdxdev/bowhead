@@ -70,9 +70,9 @@ const App = () => {
     [prefersDarkMode]
   );
 
-  pluginRegistry.register('bowhead-theme', {
+  pluginRegistry.register({
     type: PLUGIN_TYPES.THEME,
-    name: 'theme',
+    name: 'bowhead-theme',
     theme: theme
   })
 
@@ -178,7 +178,7 @@ const App = () => {
   ]
 
   routesAndMenuItems.forEach(plugin => {
-    pluginRegistry.register(plugin.name, plugin)
+    pluginRegistry.register(plugin)
   })
 
   const bowheadConfig = {
@@ -228,7 +228,8 @@ const App = () => {
     firestore: firestore,
   }
 
-  pluginRegistry.register('configuration-bowhead', {
+  pluginRegistry.register({
+    name: 'configuration-bowhead',
     type: PLUGIN_TYPES.CONFIGURATION_BOWHEAD,
     config: bowheadConfig
   })
