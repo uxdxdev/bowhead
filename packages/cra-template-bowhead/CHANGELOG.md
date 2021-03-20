@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.20](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.19...@mortond/cra-template-bowhead@0.4.20) (2021-03-20)
+
+
+### Bug Fixes
+
+* **test-app:** udpated plugin register function ([9b6435e](https://github.com/daithimorton/bowhead/commit/9b6435e87f620d27215da48e0793efdfb82e39c3))
+
+
+
+
+
 ## [0.4.19](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.18...@mortond/cra-template-bowhead@0.4.19) (2021-03-15)
 
 
