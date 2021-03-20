@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.18](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.17...@mortond/bowhead@0.1.18) (2021-03-20)
+
+
+### Bug Fixes
+
+* **test-app:** udpated plugin register function ([9b6435e](https://github.com/daithimorton/bowhead/commit/9b6435e87f620d27215da48e0793efdfb82e39c3))
+
+
+
+
+
 ## [0.1.17](https://github.com/daithimorton/bowhead/compare/@mortond/bowhead@0.1.16...@mortond/bowhead@0.1.17) (2021-03-15)
 
 
