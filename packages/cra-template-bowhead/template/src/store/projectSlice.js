@@ -59,7 +59,7 @@ const projectSlice = createSlice({
 
 pluginRegistry.register({
   type: PLUGIN_TYPES.REDUCER,
-  name: 'project-reducer',
+  name: 'project',
   reducer: projectSlice.reducer
 })
 

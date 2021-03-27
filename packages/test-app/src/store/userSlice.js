@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { pluginRegistry, PLUGIN_TYPES } from '@mortond/bowhead'
 
 const userSlice = createSlice({
   name: 'user',
@@ -26,6 +27,12 @@ const userSlice = createSlice({
       };
     }
   }
+})
+
+pluginRegistry.register({
+  type: PLUGIN_TYPES.REDUCER,
+  name: 'user',
+  reducer: userSlice.reducer
 })
 
 export const {

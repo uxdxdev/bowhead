@@ -66,7 +66,7 @@ const authSlice = createSlice({
 
 pluginRegistry.register({
   type: PLUGIN_TYPES.REDUCER,
-  name: 'auth-reducer',
+  name: 'auth',
   reducer: authSlice.reducer
 })
 
