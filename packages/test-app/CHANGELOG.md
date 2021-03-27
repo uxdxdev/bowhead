@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.21](https://github.com/daithimorton/bowhead/compare/test-app@0.1.20...test-app@0.1.21) (2021-03-27)
+
+
+### Bug Fixes
+
+* **test-app:** fixed issue with reducers ([96b4c0d](https://github.com/daithimorton/bowhead/commit/96b4c0d8c45c947f88f0e83e3fe6b6c9effb4b04))
+
+
+
+
+
 ## [0.1.20](https://github.com/daithimorton/bowhead/compare/test-app@0.1.19...test-app@0.1.20) (2021-03-20)
 
 

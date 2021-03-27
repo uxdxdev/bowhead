@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.21](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.20...@mortond/cra-template-bowhead@0.4.21) (2021-03-27)
+
+
+### Bug Fixes
+
+* **test-app:** fixed issue with reducers ([96b4c0d](https://github.com/daithimorton/bowhead/commit/96b4c0d8c45c947f88f0e83e3fe6b6c9effb4b04))
+
+
+
+
+
 ## [0.4.20](https://github.com/daithimorton/bowhead/compare/@mortond/cra-template-bowhead@0.4.19...@mortond/cra-template-bowhead@0.4.20) (2021-03-20)
 
 
