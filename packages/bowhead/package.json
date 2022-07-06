@@ -36,7 +36,7 @@
     "@mortond/eslint-config": "^0.2.26",
     "jest": "^24.9.0",
     "microbundle": "^0.12.3",
-    "serve": "^11.3.2"
+    "serve": "^13.0.4"
   },
   "eslintConfig": {
     "extends": [
