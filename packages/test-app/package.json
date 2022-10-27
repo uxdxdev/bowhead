@@ -17,7 +17,7 @@
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^2.0.0",
     "eslint": "^7.7.0",
-    "firebase": "^7.17.2",
+    "firebase": "^9.13.0",
     "firebase-admin": "^9.0.0",
     "firebase-tools": "^8.7.0",
     "materialize-css": "^1.0.0",
