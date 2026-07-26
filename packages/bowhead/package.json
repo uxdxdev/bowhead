@@ -2,7 +2,7 @@
   "name": "@mortond/bowhead",
   "version": "0.1.18",
   "description": "Bowhead components",
-  "author": "David Morton (https://github.ibm.com/DMorton)",
+  "author": "David Morton",
   "license": "MIT",
   "source": "src/index.js",
   "module": "dist/bowhead.js",

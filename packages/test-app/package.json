@@ -1,7 +1,7 @@
 {
   "name": "test-app",
   "version": "0.1.21",
-  "author": "David Morton (https://github.ibm.com/DMorton)",
+  "author": "David Morton",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.1",
